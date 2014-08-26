@@ -1,0 +1,863 @@
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	cursor_x,2,2
+  19              		.comm	cursor_y,2,2
+  20              		.comm	textcolor,2,2
+  21              		.comm	textbgcolor,2,2
+  22              		.comm	textsize,1,1
+  23              		.comm	rotation,1,1
+  24              		.comm	wrap,1,1
+  25              		.comm	_width,4,4
+  26              		.comm	_height,4,4
+  27              		.section	.text.main,"ax",%progbits
+  28              		.align	2
+  29              		.global	main
+  30              		.thumb
+  31              		.thumb_func
+  32              		.type	main, %function
+  33              	main:
+  34              	.LFB56:
+  35              		.file 1 ".\\main.c"
+   1:.\main.c      **** /*******************************************************************************
+   2:.\main.c      **** * \file main.c
+   3:.\main.c      **** * \brief This file is used for the tft_twitter project. It listens on a UART and sends the input to
+   4:.\main.c      **** *
+   5:.\main.c      **** * Version 1.0
+   6:.\main.c      **** *
+   7:.\main.c      **** * \author Robert Barron
+   8:.\main.c      **** *
+   9:.\main.c      **** * \bug Sometimes adds an extra space to text in random places. This is likely an underlying problem
+  10:.\main.c      **** *******************************************************************************/
+  11:.\main.c      **** 
+  12:.\main.c      **** #include <device.h>
+  13:.\main.c      **** 
+  14:.\main.c      **** int main()
+  15:.\main.c      **** {   
+  36              		.loc 1 15 0
+  37              		.cfi_startproc
+  38              		@ args = 0, pretend = 0, frame = 208
+  39              		@ frame_needed = 1, uses_anonymous_args = 0
+  40 0000 80B5     		push	{r7, lr}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 2
+
+
+  43              		.cfi_offset 7, -8
+  44              		.cfi_offset 14, -4
+  45 0002 B4B0     		sub	sp, sp, #208
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_offset 216
+  48 0004 00AF     		add	r7, sp, #0
+  49              	.LCFI2:
+  50              		.cfi_def_cfa_register 7
+  16:.\main.c      ****     char ch[1];       /* Data received from the Serial port */
+  17:.\main.c      ****     int count = 0;
+  51              		.loc 1 17 0
+  52 0006 4FF00003 		mov	r3, #0
+  53 000a C7F8CC30 		str	r3, [r7, #204]
+  18:.\main.c      **** 
+  19:.\main.c      ****     CyGlobalIntEnable; /* Enable all interrupts by the processor. */
+  54              		.loc 1 19 0
+  55              	@ 19 ".\main.c" 1
+  56 000e 62B6     		CPSIE   i
+  57              	@ 0 "" 2
+  20:.\main.c      **** 
+  21:.\main.c      ****     TFTSHIELD_1_Start();
+  58              		.loc 1 21 0
+  59              		.thumb
+  60 0010 FFF7FEFF 		bl	TFTSHIELD_1_Start
+  22:.\main.c      ****     UART_1_Start();
+  61              		.loc 1 22 0
+  62 0014 FFF7FEFF 		bl	UART_1_Start
+  23:.\main.c      ****     TFTSHIELD_1_FillScreen(BLACK);
+  63              		.loc 1 23 0
+  64 0018 4FF00000 		mov	r0, #0
+  65 001c FFF7FEFF 		bl	TFTSHIELD_1_FillScreen
+  24:.\main.c      ****     TFTSHIELD_1_SetCursor(0,0);
+  66              		.loc 1 24 0
+  67 0020 4FF00000 		mov	r0, #0
+  68 0024 4FF00001 		mov	r1, #0
+  69 0028 FFF7FEFF 		bl	TFTSHIELD_1_SetCursor
+  25:.\main.c      ****     TFTSHIELD_1_SetTextColor(WHITE);  
+  70              		.loc 1 25 0
+  71 002c 4FF6FF70 		movw	r0, #65535
+  72 0030 FFF7FEFF 		bl	TFTSHIELD_1_SetTextColor
+  26:.\main.c      ****     TFTSHIELD_1_SetTextSize(2);
+  73              		.loc 1 26 0
+  74 0034 4FF00200 		mov	r0, #2
+  75 0038 FFF7FEFF 		bl	TFTSHIELD_1_SetTextSize
+  27:.\main.c      ****     TFTSHIELD_1_SetRotation(1);
+  76              		.loc 1 27 0
+  77 003c 4FF00100 		mov	r0, #1
+  78 0040 FFF7FEFF 		bl	TFTSHIELD_1_SetRotation
+  79 0044 00E0     		b	.L5
+  80              	.L6:
+  28:.\main.c      ****     
+  29:.\main.c      ****     //will hold the contents of a tweet plus any extra needed characters
+  30:.\main.c      ****     char tweet[200];
+  31:.\main.c      ****     
+  32:.\main.c      ****     while(1)
+  33:.\main.c      ****     {
+  34:.\main.c      ****         // Check the UART status
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 3
+
+
+  35:.\main.c      ****         //get all available chars
+  36:.\main.c      ****         ch[0] = UART_1_GetChar();
+  37:.\main.c      ****         
+  38:.\main.c      ****         //string has not been initialized
+  39:.\main.c      ****         if(ch[0] != 0 && count == 0)
+  40:.\main.c      ****         {
+  41:.\main.c      ****             strcpy(tweet,ch);
+  42:.\main.c      ****             count++;
+  43:.\main.c      ****         }
+  44:.\main.c      ****         else if(ch[0] != 0)//str cat to string
+  45:.\main.c      ****         {
+  46:.\main.c      ****             strcat(tweet,ch);
+  47:.\main.c      ****             //count++;
+  48:.\main.c      ****         }
+  49:.\main.c      ****         //if ch = 0, no chars available. print the string
+  50:.\main.c      ****         if(ch[0] == 0 && count > 0)
+  51:.\main.c      ****         {
+  52:.\main.c      ****             TFTSHIELD_1_PrintString(tweet);
+  53:.\main.c      ****             //clear the string
+  54:.\main.c      ****             memset(&tweet[0], 0, sizeof(tweet));
+  55:.\main.c      ****             count = 0;
+  56:.\main.c      ****         }
+  57:.\main.c      ****     }
+  81              		.loc 1 57 0
+  82 0046 00BF     		nop
+  83              	.L5:
+  36:.\main.c      ****         ch[0] = UART_1_GetChar();
+  84              		.loc 1 36 0
+  85 0048 FFF7FEFF 		bl	UART_1_GetChar
+  86 004c 0346     		mov	r3, r0
+  87 004e 87F8C830 		strb	r3, [r7, #200]
+  39:.\main.c      ****         if(ch[0] != 0 && count == 0)
+  88              		.loc 1 39 0
+  89 0052 97F8C830 		ldrb	r3, [r7, #200]	@ zero_extendqisi2
+  90 0056 002B     		cmp	r3, #0
+  91 0058 11D0     		beq	.L2
+  39:.\main.c      ****         if(ch[0] != 0 && count == 0)
+  92              		.loc 1 39 0 is_stmt 0 discriminator 1
+  93 005a D7F8CC30 		ldr	r3, [r7, #204]
+  94 005e 002B     		cmp	r3, #0
+  95 0060 0DD1     		bne	.L2
+  41:.\main.c      ****             strcpy(tweet,ch);
+  96              		.loc 1 41 0 is_stmt 1
+  97 0062 3A46     		mov	r2, r7
+  98 0064 07F1C803 		add	r3, r7, #200
+  99 0068 1046     		mov	r0, r2
+ 100 006a 1946     		mov	r1, r3
+ 101 006c FFF7FEFF 		bl	strcpy
+  42:.\main.c      ****             count++;
+ 102              		.loc 1 42 0
+ 103 0070 D7F8CC30 		ldr	r3, [r7, #204]
+ 104 0074 03F10103 		add	r3, r3, #1
+ 105 0078 C7F8CC30 		str	r3, [r7, #204]
+ 106 007c 0AE0     		b	.L3
+ 107              	.L2:
+  44:.\main.c      ****         else if(ch[0] != 0)//str cat to string
+ 108              		.loc 1 44 0
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 4
+
+
+ 109 007e 97F8C830 		ldrb	r3, [r7, #200]	@ zero_extendqisi2
+ 110 0082 002B     		cmp	r3, #0
+ 111 0084 06D0     		beq	.L3
+  46:.\main.c      ****             strcat(tweet,ch);
+ 112              		.loc 1 46 0
+ 113 0086 3A46     		mov	r2, r7
+ 114 0088 07F1C803 		add	r3, r7, #200
+ 115 008c 1046     		mov	r0, r2
+ 116 008e 1946     		mov	r1, r3
+ 117 0090 FFF7FEFF 		bl	strcat
+ 118              	.L3:
+  50:.\main.c      ****         if(ch[0] == 0 && count > 0)
+ 119              		.loc 1 50 0
+ 120 0094 97F8C830 		ldrb	r3, [r7, #200]	@ zero_extendqisi2
+ 121 0098 002B     		cmp	r3, #0
+ 122 009a D4D1     		bne	.L6
+  50:.\main.c      ****         if(ch[0] == 0 && count > 0)
+ 123              		.loc 1 50 0 is_stmt 0 discriminator 1
+ 124 009c D7F8CC30 		ldr	r3, [r7, #204]
+ 125 00a0 002B     		cmp	r3, #0
+ 126 00a2 D0DD     		ble	.L6
+  52:.\main.c      ****             TFTSHIELD_1_PrintString(tweet);
+ 127              		.loc 1 52 0 is_stmt 1
+ 128 00a4 3B46     		mov	r3, r7
+ 129 00a6 1846     		mov	r0, r3
+ 130 00a8 FFF7FEFF 		bl	TFTSHIELD_1_PrintString
+  54:.\main.c      ****             memset(&tweet[0], 0, sizeof(tweet));
+ 131              		.loc 1 54 0
+ 132 00ac 3B46     		mov	r3, r7
+ 133 00ae 1846     		mov	r0, r3
+ 134 00b0 4FF00001 		mov	r1, #0
+ 135 00b4 4FF0C802 		mov	r2, #200
+ 136 00b8 FFF7FEFF 		bl	memset
+  55:.\main.c      ****             count = 0;
+ 137              		.loc 1 55 0
+ 138 00bc 4FF00003 		mov	r3, #0
+ 139 00c0 C7F8CC30 		str	r3, [r7, #204]
+ 140              		.loc 1 57 0
+ 141 00c4 BFE7     		b	.L6
+ 142              		.cfi_endproc
+ 143              	.LFE56:
+ 144              		.size	main, .-main
+ 145 00c6 00BF     		.text
+ 146              	.Letext0:
+ 147              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.0\\psoc creator\\import\\gnu_cs\\arm\\4
+ 148              		.file 3 "./Generated_Source/PSoC5/TFTSHIELD_1.h"
+ 149              		.file 4 "./Generated_Source/PSoC5/core_cm3.h"
+ 150              		.section	.debug_info,"",%progbits
+ 151              	.Ldebug_info0:
+ 152 0000 D1010000 		.4byte	0x1d1
+ 153 0004 0200     		.2byte	0x2
+ 154 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 155 000a 04       		.byte	0x4
+ 156 000b 01       		.uleb128 0x1
+ 157 000c 52010000 		.4byte	.LASF29
+ 158 0010 01       		.byte	0x1
+ 159 0011 69000000 		.4byte	.LASF30
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 5
+
+
+ 160 0015 00000000 		.4byte	.LASF31
+ 161 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 162 001d 00000000 		.4byte	0
+ 163 0021 00000000 		.4byte	0
+ 164 0025 00000000 		.4byte	.Ldebug_line0
+ 165 0029 02       		.uleb128 0x2
+ 166 002a 01       		.byte	0x1
+ 167 002b 06       		.byte	0x6
+ 168 002c B5010000 		.4byte	.LASF0
+ 169 0030 03       		.uleb128 0x3
+ 170 0031 FF000000 		.4byte	.LASF2
+ 171 0035 02       		.byte	0x2
+ 172 0036 2A       		.byte	0x2a
+ 173 0037 3B000000 		.4byte	0x3b
+ 174 003b 02       		.uleb128 0x2
+ 175 003c 01       		.byte	0x1
+ 176 003d 08       		.byte	0x8
+ 177 003e 5B000000 		.4byte	.LASF1
+ 178 0042 03       		.uleb128 0x3
+ 179 0043 07010000 		.4byte	.LASF3
+ 180 0047 02       		.byte	0x2
+ 181 0048 35       		.byte	0x35
+ 182 0049 4D000000 		.4byte	0x4d
+ 183 004d 02       		.uleb128 0x2
+ 184 004e 02       		.byte	0x2
+ 185 004f 05       		.byte	0x5
+ 186 0050 3F010000 		.4byte	.LASF4
+ 187 0054 03       		.uleb128 0x3
+ 188 0055 49010000 		.4byte	.LASF5
+ 189 0059 02       		.byte	0x2
+ 190 005a 36       		.byte	0x36
+ 191 005b 5F000000 		.4byte	0x5f
+ 192 005f 02       		.uleb128 0x2
+ 193 0060 02       		.byte	0x2
+ 194 0061 07       		.byte	0x7
+ 195 0062 84000000 		.4byte	.LASF6
+ 196 0066 03       		.uleb128 0x3
+ 197 0067 0F010000 		.4byte	.LASF7
+ 198 006b 02       		.byte	0x2
+ 199 006c 4F       		.byte	0x4f
+ 200 006d 71000000 		.4byte	0x71
+ 201 0071 02       		.uleb128 0x2
+ 202 0072 04       		.byte	0x4
+ 203 0073 05       		.byte	0x5
+ 204 0074 A7010000 		.4byte	.LASF8
+ 205 0078 02       		.uleb128 0x2
+ 206 0079 04       		.byte	0x4
+ 207 007a 07       		.byte	0x7
+ 208 007b 72000000 		.4byte	.LASF9
+ 209 007f 02       		.uleb128 0x2
+ 210 0080 08       		.byte	0x8
+ 211 0081 05       		.byte	0x5
+ 212 0082 20010000 		.4byte	.LASF10
+ 213 0086 02       		.uleb128 0x2
+ 214 0087 08       		.byte	0x8
+ 215 0088 07       		.byte	0x7
+ 216 0089 E8000000 		.4byte	.LASF11
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 6
+
+
+ 217 008d 04       		.uleb128 0x4
+ 218 008e 04       		.byte	0x4
+ 219 008f 05       		.byte	0x5
+ 220 0090 696E7400 		.ascii	"int\000"
+ 221 0094 02       		.uleb128 0x2
+ 222 0095 04       		.byte	0x4
+ 223 0096 07       		.byte	0x7
+ 224 0097 D2000000 		.4byte	.LASF12
+ 225 009b 02       		.uleb128 0x2
+ 226 009c 04       		.byte	0x4
+ 227 009d 04       		.byte	0x4
+ 228 009e 55000000 		.4byte	.LASF13
+ 229 00a2 02       		.uleb128 0x2
+ 230 00a3 08       		.byte	0x8
+ 231 00a4 04       		.byte	0x4
+ 232 00a5 B6000000 		.4byte	.LASF14
+ 233 00a9 02       		.uleb128 0x2
+ 234 00aa 01       		.byte	0x1
+ 235 00ab 08       		.byte	0x8
+ 236 00ac B0010000 		.4byte	.LASF15
+ 237 00b0 02       		.uleb128 0x2
+ 238 00b1 04       		.byte	0x4
+ 239 00b2 07       		.byte	0x7
+ 240 00b3 17010000 		.4byte	.LASF16
+ 241 00b7 05       		.uleb128 0x5
+ 242 00b8 01       		.byte	0x1
+ 243 00b9 C7000000 		.4byte	.LASF32
+ 244 00bd 01       		.byte	0x1
+ 245 00be 0E       		.byte	0xe
+ 246 00bf 8D000000 		.4byte	0x8d
+ 247 00c3 00000000 		.4byte	.LFB56
+ 248 00c7 C6000000 		.4byte	.LFE56
+ 249 00cb 00000000 		.4byte	.LLST0
+ 250 00cf 01       		.byte	0x1
+ 251 00d0 FF000000 		.4byte	0xff
+ 252 00d4 06       		.uleb128 0x6
+ 253 00d5 636800   		.ascii	"ch\000"
+ 254 00d8 01       		.byte	0x1
+ 255 00d9 10       		.byte	0x10
+ 256 00da FF000000 		.4byte	0xff
+ 257 00de 02       		.byte	0x2
+ 258 00df 91       		.byte	0x91
+ 259 00e0 70       		.sleb128 -16
+ 260 00e1 07       		.uleb128 0x7
+ 261 00e2 43000000 		.4byte	.LASF17
+ 262 00e6 01       		.byte	0x1
+ 263 00e7 11       		.byte	0x11
+ 264 00e8 8D000000 		.4byte	0x8d
+ 265 00ec 02       		.byte	0x2
+ 266 00ed 91       		.byte	0x91
+ 267 00ee 74       		.sleb128 -12
+ 268 00ef 07       		.uleb128 0x7
+ 269 00f0 CC000000 		.4byte	.LASF18
+ 270 00f4 01       		.byte	0x1
+ 271 00f5 1E       		.byte	0x1e
+ 272 00f6 0F010000 		.4byte	0x10f
+ 273 00fa 03       		.byte	0x3
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 7
+
+
+ 274 00fb 91       		.byte	0x91
+ 275 00fc A87E     		.sleb128 -216
+ 276 00fe 00       		.byte	0
+ 277 00ff 08       		.uleb128 0x8
+ 278 0100 A9000000 		.4byte	0xa9
+ 279 0104 0F010000 		.4byte	0x10f
+ 280 0108 09       		.uleb128 0x9
+ 281 0109 B0000000 		.4byte	0xb0
+ 282 010d 00       		.byte	0
+ 283 010e 00       		.byte	0
+ 284 010f 08       		.uleb128 0x8
+ 285 0110 A9000000 		.4byte	0xa9
+ 286 0114 1F010000 		.4byte	0x11f
+ 287 0118 09       		.uleb128 0x9
+ 288 0119 B0000000 		.4byte	0xb0
+ 289 011d C7       		.byte	0xc7
+ 290 011e 00       		.byte	0
+ 291 011f 0A       		.uleb128 0xa
+ 292 0120 97000000 		.4byte	.LASF19
+ 293 0124 03       		.byte	0x3
+ 294 0125 48       		.byte	0x48
+ 295 0126 42000000 		.4byte	0x42
+ 296 012a 01       		.byte	0x1
+ 297 012b 05       		.byte	0x5
+ 298 012c 03       		.byte	0x3
+ 299 012d 00000000 		.4byte	cursor_x
+ 300 0131 0A       		.uleb128 0xa
+ 301 0132 A0000000 		.4byte	.LASF20
+ 302 0136 03       		.byte	0x3
+ 303 0137 49       		.byte	0x49
+ 304 0138 42000000 		.4byte	0x42
+ 305 013c 01       		.byte	0x1
+ 306 013d 05       		.byte	0x5
+ 307 013e 03       		.byte	0x3
+ 308 013f 00000000 		.4byte	cursor_y
+ 309 0143 0A       		.uleb128 0xa
+ 310 0144 BD000000 		.4byte	.LASF21
+ 311 0148 03       		.byte	0x3
+ 312 0149 4A       		.byte	0x4a
+ 313 014a 54000000 		.4byte	0x54
+ 314 014e 01       		.byte	0x1
+ 315 014f 05       		.byte	0x5
+ 316 0150 03       		.byte	0x3
+ 317 0151 00000000 		.4byte	textcolor
+ 318 0155 0A       		.uleb128 0xa
+ 319 0156 9B010000 		.4byte	.LASF22
+ 320 015a 03       		.byte	0x3
+ 321 015b 4B       		.byte	0x4b
+ 322 015c 54000000 		.4byte	0x54
+ 323 0160 01       		.byte	0x1
+ 324 0161 05       		.byte	0x5
+ 325 0162 03       		.byte	0x3
+ 326 0163 00000000 		.4byte	textbgcolor
+ 327 0167 0A       		.uleb128 0xa
+ 328 0168 2E010000 		.4byte	.LASF23
+ 329 016c 03       		.byte	0x3
+ 330 016d 4C       		.byte	0x4c
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 8
+
+
+ 331 016e 30000000 		.4byte	0x30
+ 332 0172 01       		.byte	0x1
+ 333 0173 05       		.byte	0x5
+ 334 0174 03       		.byte	0x3
+ 335 0175 00000000 		.4byte	textsize
+ 336 0179 0A       		.uleb128 0xa
+ 337 017a DF000000 		.4byte	.LASF24
+ 338 017e 03       		.byte	0x3
+ 339 017f 4D       		.byte	0x4d
+ 340 0180 30000000 		.4byte	0x30
+ 341 0184 01       		.byte	0x1
+ 342 0185 05       		.byte	0x5
+ 343 0186 03       		.byte	0x3
+ 344 0187 00000000 		.4byte	rotation
+ 345 018b 0A       		.uleb128 0xa
+ 346 018c 50000000 		.4byte	.LASF25
+ 347 0190 03       		.byte	0x3
+ 348 0191 4E       		.byte	0x4e
+ 349 0192 30000000 		.4byte	0x30
+ 350 0196 01       		.byte	0x1
+ 351 0197 05       		.byte	0x5
+ 352 0198 03       		.byte	0x3
+ 353 0199 00000000 		.4byte	wrap
+ 354 019d 0A       		.uleb128 0xa
+ 355 019e 49000000 		.4byte	.LASF26
+ 356 01a2 03       		.byte	0x3
+ 357 01a3 4F       		.byte	0x4f
+ 358 01a4 8D000000 		.4byte	0x8d
+ 359 01a8 01       		.byte	0x1
+ 360 01a9 05       		.byte	0x5
+ 361 01aa 03       		.byte	0x3
+ 362 01ab 00000000 		.4byte	_width
+ 363 01af 0A       		.uleb128 0xa
+ 364 01b0 37010000 		.4byte	.LASF27
+ 365 01b4 03       		.byte	0x3
+ 366 01b5 50       		.byte	0x50
+ 367 01b6 8D000000 		.4byte	0x8d
+ 368 01ba 01       		.byte	0x1
+ 369 01bb 05       		.byte	0x5
+ 370 01bc 03       		.byte	0x3
+ 371 01bd 00000000 		.4byte	_height
+ 372 01c1 0B       		.uleb128 0xb
+ 373 01c2 A9000000 		.4byte	.LASF28
+ 374 01c6 04       		.byte	0x4
+ 375 01c7 1606     		.2byte	0x616
+ 376 01c9 CF010000 		.4byte	0x1cf
+ 377 01cd 01       		.byte	0x1
+ 378 01ce 01       		.byte	0x1
+ 379 01cf 0C       		.uleb128 0xc
+ 380 01d0 66000000 		.4byte	0x66
+ 381 01d4 00       		.byte	0
+ 382              		.section	.debug_abbrev,"",%progbits
+ 383              	.Ldebug_abbrev0:
+ 384 0000 01       		.uleb128 0x1
+ 385 0001 11       		.uleb128 0x11
+ 386 0002 01       		.byte	0x1
+ 387 0003 25       		.uleb128 0x25
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 9
+
+
+ 388 0004 0E       		.uleb128 0xe
+ 389 0005 13       		.uleb128 0x13
+ 390 0006 0B       		.uleb128 0xb
+ 391 0007 03       		.uleb128 0x3
+ 392 0008 0E       		.uleb128 0xe
+ 393 0009 1B       		.uleb128 0x1b
+ 394 000a 0E       		.uleb128 0xe
+ 395 000b 55       		.uleb128 0x55
+ 396 000c 06       		.uleb128 0x6
+ 397 000d 11       		.uleb128 0x11
+ 398 000e 01       		.uleb128 0x1
+ 399 000f 52       		.uleb128 0x52
+ 400 0010 01       		.uleb128 0x1
+ 401 0011 10       		.uleb128 0x10
+ 402 0012 06       		.uleb128 0x6
+ 403 0013 00       		.byte	0
+ 404 0014 00       		.byte	0
+ 405 0015 02       		.uleb128 0x2
+ 406 0016 24       		.uleb128 0x24
+ 407 0017 00       		.byte	0
+ 408 0018 0B       		.uleb128 0xb
+ 409 0019 0B       		.uleb128 0xb
+ 410 001a 3E       		.uleb128 0x3e
+ 411 001b 0B       		.uleb128 0xb
+ 412 001c 03       		.uleb128 0x3
+ 413 001d 0E       		.uleb128 0xe
+ 414 001e 00       		.byte	0
+ 415 001f 00       		.byte	0
+ 416 0020 03       		.uleb128 0x3
+ 417 0021 16       		.uleb128 0x16
+ 418 0022 00       		.byte	0
+ 419 0023 03       		.uleb128 0x3
+ 420 0024 0E       		.uleb128 0xe
+ 421 0025 3A       		.uleb128 0x3a
+ 422 0026 0B       		.uleb128 0xb
+ 423 0027 3B       		.uleb128 0x3b
+ 424 0028 0B       		.uleb128 0xb
+ 425 0029 49       		.uleb128 0x49
+ 426 002a 13       		.uleb128 0x13
+ 427 002b 00       		.byte	0
+ 428 002c 00       		.byte	0
+ 429 002d 04       		.uleb128 0x4
+ 430 002e 24       		.uleb128 0x24
+ 431 002f 00       		.byte	0
+ 432 0030 0B       		.uleb128 0xb
+ 433 0031 0B       		.uleb128 0xb
+ 434 0032 3E       		.uleb128 0x3e
+ 435 0033 0B       		.uleb128 0xb
+ 436 0034 03       		.uleb128 0x3
+ 437 0035 08       		.uleb128 0x8
+ 438 0036 00       		.byte	0
+ 439 0037 00       		.byte	0
+ 440 0038 05       		.uleb128 0x5
+ 441 0039 2E       		.uleb128 0x2e
+ 442 003a 01       		.byte	0x1
+ 443 003b 3F       		.uleb128 0x3f
+ 444 003c 0C       		.uleb128 0xc
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 10
+
+
+ 445 003d 03       		.uleb128 0x3
+ 446 003e 0E       		.uleb128 0xe
+ 447 003f 3A       		.uleb128 0x3a
+ 448 0040 0B       		.uleb128 0xb
+ 449 0041 3B       		.uleb128 0x3b
+ 450 0042 0B       		.uleb128 0xb
+ 451 0043 49       		.uleb128 0x49
+ 452 0044 13       		.uleb128 0x13
+ 453 0045 11       		.uleb128 0x11
+ 454 0046 01       		.uleb128 0x1
+ 455 0047 12       		.uleb128 0x12
+ 456 0048 01       		.uleb128 0x1
+ 457 0049 40       		.uleb128 0x40
+ 458 004a 06       		.uleb128 0x6
+ 459 004b 9642     		.uleb128 0x2116
+ 460 004d 0C       		.uleb128 0xc
+ 461 004e 01       		.uleb128 0x1
+ 462 004f 13       		.uleb128 0x13
+ 463 0050 00       		.byte	0
+ 464 0051 00       		.byte	0
+ 465 0052 06       		.uleb128 0x6
+ 466 0053 34       		.uleb128 0x34
+ 467 0054 00       		.byte	0
+ 468 0055 03       		.uleb128 0x3
+ 469 0056 08       		.uleb128 0x8
+ 470 0057 3A       		.uleb128 0x3a
+ 471 0058 0B       		.uleb128 0xb
+ 472 0059 3B       		.uleb128 0x3b
+ 473 005a 0B       		.uleb128 0xb
+ 474 005b 49       		.uleb128 0x49
+ 475 005c 13       		.uleb128 0x13
+ 476 005d 02       		.uleb128 0x2
+ 477 005e 0A       		.uleb128 0xa
+ 478 005f 00       		.byte	0
+ 479 0060 00       		.byte	0
+ 480 0061 07       		.uleb128 0x7
+ 481 0062 34       		.uleb128 0x34
+ 482 0063 00       		.byte	0
+ 483 0064 03       		.uleb128 0x3
+ 484 0065 0E       		.uleb128 0xe
+ 485 0066 3A       		.uleb128 0x3a
+ 486 0067 0B       		.uleb128 0xb
+ 487 0068 3B       		.uleb128 0x3b
+ 488 0069 0B       		.uleb128 0xb
+ 489 006a 49       		.uleb128 0x49
+ 490 006b 13       		.uleb128 0x13
+ 491 006c 02       		.uleb128 0x2
+ 492 006d 0A       		.uleb128 0xa
+ 493 006e 00       		.byte	0
+ 494 006f 00       		.byte	0
+ 495 0070 08       		.uleb128 0x8
+ 496 0071 01       		.uleb128 0x1
+ 497 0072 01       		.byte	0x1
+ 498 0073 49       		.uleb128 0x49
+ 499 0074 13       		.uleb128 0x13
+ 500 0075 01       		.uleb128 0x1
+ 501 0076 13       		.uleb128 0x13
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 11
+
+
+ 502 0077 00       		.byte	0
+ 503 0078 00       		.byte	0
+ 504 0079 09       		.uleb128 0x9
+ 505 007a 21       		.uleb128 0x21
+ 506 007b 00       		.byte	0
+ 507 007c 49       		.uleb128 0x49
+ 508 007d 13       		.uleb128 0x13
+ 509 007e 2F       		.uleb128 0x2f
+ 510 007f 0B       		.uleb128 0xb
+ 511 0080 00       		.byte	0
+ 512 0081 00       		.byte	0
+ 513 0082 0A       		.uleb128 0xa
+ 514 0083 34       		.uleb128 0x34
+ 515 0084 00       		.byte	0
+ 516 0085 03       		.uleb128 0x3
+ 517 0086 0E       		.uleb128 0xe
+ 518 0087 3A       		.uleb128 0x3a
+ 519 0088 0B       		.uleb128 0xb
+ 520 0089 3B       		.uleb128 0x3b
+ 521 008a 0B       		.uleb128 0xb
+ 522 008b 49       		.uleb128 0x49
+ 523 008c 13       		.uleb128 0x13
+ 524 008d 3F       		.uleb128 0x3f
+ 525 008e 0C       		.uleb128 0xc
+ 526 008f 02       		.uleb128 0x2
+ 527 0090 0A       		.uleb128 0xa
+ 528 0091 00       		.byte	0
+ 529 0092 00       		.byte	0
+ 530 0093 0B       		.uleb128 0xb
+ 531 0094 34       		.uleb128 0x34
+ 532 0095 00       		.byte	0
+ 533 0096 03       		.uleb128 0x3
+ 534 0097 0E       		.uleb128 0xe
+ 535 0098 3A       		.uleb128 0x3a
+ 536 0099 0B       		.uleb128 0xb
+ 537 009a 3B       		.uleb128 0x3b
+ 538 009b 05       		.uleb128 0x5
+ 539 009c 49       		.uleb128 0x49
+ 540 009d 13       		.uleb128 0x13
+ 541 009e 3F       		.uleb128 0x3f
+ 542 009f 0C       		.uleb128 0xc
+ 543 00a0 3C       		.uleb128 0x3c
+ 544 00a1 0C       		.uleb128 0xc
+ 545 00a2 00       		.byte	0
+ 546 00a3 00       		.byte	0
+ 547 00a4 0C       		.uleb128 0xc
+ 548 00a5 35       		.uleb128 0x35
+ 549 00a6 00       		.byte	0
+ 550 00a7 49       		.uleb128 0x49
+ 551 00a8 13       		.uleb128 0x13
+ 552 00a9 00       		.byte	0
+ 553 00aa 00       		.byte	0
+ 554 00ab 00       		.byte	0
+ 555              		.section	.debug_loc,"",%progbits
+ 556              	.Ldebug_loc0:
+ 557              	.LLST0:
+ 558 0000 00000000 		.4byte	.LFB56
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 12
+
+
+ 559 0004 02000000 		.4byte	.LCFI0
+ 560 0008 0200     		.2byte	0x2
+ 561 000a 7D       		.byte	0x7d
+ 562 000b 00       		.sleb128 0
+ 563 000c 02000000 		.4byte	.LCFI0
+ 564 0010 04000000 		.4byte	.LCFI1
+ 565 0014 0200     		.2byte	0x2
+ 566 0016 7D       		.byte	0x7d
+ 567 0017 08       		.sleb128 8
+ 568 0018 04000000 		.4byte	.LCFI1
+ 569 001c 06000000 		.4byte	.LCFI2
+ 570 0020 0300     		.2byte	0x3
+ 571 0022 7D       		.byte	0x7d
+ 572 0023 D801     		.sleb128 216
+ 573 0025 06000000 		.4byte	.LCFI2
+ 574 0029 C6000000 		.4byte	.LFE56
+ 575 002d 0300     		.2byte	0x3
+ 576 002f 77       		.byte	0x77
+ 577 0030 D801     		.sleb128 216
+ 578 0032 00000000 		.4byte	0
+ 579 0036 00000000 		.4byte	0
+ 580              		.section	.debug_aranges,"",%progbits
+ 581 0000 1C000000 		.4byte	0x1c
+ 582 0004 0200     		.2byte	0x2
+ 583 0006 00000000 		.4byte	.Ldebug_info0
+ 584 000a 04       		.byte	0x4
+ 585 000b 00       		.byte	0
+ 586 000c 0000     		.2byte	0
+ 587 000e 0000     		.2byte	0
+ 588 0010 00000000 		.4byte	.LFB56
+ 589 0014 C6000000 		.4byte	.LFE56-.LFB56
+ 590 0018 00000000 		.4byte	0
+ 591 001c 00000000 		.4byte	0
+ 592              		.section	.debug_ranges,"",%progbits
+ 593              	.Ldebug_ranges0:
+ 594 0000 00000000 		.4byte	.LFB56
+ 595 0004 C6000000 		.4byte	.LFE56
+ 596 0008 00000000 		.4byte	0
+ 597 000c 00000000 		.4byte	0
+ 598              		.section	.debug_line,"",%progbits
+ 599              	.Ldebug_line0:
+ 600 0000 39010000 		.section	.debug_str,"MS",%progbits,1
+ 600      0200FD00 
+ 600      00000201 
+ 600      FB0E0D00 
+ 600      01010101 
+ 601              	.LASF31:
+ 602 0000 433A5C55 		.ascii	"C:\\Users\\barror2\\Documents\\PSoC Creator\\tft_te"
+ 602      73657273 
+ 602      5C626172 
+ 602      726F7232 
+ 602      5C446F63 
+ 603 002e 73745C74 		.ascii	"st\\tft_twitter.cydsn\000"
+ 603      66745F74 
+ 603      77697474 
+ 603      65722E63 
+ 603      7964736E 
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 13
+
+
+ 604              	.LASF17:
+ 605 0043 636F756E 		.ascii	"count\000"
+ 605      7400
+ 606              	.LASF26:
+ 607 0049 5F776964 		.ascii	"_width\000"
+ 607      746800
+ 608              	.LASF25:
+ 609 0050 77726170 		.ascii	"wrap\000"
+ 609      00
+ 610              	.LASF13:
+ 611 0055 666C6F61 		.ascii	"float\000"
+ 611      7400
+ 612              	.LASF1:
+ 613 005b 756E7369 		.ascii	"unsigned char\000"
+ 613      676E6564 
+ 613      20636861 
+ 613      7200
+ 614              	.LASF30:
+ 615 0069 2E5C6D61 		.ascii	".\\main.c\000"
+ 615      696E2E63 
+ 615      00
+ 616              	.LASF9:
+ 617 0072 6C6F6E67 		.ascii	"long unsigned int\000"
+ 617      20756E73 
+ 617      69676E65 
+ 617      6420696E 
+ 617      7400
+ 618              	.LASF6:
+ 619 0084 73686F72 		.ascii	"short unsigned int\000"
+ 619      7420756E 
+ 619      7369676E 
+ 619      65642069 
+ 619      6E7400
+ 620              	.LASF19:
+ 621 0097 63757273 		.ascii	"cursor_x\000"
+ 621      6F725F78 
+ 621      00
+ 622              	.LASF20:
+ 623 00a0 63757273 		.ascii	"cursor_y\000"
+ 623      6F725F79 
+ 623      00
+ 624              	.LASF28:
+ 625 00a9 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 625      52784275 
+ 625      66666572 
+ 625      00
+ 626              	.LASF14:
+ 627 00b6 646F7562 		.ascii	"double\000"
+ 627      6C6500
+ 628              	.LASF21:
+ 629 00bd 74657874 		.ascii	"textcolor\000"
+ 629      636F6C6F 
+ 629      7200
+ 630              	.LASF32:
+ 631 00c7 6D61696E 		.ascii	"main\000"
+ 631      00
+ 632              	.LASF18:
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 14
+
+
+ 633 00cc 74776565 		.ascii	"tweet\000"
+ 633      7400
+ 634              	.LASF12:
+ 635 00d2 756E7369 		.ascii	"unsigned int\000"
+ 635      676E6564 
+ 635      20696E74 
+ 635      00
+ 636              	.LASF24:
+ 637 00df 726F7461 		.ascii	"rotation\000"
+ 637      74696F6E 
+ 637      00
+ 638              	.LASF11:
+ 639 00e8 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 639      206C6F6E 
+ 639      6720756E 
+ 639      7369676E 
+ 639      65642069 
+ 640              	.LASF2:
+ 641 00ff 75696E74 		.ascii	"uint8_t\000"
+ 641      385F7400 
+ 642              	.LASF3:
+ 643 0107 696E7431 		.ascii	"int16_t\000"
+ 643      365F7400 
+ 644              	.LASF7:
+ 645 010f 696E7433 		.ascii	"int32_t\000"
+ 645      325F7400 
+ 646              	.LASF16:
+ 647 0117 73697A65 		.ascii	"sizetype\000"
+ 647      74797065 
+ 647      00
+ 648              	.LASF10:
+ 649 0120 6C6F6E67 		.ascii	"long long int\000"
+ 649      206C6F6E 
+ 649      6720696E 
+ 649      7400
+ 650              	.LASF23:
+ 651 012e 74657874 		.ascii	"textsize\000"
+ 651      73697A65 
+ 651      00
+ 652              	.LASF27:
+ 653 0137 5F686569 		.ascii	"_height\000"
+ 653      67687400 
+ 654              	.LASF4:
+ 655 013f 73686F72 		.ascii	"short int\000"
+ 655      7420696E 
+ 655      7400
+ 656              	.LASF5:
+ 657 0149 75696E74 		.ascii	"uint16_t\000"
+ 657      31365F74 
+ 657      00
+ 658              	.LASF29:
+ 659 0152 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 659      4320342E 
+ 659      372E3320 
+ 659      32303133 
+ 659      30333132 
+ 660 0185 616E6368 		.ascii	"anch revision 196615]\000"
+ARM GAS  C:\Users\barror2\AppData\Local\Temp\ccRIyRb2.s 			page 15
+
+
+ 660      20726576 
+ 660      6973696F 
+ 660      6E203139 
+ 660      36363135 
+ 661              	.LASF22:
+ 662 019b 74657874 		.ascii	"textbgcolor\000"
+ 662      6267636F 
+ 662      6C6F7200 
+ 663              	.LASF8:
+ 664 01a7 6C6F6E67 		.ascii	"long int\000"
+ 664      20696E74 
+ 664      00
+ 665              	.LASF15:
+ 666 01b0 63686172 		.ascii	"char\000"
+ 666      00
+ 667              	.LASF0:
+ 668 01b5 7369676E 		.ascii	"signed char\000"
+ 668      65642063 
+ 668      68617200 
+ 669              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

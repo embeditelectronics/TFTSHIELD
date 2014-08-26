@@ -1,0 +1,1146 @@
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"cymetadata.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	cy_meta_loadable
+  19              		.section	.cyloadablemeta,"a",%progbits
+  20              		.align	2
+  21              		.type	cy_meta_loadable, %object
+  22              		.size	cy_meta_loadable, 64
+  23              	cy_meta_loadable:
+  24 0000 00       		.byte	0
+  25 0001 00       		.byte	0
+  26 0002 00       		.byte	0
+  27 0003 00       		.byte	0
+  28 0004 00       		.byte	0
+  29 0005 00       		.byte	0
+  30 0006 00       		.byte	0
+  31 0007 00       		.byte	0
+  32 0008 00       		.byte	0
+  33 0009 00       		.byte	0
+  34 000a 00       		.byte	0
+  35 000b 00       		.byte	0
+  36 000c 00       		.byte	0
+  37 000d 00       		.byte	0
+  38 000e 00       		.byte	0
+  39 000f 00       		.byte	0
+  40 0010 00       		.byte	0
+  41 0011 00       		.byte	0
+  42 0012 00       		.byte	0
+  43 0013 00       		.byte	0
+  44 0014 00       		.byte	0
+  45 0015 00       		.byte	0
+  46 0016 01       		.byte	1
+  47 0017 03       		.byte	3
+  48 0018 00       		.byte	0
+  49 0019 00       		.byte	0
+  50 001a 00       		.byte	0
+  51 001b 00       		.byte	0
+  52 001c 00       		.byte	0
+  53 001d 00       		.byte	0
+  54 001e 00       		.byte	0
+  55 001f 00       		.byte	0
+  56 0020 00       		.byte	0
+  57 0021 00       		.byte	0
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 2
+
+
+  58 0022 00       		.byte	0
+  59 0023 00       		.byte	0
+  60 0024 00       		.byte	0
+  61 0025 00       		.byte	0
+  62 0026 00       		.byte	0
+  63 0027 00       		.byte	0
+  64 0028 00       		.byte	0
+  65 0029 00       		.byte	0
+  66 002a 00       		.byte	0
+  67 002b 00       		.byte	0
+  68 002c 00       		.byte	0
+  69 002d 00       		.byte	0
+  70 002e 00       		.byte	0
+  71 002f 00       		.byte	0
+  72 0030 00       		.byte	0
+  73 0031 00       		.byte	0
+  74 0032 00       		.byte	0
+  75 0033 00       		.byte	0
+  76 0034 00       		.byte	0
+  77 0035 00       		.byte	0
+  78 0036 00       		.byte	0
+  79 0037 00       		.byte	0
+  80 0038 00       		.byte	0
+  81 0039 00       		.byte	0
+  82 003a 00       		.byte	0
+  83 003b 00       		.byte	0
+  84 003c 00       		.byte	0
+  85 003d 00       		.byte	0
+  86 003e 00       		.byte	0
+  87 003f 00       		.byte	0
+  88              		.global	cy_meta_configecc
+  89              		.section	.cyconfigecc,"a",%progbits
+  90              		.align	2
+  91              		.type	cy_meta_configecc, %object
+  92              		.size	cy_meta_configecc, 656
+  93              	cy_meta_configecc:
+  94 0000 04       		.byte	4
+  95 0001 52       		.byte	82
+  96 0002 00       		.byte	0
+  97 0003 40       		.byte	64
+  98 0004 01       		.byte	1
+  99 0005 64       		.byte	100
+ 100 0006 00       		.byte	0
+ 101 0007 40       		.byte	64
+ 102 0008 02       		.byte	2
+ 103 0009 05       		.byte	5
+ 104 000a 01       		.byte	1
+ 105 000b 40       		.byte	64
+ 106 000c 02       		.byte	2
+ 107 000d 09       		.byte	9
+ 108 000e 01       		.byte	1
+ 109 000f 40       		.byte	64
+ 110 0010 37       		.byte	55
+ 111 0011 0A       		.byte	10
+ 112 0012 01       		.byte	1
+ 113 0013 40       		.byte	64
+ 114 0014 3D       		.byte	61
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 3
+
+
+ 115 0015 0B       		.byte	11
+ 116 0016 01       		.byte	1
+ 117 0017 40       		.byte	64
+ 118 0018 30       		.byte	48
+ 119 0019 0D       		.byte	13
+ 120 001a 01       		.byte	1
+ 121 001b 40       		.byte	64
+ 122 001c 03       		.byte	3
+ 123 001d 40       		.byte	64
+ 124 001e 01       		.byte	1
+ 125 001f 40       		.byte	64
+ 126 0020 02       		.byte	2
+ 127 0021 41       		.byte	65
+ 128 0022 01       		.byte	1
+ 129 0023 40       		.byte	64
+ 130 0024 06       		.byte	6
+ 131 0025 42       		.byte	66
+ 132 0026 01       		.byte	1
+ 133 0027 40       		.byte	64
+ 134 0028 0C       		.byte	12
+ 135 0029 44       		.byte	68
+ 136 002a 01       		.byte	1
+ 137 002b 40       		.byte	64
+ 138 002c 09       		.byte	9
+ 139 002d 45       		.byte	69
+ 140 002e 01       		.byte	1
+ 141 002f 40       		.byte	64
+ 142 0030 0B       		.byte	11
+ 143 0031 46       		.byte	70
+ 144 0032 01       		.byte	1
+ 145 0033 40       		.byte	64
+ 146 0034 01       		.byte	1
+ 147 0035 47       		.byte	71
+ 148 0036 01       		.byte	1
+ 149 0037 40       		.byte	64
+ 150 0038 03       		.byte	3
+ 151 0039 50       		.byte	80
+ 152 003a 01       		.byte	1
+ 153 003b 40       		.byte	64
+ 154 003c 01       		.byte	1
+ 155 003d 51       		.byte	81
+ 156 003e 01       		.byte	1
+ 157 003f 40       		.byte	64
+ 158 0040 30       		.byte	48
+ 159 0041 94       		.byte	-108
+ 160 0042 31       		.byte	49
+ 161 0043 88       		.byte	-120
+ 162 0044 34       		.byte	52
+ 163 0045 40       		.byte	64
+ 164 0046 60       		.byte	96
+ 165 0047 40       		.byte	64
+ 166 0048 8D       		.byte	-115
+ 167 0049 0F       		.byte	15
+ 168 004a E2       		.byte	-30
+ 169 004b 04       		.byte	4
+ 170 004c E6       		.byte	-26
+ 171 004d 08       		.byte	8
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 4
+
+
+ 172 004e AF       		.byte	-81
+ 173 004f 10       		.byte	16
+ 174 0050 E8       		.byte	-24
+ 175 0051 08       		.byte	8
+ 176 0052 00       		.byte	0
+ 177 0053 8D       		.byte	-115
+ 178 0054 04       		.byte	4
+ 179 0055 62       		.byte	98
+ 180 0056 05       		.byte	5
+ 181 0057 4A       		.byte	74
+ 182 0058 06       		.byte	6
+ 183 0059 14       		.byte	20
+ 184 005a 07       		.byte	7
+ 185 005b 35       		.byte	53
+ 186 005c 09       		.byte	9
+ 187 005d 07       		.byte	7
+ 188 005e 0C       		.byte	12
+ 189 005f 0D       		.byte	13
+ 190 0060 0E       		.byte	14
+ 191 0061 80       		.byte	-128
+ 192 0062 10       		.byte	16
+ 193 0063 02       		.byte	2
+ 194 0064 12       		.byte	18
+ 195 0065 0D       		.byte	13
+ 196 0066 14       		.byte	20
+ 197 0067 11       		.byte	17
+ 198 0068 15       		.byte	21
+ 199 0069 29       		.byte	41
+ 200 006a 16       		.byte	22
+ 201 006b 22       		.byte	34
+ 202 006c 17       		.byte	23
+ 203 006d 42       		.byte	66
+ 204 006e 18       		.byte	24
+ 205 006f 40       		.byte	64
+ 206 0070 1B       		.byte	27
+ 207 0071 10       		.byte	16
+ 208 0072 1C       		.byte	28
+ 209 0073 42       		.byte	66
+ 210 0074 1E       		.byte	30
+ 211 0075 08       		.byte	8
+ 212 0076 20       		.byte	32
+ 213 0077 8D       		.byte	-115
+ 214 0078 24       		.byte	36
+ 215 0079 8D       		.byte	-115
+ 216 007a 28       		.byte	40
+ 217 007b 8D       		.byte	-115
+ 218 007c 2D       		.byte	45
+ 219 007d 02       		.byte	2
+ 220 007e 2E       		.byte	46
+ 221 007f 80       		.byte	-128
+ 222 0080 2F       		.byte	47
+ 223 0081 7C       		.byte	124
+ 224 0082 30       		.byte	48
+ 225 0083 0F       		.byte	15
+ 226 0084 32       		.byte	50
+ 227 0085 80       		.byte	-128
+ 228 0086 33       		.byte	51
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 5
+
+
+ 229 0087 0F       		.byte	15
+ 230 0088 35       		.byte	53
+ 231 0089 30       		.byte	48
+ 232 008a 36       		.byte	54
+ 233 008b 70       		.byte	112
+ 234 008c 37       		.byte	55
+ 235 008d 40       		.byte	64
+ 236 008e 39       		.byte	57
+ 237 008f 08       		.byte	8
+ 238 0090 3A       		.byte	58
+ 239 0091 82       		.byte	-126
+ 240 0092 3E       		.byte	62
+ 241 0093 04       		.byte	4
+ 242 0094 3F       		.byte	63
+ 243 0095 40       		.byte	64
+ 244 0096 54       		.byte	84
+ 245 0097 09       		.byte	9
+ 246 0098 56       		.byte	86
+ 247 0099 04       		.byte	4
+ 248 009a 58       		.byte	88
+ 249 009b 04       		.byte	4
+ 250 009c 59       		.byte	89
+ 251 009d 04       		.byte	4
+ 252 009e 5B       		.byte	91
+ 253 009f 04       		.byte	4
+ 254 00a0 5F       		.byte	95
+ 255 00a1 01       		.byte	1
+ 256 00a2 84       		.byte	-124
+ 257 00a3 05       		.byte	5
+ 258 00a4 86       		.byte	-122
+ 259 00a5 0A       		.byte	10
+ 260 00a6 8C       		.byte	-116
+ 261 00a7 09       		.byte	9
+ 262 00a8 8E       		.byte	-114
+ 263 00a9 06       		.byte	6
+ 264 00aa 90       		.byte	-112
+ 265 00ab 02       		.byte	2
+ 266 00ac 92       		.byte	-110
+ 267 00ad 0D       		.byte	13
+ 268 00ae 94       		.byte	-108
+ 269 00af 03       		.byte	3
+ 270 00b0 96       		.byte	-106
+ 271 00b1 0C       		.byte	12
+ 272 00b2 B0       		.byte	-80
+ 273 00b3 0F       		.byte	15
+ 274 00b4 BA       		.byte	-70
+ 275 00b5 02       		.byte	2
+ 276 00b6 D4       		.byte	-44
+ 277 00b7 40       		.byte	64
+ 278 00b8 D6       		.byte	-42
+ 279 00b9 04       		.byte	4
+ 280 00ba D8       		.byte	-40
+ 281 00bb 04       		.byte	4
+ 282 00bc DB       		.byte	-37
+ 283 00bd 04       		.byte	4
+ 284 00be DF       		.byte	-33
+ 285 00bf 01       		.byte	1
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 6
+
+
+ 286 00c0 00       		.byte	0
+ 287 00c1 04       		.byte	4
+ 288 00c2 01       		.byte	1
+ 289 00c3 41       		.byte	65
+ 290 00c4 04       		.byte	4
+ 291 00c5 04       		.byte	4
+ 292 00c6 05       		.byte	5
+ 293 00c7 40       		.byte	64
+ 294 00c8 08       		.byte	8
+ 295 00c9 10       		.byte	16
+ 296 00ca 09       		.byte	9
+ 297 00cb 08       		.byte	8
+ 298 00cc 0A       		.byte	10
+ 299 00cd 41       		.byte	65
+ 300 00ce 0B       		.byte	11
+ 301 00cf 08       		.byte	8
+ 302 00d0 0D       		.byte	13
+ 303 00d1 08       		.byte	8
+ 304 00d2 0E       		.byte	14
+ 305 00d3 80       		.byte	-128
+ 306 00d4 10       		.byte	16
+ 307 00d5 0B       		.byte	11
+ 308 00d6 11       		.byte	17
+ 309 00d7 04       		.byte	4
+ 310 00d8 13       		.byte	19
+ 311 00d9 02       		.byte	2
+ 312 00da 19       		.byte	25
+ 313 00db 48       		.byte	72
+ 314 00dc 1A       		.byte	26
+ 315 00dd 41       		.byte	65
+ 316 00de 1C       		.byte	28
+ 317 00df 40       		.byte	64
+ 318 00e0 1E       		.byte	30
+ 319 00e1 80       		.byte	-128
+ 320 00e2 21       		.byte	33
+ 321 00e3 20       		.byte	32
+ 322 00e4 22       		.byte	34
+ 323 00e5 40       		.byte	64
+ 324 00e6 23       		.byte	35
+ 325 00e7 10       		.byte	16
+ 326 00e8 29       		.byte	41
+ 327 00e9 40       		.byte	64
+ 328 00ea 31       		.byte	49
+ 329 00eb 28       		.byte	40
+ 330 00ec 38       		.byte	56
+ 331 00ed 04       		.byte	4
+ 332 00ee 3B       		.byte	59
+ 333 00ef 10       		.byte	16
+ 334 00f0 58       		.byte	88
+ 335 00f1 10       		.byte	16
+ 336 00f2 59       		.byte	89
+ 337 00f3 05       		.byte	5
+ 338 00f4 5A       		.byte	90
+ 339 00f5 80       		.byte	-128
+ 340 00f6 62       		.byte	98
+ 341 00f7 80       		.byte	-128
+ 342 00f8 63       		.byte	99
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 7
+
+
+ 343 00f9 80       		.byte	-128
+ 344 00fa 64       		.byte	100
+ 345 00fb 01       		.byte	1
+ 346 00fc 65       		.byte	101
+ 347 00fd 08       		.byte	8
+ 348 00fe 66       		.byte	102
+ 349 00ff 12       		.byte	18
+ 350 0100 68       		.byte	104
+ 351 0101 01       		.byte	1
+ 352 0102 69       		.byte	105
+ 353 0103 10       		.byte	16
+ 354 0104 6B       		.byte	107
+ 355 0105 10       		.byte	16
+ 356 0106 83       		.byte	-125
+ 357 0107 40       		.byte	64
+ 358 0108 86       		.byte	-122
+ 359 0109 02       		.byte	2
+ 360 010a 89       		.byte	-119
+ 361 010b 30       		.byte	48
+ 362 010c 8F       		.byte	-113
+ 363 010d 10       		.byte	16
+ 364 010e 90       		.byte	-112
+ 365 010f 04       		.byte	4
+ 366 0110 91       		.byte	-111
+ 367 0111 45       		.byte	69
+ 368 0112 93       		.byte	-109
+ 369 0113 08       		.byte	8
+ 370 0114 94       		.byte	-108
+ 371 0115 40       		.byte	64
+ 372 0116 99       		.byte	-103
+ 373 0117 05       		.byte	5
+ 374 0118 9A       		.byte	-102
+ 375 0119 10       		.byte	16
+ 376 011a 9B       		.byte	-101
+ 377 011b 02       		.byte	2
+ 378 011c 9D       		.byte	-99
+ 379 011d 40       		.byte	64
+ 380 011e A0       		.byte	-96
+ 381 011f 0A       		.byte	10
+ 382 0120 A1       		.byte	-95
+ 383 0121 08       		.byte	8
+ 384 0122 A2       		.byte	-94
+ 385 0123 80       		.byte	-128
+ 386 0124 A4       		.byte	-92
+ 387 0125 01       		.byte	1
+ 388 0126 B2       		.byte	-78
+ 389 0127 84       		.byte	-124
+ 390 0128 B4       		.byte	-76
+ 391 0129 10       		.byte	16
+ 392 012a C0       		.byte	-64
+ 393 012b AD       		.byte	-83
+ 394 012c C2       		.byte	-62
+ 395 012d 3F       		.byte	63
+ 396 012e C4       		.byte	-60
+ 397 012f 0F       		.byte	15
+ 398 0130 CA       		.byte	-54
+ 399 0131 08       		.byte	8
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 8
+
+
+ 400 0132 CC       		.byte	-52
+ 401 0133 06       		.byte	6
+ 402 0134 CE       		.byte	-50
+ 403 0135 06       		.byte	6
+ 404 0136 D6       		.byte	-42
+ 405 0137 0F       		.byte	15
+ 406 0138 D8       		.byte	-40
+ 407 0139 F9       		.byte	-7
+ 408 013a 00       		.byte	0
+ 409 013b 94       		.byte	-108
+ 410 013c 01       		.byte	1
+ 411 013d 01       		.byte	1
+ 412 013e 08       		.byte	8
+ 413 013f 01       		.byte	1
+ 414 0140 09       		.byte	9
+ 415 0141 08       		.byte	8
+ 416 0142 0A       		.byte	10
+ 417 0143 02       		.byte	2
+ 418 0144 10       		.byte	16
+ 419 0145 08       		.byte	8
+ 420 0146 11       		.byte	17
+ 421 0147 44       		.byte	68
+ 422 0148 13       		.byte	19
+ 423 0149 02       		.byte	2
+ 424 014a 18       		.byte	24
+ 425 014b 10       		.byte	16
+ 426 014c 19       		.byte	25
+ 427 014d 01       		.byte	1
+ 428 014e 1A       		.byte	26
+ 429 014f 48       		.byte	72
+ 430 0150 20       		.byte	32
+ 431 0151 04       		.byte	4
+ 432 0152 21       		.byte	33
+ 433 0153 28       		.byte	40
+ 434 0154 22       		.byte	34
+ 435 0155 01       		.byte	1
+ 436 0156 28       		.byte	40
+ 437 0157 01       		.byte	1
+ 438 0158 29       		.byte	41
+ 439 0159 40       		.byte	64
+ 440 015a 2A       		.byte	42
+ 441 015b 02       		.byte	2
+ 442 015c 2B       		.byte	43
+ 443 015d 08       		.byte	8
+ 444 015e 31       		.byte	49
+ 445 015f 28       		.byte	40
+ 446 0160 32       		.byte	50
+ 447 0161 01       		.byte	1
+ 448 0162 33       		.byte	51
+ 449 0163 40       		.byte	64
+ 450 0164 39       		.byte	57
+ 451 0165 54       		.byte	84
+ 452 0166 40       		.byte	64
+ 453 0167 04       		.byte	4
+ 454 0168 41       		.byte	65
+ 455 0169 08       		.byte	8
+ 456 016a 42       		.byte	66
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 9
+
+
+ 457 016b 40       		.byte	64
+ 458 016c 48       		.byte	72
+ 459 016d 44       		.byte	68
+ 460 016e 49       		.byte	73
+ 461 016f 44       		.byte	68
+ 462 0170 50       		.byte	80
+ 463 0171 02       		.byte	2
+ 464 0172 52       		.byte	82
+ 465 0173 10       		.byte	16
+ 466 0174 53       		.byte	83
+ 467 0175 0C       		.byte	12
+ 468 0176 60       		.byte	96
+ 469 0177 40       		.byte	64
+ 470 0178 68       		.byte	104
+ 471 0179 08       		.byte	8
+ 472 017a 69       		.byte	105
+ 473 017b 55       		.byte	85
+ 474 017c 6B       		.byte	107
+ 475 017d 40       		.byte	64
+ 476 017e 72       		.byte	114
+ 477 017f 02       		.byte	2
+ 478 0180 73       		.byte	115
+ 479 0181 02       		.byte	2
+ 480 0182 88       		.byte	-120
+ 481 0183 01       		.byte	1
+ 482 0184 A0       		.byte	-96
+ 483 0185 04       		.byte	4
+ 484 0186 B0       		.byte	-80
+ 485 0187 04       		.byte	4
+ 486 0188 C0       		.byte	-64
+ 487 0189 0F       		.byte	15
+ 488 018a C2       		.byte	-62
+ 489 018b 0D       		.byte	13
+ 490 018c C4       		.byte	-60
+ 491 018d 0F       		.byte	15
+ 492 018e CA       		.byte	-54
+ 493 018f 0D       		.byte	13
+ 494 0190 CC       		.byte	-52
+ 495 0191 0F       		.byte	15
+ 496 0192 CE       		.byte	-50
+ 497 0193 0E       		.byte	14
+ 498 0194 D0       		.byte	-48
+ 499 0195 07       		.byte	7
+ 500 0196 D2       		.byte	-46
+ 501 0197 0C       		.byte	12
+ 502 0198 D8       		.byte	-40
+ 503 0199 01       		.byte	1
+ 504 019a 33       		.byte	51
+ 505 019b 80       		.byte	-128
+ 506 019c 35       		.byte	53
+ 507 019d 80       		.byte	-128
+ 508 019e CC       		.byte	-52
+ 509 019f 30       		.byte	48
+ 510 01a0 9D       		.byte	-99
+ 511 01a1 80       		.byte	-128
+ 512 01a2 A7       		.byte	-89
+ 513 01a3 80       		.byte	-128
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 10
+
+
+ 514 01a4 81       		.byte	-127
+ 515 01a5 80       		.byte	-128
+ 516 01a6 87       		.byte	-121
+ 517 01a7 80       		.byte	-128
+ 518 01a8 9D       		.byte	-99
+ 519 01a9 80       		.byte	-128
+ 520 01aa A7       		.byte	-89
+ 521 01ab 80       		.byte	-128
+ 522 01ac E2       		.byte	-30
+ 523 01ad 20       		.byte	32
+ 524 01ae E6       		.byte	-26
+ 525 01af 10       		.byte	16
+ 526 01b0 08       		.byte	8
+ 527 01b1 10       		.byte	16
+ 528 01b2 57       		.byte	87
+ 529 01b3 40       		.byte	64
+ 530 01b4 58       		.byte	88
+ 531 01b5 20       		.byte	32
+ 532 01b6 5B       		.byte	91
+ 533 01b7 02       		.byte	2
+ 534 01b8 5C       		.byte	92
+ 535 01b9 08       		.byte	8
+ 536 01ba 67       		.byte	103
+ 537 01bb 80       		.byte	-128
+ 538 01bc 74       		.byte	116
+ 539 01bd 02       		.byte	2
+ 540 01be C2       		.byte	-62
+ 541 01bf 02       		.byte	2
+ 542 01c0 D4       		.byte	-44
+ 543 01c1 03       		.byte	3
+ 544 01c2 D6       		.byte	-42
+ 545 01c3 03       		.byte	3
+ 546 01c4 D8       		.byte	-40
+ 547 01c5 01       		.byte	1
+ 548 01c6 DE       		.byte	-34
+ 549 01c7 04       		.byte	4
+ 550 01c8 88       		.byte	-120
+ 551 01c9 08       		.byte	8
+ 552 01ca 97       		.byte	-105
+ 553 01cb 80       		.byte	-128
+ 554 01cc 9C       		.byte	-100
+ 555 01cd 28       		.byte	40
+ 556 01ce 9F       		.byte	-97
+ 557 01cf 02       		.byte	2
+ 558 01d0 A4       		.byte	-92
+ 559 01d1 02       		.byte	2
+ 560 01d2 A7       		.byte	-89
+ 561 01d3 40       		.byte	64
+ 562 01d4 B0       		.byte	-80
+ 563 01d5 10       		.byte	16
+ 564 01d6 E0       		.byte	-32
+ 565 01d7 01       		.byte	1
+ 566 01d8 EA       		.byte	-22
+ 567 01d9 04       		.byte	4
+ 568 01da 88       		.byte	-120
+ 569 01db 20       		.byte	32
+ 570 01dc 8B       		.byte	-117
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 11
+
+
+ 571 01dd 40       		.byte	64
+ 572 01de 8F       		.byte	-113
+ 573 01df 40       		.byte	64
+ 574 01e0 97       		.byte	-105
+ 575 01e1 80       		.byte	-128
+ 576 01e2 9C       		.byte	-100
+ 577 01e3 20       		.byte	32
+ 578 01e4 A4       		.byte	-92
+ 579 01e5 02       		.byte	2
+ 580 01e6 A7       		.byte	-89
+ 581 01e7 40       		.byte	64
+ 582 01e8 B7       		.byte	-73
+ 583 01e9 02       		.byte	2
+ 584 01ea E0       		.byte	-32
+ 585 01eb 01       		.byte	1
+ 586 01ec E4       		.byte	-28
+ 587 01ed 03       		.byte	3
+ 588 01ee E8       		.byte	-24
+ 589 01ef 08       		.byte	8
+ 590 01f0 AC       		.byte	-84
+ 591 01f1 02       		.byte	2
+ 592 01f2 00       		.byte	0
+ 593 01f3 01       		.byte	1
+ 594 01f4 0C       		.byte	12
+ 595 01f5 01       		.byte	1
+ 596 01f6 0E       		.byte	14
+ 597 01f7 01       		.byte	1
+ 598 01f8 00       		.byte	0
+ 599 01f9 0F       		.byte	15
+ 600 01fa 00       		.byte	0
+ 601 01fb 00       		.byte	0
+ 602 01fc 84       		.byte	-124
+ 603 01fd 00       		.byte	0
+ 604 01fe 00       		.byte	0
+ 605 01ff 00       		.byte	0
+ 606 0200 0A       		.byte	10
+ 607 0201 92       		.byte	-110
+ 608 0202 10       		.byte	16
+ 609 0203 04       		.byte	4
+ 610 0204 01       		.byte	1
+ 611 0205 04       		.byte	4
+ 612 0206 00       		.byte	0
+ 613 0207 92       		.byte	-110
+ 614 0208 60       		.byte	96
+ 615 0209 92       		.byte	-110
+ 616 020a 00       		.byte	0
+ 617 020b 04       		.byte	4
+ 618 020c 56       		.byte	86
+ 619 020d 32       		.byte	50
+ 620 020e 09       		.byte	9
+ 621 020f C0       		.byte	-64
+ 622 0210 07       		.byte	7
+ 623 0211 07       		.byte	7
+ 624 0212 38       		.byte	56
+ 625 0213 68       		.byte	104
+ 626 0214 00       		.byte	0
+ 627 0215 21       		.byte	33
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 12
+
+
+ 628 0216 00       		.byte	0
+ 629 0217 D2       		.byte	-46
+ 630 0218 04       		.byte	4
+ 631 0219 96       		.byte	-106
+ 632 021a 00       		.byte	0
+ 633 021b 00       		.byte	0
+ 634 021c 84       		.byte	-124
+ 635 021d 96       		.byte	-106
+ 636 021e 00       		.byte	0
+ 637 021f 00       		.byte	0
+ 638 0220 84       		.byte	-124
+ 639 0221 00       		.byte	0
+ 640 0222 00       		.byte	0
+ 641 0223 00       		.byte	0
+ 642 0224 80       		.byte	-128
+ 643 0225 04       		.byte	4
+ 644 0226 04       		.byte	4
+ 645 0227 00       		.byte	0
+ 646 0228 04       		.byte	4
+ 647 0229 FA       		.byte	-6
+ 648 022a 80       		.byte	-128
+ 649 022b 05       		.byte	5
+ 650 022c 80       		.byte	-128
+ 651 022d E0       		.byte	-32
+ 652 022e 7F       		.byte	127
+ 653 022f 07       		.byte	7
+ 654 0230 02       		.byte	2
+ 655 0231 1D       		.byte	29
+ 656 0232 00       		.byte	0
+ 657 0233 00       		.byte	0
+ 658 0234 08       		.byte	8
+ 659 0235 00       		.byte	0
+ 660 0236 00       		.byte	0
+ 661 0237 22       		.byte	34
+ 662 0238 00       		.byte	0
+ 663 0239 00       		.byte	0
+ 664 023a 11       		.byte	17
+ 665 023b 00       		.byte	0
+ 666 023c 25       		.byte	37
+ 667 023d 03       		.byte	3
+ 668 023e 40       		.byte	64
+ 669 023f 00       		.byte	0
+ 670 0240 06       		.byte	6
+ 671 0241 BE       		.byte	-66
+ 672 0242 F0       		.byte	-16
+ 673 0243 DC       		.byte	-36
+ 674 0244 3B       		.byte	59
+ 675 0245 FF       		.byte	-1
+ 676 0246 FF       		.byte	-1
+ 677 0247 FF       		.byte	-1
+ 678 0248 22       		.byte	34
+ 679 0249 00       		.byte	0
+ 680 024a F0       		.byte	-16
+ 681 024b 08       		.byte	8
+ 682 024c 04       		.byte	4
+ 683 024d 00       		.byte	0
+ 684 024e 00       		.byte	0
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 13
+
+
+ 685 024f 00       		.byte	0
+ 686 0250 00       		.byte	0
+ 687 0251 00       		.byte	0
+ 688 0252 02       		.byte	2
+ 689 0253 2C       		.byte	44
+ 690 0254 04       		.byte	4
+ 691 0255 04       		.byte	4
+ 692 0256 04       		.byte	4
+ 693 0257 04       		.byte	4
+ 694 0258 00       		.byte	0
+ 695 0259 00       		.byte	0
+ 696 025a 00       		.byte	0
+ 697 025b 01       		.byte	1
+ 698 025c 00       		.byte	0
+ 699 025d 00       		.byte	0
+ 700 025e C0       		.byte	-64
+ 701 025f 00       		.byte	0
+ 702 0260 40       		.byte	64
+ 703 0261 01       		.byte	1
+ 704 0262 10       		.byte	16
+ 705 0263 11       		.byte	17
+ 706 0264 C0       		.byte	-64
+ 707 0265 01       		.byte	1
+ 708 0266 00       		.byte	0
+ 709 0267 11       		.byte	17
+ 710 0268 40       		.byte	64
+ 711 0269 01       		.byte	1
+ 712 026a 40       		.byte	64
+ 713 026b 01       		.byte	1
+ 714 026c 00       		.byte	0
+ 715 026d 00       		.byte	0
+ 716 026e 00       		.byte	0
+ 717 026f 00       		.byte	0
+ 718 0270 00       		.byte	0
+ 719 0271 00       		.byte	0
+ 720 0272 00       		.byte	0
+ 721 0273 00       		.byte	0
+ 722 0274 00       		.byte	0
+ 723 0275 00       		.byte	0
+ 724 0276 00       		.byte	0
+ 725 0277 00       		.byte	0
+ 726 0278 00       		.byte	0
+ 727 0279 00       		.byte	0
+ 728 027a 00       		.byte	0
+ 729 027b 00       		.byte	0
+ 730 027c 00       		.byte	0
+ 731 027d 40       		.byte	64
+ 732 027e 40       		.byte	64
+ 733 027f 00       		.byte	0
+ 734 0280 40       		.byte	64
+ 735 0281 00       		.byte	0
+ 736 0282 00       		.byte	0
+ 737 0283 00       		.byte	0
+ 738 0284 04       		.byte	4
+ 739 0285 00       		.byte	0
+ 740 0286 40       		.byte	64
+ 741 0287 BC       		.byte	-68
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 14
+
+
+ 742 0288 BC       		.byte	-68
+ 743 0289 00       		.byte	0
+ 744 028a BC       		.byte	-68
+ 745 028b 00       		.byte	0
+ 746 028c 00       		.byte	0
+ 747 028d 00       		.byte	0
+ 748 028e 00       		.byte	0
+ 749 028f 00       		.byte	0
+ 750              		.text
+ 751              	.Letext0:
+ 752              		.file 1 ".\\Generated_Source\\PSoC5\\cymetadata.c"
+ 753              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 754              		.section	.debug_info,"",%progbits
+ 755              	.Ldebug_info0:
+ 756 0000 D6000000 		.4byte	0xd6
+ 757 0004 0200     		.2byte	0x2
+ 758 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 759 000a 04       		.byte	0x4
+ 760 000b 01       		.uleb128 0x1
+ 761 000c 32010000 		.4byte	.LASF15
+ 762 0010 01       		.byte	0x1
+ 763 0011 00000000 		.4byte	.LASF16
+ 764 0015 66000000 		.4byte	.LASF17
+ 765 0019 00000000 		.4byte	.Ldebug_line0
+ 766 001d 02       		.uleb128 0x2
+ 767 001e 01       		.byte	0x1
+ 768 001f 06       		.byte	0x6
+ 769 0020 84010000 		.4byte	.LASF0
+ 770 0024 02       		.uleb128 0x2
+ 771 0025 01       		.byte	0x1
+ 772 0026 08       		.byte	0x8
+ 773 0027 2C000000 		.4byte	.LASF1
+ 774 002b 02       		.uleb128 0x2
+ 775 002c 02       		.byte	0x2
+ 776 002d 05       		.byte	0x5
+ 777 002e 22010000 		.4byte	.LASF2
+ 778 0032 02       		.uleb128 0x2
+ 779 0033 02       		.byte	0x2
+ 780 0034 07       		.byte	0x7
+ 781 0035 4C000000 		.4byte	.LASF3
+ 782 0039 02       		.uleb128 0x2
+ 783 003a 04       		.byte	0x4
+ 784 003b 05       		.byte	0x5
+ 785 003c 7B010000 		.4byte	.LASF4
+ 786 0040 02       		.uleb128 0x2
+ 787 0041 04       		.byte	0x4
+ 788 0042 07       		.byte	0x7
+ 789 0043 3A000000 		.4byte	.LASF5
+ 790 0047 02       		.uleb128 0x2
+ 791 0048 08       		.byte	0x8
+ 792 0049 05       		.byte	0x5
+ 793 004a 0F010000 		.4byte	.LASF6
+ 794 004e 02       		.uleb128 0x2
+ 795 004f 08       		.byte	0x8
+ 796 0050 07       		.byte	0x7
+ 797 0051 CC000000 		.4byte	.LASF7
+ 798 0055 03       		.uleb128 0x3
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 15
+
+
+ 799 0056 04       		.byte	0x4
+ 800 0057 05       		.byte	0x5
+ 801 0058 696E7400 		.ascii	"int\000"
+ 802 005c 02       		.uleb128 0x2
+ 803 005d 04       		.byte	0x4
+ 804 005e 07       		.byte	0x7
+ 805 005f BF000000 		.4byte	.LASF8
+ 806 0063 04       		.uleb128 0x4
+ 807 0064 2C010000 		.4byte	.LASF18
+ 808 0068 02       		.byte	0x2
+ 809 0069 5B       		.byte	0x5b
+ 810 006a 24000000 		.4byte	0x24
+ 811 006e 02       		.uleb128 0x2
+ 812 006f 04       		.byte	0x4
+ 813 0070 04       		.byte	0x4
+ 814 0071 26000000 		.4byte	.LASF9
+ 815 0075 02       		.uleb128 0x2
+ 816 0076 08       		.byte	0x8
+ 817 0077 04       		.byte	0x4
+ 818 0078 5F000000 		.4byte	.LASF10
+ 819 007c 02       		.uleb128 0x2
+ 820 007d 01       		.byte	0x1
+ 821 007e 08       		.byte	0x8
+ 822 007f 1D010000 		.4byte	.LASF11
+ 823 0083 05       		.uleb128 0x5
+ 824 0084 63000000 		.4byte	0x63
+ 825 0088 93000000 		.4byte	0x93
+ 826 008c 06       		.uleb128 0x6
+ 827 008d 93000000 		.4byte	0x93
+ 828 0091 3F       		.byte	0x3f
+ 829 0092 00       		.byte	0
+ 830 0093 02       		.uleb128 0x2
+ 831 0094 04       		.byte	0x4
+ 832 0095 07       		.byte	0x7
+ 833 0096 F4000000 		.4byte	.LASF12
+ 834 009a 07       		.uleb128 0x7
+ 835 009b E3000000 		.4byte	.LASF13
+ 836 009f 01       		.byte	0x1
+ 837 00a0 1C       		.byte	0x1c
+ 838 00a1 AC000000 		.4byte	0xac
+ 839 00a5 01       		.byte	0x1
+ 840 00a6 05       		.byte	0x5
+ 841 00a7 03       		.byte	0x3
+ 842 00a8 00000000 		.4byte	cy_meta_loadable
+ 843 00ac 08       		.uleb128 0x8
+ 844 00ad 83000000 		.4byte	0x83
+ 845 00b1 05       		.uleb128 0x5
+ 846 00b2 63000000 		.4byte	0x63
+ 847 00b6 C2000000 		.4byte	0xc2
+ 848 00ba 09       		.uleb128 0x9
+ 849 00bb 93000000 		.4byte	0x93
+ 850 00bf 8F02     		.2byte	0x28f
+ 851 00c1 00       		.byte	0
+ 852 00c2 07       		.uleb128 0x7
+ 853 00c3 FD000000 		.4byte	.LASF14
+ 854 00c7 01       		.byte	0x1
+ 855 00c8 2E       		.byte	0x2e
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 16
+
+
+ 856 00c9 D4000000 		.4byte	0xd4
+ 857 00cd 01       		.byte	0x1
+ 858 00ce 05       		.byte	0x5
+ 859 00cf 03       		.byte	0x3
+ 860 00d0 00000000 		.4byte	cy_meta_configecc
+ 861 00d4 08       		.uleb128 0x8
+ 862 00d5 B1000000 		.4byte	0xb1
+ 863 00d9 00       		.byte	0
+ 864              		.section	.debug_abbrev,"",%progbits
+ 865              	.Ldebug_abbrev0:
+ 866 0000 01       		.uleb128 0x1
+ 867 0001 11       		.uleb128 0x11
+ 868 0002 01       		.byte	0x1
+ 869 0003 25       		.uleb128 0x25
+ 870 0004 0E       		.uleb128 0xe
+ 871 0005 13       		.uleb128 0x13
+ 872 0006 0B       		.uleb128 0xb
+ 873 0007 03       		.uleb128 0x3
+ 874 0008 0E       		.uleb128 0xe
+ 875 0009 1B       		.uleb128 0x1b
+ 876 000a 0E       		.uleb128 0xe
+ 877 000b 10       		.uleb128 0x10
+ 878 000c 06       		.uleb128 0x6
+ 879 000d 00       		.byte	0
+ 880 000e 00       		.byte	0
+ 881 000f 02       		.uleb128 0x2
+ 882 0010 24       		.uleb128 0x24
+ 883 0011 00       		.byte	0
+ 884 0012 0B       		.uleb128 0xb
+ 885 0013 0B       		.uleb128 0xb
+ 886 0014 3E       		.uleb128 0x3e
+ 887 0015 0B       		.uleb128 0xb
+ 888 0016 03       		.uleb128 0x3
+ 889 0017 0E       		.uleb128 0xe
+ 890 0018 00       		.byte	0
+ 891 0019 00       		.byte	0
+ 892 001a 03       		.uleb128 0x3
+ 893 001b 24       		.uleb128 0x24
+ 894 001c 00       		.byte	0
+ 895 001d 0B       		.uleb128 0xb
+ 896 001e 0B       		.uleb128 0xb
+ 897 001f 3E       		.uleb128 0x3e
+ 898 0020 0B       		.uleb128 0xb
+ 899 0021 03       		.uleb128 0x3
+ 900 0022 08       		.uleb128 0x8
+ 901 0023 00       		.byte	0
+ 902 0024 00       		.byte	0
+ 903 0025 04       		.uleb128 0x4
+ 904 0026 16       		.uleb128 0x16
+ 905 0027 00       		.byte	0
+ 906 0028 03       		.uleb128 0x3
+ 907 0029 0E       		.uleb128 0xe
+ 908 002a 3A       		.uleb128 0x3a
+ 909 002b 0B       		.uleb128 0xb
+ 910 002c 3B       		.uleb128 0x3b
+ 911 002d 0B       		.uleb128 0xb
+ 912 002e 49       		.uleb128 0x49
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 17
+
+
+ 913 002f 13       		.uleb128 0x13
+ 914 0030 00       		.byte	0
+ 915 0031 00       		.byte	0
+ 916 0032 05       		.uleb128 0x5
+ 917 0033 01       		.uleb128 0x1
+ 918 0034 01       		.byte	0x1
+ 919 0035 49       		.uleb128 0x49
+ 920 0036 13       		.uleb128 0x13
+ 921 0037 01       		.uleb128 0x1
+ 922 0038 13       		.uleb128 0x13
+ 923 0039 00       		.byte	0
+ 924 003a 00       		.byte	0
+ 925 003b 06       		.uleb128 0x6
+ 926 003c 21       		.uleb128 0x21
+ 927 003d 00       		.byte	0
+ 928 003e 49       		.uleb128 0x49
+ 929 003f 13       		.uleb128 0x13
+ 930 0040 2F       		.uleb128 0x2f
+ 931 0041 0B       		.uleb128 0xb
+ 932 0042 00       		.byte	0
+ 933 0043 00       		.byte	0
+ 934 0044 07       		.uleb128 0x7
+ 935 0045 34       		.uleb128 0x34
+ 936 0046 00       		.byte	0
+ 937 0047 03       		.uleb128 0x3
+ 938 0048 0E       		.uleb128 0xe
+ 939 0049 3A       		.uleb128 0x3a
+ 940 004a 0B       		.uleb128 0xb
+ 941 004b 3B       		.uleb128 0x3b
+ 942 004c 0B       		.uleb128 0xb
+ 943 004d 49       		.uleb128 0x49
+ 944 004e 13       		.uleb128 0x13
+ 945 004f 3F       		.uleb128 0x3f
+ 946 0050 0C       		.uleb128 0xc
+ 947 0051 02       		.uleb128 0x2
+ 948 0052 0A       		.uleb128 0xa
+ 949 0053 00       		.byte	0
+ 950 0054 00       		.byte	0
+ 951 0055 08       		.uleb128 0x8
+ 952 0056 26       		.uleb128 0x26
+ 953 0057 00       		.byte	0
+ 954 0058 49       		.uleb128 0x49
+ 955 0059 13       		.uleb128 0x13
+ 956 005a 00       		.byte	0
+ 957 005b 00       		.byte	0
+ 958 005c 09       		.uleb128 0x9
+ 959 005d 21       		.uleb128 0x21
+ 960 005e 00       		.byte	0
+ 961 005f 49       		.uleb128 0x49
+ 962 0060 13       		.uleb128 0x13
+ 963 0061 2F       		.uleb128 0x2f
+ 964 0062 05       		.uleb128 0x5
+ 965 0063 00       		.byte	0
+ 966 0064 00       		.byte	0
+ 967 0065 00       		.byte	0
+ 968              		.section	.debug_aranges,"",%progbits
+ 969 0000 14000000 		.4byte	0x14
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 18
+
+
+ 970 0004 0200     		.2byte	0x2
+ 971 0006 00000000 		.4byte	.Ldebug_info0
+ 972 000a 04       		.byte	0x4
+ 973 000b 00       		.byte	0
+ 974 000c 0000     		.2byte	0
+ 975 000e 0000     		.2byte	0
+ 976 0010 00000000 		.4byte	0
+ 977 0014 00000000 		.4byte	0
+ 978              		.section	.debug_line,"",%progbits
+ 979              	.Ldebug_line0:
+ 980 0000 4F000000 		.section	.debug_str,"MS",%progbits,1
+ 980      02004900 
+ 980      00000201 
+ 980      FB0E0D00 
+ 980      01010101 
+ 981              	.LASF16:
+ 982 0000 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\cymetadata.c\000"
+ 982      6E657261 
+ 982      7465645F 
+ 982      536F7572 
+ 982      63655C50 
+ 983              	.LASF9:
+ 984 0026 666C6F61 		.ascii	"float\000"
+ 984      7400
+ 985              	.LASF1:
+ 986 002c 756E7369 		.ascii	"unsigned char\000"
+ 986      676E6564 
+ 986      20636861 
+ 986      7200
+ 987              	.LASF5:
+ 988 003a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 988      20756E73 
+ 988      69676E65 
+ 988      6420696E 
+ 988      7400
+ 989              	.LASF3:
+ 990 004c 73686F72 		.ascii	"short unsigned int\000"
+ 990      7420756E 
+ 990      7369676E 
+ 990      65642069 
+ 990      6E7400
+ 991              	.LASF10:
+ 992 005f 646F7562 		.ascii	"double\000"
+ 992      6C6500
+ 993              	.LASF17:
+ 994 0066 433A5C55 		.ascii	"C:\\Users\\Robert\\Dropbox\\RPiSoC\\Projects\\tft_t"
+ 994      73657273 
+ 994      5C526F62 
+ 994      6572745C 
+ 994      44726F70 
+ 995 0093 6573742E 		.ascii	"est.Bundle01_Rev_b - touch\\touchpaint.cydsn\000"
+ 995      42756E64 
+ 995      6C653031 
+ 995      5F526576 
+ 995      5F62202D 
+ 996              	.LASF8:
+ 997 00bf 756E7369 		.ascii	"unsigned int\000"
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 19
+
+
+ 997      676E6564 
+ 997      20696E74 
+ 997      00
+ 998              	.LASF7:
+ 999 00cc 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 999      206C6F6E 
+ 999      6720756E 
+ 999      7369676E 
+ 999      65642069 
+ 1000              	.LASF13:
+ 1001 00e3 63795F6D 		.ascii	"cy_meta_loadable\000"
+ 1001      6574615F 
+ 1001      6C6F6164 
+ 1001      61626C65 
+ 1001      00
+ 1002              	.LASF12:
+ 1003 00f4 73697A65 		.ascii	"sizetype\000"
+ 1003      74797065 
+ 1003      00
+ 1004              	.LASF14:
+ 1005 00fd 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 1005      6574615F 
+ 1005      636F6E66 
+ 1005      69676563 
+ 1005      6300
+ 1006              	.LASF6:
+ 1007 010f 6C6F6E67 		.ascii	"long long int\000"
+ 1007      206C6F6E 
+ 1007      6720696E 
+ 1007      7400
+ 1008              	.LASF11:
+ 1009 011d 63686172 		.ascii	"char\000"
+ 1009      00
+ 1010              	.LASF2:
+ 1011 0122 73686F72 		.ascii	"short int\000"
+ 1011      7420696E 
+ 1011      7400
+ 1012              	.LASF18:
+ 1013 012c 75696E74 		.ascii	"uint8\000"
+ 1013      3800
+ 1014              	.LASF15:
+ 1015 0132 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 1015      4320342E 
+ 1015      372E3320 
+ 1015      32303133 
+ 1015      30333132 
+ 1016 0165 616E6368 		.ascii	"anch revision 196615]\000"
+ 1016      20726576 
+ 1016      6973696F 
+ 1016      6E203139 
+ 1016      36363135 
+ 1017              	.LASF4:
+ 1018 017b 6C6F6E67 		.ascii	"long int\000"
+ 1018      20696E74 
+ 1018      00
+ 1019              	.LASF0:
+ 1020 0184 7369676E 		.ascii	"signed char\000"
+ARM GAS  C:\Users\Robert\AppData\Local\Temp\ccTl6VmA.s 			page 20
+
+
+ 1020      65642063 
+ 1020      68617200 
+ 1021              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

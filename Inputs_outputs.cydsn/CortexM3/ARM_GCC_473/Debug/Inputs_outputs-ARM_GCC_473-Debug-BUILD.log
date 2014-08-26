@@ -1,0 +1,80 @@
+--------------- Build Started: 08/01/2014 11:05:45 Project: Inputs_outputs, Configuration: ARM GCC 4.7.3 Debug ---------------
+cydsfit.exe "-.appdatapath" "C:\Users\barror2\AppData\Local\Cypress Semiconductor\PSoC Creator\3.0" "-.fdsnotice" "-.fdswarpdepfile=warp_dependencies.txt" "-.fdselabdepfile=elab_dependencies.txt" "-.fdsbldfile=generated_files.txt" "-p" "C:\Users\barror2\Dropbox\RPiSoC\Projects\tft_test.Bundle01_Rev_b - touch\Inputs_outputs.cydsn\Inputs_outputs.cyprj" "-d" "CY8C5868AXI-LP035" "-s" "C:\Users\barror2\Dropbox\RPiSoC\Projects\tft_test.Bundle01_Rev_b - touch\Inputs_outputs.cydsn\Generated_Source\PSoC5" "--" "-yv2" "-v3" "-ygs" "-q10" "-o2" "-.fftcfgtype=LE"
+Elaborating Design...
+HDL Generation ...
+Synthesis ...
+Place and Route ...
+Tech mapping ...
+Info: mpr.M0037: Unused pieces of the design have been optimized out. See the Tech mapping section of the report file for details. (App=cydsfit)
+Analog Placement ...
+Analog Routing ...
+Analog Code Generation ...
+Digital Placement ...
+Digital Routing ...
+Bitstream Generation ...
+Static timing analysis ...
+API Generation ...
+Dependency Generation ...
+Clean Temporary Files ...
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\main.lst -ffunction-sections -c .\main.c -o .\CortexM3\ARM_GCC_473\Debug\main.o
+.\main.c: In function 'main':
+.\main.c:78:22: warning: unused variable 'buffer' [-Wunused-variable]
+.\main.c: In function 'InputTouched':
+.\main.c:526:1: warning: control reaches end of non-void function [-Wreturn-type]
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\cyfitter_cfg.lst -ffunction-sections -c .\Generated_Source\PSoC5\cyfitter_cfg.c -o .\CortexM3\ARM_GCC_473\Debug\cyfitter_cfg.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\cymetadata.lst -ffunction-sections -c .\Generated_Source\PSoC5\cymetadata.c -o .\CortexM3\ARM_GCC_473\Debug\cymetadata.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\miso.lst -ffunction-sections -c .\Generated_Source\PSoC5\miso.c -o .\CortexM3\ARM_GCC_473\Debug\miso.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\Clock_1.lst -ffunction-sections -c .\Generated_Source\PSoC5\Clock_1.c -o .\CortexM3\ARM_GCC_473\Debug\Clock_1.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\ss.lst -ffunction-sections -c .\Generated_Source\PSoC5\ss.c -o .\CortexM3\ARM_GCC_473\Debug\ss.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\sclk.lst -ffunction-sections -c .\Generated_Source\PSoC5\sclk.c -o .\CortexM3\ARM_GCC_473\Debug\sclk.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\mosi.lst -ffunction-sections -c .\Generated_Source\PSoC5\mosi.c -o .\CortexM3\ARM_GCC_473\Debug\mosi.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\cs.lst -ffunction-sections -c .\Generated_Source\PSoC5\cs.c -o .\CortexM3\ARM_GCC_473\Debug\cs.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\dc.lst -ffunction-sections -c .\Generated_Source\PSoC5\dc.c -o .\CortexM3\ARM_GCC_473\Debug\dc.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\rt_cs.lst -ffunction-sections -c .\Generated_Source\PSoC5\rt_cs.c -o .\CortexM3\ARM_GCC_473\Debug\rt_cs.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1.lst -ffunction-sections -c .\Generated_Source\PSoC5\TFTSHIELD_1.c -o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1.o
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_SPITransfer':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:495:5: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_WriteTxData' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_DrawTriangle':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:776:5: warning: implicit declaration of function 'TFTSHIELD_1DrawLine' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_FillTriangle':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:800:5: warning: implicit declaration of function 'swap' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:825:5: warning: unused variable 'dy12' [-Wunused-variable]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:824:5: warning: unused variable 'dx12' [-Wunused-variable]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_PrintString':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:934:9: warning: unused variable 'unused' [-Wunused-variable]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_CS_LOW':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:1158:5: warning: implicit declaration of function 'TFTSHIELD_1_CR_1_Read' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:1160:5: warning: implicit declaration of function 'TFTSHIELD_1_CR_1_Write' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_StartTouch':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:1227:5: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_Start' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:1239:13: warning: variable 'val' set but not used [-Wunused-but-set-variable]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_ReadRegister16':
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:1306:5: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_GetRxBufferSize' [-Wimplicit-function-declaration]
+.\Generated_Source\PSoC5\TFTSHIELD_1.c:1309:9: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_ReadRxData' [-Wimplicit-function-declaration]
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1.lst -ffunction-sections -c .\Generated_Source\PSoC5\TFTSHIELD_1_SPIM_1.c -o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1_PM.lst -ffunction-sections -c .\Generated_Source\PSoC5\TFTSHIELD_1_SPIM_1_PM.c -o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1_PM.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1_INT.lst -ffunction-sections -c .\Generated_Source\PSoC5\TFTSHIELD_1_SPIM_1_INT.c -o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1_INT.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_CR_1.lst -ffunction-sections -c .\Generated_Source\PSoC5\TFTSHIELD_1_CR_1.c -o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_CR_1.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\Cm3Start.lst -ffunction-sections -c .\Generated_Source\PSoC5\Cm3Start.c -o .\CortexM3\ARM_GCC_473\Debug\Cm3Start.o
+arm-none-eabi-as.exe -I. -I./Generated_Source/PSoC5 -mcpu=cortex-m3 -mthumb -g -alh=.\CortexM3\ARM_GCC_473\Debug/CyBootAsmGnu.lst -o .\CortexM3\ARM_GCC_473\Debug\CyBootAsmGnu.o .\Generated_Source\PSoC5\CyBootAsmGnu.s
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\CyDmac.lst -ffunction-sections -c .\Generated_Source\PSoC5\CyDmac.c -o .\CortexM3\ARM_GCC_473\Debug\CyDmac.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\CyFlash.lst -ffunction-sections -c .\Generated_Source\PSoC5\CyFlash.c -o .\CortexM3\ARM_GCC_473\Debug\CyFlash.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\CyLib.lst -ffunction-sections -c .\Generated_Source\PSoC5\CyLib.c -o .\CortexM3\ARM_GCC_473\Debug\CyLib.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\cyPm.lst -ffunction-sections -c .\Generated_Source\PSoC5\cyPm.c -o .\CortexM3\ARM_GCC_473\Debug\cyPm.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\CySpc.lst -ffunction-sections -c .\Generated_Source\PSoC5\CySpc.c -o .\CortexM3\ARM_GCC_473\Debug\CySpc.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\cyutils.lst -ffunction-sections -c .\Generated_Source\PSoC5\cyutils.c -o .\CortexM3\ARM_GCC_473\Debug\cyutils.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\Seven_Segment_Register.lst -ffunction-sections -c .\Generated_Source\PSoC5\Seven_Segment_Register.c -o .\CortexM3\ARM_GCC_473\Debug\Seven_Segment_Register.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\Clock_2.lst -ffunction-sections -c .\Generated_Source\PSoC5\Clock_2.c -o .\CortexM3\ARM_GCC_473\Debug\Clock_2.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\PushButton_Register.lst -ffunction-sections -c .\Generated_Source\PSoC5\PushButton_Register.c -o .\CortexM3\ARM_GCC_473\Debug\PushButton_Register.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\Switch_Register.lst -ffunction-sections -c .\Generated_Source\PSoC5\Switch_Register.c -o .\CortexM3\ARM_GCC_473\Debug\Switch_Register.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\LED_Register.lst -ffunction-sections -c .\Generated_Source\PSoC5\LED_Register.c -o .\CortexM3\ARM_GCC_473\Debug\LED_Register.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\cybootloader.lst -ffunction-sections -c .\Generated_Source\PSoC5\cybootloader.c -o .\CortexM3\ARM_GCC_473\Debug\cybootloader.o
+arm-none-eabi-gcc.exe -I. -I./Generated_Source/PSoC5 -Wno-main -mcpu=cortex-m3 -mthumb -Wall -g -D DEBUG -Wa,-alh=.\CortexM3\ARM_GCC_473\Debug\Bootloadable_1.lst -ffunction-sections -c .\Generated_Source\PSoC5\Bootloadable_1.c -o .\CortexM3\ARM_GCC_473\Debug\Bootloadable_1.o
+arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.a .\CortexM3\ARM_GCC_473\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_473\Debug\miso.o .\CortexM3\ARM_GCC_473\Debug\Clock_1.o .\CortexM3\ARM_GCC_473\Debug\ss.o .\CortexM3\ARM_GCC_473\Debug\sclk.o .\CortexM3\ARM_GCC_473\Debug\mosi.o .\CortexM3\ARM_GCC_473\Debug\cs.o .\CortexM3\ARM_GCC_473\Debug\dc.o .\CortexM3\ARM_GCC_473\Debug\rt_cs.o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1.o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1.o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1_PM.o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_SPIM_1_INT.o .\CortexM3\ARM_GCC_473\Debug\TFTSHIELD_1_CR_1.o .\CortexM3\ARM_GCC_473\Debug\CyBootAsmGnu.o .\CortexM3\ARM_GCC_473\Debug\CyDmac.o .\CortexM3\ARM_GCC_473\Debug\CyFlash.o .\CortexM3\ARM_GCC_473\Debug\CyLib.o .\CortexM3\ARM_GCC_473\Debug\cyPm.o .\CortexM3\ARM_GCC_473\Debug\CySpc.o .\CortexM3\ARM_GCC_473\Debug\cyutils.o .\CortexM3\ARM_GCC_473\Debug\Seven_Segment_Register.o .\CortexM3\ARM_GCC_473\Debug\Clock_2.o .\CortexM3\ARM_GCC_473\Debug\PushButton_Register.o .\CortexM3\ARM_GCC_473\Debug\Switch_Register.o .\CortexM3\ARM_GCC_473\Debug\LED_Register.o .\CortexM3\ARM_GCC_473\Debug\Bootloadable_1.o
+arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.a
+arm-none-eabi-gcc.exe -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -T .\Generated_Source\PSoC5\cm3gcc.ld -g -Wl,-Map,.\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.map -specs=nano.specs -Wl,--gc-sections -Wl,--start-group -o .\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.elf .\CortexM3\ARM_GCC_473\Debug\main.o .\CortexM3\ARM_GCC_473\Debug\cymetadata.o .\CortexM3\ARM_GCC_473\Debug\Cm3Start.o .\CortexM3\ARM_GCC_473\Debug\cybootloader.o .\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.a "C:\Program Files (x86)\Cypress\PSoC Creator\3.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_473\Debug\CyComponentLibrary.a" -Wl,--end-group
+cyelftool.exe -B "C:\Users\barror2\Dropbox\RPiSoC\Projects\tft_test.Bundle01_Rev_b - touch\Inputs_outputs.cydsn\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.elf" --flash_row_size 256 --flash_size 262144 --flash_array_size 65536 --ee_array 64 --ee_row_size 16
+cyelftool.exe -S "C:\Users\barror2\Dropbox\RPiSoC\Projects\tft_test.Bundle01_Rev_b - touch\Inputs_outputs.cydsn\CortexM3\ARM_GCC_473\Debug\Inputs_outputs.elf"
+Flash used: 46038 of 262144 bytes (17.6 %).
+SRAM used: 20821 of 65536 bytes (31.8 %).
+--------------- Build Succeeded: 08/01/2014 11:06:25 ---------------

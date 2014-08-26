@@ -1,0 +1,1063 @@
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	cursor_x,2,2
+  19              		.comm	cursor_y,2,2
+  20              		.comm	textcolor,2,2
+  21              		.comm	textbgcolor,2,2
+  22              		.comm	textsize,1,1
+  23              		.comm	rotation,1,1
+  24              		.comm	wrap,1,1
+  25              		.comm	_width,4,4
+  26              		.comm	_height,4,4
+  27              		.section	.rodata
+  28              		.align	2
+  29              	.LC0:
+  30 0000 782C792C 		.ascii	"x,y,z: %i    %i\000"
+  30      7A3A2025 
+  30      69202020 
+  30      20256900 
+  31              		.section	.text.main,"ax",%progbits
+  32              		.align	2
+  33              		.global	main
+  34              		.thumb
+  35              		.thumb_func
+  36              		.type	main, %function
+  37              	main:
+  38              	.LFB56:
+  39              		.file 1 ".\\main.c"
+   1:.\main.c      **** /*******************************************************************************
+   2:.\main.c      **** * \file main.c
+   3:.\main.c      **** * \brief This file is used to demonstrate the TFTSHIELD API.
+   4:.\main.c      **** *
+   5:.\main.c      **** * Version 1.0
+   6:.\main.c      **** *
+   7:.\main.c      **** * \author Robert Barron
+   8:.\main.c      **** *
+   9:.\main.c      **** * \bug 
+  10:.\main.c      **** *******************************************************************************/
+  11:.\main.c      **** #include <project.h>
+  12:.\main.c      **** #include "stdio.h"
+  13:.\main.c      **** int main()
+  14:.\main.c      **** {   
+  40              		.loc 1 14 0
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 2
+
+
+  41              		.cfi_startproc
+  42              		@ args = 0, pretend = 0, frame = 64
+  43              		@ frame_needed = 1, uses_anonymous_args = 0
+  44 0000 80B5     		push	{r7, lr}
+  45              	.LCFI0:
+  46              		.cfi_def_cfa_offset 8
+  47              		.cfi_offset 7, -8
+  48              		.cfi_offset 14, -4
+  49 0002 92B0     		sub	sp, sp, #72
+  50              	.LCFI1:
+  51              		.cfi_def_cfa_offset 80
+  52 0004 02AF     		add	r7, sp, #8
+  53              	.LCFI2:
+  54              		.cfi_def_cfa 7, 72
+  15:.\main.c      ****     //initializes tft
+  16:.\main.c      ****     CyDelay(1000);
+  55              		.loc 1 16 0
+  56 0006 4FF47A70 		mov	r0, #1000
+  57 000a FFF7FEFF 		bl	CyDelay
+  17:.\main.c      ****     Clock_1_SetDividerValue(24);
+  58              		.loc 1 17 0
+  59 000e 4FF01700 		mov	r0, #23
+  60 0012 4FF00101 		mov	r1, #1
+  61 0016 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  18:.\main.c      ****     CyDelay(10);
+  62              		.loc 1 18 0
+  63 001a 4FF00A00 		mov	r0, #10
+  64 001e FFF7FEFF 		bl	CyDelay
+  19:.\main.c      ****     //TFTSHIELD_1_StartTouch();
+  20:.\main.c      ****     bool touch_en = 0;
+  65              		.loc 1 20 0
+  66 0022 4FF00003 		mov	r3, #0
+  67 0026 87F83F30 		strb	r3, [r7, #63]
+  21:.\main.c      ****     
+  22:.\main.c      ****     while(!TFTSHIELD_1_StartTouch())
+  68              		.loc 1 22 0
+  69 002a 00BF     		nop
+  70              	.L2:
+  71              		.loc 1 22 0 is_stmt 0 discriminator 1
+  72 002c FFF7FEFF 		bl	TFTSHIELD_1_StartTouch
+  73 0030 0346     		mov	r3, r0
+  74 0032 83F00103 		eor	r3, r3, #1
+  75 0036 DBB2     		uxtb	r3, r3
+  76 0038 002B     		cmp	r3, #0
+  77 003a F7D1     		bne	.L2
+  23:.\main.c      ****     {
+  24:.\main.c      ****        
+  25:.\main.c      ****     }
+  26:.\main.c      ****     touch_en = 1;
+  78              		.loc 1 26 0 is_stmt 1
+  79 003c 4FF00103 		mov	r3, #1
+  80 0040 87F83F30 		strb	r3, [r7, #63]
+  27:.\main.c      ****     Clock_1_SetDividerValue(1);
+  81              		.loc 1 27 0
+  82 0044 4FF00000 		mov	r0, #0
+  83 0048 4FF00101 		mov	r1, #1
+  84 004c FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 3
+
+
+  28:.\main.c      ****     CyDelay(10);
+  85              		.loc 1 28 0
+  86 0050 4FF00A00 		mov	r0, #10
+  87 0054 FFF7FEFF 		bl	CyDelay
+  29:.\main.c      ****     TFTSHIELD_1_Start();
+  88              		.loc 1 29 0
+  89 0058 FFF7FEFF 		bl	TFTSHIELD_1_Start
+  30:.\main.c      ****     
+  31:.\main.c      ****     TFTSHIELD_1_FillScreen(BLACK);
+  90              		.loc 1 31 0
+  91 005c 4FF00000 		mov	r0, #0
+  92 0060 FFF7FEFF 		bl	TFTSHIELD_1_FillScreen
+  32:.\main.c      ****     //start at 0,0 for text
+  33:.\main.c      ****     TFTSHIELD_1_SetCursor(0,0);
+  93              		.loc 1 33 0
+  94 0064 4FF00000 		mov	r0, #0
+  95 0068 4FF00001 		mov	r1, #0
+  96 006c FFF7FEFF 		bl	TFTSHIELD_1_SetCursor
+  34:.\main.c      ****     TFTSHIELD_1_SetTextColor(WHITE);  
+  97              		.loc 1 34 0
+  98 0070 4FF6FF70 		movw	r0, #65535
+  99 0074 FFF7FEFF 		bl	TFTSHIELD_1_SetTextColor
+  35:.\main.c      ****     TFTSHIELD_1_SetTextSize(2);
+ 100              		.loc 1 35 0
+ 101 0078 4FF00200 		mov	r0, #2
+ 102 007c FFF7FEFF 		bl	TFTSHIELD_1_SetTextSize
+  36:.\main.c      ****     
+  37:.\main.c      ****     //landscape orientation
+  38:.\main.c      ****     TFTSHIELD_1_SetRotation(1);
+ 103              		.loc 1 38 0
+ 104 0080 4FF00100 		mov	r0, #1
+ 105 0084 FFF7FEFF 		bl	TFTSHIELD_1_SetRotation
+  39:.\main.c      ****     //TFTSHIELD_1_PrintString("tft lcd screen with word wrap working blah blah blah");
+  40:.\main.c      ****     
+  41:.\main.c      ****     TFTSHIELD_1_DrawLine(50, 150, 100, 150, GREEN);
+ 106              		.loc 1 41 0
+ 107 0088 4FF4FC63 		mov	r3, #2016
+ 108 008c 0093     		str	r3, [sp, #0]
+ 109 008e 4FF03200 		mov	r0, #50
+ 110 0092 4FF09601 		mov	r1, #150
+ 111 0096 4FF06402 		mov	r2, #100
+ 112 009a 4FF09603 		mov	r3, #150
+ 113 009e FFF7FEFF 		bl	TFTSHIELD_1_DrawLine
+  42:.\main.c      ****     TFTSHIELD_1_DrawLine(35, 100, 35 , 200, BLUE);
+ 114              		.loc 1 42 0
+ 115 00a2 4FF01F03 		mov	r3, #31
+ 116 00a6 0093     		str	r3, [sp, #0]
+ 117 00a8 4FF02300 		mov	r0, #35
+ 118 00ac 4FF06401 		mov	r1, #100
+ 119 00b0 4FF02302 		mov	r2, #35
+ 120 00b4 4FF0C803 		mov	r3, #200
+ 121 00b8 FFF7FEFF 		bl	TFTSHIELD_1_DrawLine
+  43:.\main.c      ****     TFTSHIELD_1_FillCircle(100,100,10,MAGENTA);
+ 122              		.loc 1 43 0
+ 123 00bc 4FF06400 		mov	r0, #100
+ 124 00c0 4FF06401 		mov	r1, #100
+ 125 00c4 4FF00A02 		mov	r2, #10
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 4
+
+
+ 126 00c8 4FF61F03 		movw	r3, #63519
+ 127 00cc FFF7FEFF 		bl	TFTSHIELD_1_FillCircle
+  44:.\main.c      ****     
+  45:.\main.c      ****     //TFTSHIELD_1_FillRect(150, 150, 75,75, YELLOW);
+  46:.\main.c      ****     if(touch_en)
+  47:.\main.c      ****     {
+  48:.\main.c      ****        // TFTSHIELD_1_PrintString("GO1");
+  49:.\main.c      ****     }
+  50:.\main.c      ****     //initializes touchscreen
+  51:.\main.c      ****     //clock must be set to 1MHZ when polling the touchscreen..
+  52:.\main.c      ****     Clock_1_SetDividerValue(24);
+ 128              		.loc 1 52 0
+ 129 00d0 4FF01700 		mov	r0, #23
+ 130 00d4 4FF00101 		mov	r1, #1
+ 131 00d8 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  53:.\main.c      ****     CyDelay(10);
+ 132              		.loc 1 53 0
+ 133 00dc 4FF00A00 		mov	r0, #10
+ 134 00e0 FFF7FEFF 		bl	CyDelay
+  54:.\main.c      ****     
+  55:.\main.c      ****     //int touchon = 0;
+  56:.\main.c      ****     if(TFTSHIELD_1_StartTouch())
+ 135              		.loc 1 56 0
+ 136 00e4 FFF7FEFF 		bl	TFTSHIELD_1_StartTouch
+ 137 00e8 0346     		mov	r3, r0
+ 138 00ea 002B     		cmp	r3, #0
+ 139 00ec 0FD0     		beq	.L3
+  57:.\main.c      ****     {
+  58:.\main.c      ****          //touchon = 1;  
+  59:.\main.c      ****         Clock_1_SetDividerValue(1);
+ 140              		.loc 1 59 0
+ 141 00ee 4FF00000 		mov	r0, #0
+ 142 00f2 4FF00101 		mov	r1, #1
+ 143 00f6 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  60:.\main.c      ****         CyDelay(1);
+ 144              		.loc 1 60 0
+ 145 00fa 4FF00100 		mov	r0, #1
+ 146 00fe FFF7FEFF 		bl	CyDelay
+  61:.\main.c      ****         //TFTSHIELD_1_PrintString("     GO2");
+  62:.\main.c      ****         Clock_1_SetDividerValue(24);
+ 147              		.loc 1 62 0
+ 148 0102 4FF01700 		mov	r0, #23
+ 149 0106 4FF00101 		mov	r1, #1
+ 150 010a FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ 151              	.L3:
+ 152              	.LBB2:
+  63:.\main.c      ****     } 
+  64:.\main.c      ****     
+  65:.\main.c      ****     
+  66:.\main.c      ****     
+  67:.\main.c      ****     for(;;)
+  68:.\main.c      ****     {
+  69:.\main.c      ****         Clock_1_SetDividerValue(24);
+ 153              		.loc 1 69 0
+ 154 010e 4FF01700 		mov	r0, #23
+ 155 0112 4FF00101 		mov	r1, #1
+ 156 0116 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 5
+
+
+  70:.\main.c      ****         uint16_t x, y;
+  71:.\main.c      ****         uint8_t z, buf;
+  72:.\main.c      ****         char buffer[50];
+  73:.\main.c      ****         //Clock_1_SetDividerValue(24);
+  74:.\main.c      ****         CyDelay(1);
+ 157              		.loc 1 74 0
+ 158 011a 4FF00100 		mov	r0, #1
+ 159 011e FFF7FEFF 		bl	CyDelay
+  75:.\main.c      ****         while(TFTSHIELD_1_Touched())
+ 160              		.loc 1 75 0
+ 161 0122 5CE0     		b	.L4
+ 162              	.L5:
+  76:.\main.c      ****         {
+  77:.\main.c      ****             Clock_1_SetDividerValue(24);
+ 163              		.loc 1 77 0
+ 164 0124 4FF01700 		mov	r0, #23
+ 165 0128 4FF00101 		mov	r1, #1
+ 166 012c FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  78:.\main.c      ****                
+  79:.\main.c      ****             //while(!TFTSHIELD_1_BufferEmpty())
+  80:.\main.c      ****             //{
+  81:.\main.c      ****                 //TFTSHIELD_1_BufferSize();
+  82:.\main.c      ****                 buf = TFTSHIELD_1_BufferSize();
+ 167              		.loc 1 82 0
+ 168 0130 FFF7FEFF 		bl	TFTSHIELD_1_BufferSize
+ 169 0134 0346     		mov	r3, r0
+ 170 0136 87F83E30 		strb	r3, [r7, #62]
+  83:.\main.c      ****                 z = 255;
+ 171              		.loc 1 83 0
+ 172 013a 4FF0FF03 		mov	r3, #255
+ 173 013e 87F83930 		strb	r3, [r7, #57]
+  84:.\main.c      ****                 TFTSHIELD_1_ReadData(&x,&y,&z);
+ 174              		.loc 1 84 0
+ 175 0142 07F13C01 		add	r1, r7, #60
+ 176 0146 07F13A02 		add	r2, r7, #58
+ 177 014a 07F13903 		add	r3, r7, #57
+ 178 014e 0846     		mov	r0, r1
+ 179 0150 1146     		mov	r1, r2
+ 180 0152 1A46     		mov	r2, r3
+ 181 0154 FFF7FEFF 		bl	TFTSHIELD_1_ReadData
+  85:.\main.c      ****                 sprintf(buffer,"x,y,z: %i    %i",buf,z);
+ 182              		.loc 1 85 0
+ 183 0158 97F83E20 		ldrb	r2, [r7, #62]	@ zero_extendqisi2
+ 184 015c 97F83930 		ldrb	r3, [r7, #57]	@ zero_extendqisi2
+ 185 0160 07F10401 		add	r1, r7, #4
+ 186 0164 0846     		mov	r0, r1
+ 187 0166 40F20001 		movw	r1, #:lower16:.LC0
+ 188 016a C0F20001 		movt	r1, #:upper16:.LC0
+ 189 016e FFF7FEFF 		bl	sprintf
+  86:.\main.c      ****                 Clock_1_SetDividerValue(1);
+ 190              		.loc 1 86 0
+ 191 0172 4FF00000 		mov	r0, #0
+ 192 0176 4FF00101 		mov	r1, #1
+ 193 017a FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  87:.\main.c      ****                 CyDelay(1);
+ 194              		.loc 1 87 0
+ 195 017e 4FF00100 		mov	r0, #1
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 6
+
+
+ 196 0182 FFF7FEFF 		bl	CyDelay
+  88:.\main.c      ****                 TFTSHIELD_1_PrintString(buffer);
+ 197              		.loc 1 88 0
+ 198 0186 07F10403 		add	r3, r7, #4
+ 199 018a 1846     		mov	r0, r3
+ 200 018c FFF7FEFF 		bl	TFTSHIELD_1_PrintString
+  89:.\main.c      ****                 CyDelay(1);
+ 201              		.loc 1 89 0
+ 202 0190 4FF00100 		mov	r0, #1
+ 203 0194 FFF7FEFF 		bl	CyDelay
+  90:.\main.c      ****                 TFTSHIELD_1_FillRect(40, 0, 200,20, BLACK);
+ 204              		.loc 1 90 0
+ 205 0198 4FF00003 		mov	r3, #0
+ 206 019c 0093     		str	r3, [sp, #0]
+ 207 019e 4FF02800 		mov	r0, #40
+ 208 01a2 4FF00001 		mov	r1, #0
+ 209 01a6 4FF0C802 		mov	r2, #200
+ 210 01aa 4FF01403 		mov	r3, #20
+ 211 01ae FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+  91:.\main.c      ****                 TFTSHIELD_1_SetCursor(0,0);
+ 212              		.loc 1 91 0
+ 213 01b2 4FF00000 		mov	r0, #0
+ 214 01b6 4FF00001 		mov	r1, #0
+ 215 01ba FFF7FEFF 		bl	TFTSHIELD_1_SetCursor
+  92:.\main.c      ****                 Clock_1_SetDividerValue(24);
+ 216              		.loc 1 92 0
+ 217 01be 4FF01700 		mov	r0, #23
+ 218 01c2 4FF00101 		mov	r1, #1
+ 219 01c6 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  93:.\main.c      ****                 CyDelay(1);
+ 220              		.loc 1 93 0
+ 221 01ca 4FF00100 		mov	r0, #1
+ 222 01ce FFF7FEFF 		bl	CyDelay
+  94:.\main.c      ****                 
+  95:.\main.c      ****                 /*if(buf == 0)
+  96:.\main.c      ****                 {
+  97:.\main.c      ****                     TFTSHIELD_1_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
+  98:.\main.c      ****                 }*/
+  99:.\main.c      ****             //}
+ 100:.\main.c      ****             Clock_1_SetDividerValue(24);
+ 223              		.loc 1 100 0
+ 224 01d2 4FF01700 		mov	r0, #23
+ 225 01d6 4FF00101 		mov	r1, #1
+ 226 01da FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ 227              	.L4:
+  75:.\main.c      ****         while(TFTSHIELD_1_Touched())
+ 228              		.loc 1 75 0 discriminator 1
+ 229 01de FFF7FEFF 		bl	TFTSHIELD_1_Touched
+ 230 01e2 0346     		mov	r3, r0
+ 231 01e4 002B     		cmp	r3, #0
+ 232 01e6 9DD1     		bne	.L5
+ 101:.\main.c      ****             
+ 102:.\main.c      ****              
+ 103:.\main.c      ****         }
+ 104:.\main.c      ****         TFTSHIELD_1_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
+ 233              		.loc 1 104 0
+ 234 01e8 4FF00B00 		mov	r0, #11
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 7
+
+
+ 235 01ec 4FF0FF01 		mov	r1, #255
+ 236 01f0 FFF7FEFF 		bl	TFTSHIELD_1_WriteRegister8
+ 105:.\main.c      ****         TFTSHIELD_1_ResetBuffer();
+ 237              		.loc 1 105 0
+ 238 01f4 FFF7FEFF 		bl	TFTSHIELD_1_ResetBuffer
+ 106:.\main.c      ****         
+ 107:.\main.c      ****             //TFTSHIELD_1_FillRect(150, 150, 75,75, GREEN); 
+ 108:.\main.c      ****            
+ 109:.\main.c      ****       // }
+ 110:.\main.c      ****       // else
+ 111:.\main.c      ****        //{
+ 112:.\main.c      ****          //  TFTSHIELD_1_FillRect(150, 150, 75,75, RED); 
+ 113:.\main.c      ****       // }
+ 114:.\main.c      ****         CyDelay(10);
+ 239              		.loc 1 114 0
+ 240 01f8 4FF00A00 		mov	r0, #10
+ 241 01fc FFF7FEFF 		bl	CyDelay
+ 242              	.LBE2:
+ 115:.\main.c      ****     }
+ 243              		.loc 1 115 0
+ 244 0200 85E7     		b	.L3
+ 245              		.cfi_endproc
+ 246              	.LFE56:
+ 247              		.size	main, .-main
+ 248 0202 00BF     		.text
+ 249              	.Letext0:
+ 250              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.0\\psoc creator\\import\\gnu_cs\\arm\\4
+ 251              		.file 3 "./Generated_Source/PSoC5/TFTSHIELD_1.h"
+ 252              		.file 4 "./Generated_Source/PSoC5/core_cm3.h"
+ 253              		.section	.debug_info,"",%progbits
+ 254              	.Ldebug_info0:
+ 255 0000 F7010000 		.4byte	0x1f7
+ 256 0004 0200     		.2byte	0x2
+ 257 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 258 000a 04       		.byte	0x4
+ 259 000b 01       		.uleb128 0x1
+ 260 000c 69010000 		.4byte	.LASF30
+ 261 0010 01       		.byte	0x1
+ 262 0011 76000000 		.4byte	.LASF31
+ 263 0015 00000000 		.4byte	.LASF32
+ 264 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 265 001d 00000000 		.4byte	0
+ 266 0021 00000000 		.4byte	0
+ 267 0025 00000000 		.4byte	.Ldebug_line0
+ 268 0029 02       		.uleb128 0x2
+ 269 002a 01       		.byte	0x1
+ 270 002b 06       		.byte	0x6
+ 271 002c CC010000 		.4byte	.LASF0
+ 272 0030 03       		.uleb128 0x3
+ 273 0031 06010000 		.4byte	.LASF2
+ 274 0035 02       		.byte	0x2
+ 275 0036 2A       		.byte	0x2a
+ 276 0037 3B000000 		.4byte	0x3b
+ 277 003b 02       		.uleb128 0x2
+ 278 003c 01       		.byte	0x1
+ 279 003d 08       		.byte	0x8
+ 280 003e 68000000 		.4byte	.LASF1
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 8
+
+
+ 281 0042 03       		.uleb128 0x3
+ 282 0043 0E010000 		.4byte	.LASF3
+ 283 0047 02       		.byte	0x2
+ 284 0048 35       		.byte	0x35
+ 285 0049 4D000000 		.4byte	0x4d
+ 286 004d 02       		.uleb128 0x2
+ 287 004e 02       		.byte	0x2
+ 288 004f 05       		.byte	0x5
+ 289 0050 4F010000 		.4byte	.LASF4
+ 290 0054 03       		.uleb128 0x3
+ 291 0055 60010000 		.4byte	.LASF5
+ 292 0059 02       		.byte	0x2
+ 293 005a 36       		.byte	0x36
+ 294 005b 5F000000 		.4byte	0x5f
+ 295 005f 02       		.uleb128 0x2
+ 296 0060 02       		.byte	0x2
+ 297 0061 07       		.byte	0x7
+ 298 0062 91000000 		.4byte	.LASF6
+ 299 0066 03       		.uleb128 0x3
+ 300 0067 1F010000 		.4byte	.LASF7
+ 301 006b 02       		.byte	0x2
+ 302 006c 4F       		.byte	0x4f
+ 303 006d 71000000 		.4byte	0x71
+ 304 0071 02       		.uleb128 0x2
+ 305 0072 04       		.byte	0x4
+ 306 0073 05       		.byte	0x5
+ 307 0074 BE010000 		.4byte	.LASF8
+ 308 0078 02       		.uleb128 0x2
+ 309 0079 04       		.byte	0x4
+ 310 007a 07       		.byte	0x7
+ 311 007b 7F000000 		.4byte	.LASF9
+ 312 007f 02       		.uleb128 0x2
+ 313 0080 08       		.byte	0x8
+ 314 0081 05       		.byte	0x5
+ 315 0082 30010000 		.4byte	.LASF10
+ 316 0086 02       		.uleb128 0x2
+ 317 0087 08       		.byte	0x8
+ 318 0088 07       		.byte	0x7
+ 319 0089 EF000000 		.4byte	.LASF11
+ 320 008d 04       		.uleb128 0x4
+ 321 008e 04       		.byte	0x4
+ 322 008f 05       		.byte	0x5
+ 323 0090 696E7400 		.ascii	"int\000"
+ 324 0094 02       		.uleb128 0x2
+ 325 0095 04       		.byte	0x4
+ 326 0096 07       		.byte	0x7
+ 327 0097 D9000000 		.4byte	.LASF12
+ 328 009b 02       		.uleb128 0x2
+ 329 009c 04       		.byte	0x4
+ 330 009d 04       		.byte	0x4
+ 331 009e 62000000 		.4byte	.LASF13
+ 332 00a2 02       		.uleb128 0x2
+ 333 00a3 08       		.byte	0x8
+ 334 00a4 04       		.byte	0x4
+ 335 00a5 C3000000 		.4byte	.LASF14
+ 336 00a9 02       		.uleb128 0x2
+ 337 00aa 01       		.byte	0x1
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 9
+
+
+ 338 00ab 08       		.byte	0x8
+ 339 00ac C7010000 		.4byte	.LASF15
+ 340 00b0 02       		.uleb128 0x2
+ 341 00b1 04       		.byte	0x4
+ 342 00b2 07       		.byte	0x7
+ 343 00b3 27010000 		.4byte	.LASF16
+ 344 00b7 05       		.uleb128 0x5
+ 345 00b8 01       		.byte	0x1
+ 346 00b9 D4000000 		.4byte	.LASF33
+ 347 00bd 01       		.byte	0x1
+ 348 00be 0D       		.byte	0xd
+ 349 00bf 8D000000 		.4byte	0x8d
+ 350 00c3 00000000 		.4byte	.LFB56
+ 351 00c7 02020000 		.4byte	.LFE56
+ 352 00cb 00000000 		.4byte	.LLST0
+ 353 00cf 01       		.byte	0x1
+ 354 00d0 2E010000 		.4byte	0x12e
+ 355 00d4 06       		.uleb128 0x6
+ 356 00d5 16010000 		.4byte	.LASF17
+ 357 00d9 01       		.byte	0x1
+ 358 00da 14       		.byte	0x14
+ 359 00db 2E010000 		.4byte	0x12e
+ 360 00df 02       		.byte	0x2
+ 361 00e0 91       		.byte	0x91
+ 362 00e1 77       		.sleb128 -9
+ 363 00e2 07       		.uleb128 0x7
+ 364 00e3 0E010000 		.4byte	.LBB2
+ 365 00e7 00020000 		.4byte	.LBE2
+ 366 00eb 08       		.uleb128 0x8
+ 367 00ec 7800     		.ascii	"x\000"
+ 368 00ee 01       		.byte	0x1
+ 369 00ef 46       		.byte	0x46
+ 370 00f0 54000000 		.4byte	0x54
+ 371 00f4 02       		.byte	0x2
+ 372 00f5 91       		.byte	0x91
+ 373 00f6 74       		.sleb128 -12
+ 374 00f7 08       		.uleb128 0x8
+ 375 00f8 7900     		.ascii	"y\000"
+ 376 00fa 01       		.byte	0x1
+ 377 00fb 46       		.byte	0x46
+ 378 00fc 54000000 		.4byte	0x54
+ 379 0100 02       		.byte	0x2
+ 380 0101 91       		.byte	0x91
+ 381 0102 72       		.sleb128 -14
+ 382 0103 08       		.uleb128 0x8
+ 383 0104 7A00     		.ascii	"z\000"
+ 384 0106 01       		.byte	0x1
+ 385 0107 47       		.byte	0x47
+ 386 0108 30000000 		.4byte	0x30
+ 387 010c 02       		.byte	0x2
+ 388 010d 91       		.byte	0x91
+ 389 010e 71       		.sleb128 -15
+ 390 010f 08       		.uleb128 0x8
+ 391 0110 62756600 		.ascii	"buf\000"
+ 392 0114 01       		.byte	0x1
+ 393 0115 47       		.byte	0x47
+ 394 0116 30000000 		.4byte	0x30
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 10
+
+
+ 395 011a 02       		.byte	0x2
+ 396 011b 91       		.byte	0x91
+ 397 011c 76       		.sleb128 -10
+ 398 011d 06       		.uleb128 0x6
+ 399 011e 59010000 		.4byte	.LASF18
+ 400 0122 01       		.byte	0x1
+ 401 0123 48       		.byte	0x48
+ 402 0124 35010000 		.4byte	0x135
+ 403 0128 03       		.byte	0x3
+ 404 0129 91       		.byte	0x91
+ 405 012a BC7F     		.sleb128 -68
+ 406 012c 00       		.byte	0
+ 407 012d 00       		.byte	0
+ 408 012e 02       		.uleb128 0x2
+ 409 012f 01       		.byte	0x1
+ 410 0130 02       		.byte	0x2
+ 411 0131 D8010000 		.4byte	.LASF19
+ 412 0135 09       		.uleb128 0x9
+ 413 0136 A9000000 		.4byte	0xa9
+ 414 013a 45010000 		.4byte	0x145
+ 415 013e 0A       		.uleb128 0xa
+ 416 013f B0000000 		.4byte	0xb0
+ 417 0143 31       		.byte	0x31
+ 418 0144 00       		.byte	0
+ 419 0145 0B       		.uleb128 0xb
+ 420 0146 A4000000 		.4byte	.LASF20
+ 421 014a 03       		.byte	0x3
+ 422 014b 6D       		.byte	0x6d
+ 423 014c 42000000 		.4byte	0x42
+ 424 0150 01       		.byte	0x1
+ 425 0151 05       		.byte	0x5
+ 426 0152 03       		.byte	0x3
+ 427 0153 00000000 		.4byte	cursor_x
+ 428 0157 0B       		.uleb128 0xb
+ 429 0158 AD000000 		.4byte	.LASF21
+ 430 015c 03       		.byte	0x3
+ 431 015d 6E       		.byte	0x6e
+ 432 015e 42000000 		.4byte	0x42
+ 433 0162 01       		.byte	0x1
+ 434 0163 05       		.byte	0x5
+ 435 0164 03       		.byte	0x3
+ 436 0165 00000000 		.4byte	cursor_y
+ 437 0169 0B       		.uleb128 0xb
+ 438 016a CA000000 		.4byte	.LASF22
+ 439 016e 03       		.byte	0x3
+ 440 016f 6F       		.byte	0x6f
+ 441 0170 54000000 		.4byte	0x54
+ 442 0174 01       		.byte	0x1
+ 443 0175 05       		.byte	0x5
+ 444 0176 03       		.byte	0x3
+ 445 0177 00000000 		.4byte	textcolor
+ 446 017b 0B       		.uleb128 0xb
+ 447 017c B2010000 		.4byte	.LASF23
+ 448 0180 03       		.byte	0x3
+ 449 0181 70       		.byte	0x70
+ 450 0182 54000000 		.4byte	0x54
+ 451 0186 01       		.byte	0x1
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 11
+
+
+ 452 0187 05       		.byte	0x5
+ 453 0188 03       		.byte	0x3
+ 454 0189 00000000 		.4byte	textbgcolor
+ 455 018d 0B       		.uleb128 0xb
+ 456 018e 3E010000 		.4byte	.LASF24
+ 457 0192 03       		.byte	0x3
+ 458 0193 71       		.byte	0x71
+ 459 0194 30000000 		.4byte	0x30
+ 460 0198 01       		.byte	0x1
+ 461 0199 05       		.byte	0x5
+ 462 019a 03       		.byte	0x3
+ 463 019b 00000000 		.4byte	textsize
+ 464 019f 0B       		.uleb128 0xb
+ 465 01a0 E6000000 		.4byte	.LASF25
+ 466 01a4 03       		.byte	0x3
+ 467 01a5 72       		.byte	0x72
+ 468 01a6 30000000 		.4byte	0x30
+ 469 01aa 01       		.byte	0x1
+ 470 01ab 05       		.byte	0x5
+ 471 01ac 03       		.byte	0x3
+ 472 01ad 00000000 		.4byte	rotation
+ 473 01b1 0B       		.uleb128 0xb
+ 474 01b2 5D000000 		.4byte	.LASF26
+ 475 01b6 03       		.byte	0x3
+ 476 01b7 73       		.byte	0x73
+ 477 01b8 30000000 		.4byte	0x30
+ 478 01bc 01       		.byte	0x1
+ 479 01bd 05       		.byte	0x5
+ 480 01be 03       		.byte	0x3
+ 481 01bf 00000000 		.4byte	wrap
+ 482 01c3 0B       		.uleb128 0xb
+ 483 01c4 56000000 		.4byte	.LASF27
+ 484 01c8 03       		.byte	0x3
+ 485 01c9 74       		.byte	0x74
+ 486 01ca 8D000000 		.4byte	0x8d
+ 487 01ce 01       		.byte	0x1
+ 488 01cf 05       		.byte	0x5
+ 489 01d0 03       		.byte	0x3
+ 490 01d1 00000000 		.4byte	_width
+ 491 01d5 0B       		.uleb128 0xb
+ 492 01d6 47010000 		.4byte	.LASF28
+ 493 01da 03       		.byte	0x3
+ 494 01db 75       		.byte	0x75
+ 495 01dc 8D000000 		.4byte	0x8d
+ 496 01e0 01       		.byte	0x1
+ 497 01e1 05       		.byte	0x5
+ 498 01e2 03       		.byte	0x3
+ 499 01e3 00000000 		.4byte	_height
+ 500 01e7 0C       		.uleb128 0xc
+ 501 01e8 B6000000 		.4byte	.LASF29
+ 502 01ec 04       		.byte	0x4
+ 503 01ed 1606     		.2byte	0x616
+ 504 01ef F5010000 		.4byte	0x1f5
+ 505 01f3 01       		.byte	0x1
+ 506 01f4 01       		.byte	0x1
+ 507 01f5 0D       		.uleb128 0xd
+ 508 01f6 66000000 		.4byte	0x66
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 12
+
+
+ 509 01fa 00       		.byte	0
+ 510              		.section	.debug_abbrev,"",%progbits
+ 511              	.Ldebug_abbrev0:
+ 512 0000 01       		.uleb128 0x1
+ 513 0001 11       		.uleb128 0x11
+ 514 0002 01       		.byte	0x1
+ 515 0003 25       		.uleb128 0x25
+ 516 0004 0E       		.uleb128 0xe
+ 517 0005 13       		.uleb128 0x13
+ 518 0006 0B       		.uleb128 0xb
+ 519 0007 03       		.uleb128 0x3
+ 520 0008 0E       		.uleb128 0xe
+ 521 0009 1B       		.uleb128 0x1b
+ 522 000a 0E       		.uleb128 0xe
+ 523 000b 55       		.uleb128 0x55
+ 524 000c 06       		.uleb128 0x6
+ 525 000d 11       		.uleb128 0x11
+ 526 000e 01       		.uleb128 0x1
+ 527 000f 52       		.uleb128 0x52
+ 528 0010 01       		.uleb128 0x1
+ 529 0011 10       		.uleb128 0x10
+ 530 0012 06       		.uleb128 0x6
+ 531 0013 00       		.byte	0
+ 532 0014 00       		.byte	0
+ 533 0015 02       		.uleb128 0x2
+ 534 0016 24       		.uleb128 0x24
+ 535 0017 00       		.byte	0
+ 536 0018 0B       		.uleb128 0xb
+ 537 0019 0B       		.uleb128 0xb
+ 538 001a 3E       		.uleb128 0x3e
+ 539 001b 0B       		.uleb128 0xb
+ 540 001c 03       		.uleb128 0x3
+ 541 001d 0E       		.uleb128 0xe
+ 542 001e 00       		.byte	0
+ 543 001f 00       		.byte	0
+ 544 0020 03       		.uleb128 0x3
+ 545 0021 16       		.uleb128 0x16
+ 546 0022 00       		.byte	0
+ 547 0023 03       		.uleb128 0x3
+ 548 0024 0E       		.uleb128 0xe
+ 549 0025 3A       		.uleb128 0x3a
+ 550 0026 0B       		.uleb128 0xb
+ 551 0027 3B       		.uleb128 0x3b
+ 552 0028 0B       		.uleb128 0xb
+ 553 0029 49       		.uleb128 0x49
+ 554 002a 13       		.uleb128 0x13
+ 555 002b 00       		.byte	0
+ 556 002c 00       		.byte	0
+ 557 002d 04       		.uleb128 0x4
+ 558 002e 24       		.uleb128 0x24
+ 559 002f 00       		.byte	0
+ 560 0030 0B       		.uleb128 0xb
+ 561 0031 0B       		.uleb128 0xb
+ 562 0032 3E       		.uleb128 0x3e
+ 563 0033 0B       		.uleb128 0xb
+ 564 0034 03       		.uleb128 0x3
+ 565 0035 08       		.uleb128 0x8
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 13
+
+
+ 566 0036 00       		.byte	0
+ 567 0037 00       		.byte	0
+ 568 0038 05       		.uleb128 0x5
+ 569 0039 2E       		.uleb128 0x2e
+ 570 003a 01       		.byte	0x1
+ 571 003b 3F       		.uleb128 0x3f
+ 572 003c 0C       		.uleb128 0xc
+ 573 003d 03       		.uleb128 0x3
+ 574 003e 0E       		.uleb128 0xe
+ 575 003f 3A       		.uleb128 0x3a
+ 576 0040 0B       		.uleb128 0xb
+ 577 0041 3B       		.uleb128 0x3b
+ 578 0042 0B       		.uleb128 0xb
+ 579 0043 49       		.uleb128 0x49
+ 580 0044 13       		.uleb128 0x13
+ 581 0045 11       		.uleb128 0x11
+ 582 0046 01       		.uleb128 0x1
+ 583 0047 12       		.uleb128 0x12
+ 584 0048 01       		.uleb128 0x1
+ 585 0049 40       		.uleb128 0x40
+ 586 004a 06       		.uleb128 0x6
+ 587 004b 9642     		.uleb128 0x2116
+ 588 004d 0C       		.uleb128 0xc
+ 589 004e 01       		.uleb128 0x1
+ 590 004f 13       		.uleb128 0x13
+ 591 0050 00       		.byte	0
+ 592 0051 00       		.byte	0
+ 593 0052 06       		.uleb128 0x6
+ 594 0053 34       		.uleb128 0x34
+ 595 0054 00       		.byte	0
+ 596 0055 03       		.uleb128 0x3
+ 597 0056 0E       		.uleb128 0xe
+ 598 0057 3A       		.uleb128 0x3a
+ 599 0058 0B       		.uleb128 0xb
+ 600 0059 3B       		.uleb128 0x3b
+ 601 005a 0B       		.uleb128 0xb
+ 602 005b 49       		.uleb128 0x49
+ 603 005c 13       		.uleb128 0x13
+ 604 005d 02       		.uleb128 0x2
+ 605 005e 0A       		.uleb128 0xa
+ 606 005f 00       		.byte	0
+ 607 0060 00       		.byte	0
+ 608 0061 07       		.uleb128 0x7
+ 609 0062 0B       		.uleb128 0xb
+ 610 0063 01       		.byte	0x1
+ 611 0064 11       		.uleb128 0x11
+ 612 0065 01       		.uleb128 0x1
+ 613 0066 12       		.uleb128 0x12
+ 614 0067 01       		.uleb128 0x1
+ 615 0068 00       		.byte	0
+ 616 0069 00       		.byte	0
+ 617 006a 08       		.uleb128 0x8
+ 618 006b 34       		.uleb128 0x34
+ 619 006c 00       		.byte	0
+ 620 006d 03       		.uleb128 0x3
+ 621 006e 08       		.uleb128 0x8
+ 622 006f 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 14
+
+
+ 623 0070 0B       		.uleb128 0xb
+ 624 0071 3B       		.uleb128 0x3b
+ 625 0072 0B       		.uleb128 0xb
+ 626 0073 49       		.uleb128 0x49
+ 627 0074 13       		.uleb128 0x13
+ 628 0075 02       		.uleb128 0x2
+ 629 0076 0A       		.uleb128 0xa
+ 630 0077 00       		.byte	0
+ 631 0078 00       		.byte	0
+ 632 0079 09       		.uleb128 0x9
+ 633 007a 01       		.uleb128 0x1
+ 634 007b 01       		.byte	0x1
+ 635 007c 49       		.uleb128 0x49
+ 636 007d 13       		.uleb128 0x13
+ 637 007e 01       		.uleb128 0x1
+ 638 007f 13       		.uleb128 0x13
+ 639 0080 00       		.byte	0
+ 640 0081 00       		.byte	0
+ 641 0082 0A       		.uleb128 0xa
+ 642 0083 21       		.uleb128 0x21
+ 643 0084 00       		.byte	0
+ 644 0085 49       		.uleb128 0x49
+ 645 0086 13       		.uleb128 0x13
+ 646 0087 2F       		.uleb128 0x2f
+ 647 0088 0B       		.uleb128 0xb
+ 648 0089 00       		.byte	0
+ 649 008a 00       		.byte	0
+ 650 008b 0B       		.uleb128 0xb
+ 651 008c 34       		.uleb128 0x34
+ 652 008d 00       		.byte	0
+ 653 008e 03       		.uleb128 0x3
+ 654 008f 0E       		.uleb128 0xe
+ 655 0090 3A       		.uleb128 0x3a
+ 656 0091 0B       		.uleb128 0xb
+ 657 0092 3B       		.uleb128 0x3b
+ 658 0093 0B       		.uleb128 0xb
+ 659 0094 49       		.uleb128 0x49
+ 660 0095 13       		.uleb128 0x13
+ 661 0096 3F       		.uleb128 0x3f
+ 662 0097 0C       		.uleb128 0xc
+ 663 0098 02       		.uleb128 0x2
+ 664 0099 0A       		.uleb128 0xa
+ 665 009a 00       		.byte	0
+ 666 009b 00       		.byte	0
+ 667 009c 0C       		.uleb128 0xc
+ 668 009d 34       		.uleb128 0x34
+ 669 009e 00       		.byte	0
+ 670 009f 03       		.uleb128 0x3
+ 671 00a0 0E       		.uleb128 0xe
+ 672 00a1 3A       		.uleb128 0x3a
+ 673 00a2 0B       		.uleb128 0xb
+ 674 00a3 3B       		.uleb128 0x3b
+ 675 00a4 05       		.uleb128 0x5
+ 676 00a5 49       		.uleb128 0x49
+ 677 00a6 13       		.uleb128 0x13
+ 678 00a7 3F       		.uleb128 0x3f
+ 679 00a8 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 15
+
+
+ 680 00a9 3C       		.uleb128 0x3c
+ 681 00aa 0C       		.uleb128 0xc
+ 682 00ab 00       		.byte	0
+ 683 00ac 00       		.byte	0
+ 684 00ad 0D       		.uleb128 0xd
+ 685 00ae 35       		.uleb128 0x35
+ 686 00af 00       		.byte	0
+ 687 00b0 49       		.uleb128 0x49
+ 688 00b1 13       		.uleb128 0x13
+ 689 00b2 00       		.byte	0
+ 690 00b3 00       		.byte	0
+ 691 00b4 00       		.byte	0
+ 692              		.section	.debug_loc,"",%progbits
+ 693              	.Ldebug_loc0:
+ 694              	.LLST0:
+ 695 0000 00000000 		.4byte	.LFB56
+ 696 0004 02000000 		.4byte	.LCFI0
+ 697 0008 0200     		.2byte	0x2
+ 698 000a 7D       		.byte	0x7d
+ 699 000b 00       		.sleb128 0
+ 700 000c 02000000 		.4byte	.LCFI0
+ 701 0010 04000000 		.4byte	.LCFI1
+ 702 0014 0200     		.2byte	0x2
+ 703 0016 7D       		.byte	0x7d
+ 704 0017 08       		.sleb128 8
+ 705 0018 04000000 		.4byte	.LCFI1
+ 706 001c 06000000 		.4byte	.LCFI2
+ 707 0020 0300     		.2byte	0x3
+ 708 0022 7D       		.byte	0x7d
+ 709 0023 D000     		.sleb128 80
+ 710 0025 06000000 		.4byte	.LCFI2
+ 711 0029 02020000 		.4byte	.LFE56
+ 712 002d 0300     		.2byte	0x3
+ 713 002f 77       		.byte	0x77
+ 714 0030 C800     		.sleb128 72
+ 715 0032 00000000 		.4byte	0
+ 716 0036 00000000 		.4byte	0
+ 717              		.section	.debug_aranges,"",%progbits
+ 718 0000 1C000000 		.4byte	0x1c
+ 719 0004 0200     		.2byte	0x2
+ 720 0006 00000000 		.4byte	.Ldebug_info0
+ 721 000a 04       		.byte	0x4
+ 722 000b 00       		.byte	0
+ 723 000c 0000     		.2byte	0
+ 724 000e 0000     		.2byte	0
+ 725 0010 00000000 		.4byte	.LFB56
+ 726 0014 02020000 		.4byte	.LFE56-.LFB56
+ 727 0018 00000000 		.4byte	0
+ 728 001c 00000000 		.4byte	0
+ 729              		.section	.debug_ranges,"",%progbits
+ 730              	.Ldebug_ranges0:
+ 731 0000 00000000 		.4byte	.LFB56
+ 732 0004 02020000 		.4byte	.LFE56
+ 733 0008 00000000 		.4byte	0
+ 734 000c 00000000 		.4byte	0
+ 735              		.section	.debug_line,"",%progbits
+ 736              	.Ldebug_line0:
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 16
+
+
+ 737 0000 52010000 		.section	.debug_str,"MS",%progbits,1
+ 737      0200FD00 
+ 737      00000201 
+ 737      FB0E0D00 
+ 737      01010101 
+ 738              	.LASF32:
+ 739 0000 433A5C55 		.ascii	"C:\\Users\\Brian\\Dropbox\\RPiSoC\\Projects\\tft_te"
+ 739      73657273 
+ 739      5C427269 
+ 739      616E5C44 
+ 739      726F7062 
+ 740 002d 73742E42 		.ascii	"st.Bundle01_Rev_b - touch\\tft_test.cydsn\000"
+ 740      756E646C 
+ 740      6530315F 
+ 740      5265765F 
+ 740      62202D20 
+ 741              	.LASF27:
+ 742 0056 5F776964 		.ascii	"_width\000"
+ 742      746800
+ 743              	.LASF26:
+ 744 005d 77726170 		.ascii	"wrap\000"
+ 744      00
+ 745              	.LASF13:
+ 746 0062 666C6F61 		.ascii	"float\000"
+ 746      7400
+ 747              	.LASF1:
+ 748 0068 756E7369 		.ascii	"unsigned char\000"
+ 748      676E6564 
+ 748      20636861 
+ 748      7200
+ 749              	.LASF31:
+ 750 0076 2E5C6D61 		.ascii	".\\main.c\000"
+ 750      696E2E63 
+ 750      00
+ 751              	.LASF9:
+ 752 007f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 752      20756E73 
+ 752      69676E65 
+ 752      6420696E 
+ 752      7400
+ 753              	.LASF6:
+ 754 0091 73686F72 		.ascii	"short unsigned int\000"
+ 754      7420756E 
+ 754      7369676E 
+ 754      65642069 
+ 754      6E7400
+ 755              	.LASF20:
+ 756 00a4 63757273 		.ascii	"cursor_x\000"
+ 756      6F725F78 
+ 756      00
+ 757              	.LASF21:
+ 758 00ad 63757273 		.ascii	"cursor_y\000"
+ 758      6F725F79 
+ 758      00
+ 759              	.LASF29:
+ 760 00b6 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 760      52784275 
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 17
+
+
+ 760      66666572 
+ 760      00
+ 761              	.LASF14:
+ 762 00c3 646F7562 		.ascii	"double\000"
+ 762      6C6500
+ 763              	.LASF22:
+ 764 00ca 74657874 		.ascii	"textcolor\000"
+ 764      636F6C6F 
+ 764      7200
+ 765              	.LASF33:
+ 766 00d4 6D61696E 		.ascii	"main\000"
+ 766      00
+ 767              	.LASF12:
+ 768 00d9 756E7369 		.ascii	"unsigned int\000"
+ 768      676E6564 
+ 768      20696E74 
+ 768      00
+ 769              	.LASF25:
+ 770 00e6 726F7461 		.ascii	"rotation\000"
+ 770      74696F6E 
+ 770      00
+ 771              	.LASF11:
+ 772 00ef 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 772      206C6F6E 
+ 772      6720756E 
+ 772      7369676E 
+ 772      65642069 
+ 773              	.LASF2:
+ 774 0106 75696E74 		.ascii	"uint8_t\000"
+ 774      385F7400 
+ 775              	.LASF3:
+ 776 010e 696E7431 		.ascii	"int16_t\000"
+ 776      365F7400 
+ 777              	.LASF17:
+ 778 0116 746F7563 		.ascii	"touch_en\000"
+ 778      685F656E 
+ 778      00
+ 779              	.LASF7:
+ 780 011f 696E7433 		.ascii	"int32_t\000"
+ 780      325F7400 
+ 781              	.LASF16:
+ 782 0127 73697A65 		.ascii	"sizetype\000"
+ 782      74797065 
+ 782      00
+ 783              	.LASF10:
+ 784 0130 6C6F6E67 		.ascii	"long long int\000"
+ 784      206C6F6E 
+ 784      6720696E 
+ 784      7400
+ 785              	.LASF24:
+ 786 013e 74657874 		.ascii	"textsize\000"
+ 786      73697A65 
+ 786      00
+ 787              	.LASF28:
+ 788 0147 5F686569 		.ascii	"_height\000"
+ 788      67687400 
+ 789              	.LASF4:
+ARM GAS  C:\Users\Brian\AppData\Local\Temp\ccJGU8mr.s 			page 18
+
+
+ 790 014f 73686F72 		.ascii	"short int\000"
+ 790      7420696E 
+ 790      7400
+ 791              	.LASF18:
+ 792 0159 62756666 		.ascii	"buffer\000"
+ 792      657200
+ 793              	.LASF5:
+ 794 0160 75696E74 		.ascii	"uint16_t\000"
+ 794      31365F74 
+ 794      00
+ 795              	.LASF30:
+ 796 0169 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 796      4320342E 
+ 796      372E3320 
+ 796      32303133 
+ 796      30333132 
+ 797 019c 616E6368 		.ascii	"anch revision 196615]\000"
+ 797      20726576 
+ 797      6973696F 
+ 797      6E203139 
+ 797      36363135 
+ 798              	.LASF23:
+ 799 01b2 74657874 		.ascii	"textbgcolor\000"
+ 799      6267636F 
+ 799      6C6F7200 
+ 800              	.LASF8:
+ 801 01be 6C6F6E67 		.ascii	"long int\000"
+ 801      20696E74 
+ 801      00
+ 802              	.LASF15:
+ 803 01c7 63686172 		.ascii	"char\000"
+ 803      00
+ 804              	.LASF0:
+ 805 01cc 7369676E 		.ascii	"signed char\000"
+ 805      65642063 
+ 805      68617200 
+ 806              	.LASF19:
+ 807 01d8 5F426F6F 		.ascii	"_Bool\000"
+ 807      6C00
+ 808              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br
