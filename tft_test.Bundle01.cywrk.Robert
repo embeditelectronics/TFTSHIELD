@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="tft_test\touchpaint">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="tft_test\touchpaint\TopDesign.cysch">
 <ExpandedNodeIds>
 <v>tft_test</v>
 <v>tft_test\Inputs_outputs\Source Files</v>
@@ -320,7 +320,6 @@
 <v>tft_test\touchpaint\Header Files</v>
 <v>tft_test\touchpaint\Source Files</v>
 <v>tft_test\touchpaint\Source Files\main.c</v>
-<v>tft_test\touchpaint\Generated_Source</v>
 <v>tft_test\touchpaint\Generated_Source\PSoC5</v>
 <v>tft_test\touchpaint\Generated_Source\PSoC5\Bootloadable_1</v>
 <v>tft_test\touchpaint\Generated_Source\PSoC5\Bootloadable_1\Bootloadable_1.c</v>
@@ -426,42 +425,6 @@
 <v>tft_test\touchpaint\Source Files</v>
 <v>tft_test\touchpaint\Source Files\main.c</v>
 <v>tft_test\touchpaint\Generated_Source</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\Bootloadable_1</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\Bootloadable_1\Bootloadable_1.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\Bootloadable_1\Bootloadable_1.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\Clock_1</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\Clock_1\Clock_1.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\Clock_1\Clock_1.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cs</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cs\cs.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cs\cs.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cs\cs_aliases.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\cm3gcc.ld</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\Cm3Iar.icf</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\Cm3RealView.scat</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\Cm3Start.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\core_cm3.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\core_cm3_psoc5.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\core_cmFunc.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\core_cmInstr.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyBootAsmGnu.s</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyBootAsmIar.s</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyBootAsmRv.s</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyDmac.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyDmac.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyFlash.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyFlash.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyLib.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CyLib.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\cypins.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\cyPm.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\cyPm.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CySpc.c</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\CySpc.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\cytypes.h</v>
-<v>tft_test\touchpaint\Generated_Source\PSoC5\cy_boot\cyutils.c</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -842,23 +805,44 @@
 </dataGuid>
 <dataGuid v="6c335137-fa19-46ce-bc2d-2fbeb6d5f2a2">
 <CyGuid_70084457-cd6a-4593-9ed0-7f6eeb432dc2 type_name="CyDesigner.Common.ProjMgmt.GUI.CyDependenciesCustomData" version="1">
-<dictName v=".\tft_test.cydsn\tft_test.cyprj">
+<dictName v="..\..\..\tft_test.cydsn\tft_test.cyprj">
 <listName>
-<v>.\tft_twitter.cydsn\tft_twitter.cyprj</v>
-<v>.\touchpaint.cydsn\touchpaint.cyprj</v>
+<v>..\..\..\tft_twitter.cydsn\tft_twitter.cyprj</v>
+<v>..\..\..\touchpaint.cydsn\touchpaint.cyprj</v>
+<v>..\..\..\touch_buttons.cydsn\touch_buttons.cyprj</v>
+<v>..\..\..\Inputs_outputs.cydsn\Inputs_outputs.cyprj</v>
 </listName>
 </dictName>
-<dictName v=".\touchpaint.cydsn\touchpaint.cyprj">
+<dictName v="..\..\..\touchpaint.cydsn\touchpaint.cyprj">
 <listName>
-<v>.\tft_test.cydsn\tft_test.cyprj</v>
-<v>.\tft_twitter.cydsn\tft_twitter.cyprj</v>
+<v>..\..\..\tft_test.cydsn\tft_test.cyprj</v>
+<v>..\..\..\tft_twitter.cydsn\tft_twitter.cyprj</v>
+<v>..\..\..\touch_buttons.cydsn\touch_buttons.cyprj</v>
+<v>..\..\..\Inputs_outputs.cydsn\Inputs_outputs.cyprj</v>
 </listName>
 </dictName>
-<dictName v=".\touch_buttons.cydsn\touch_buttons.cyprj">
+<dictName v="..\..\..\touch_buttons.cydsn\touch_buttons.cyprj">
 <listName>
-<v>.\tft_test.cydsn\tft_test.cyprj</v>
-<v>.\tft_twitter.cydsn\tft_twitter.cyprj</v>
-<v>.\touchpaint.cydsn\touchpaint.cyprj</v>
+<v>..\..\..\tft_test.cydsn\tft_test.cyprj</v>
+<v>..\..\..\tft_twitter.cydsn\tft_twitter.cyprj</v>
+<v>..\..\..\touchpaint.cydsn\touchpaint.cyprj</v>
+<v>..\..\..\Inputs_outputs.cydsn\Inputs_outputs.cyprj</v>
+</listName>
+</dictName>
+<dictName v="..\..\..\tft_twitter.cydsn\tft_twitter.cyprj">
+<listName>
+<v>..\..\..\tft_test.cydsn\tft_test.cyprj</v>
+<v>..\..\..\touchpaint.cydsn\touchpaint.cyprj</v>
+<v>..\..\..\touch_buttons.cydsn\touch_buttons.cyprj</v>
+<v>..\..\..\Inputs_outputs.cydsn\Inputs_outputs.cyprj</v>
+</listName>
+</dictName>
+<dictName v="..\..\..\Inputs_outputs.cydsn\Inputs_outputs.cyprj">
+<listName>
+<v>..\..\..\tft_test.cydsn\tft_test.cyprj</v>
+<v>..\..\..\tft_twitter.cydsn\tft_twitter.cyprj</v>
+<v>..\..\..\touchpaint.cydsn\touchpaint.cyprj</v>
+<v>..\..\..\touch_buttons.cydsn\touch_buttons.cyprj</v>
 </listName>
 </dictName>
 </CyGuid_70084457-cd6a-4593-9ed0-7f6eeb432dc2>
@@ -868,7 +852,6 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\touchpaint.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\touchpaint.cydsn\main.c" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />

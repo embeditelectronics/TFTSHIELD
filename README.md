@@ -5,7 +5,7 @@ PSoC Component and example projects for the Adafruit 2.8" TFT Touch Shield for A
 
 1. TFTSHIELD is the actual PSoC Creator component. Includes drawing, text, graphics, and touch functionality.
 
-2. touchpaint is a simple paint pad like demo
+2. touchpaint is a simple paint pad like demo. Includes bootloadable for USB programming.
 
 3. tft_twitter takes ASCII input over UART and displays it on screen
 
