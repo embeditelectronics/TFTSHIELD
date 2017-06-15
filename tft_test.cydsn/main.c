@@ -10,6 +10,14 @@
 *******************************************************************************/
 #include <project.h>
 #include "stdio.h"
+
+// This is calibration data for the raw touch data to the screen coordinates
+#define TS_MINX 150
+#define TS_MINY 130
+#define TS_MAXX 3800
+#define TS_MAXY 4000
+long mapCoor(long x, long in_min, long in_max, long out_min, long out_max);
+
 int main()
 {   
     //initializes tft
@@ -18,6 +26,9 @@ int main()
     CyDelay(10);
     //TFTSHIELD_1_StartTouch();
     bool touch_en = 0;
+    uint16_t x, y;
+    uint8_t z, buf;
+    char buffer[50];
     
     while(!TFTSHIELD_1_StartTouch())
     {
@@ -35,14 +46,14 @@ int main()
     TFTSHIELD_1_SetTextSize(2);
     
     //landscape orientation
-    TFTSHIELD_1_SetRotation(1);
-    //TFTSHIELD_1_PrintString("tft lcd screen with word wrap working blah blah blah");
+    TFTSHIELD_1_SetRotation(0);
+    TFTSHIELD_1_PrintString("tft lcd screen with word wrap");
     
     TFTSHIELD_1_DrawLine(50, 150, 100, 150, GREEN);
     TFTSHIELD_1_DrawLine(35, 100, 35 , 200, BLUE);
     TFTSHIELD_1_FillCircle(100,100,10,MAGENTA);
     
-    //TFTSHIELD_1_FillRect(150, 150, 75,75, YELLOW);
+    TFTSHIELD_1_FillRect(150, 150, 75,75, YELLOW);
     if(touch_en)
     {
        // TFTSHIELD_1_PrintString("GO1");
@@ -67,39 +78,27 @@ int main()
     for(;;)
     {
         Clock_1_SetDividerValue(24);
-        uint16_t x, y;
-        uint8_t z, buf;
-        char buffer[50];
         //Clock_1_SetDividerValue(24);
         CyDelay(1);
-        while(TFTSHIELD_1_Touched())
+        if(TFTSHIELD_1_Touched())
         {
-            Clock_1_SetDividerValue(24);
-                
-            //while(!TFTSHIELD_1_BufferEmpty())
-            //{
-                //TFTSHIELD_1_BufferSize();
-                buf = TFTSHIELD_1_BufferSize();
-                z = 255;
-                TFTSHIELD_1_ReadData(&x,&y,&z);
-                sprintf(buffer,"x,y,z: %i    %i",buf,z);
-                Clock_1_SetDividerValue(1);
-                CyDelay(1);
-                TFTSHIELD_1_PrintString(buffer);
-                CyDelay(1);
-                TFTSHIELD_1_FillRect(40, 0, 200,20, BLACK);
-                TFTSHIELD_1_SetCursor(0,0);
-                Clock_1_SetDividerValue(24);
-                CyDelay(1);
-                
-                /*if(buf == 0)
-                {
-                    TFTSHIELD_1_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
-                }*/
-            //}
-            Clock_1_SetDividerValue(24);
+            Clock_1_SetDividerValue(1);
+            CyDelay(1);
+            TFTSHIELD_1_FillRect(0, 0, 240,50, BLACK);
+            TFTSHIELD_1_SetCursor(0,5);
             
-             
+            Clock_1_SetDividerValue(24);
+           
+            TFTSHIELD_1_ReadData(&x,&y,&z);
+            x = mapCoor(x, TS_MINX, TS_MAXX, 0, 240);
+            y = mapCoor(y, TS_MINY, TS_MAXY, 0, 320);
+            sprintf(buffer,"x,y: %i    %i",x,y);
+            Clock_1_SetDividerValue(1);
+            CyDelay(1);
+            TFTSHIELD_1_PrintString(buffer);
+            CyDelay(1);
+                
+            Clock_1_SetDividerValue(24);
         }
         TFTSHIELD_1_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
         TFTSHIELD_1_ResetBuffer();
@@ -113,6 +112,11 @@ int main()
       // }
         CyDelay(10);
     }
+}
+
+long mapCoor(long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 /* [] END OF FILE */

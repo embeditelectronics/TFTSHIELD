@@ -12,7 +12,7 @@
       <baseAddress>0x4000647A</baseAddress>
       <addressBlock>
         <offset>0</offset>
-        <size>0x1</size>
+        <size>0x0</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>

@@ -31,8 +31,8 @@ MEMORY
 CY_APPL_ORIGIN      = 0; 
 CY_FLASH_ROW_SIZE   = 256;
 CY_ECC_ROW_SIZE     = 32;
-CY_EE_IN_BTLDR      = 0x00;
-CY_APPL_LOADABLE    = 1;
+CY_EE_IN_BTLDR      = 0x0;
+CY_APPL_LOADABLE    = 0;
 CY_EE_SIZE          = 2048;
 CY_APPL_NUM         = 1;
 CY_APPL_MAX         = 1;

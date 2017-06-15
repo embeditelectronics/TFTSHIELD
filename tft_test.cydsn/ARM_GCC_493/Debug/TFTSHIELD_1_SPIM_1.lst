@@ -1,0 +1,3809 @@
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"TFTSHIELD_1_SPIM_1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	TFTSHIELD_1_SPIM_1_initVar
+  19              		.bss
+  20              		.type	TFTSHIELD_1_SPIM_1_initVar, %object
+  21              		.size	TFTSHIELD_1_SPIM_1_initVar, 1
+  22              	TFTSHIELD_1_SPIM_1_initVar:
+  23 0000 00       		.space	1
+  24              		.comm	TFTSHIELD_1_SPIM_1_swStatusTx,1,1
+  25              		.comm	TFTSHIELD_1_SPIM_1_swStatusRx,1,1
+  26              		.section	.text.TFTSHIELD_1_SPIM_1_Init,"ax",%progbits
+  27              		.align	2
+  28              		.global	TFTSHIELD_1_SPIM_1_Init
+  29              		.thumb
+  30              		.thumb_func
+  31              		.type	TFTSHIELD_1_SPIM_1_Init, %function
+  32              	TFTSHIELD_1_SPIM_1_Init:
+  33              	.LFB0:
+  34              		.file 1 "Generated_Source\\PSoC5\\TFTSHIELD_1_SPIM_1.c"
+   1:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * File Name: TFTSHIELD_1_SPIM_1.c
+   3:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Version 2.40
+   4:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+   5:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Description:
+   6:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  This file provides all API functionality of the SPI Master component.
+   7:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+   8:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Note:
+   9:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+  10:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  11:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  18:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #include "TFTSHIELD_1_SPIM_1_PVT.h"
+  19:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  20:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED)
+  21:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_txBuffer[TFTSHIELD_1_SPIM_1_TX_BUFFER_SIZE] = {0u};
+  22:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_txBufferFull;
+  23:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_txBufferRead;
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 2
+
+
+  24:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_txBufferWrite;
+  25:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+  26:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  27:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #if(TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+  28:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_rxBuffer[TFTSHIELD_1_SPIM_1_RX_BUFFER_SIZE] = {0u};
+  29:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_rxBufferFull;
+  30:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_rxBufferRead;
+  31:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     volatile uint8 TFTSHIELD_1_SPIM_1_rxBufferWrite;
+  32:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #endif /* (TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED) */
+  33:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  34:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8 TFTSHIELD_1_SPIM_1_initVar = 0u;
+  35:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  36:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** volatile uint8 TFTSHIELD_1_SPIM_1_swStatusTx;
+  37:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** volatile uint8 TFTSHIELD_1_SPIM_1_swStatusRx;
+  38:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  39:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  40:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+  41:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_Init
+  42:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+  43:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  44:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+  45:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Inits/Restores default SPIM configuration provided with customizer.
+  46:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  47:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+  48:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+  49:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  50:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+  51:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+  52:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  53:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+  54:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  When this function is called it initializes all of the necessary parameters
+  55:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  for execution. i.e. setting the initial interrupt mask, configuring the
+  56:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  interrupt service routine, configuring the bit-counter parameters and
+  57:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  clearing the FIFO and Status Register.
+  58:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  59:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+  60:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+  61:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+  62:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+  63:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_Init(void) 
+  64:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+  35              		.loc 1 64 0
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39 0000 80B5     		push	{r7, lr}
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 00AF     		add	r7, sp, #0
+  44              		.cfi_def_cfa_register 7
+  65:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Initialize the Bit counter */
+  66:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_COUNTER_PERIOD_REG = TFTSHIELD_1_SPIM_1_BITCTR_INIT;
+  45              		.loc 1 66 0
+  46 0004 124B     		ldr	r3, .L2
+  47 0006 0F22     		movs	r2, #15
+  48 0008 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 3
+
+
+  67:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  68:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Init TX ISR  */
+  69:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_TX_INT_ENABLED)
+  70:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntDisable         (TFTSHIELD_1_SPIM_1_TX_ISR_NUMBER);
+  49              		.loc 1 70 0
+  50 000a 124B     		ldr	r3, .L2+4
+  51 000c 0222     		movs	r2, #2
+  52 000e 1A60     		str	r2, [r3]
+  71:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntSetPriority     (TFTSHIELD_1_SPIM_1_TX_ISR_NUMBER,  TFTSHIELD_1_SPIM_1_TX_ISR_PRIORITY
+  53              		.loc 1 71 0
+  54 0010 0120     		movs	r0, #1
+  55 0012 0721     		movs	r1, #7
+  56 0014 FFF7FEFF 		bl	CyIntSetPriority
+  72:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         (void) CyIntSetVector(TFTSHIELD_1_SPIM_1_TX_ISR_NUMBER, &TFTSHIELD_1_SPIM_1_TX_ISR);
+  57              		.loc 1 72 0
+  58 0018 0120     		movs	r0, #1
+  59 001a 0F49     		ldr	r1, .L2+8
+  60 001c FFF7FEFF 		bl	CyIntSetVector
+  73:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_TX_INT_ENABLED) */
+  74:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  75:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Init RX ISR  */
+  76:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_RX_INT_ENABLED)
+  77:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntDisable         (TFTSHIELD_1_SPIM_1_RX_ISR_NUMBER);
+  61              		.loc 1 77 0
+  62 0020 0C4B     		ldr	r3, .L2+4
+  63 0022 0122     		movs	r2, #1
+  64 0024 1A60     		str	r2, [r3]
+  78:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntSetPriority     (TFTSHIELD_1_SPIM_1_RX_ISR_NUMBER,  TFTSHIELD_1_SPIM_1_RX_ISR_PRIORITY
+  65              		.loc 1 78 0
+  66 0026 0020     		movs	r0, #0
+  67 0028 0721     		movs	r1, #7
+  68 002a FFF7FEFF 		bl	CyIntSetPriority
+  79:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         (void) CyIntSetVector(TFTSHIELD_1_SPIM_1_RX_ISR_NUMBER, &TFTSHIELD_1_SPIM_1_RX_ISR);
+  69              		.loc 1 79 0
+  70 002e 0020     		movs	r0, #0
+  71 0030 0A49     		ldr	r1, .L2+12
+  72 0032 FFF7FEFF 		bl	CyIntSetVector
+  80:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_RX_INT_ENABLED) */
+  81:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  82:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Clear any stray data from the RX and TX FIFO */
+  83:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_ClearFIFO();
+  73              		.loc 1 83 0
+  74 0036 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_ClearFIFO
+  84:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  85:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+  86:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_rxBufferFull  = 0u;
+  87:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_rxBufferRead  = 0u;
+  88:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_rxBufferWrite = 0u;
+  89:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED) */
+  90:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  91:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED)
+  92:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_txBufferFull  = 0u;
+  93:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_txBufferRead  = 0u;
+  94:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_txBufferWrite = 0u;
+  95:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+  96:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+  97:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     (void) TFTSHIELD_1_SPIM_1_ReadTxStatus(); /* Clear Tx status and swStatusTx */
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 4
+
+
+  75              		.loc 1 97 0
+  76 003a FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_ReadTxStatus
+  98:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     (void) TFTSHIELD_1_SPIM_1_ReadRxStatus(); /* Clear Rx status and swStatusRx */
+  77              		.loc 1 98 0
+  78 003e FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_ReadRxStatus
+  99:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 100:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Configure TX and RX interrupt mask */
+ 101:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_TX_STATUS_MASK_REG = TFTSHIELD_1_SPIM_1_TX_INIT_INTERRUPTS_MASK;
+  79              		.loc 1 101 0
+  80 0042 074B     		ldr	r3, .L2+16
+  81 0044 0822     		movs	r2, #8
+  82 0046 1A70     		strb	r2, [r3]
+ 102:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_RX_STATUS_MASK_REG = TFTSHIELD_1_SPIM_1_RX_INIT_INTERRUPTS_MASK;
+  83              		.loc 1 102 0
+  84 0048 064B     		ldr	r3, .L2+20
+  85 004a 0022     		movs	r2, #0
+  86 004c 1A70     		strb	r2, [r3]
+ 103:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+  87              		.loc 1 103 0
+  88 004e 80BD     		pop	{r7, pc}
+  89              	.L3:
+  90              		.align	2
+  91              	.L2:
+  92 0050 8D640040 		.word	1073767565
+  93 0054 80E100E0 		.word	-536813184
+  94 0058 00000000 		.word	TFTSHIELD_1_SPIM_1_TX_ISR
+  95 005c 00000000 		.word	TFTSHIELD_1_SPIM_1_RX_ISR
+  96 0060 8A640040 		.word	1073767562
+  97 0064 8B640040 		.word	1073767563
+  98              		.cfi_endproc
+  99              	.LFE0:
+ 100              		.size	TFTSHIELD_1_SPIM_1_Init, .-TFTSHIELD_1_SPIM_1_Init
+ 101              		.section	.text.TFTSHIELD_1_SPIM_1_Enable,"ax",%progbits
+ 102              		.align	2
+ 103              		.global	TFTSHIELD_1_SPIM_1_Enable
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.type	TFTSHIELD_1_SPIM_1_Enable, %function
+ 107              	TFTSHIELD_1_SPIM_1_Enable:
+ 108              	.LFB1:
+ 104:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 105:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 106:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 107:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_Enable
+ 108:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 109:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 110:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 111:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable SPIM component.
+ 112:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 113:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 114:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 115:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 116:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 117:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 118:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 119:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 120:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_Enable(void) 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 5
+
+
+ 121:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 109              		.loc 1 121 0
+ 110              		.cfi_startproc
+ 111              		@ args = 0, pretend = 0, frame = 8
+ 112              		@ frame_needed = 1, uses_anonymous_args = 0
+ 113 0000 80B5     		push	{r7, lr}
+ 114              		.cfi_def_cfa_offset 8
+ 115              		.cfi_offset 7, -8
+ 116              		.cfi_offset 14, -4
+ 117 0002 82B0     		sub	sp, sp, #8
+ 118              		.cfi_def_cfa_offset 16
+ 119 0004 00AF     		add	r7, sp, #0
+ 120              		.cfi_def_cfa_register 7
+ 122:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 enableInterrupts;
+ 123:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 124:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     enableInterrupts = CyEnterCriticalSection();
+ 121              		.loc 1 124 0
+ 122 0006 FFF7FEFF 		bl	CyEnterCriticalSection
+ 123 000a 0346     		mov	r3, r0
+ 124 000c FB71     		strb	r3, [r7, #7]
+ 125:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_COUNTER_CONTROL_REG |= TFTSHIELD_1_SPIM_1_CNTR_ENABLE;
+ 125              		.loc 1 125 0
+ 126 000e 114A     		ldr	r2, .L5
+ 127 0010 104B     		ldr	r3, .L5
+ 128 0012 1B78     		ldrb	r3, [r3]
+ 129 0014 DBB2     		uxtb	r3, r3
+ 130 0016 43F02003 		orr	r3, r3, #32
+ 131 001a DBB2     		uxtb	r3, r3
+ 132 001c 1370     		strb	r3, [r2]
+ 126:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_TX_STATUS_ACTL_REG  |= TFTSHIELD_1_SPIM_1_INT_ENABLE;
+ 133              		.loc 1 126 0
+ 134 001e 0E4A     		ldr	r2, .L5+4
+ 135 0020 0D4B     		ldr	r3, .L5+4
+ 136 0022 1B78     		ldrb	r3, [r3]
+ 137 0024 DBB2     		uxtb	r3, r3
+ 138 0026 43F01003 		orr	r3, r3, #16
+ 139 002a DBB2     		uxtb	r3, r3
+ 140 002c 1370     		strb	r3, [r2]
+ 127:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_RX_STATUS_ACTL_REG  |= TFTSHIELD_1_SPIM_1_INT_ENABLE;
+ 141              		.loc 1 127 0
+ 142 002e 0B4A     		ldr	r2, .L5+8
+ 143 0030 0A4B     		ldr	r3, .L5+8
+ 144 0032 1B78     		ldrb	r3, [r3]
+ 145 0034 DBB2     		uxtb	r3, r3
+ 146 0036 43F01003 		orr	r3, r3, #16
+ 147 003a DBB2     		uxtb	r3, r3
+ 148 003c 1370     		strb	r3, [r2]
+ 128:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     CyExitCriticalSection(enableInterrupts);
+ 149              		.loc 1 128 0
+ 150 003e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 151 0040 1846     		mov	r0, r3
+ 152 0042 FFF7FEFF 		bl	CyExitCriticalSection
+ 129:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 130:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_CLOCK)
+ 131:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_IntClock_Enable();
+ 132:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_CLOCK) */
+ 133:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 6
+
+
+ 134:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_EnableTxInt();
+ 153              		.loc 1 134 0
+ 154 0046 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_EnableTxInt
+ 135:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_EnableRxInt();
+ 155              		.loc 1 135 0
+ 156 004a FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_EnableRxInt
+ 136:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 157              		.loc 1 136 0
+ 158 004e 0837     		adds	r7, r7, #8
+ 159              		.cfi_def_cfa_offset 8
+ 160 0050 BD46     		mov	sp, r7
+ 161              		.cfi_def_cfa_register 13
+ 162              		@ sp needed
+ 163 0052 80BD     		pop	{r7, pc}
+ 164              	.L6:
+ 165              		.align	2
+ 166              	.L5:
+ 167 0054 9D640040 		.word	1073767581
+ 168 0058 9A640040 		.word	1073767578
+ 169 005c 9B640040 		.word	1073767579
+ 170              		.cfi_endproc
+ 171              	.LFE1:
+ 172              		.size	TFTSHIELD_1_SPIM_1_Enable, .-TFTSHIELD_1_SPIM_1_Enable
+ 173              		.section	.text.TFTSHIELD_1_SPIM_1_Start,"ax",%progbits
+ 174              		.align	2
+ 175              		.global	TFTSHIELD_1_SPIM_1_Start
+ 176              		.thumb
+ 177              		.thumb_func
+ 178              		.type	TFTSHIELD_1_SPIM_1_Start, %function
+ 179              	TFTSHIELD_1_SPIM_1_Start:
+ 180              	.LFB2:
+ 137:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 138:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 139:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 140:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_Start
+ 141:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 142:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 143:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 144:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Initialize and Enable the SPI Master component.
+ 145:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 146:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 147:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 148:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 149:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 150:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 151:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 152:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 153:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_initVar - used to check initial configuration, modified on
+ 154:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  first function call.
+ 155:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 156:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 157:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable the clock input to enable operation.
+ 158:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 159:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 160:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 161:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 162:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 7
+
+
+ 163:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_Start(void) 
+ 164:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 181              		.loc 1 164 0
+ 182              		.cfi_startproc
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 1, uses_anonymous_args = 0
+ 185 0000 80B5     		push	{r7, lr}
+ 186              		.cfi_def_cfa_offset 8
+ 187              		.cfi_offset 7, -8
+ 188              		.cfi_offset 14, -4
+ 189 0002 00AF     		add	r7, sp, #0
+ 190              		.cfi_def_cfa_register 7
+ 165:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     if(0u == TFTSHIELD_1_SPIM_1_initVar)
+ 191              		.loc 1 165 0
+ 192 0004 054B     		ldr	r3, .L9
+ 193 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 194 0008 002B     		cmp	r3, #0
+ 195 000a 04D1     		bne	.L8
+ 166:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 167:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_Init();
+ 196              		.loc 1 167 0
+ 197 000c FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_Init
+ 168:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_initVar = 1u;
+ 198              		.loc 1 168 0
+ 199 0010 024B     		ldr	r3, .L9
+ 200 0012 0122     		movs	r2, #1
+ 201 0014 1A70     		strb	r2, [r3]
+ 202              	.L8:
+ 169:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     }
+ 170:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 171:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_Enable();
+ 203              		.loc 1 171 0
+ 204 0016 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_Enable
+ 172:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 205              		.loc 1 172 0
+ 206 001a 80BD     		pop	{r7, pc}
+ 207              	.L10:
+ 208              		.align	2
+ 209              	.L9:
+ 210 001c 00000000 		.word	TFTSHIELD_1_SPIM_1_initVar
+ 211              		.cfi_endproc
+ 212              	.LFE2:
+ 213              		.size	TFTSHIELD_1_SPIM_1_Start, .-TFTSHIELD_1_SPIM_1_Start
+ 214              		.section	.text.TFTSHIELD_1_SPIM_1_Stop,"ax",%progbits
+ 215              		.align	2
+ 216              		.global	TFTSHIELD_1_SPIM_1_Stop
+ 217              		.thumb
+ 218              		.thumb_func
+ 219              		.type	TFTSHIELD_1_SPIM_1_Stop, %function
+ 220              	TFTSHIELD_1_SPIM_1_Stop:
+ 221              	.LFB3:
+ 173:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 174:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 175:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 176:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_Stop
+ 177:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 178:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 8
+
+
+ 179:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 180:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable the SPI Master component.
+ 181:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 182:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 183:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 184:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 185:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 186:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 187:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 188:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 189:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable the clock input to enable operation.
+ 190:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 191:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 192:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_Stop(void) 
+ 193:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 222              		.loc 1 193 0
+ 223              		.cfi_startproc
+ 224              		@ args = 0, pretend = 0, frame = 8
+ 225              		@ frame_needed = 1, uses_anonymous_args = 0
+ 226 0000 80B5     		push	{r7, lr}
+ 227              		.cfi_def_cfa_offset 8
+ 228              		.cfi_offset 7, -8
+ 229              		.cfi_offset 14, -4
+ 230 0002 82B0     		sub	sp, sp, #8
+ 231              		.cfi_def_cfa_offset 16
+ 232 0004 00AF     		add	r7, sp, #0
+ 233              		.cfi_def_cfa_register 7
+ 194:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 enableInterrupts;
+ 195:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 196:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     enableInterrupts = CyEnterCriticalSection();
+ 234              		.loc 1 196 0
+ 235 0006 FFF7FEFF 		bl	CyEnterCriticalSection
+ 236 000a 0346     		mov	r3, r0
+ 237 000c FB71     		strb	r3, [r7, #7]
+ 197:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_TX_STATUS_ACTL_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_INT_ENABLE);
+ 238              		.loc 1 197 0
+ 239 000e 0D4A     		ldr	r2, .L12
+ 240 0010 0C4B     		ldr	r3, .L12
+ 241 0012 1B78     		ldrb	r3, [r3]
+ 242 0014 DBB2     		uxtb	r3, r3
+ 243 0016 23F01003 		bic	r3, r3, #16
+ 244 001a DBB2     		uxtb	r3, r3
+ 245 001c 1370     		strb	r3, [r2]
+ 198:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_RX_STATUS_ACTL_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_INT_ENABLE);
+ 246              		.loc 1 198 0
+ 247 001e 0A4A     		ldr	r2, .L12+4
+ 248 0020 094B     		ldr	r3, .L12+4
+ 249 0022 1B78     		ldrb	r3, [r3]
+ 250 0024 DBB2     		uxtb	r3, r3
+ 251 0026 23F01003 		bic	r3, r3, #16
+ 252 002a DBB2     		uxtb	r3, r3
+ 253 002c 1370     		strb	r3, [r2]
+ 199:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     CyExitCriticalSection(enableInterrupts);
+ 254              		.loc 1 199 0
+ 255 002e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 256 0030 1846     		mov	r0, r3
+ 257 0032 FFF7FEFF 		bl	CyExitCriticalSection
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 9
+
+
+ 200:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 201:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_CLOCK)
+ 202:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_IntClock_Disable();
+ 203:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_CLOCK) */
+ 204:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 205:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_DisableTxInt();
+ 258              		.loc 1 205 0
+ 259 0036 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_DisableTxInt
+ 206:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_DisableRxInt();
+ 260              		.loc 1 206 0
+ 261 003a FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_DisableRxInt
+ 207:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 262              		.loc 1 207 0
+ 263 003e 0837     		adds	r7, r7, #8
+ 264              		.cfi_def_cfa_offset 8
+ 265 0040 BD46     		mov	sp, r7
+ 266              		.cfi_def_cfa_register 13
+ 267              		@ sp needed
+ 268 0042 80BD     		pop	{r7, pc}
+ 269              	.L13:
+ 270              		.align	2
+ 271              	.L12:
+ 272 0044 9A640040 		.word	1073767578
+ 273 0048 9B640040 		.word	1073767579
+ 274              		.cfi_endproc
+ 275              	.LFE3:
+ 276              		.size	TFTSHIELD_1_SPIM_1_Stop, .-TFTSHIELD_1_SPIM_1_Stop
+ 277              		.section	.text.TFTSHIELD_1_SPIM_1_EnableTxInt,"ax",%progbits
+ 278              		.align	2
+ 279              		.global	TFTSHIELD_1_SPIM_1_EnableTxInt
+ 280              		.thumb
+ 281              		.thumb_func
+ 282              		.type	TFTSHIELD_1_SPIM_1_EnableTxInt, %function
+ 283              	TFTSHIELD_1_SPIM_1_EnableTxInt:
+ 284              	.LFB4:
+ 208:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 209:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 210:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 211:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_EnableTxInt
+ 212:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 213:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 214:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 215:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable internal Tx interrupt generation.
+ 216:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 217:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 218:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 219:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 220:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 221:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 222:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 223:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 224:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable the internal Tx interrupt output -or- the interrupt component itself.
+ 225:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 226:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 227:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_EnableTxInt(void) 
+ 228:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 285              		.loc 1 228 0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 10
+
+
+ 286              		.cfi_startproc
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 1, uses_anonymous_args = 0
+ 289              		@ link register save eliminated.
+ 290 0000 80B4     		push	{r7}
+ 291              		.cfi_def_cfa_offset 4
+ 292              		.cfi_offset 7, -4
+ 293 0002 00AF     		add	r7, sp, #0
+ 294              		.cfi_def_cfa_register 7
+ 229:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_TX_INT_ENABLED)
+ 230:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntEnable(TFTSHIELD_1_SPIM_1_TX_ISR_NUMBER);
+ 295              		.loc 1 230 0
+ 296 0004 034B     		ldr	r3, .L15
+ 297 0006 0222     		movs	r2, #2
+ 298 0008 1A60     		str	r2, [r3]
+ 231:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_TX_INT_ENABLED) */
+ 232:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 299              		.loc 1 232 0
+ 300 000a BD46     		mov	sp, r7
+ 301              		.cfi_def_cfa_register 13
+ 302              		@ sp needed
+ 303 000c 5DF8047B 		ldr	r7, [sp], #4
+ 304              		.cfi_restore 7
+ 305              		.cfi_def_cfa_offset 0
+ 306 0010 7047     		bx	lr
+ 307              	.L16:
+ 308 0012 00BF     		.align	2
+ 309              	.L15:
+ 310 0014 00E100E0 		.word	-536813312
+ 311              		.cfi_endproc
+ 312              	.LFE4:
+ 313              		.size	TFTSHIELD_1_SPIM_1_EnableTxInt, .-TFTSHIELD_1_SPIM_1_EnableTxInt
+ 314              		.section	.text.TFTSHIELD_1_SPIM_1_EnableRxInt,"ax",%progbits
+ 315              		.align	2
+ 316              		.global	TFTSHIELD_1_SPIM_1_EnableRxInt
+ 317              		.thumb
+ 318              		.thumb_func
+ 319              		.type	TFTSHIELD_1_SPIM_1_EnableRxInt, %function
+ 320              	TFTSHIELD_1_SPIM_1_EnableRxInt:
+ 321              	.LFB5:
+ 233:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 234:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 235:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 236:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_EnableRxInt
+ 237:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 238:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 239:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 240:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable internal Rx interrupt generation.
+ 241:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 242:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 243:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 244:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 245:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 246:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 247:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 248:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 249:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable the internal Rx interrupt output -or- the interrupt component itself.
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 11
+
+
+ 250:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 251:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 252:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_EnableRxInt(void) 
+ 253:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 322              		.loc 1 253 0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 0
+ 325              		@ frame_needed = 1, uses_anonymous_args = 0
+ 326              		@ link register save eliminated.
+ 327 0000 80B4     		push	{r7}
+ 328              		.cfi_def_cfa_offset 4
+ 329              		.cfi_offset 7, -4
+ 330 0002 00AF     		add	r7, sp, #0
+ 331              		.cfi_def_cfa_register 7
+ 254:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_RX_INT_ENABLED)
+ 255:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntEnable(TFTSHIELD_1_SPIM_1_RX_ISR_NUMBER);
+ 332              		.loc 1 255 0
+ 333 0004 034B     		ldr	r3, .L18
+ 334 0006 0122     		movs	r2, #1
+ 335 0008 1A60     		str	r2, [r3]
+ 256:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_RX_INT_ENABLED) */
+ 257:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 336              		.loc 1 257 0
+ 337 000a BD46     		mov	sp, r7
+ 338              		.cfi_def_cfa_register 13
+ 339              		@ sp needed
+ 340 000c 5DF8047B 		ldr	r7, [sp], #4
+ 341              		.cfi_restore 7
+ 342              		.cfi_def_cfa_offset 0
+ 343 0010 7047     		bx	lr
+ 344              	.L19:
+ 345 0012 00BF     		.align	2
+ 346              	.L18:
+ 347 0014 00E100E0 		.word	-536813312
+ 348              		.cfi_endproc
+ 349              	.LFE5:
+ 350              		.size	TFTSHIELD_1_SPIM_1_EnableRxInt, .-TFTSHIELD_1_SPIM_1_EnableRxInt
+ 351              		.section	.text.TFTSHIELD_1_SPIM_1_DisableTxInt,"ax",%progbits
+ 352              		.align	2
+ 353              		.global	TFTSHIELD_1_SPIM_1_DisableTxInt
+ 354              		.thumb
+ 355              		.thumb_func
+ 356              		.type	TFTSHIELD_1_SPIM_1_DisableTxInt, %function
+ 357              	TFTSHIELD_1_SPIM_1_DisableTxInt:
+ 358              	.LFB6:
+ 258:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 259:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 260:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 261:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_DisableTxInt
+ 262:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 263:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 264:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 265:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable internal Tx interrupt generation.
+ 266:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 267:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 268:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 269:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 12
+
+
+ 270:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 271:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 272:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 273:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 274:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable the internal Tx interrupt output -or- the interrupt component itself.
+ 275:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 276:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 277:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_DisableTxInt(void) 
+ 278:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 359              		.loc 1 278 0
+ 360              		.cfi_startproc
+ 361              		@ args = 0, pretend = 0, frame = 0
+ 362              		@ frame_needed = 1, uses_anonymous_args = 0
+ 363              		@ link register save eliminated.
+ 364 0000 80B4     		push	{r7}
+ 365              		.cfi_def_cfa_offset 4
+ 366              		.cfi_offset 7, -4
+ 367 0002 00AF     		add	r7, sp, #0
+ 368              		.cfi_def_cfa_register 7
+ 279:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_TX_INT_ENABLED)
+ 280:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntDisable(TFTSHIELD_1_SPIM_1_TX_ISR_NUMBER);
+ 369              		.loc 1 280 0
+ 370 0004 034B     		ldr	r3, .L21
+ 371 0006 0222     		movs	r2, #2
+ 372 0008 1A60     		str	r2, [r3]
+ 281:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_TX_INT_ENABLED) */
+ 282:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 373              		.loc 1 282 0
+ 374 000a BD46     		mov	sp, r7
+ 375              		.cfi_def_cfa_register 13
+ 376              		@ sp needed
+ 377 000c 5DF8047B 		ldr	r7, [sp], #4
+ 378              		.cfi_restore 7
+ 379              		.cfi_def_cfa_offset 0
+ 380 0010 7047     		bx	lr
+ 381              	.L22:
+ 382 0012 00BF     		.align	2
+ 383              	.L21:
+ 384 0014 80E100E0 		.word	-536813184
+ 385              		.cfi_endproc
+ 386              	.LFE6:
+ 387              		.size	TFTSHIELD_1_SPIM_1_DisableTxInt, .-TFTSHIELD_1_SPIM_1_DisableTxInt
+ 388              		.section	.text.TFTSHIELD_1_SPIM_1_DisableRxInt,"ax",%progbits
+ 389              		.align	2
+ 390              		.global	TFTSHIELD_1_SPIM_1_DisableRxInt
+ 391              		.thumb
+ 392              		.thumb_func
+ 393              		.type	TFTSHIELD_1_SPIM_1_DisableRxInt, %function
+ 394              	TFTSHIELD_1_SPIM_1_DisableRxInt:
+ 395              	.LFB7:
+ 283:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 284:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 285:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 286:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_DisableRxInt
+ 287:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 288:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 289:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 13
+
+
+ 290:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable internal Rx interrupt generation.
+ 291:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 292:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 293:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 294:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 295:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 296:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 297:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 298:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 299:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable the internal Rx interrupt output -or- the interrupt component itself.
+ 300:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 301:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 302:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_DisableRxInt(void) 
+ 303:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 396              		.loc 1 303 0
+ 397              		.cfi_startproc
+ 398              		@ args = 0, pretend = 0, frame = 0
+ 399              		@ frame_needed = 1, uses_anonymous_args = 0
+ 400              		@ link register save eliminated.
+ 401 0000 80B4     		push	{r7}
+ 402              		.cfi_def_cfa_offset 4
+ 403              		.cfi_offset 7, -4
+ 404 0002 00AF     		add	r7, sp, #0
+ 405              		.cfi_def_cfa_register 7
+ 304:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(0u != TFTSHIELD_1_SPIM_1_INTERNAL_RX_INT_ENABLED)
+ 305:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CyIntDisable(TFTSHIELD_1_SPIM_1_RX_ISR_NUMBER);
+ 406              		.loc 1 305 0
+ 407 0004 034B     		ldr	r3, .L24
+ 408 0006 0122     		movs	r2, #1
+ 409 0008 1A60     		str	r2, [r3]
+ 306:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (0u != TFTSHIELD_1_SPIM_1_INTERNAL_RX_INT_ENABLED) */
+ 307:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 410              		.loc 1 307 0
+ 411 000a BD46     		mov	sp, r7
+ 412              		.cfi_def_cfa_register 13
+ 413              		@ sp needed
+ 414 000c 5DF8047B 		ldr	r7, [sp], #4
+ 415              		.cfi_restore 7
+ 416              		.cfi_def_cfa_offset 0
+ 417 0010 7047     		bx	lr
+ 418              	.L25:
+ 419 0012 00BF     		.align	2
+ 420              	.L24:
+ 421 0014 80E100E0 		.word	-536813184
+ 422              		.cfi_endproc
+ 423              	.LFE7:
+ 424              		.size	TFTSHIELD_1_SPIM_1_DisableRxInt, .-TFTSHIELD_1_SPIM_1_DisableRxInt
+ 425              		.section	.text.TFTSHIELD_1_SPIM_1_SetTxInterruptMode,"ax",%progbits
+ 426              		.align	2
+ 427              		.global	TFTSHIELD_1_SPIM_1_SetTxInterruptMode
+ 428              		.thumb
+ 429              		.thumb_func
+ 430              		.type	TFTSHIELD_1_SPIM_1_SetTxInterruptMode, %function
+ 431              	TFTSHIELD_1_SPIM_1_SetTxInterruptMode:
+ 432              	.LFB8:
+ 308:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 309:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 14
+
+
+ 310:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 311:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_SetTxInterruptMode
+ 312:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 313:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 314:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 315:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Configure which status bits trigger an interrupt event.
+ 316:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 317:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 318:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  intSrc: An or'd combination of the desired status bit masks (defined in the
+ 319:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  header file).
+ 320:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 321:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 322:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 323:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 324:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 325:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enables the output of specific status bits to the interrupt controller.
+ 326:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 327:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 328:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_SetTxInterruptMode(uint8 intSrc) 
+ 329:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 433              		.loc 1 329 0
+ 434              		.cfi_startproc
+ 435              		@ args = 0, pretend = 0, frame = 8
+ 436              		@ frame_needed = 1, uses_anonymous_args = 0
+ 437              		@ link register save eliminated.
+ 438 0000 80B4     		push	{r7}
+ 439              		.cfi_def_cfa_offset 4
+ 440              		.cfi_offset 7, -4
+ 441 0002 83B0     		sub	sp, sp, #12
+ 442              		.cfi_def_cfa_offset 16
+ 443 0004 00AF     		add	r7, sp, #0
+ 444              		.cfi_def_cfa_register 7
+ 445 0006 0346     		mov	r3, r0
+ 446 0008 FB71     		strb	r3, [r7, #7]
+ 330:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_TX_STATUS_MASK_REG = intSrc;
+ 447              		.loc 1 330 0
+ 448 000a 044A     		ldr	r2, .L27
+ 449 000c FB79     		ldrb	r3, [r7, #7]
+ 450 000e 1370     		strb	r3, [r2]
+ 331:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 451              		.loc 1 331 0
+ 452 0010 0C37     		adds	r7, r7, #12
+ 453              		.cfi_def_cfa_offset 4
+ 454 0012 BD46     		mov	sp, r7
+ 455              		.cfi_def_cfa_register 13
+ 456              		@ sp needed
+ 457 0014 5DF8047B 		ldr	r7, [sp], #4
+ 458              		.cfi_restore 7
+ 459              		.cfi_def_cfa_offset 0
+ 460 0018 7047     		bx	lr
+ 461              	.L28:
+ 462 001a 00BF     		.align	2
+ 463              	.L27:
+ 464 001c 8A640040 		.word	1073767562
+ 465              		.cfi_endproc
+ 466              	.LFE8:
+ 467              		.size	TFTSHIELD_1_SPIM_1_SetTxInterruptMode, .-TFTSHIELD_1_SPIM_1_SetTxInterruptMode
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 15
+
+
+ 468              		.section	.text.TFTSHIELD_1_SPIM_1_SetRxInterruptMode,"ax",%progbits
+ 469              		.align	2
+ 470              		.global	TFTSHIELD_1_SPIM_1_SetRxInterruptMode
+ 471              		.thumb
+ 472              		.thumb_func
+ 473              		.type	TFTSHIELD_1_SPIM_1_SetRxInterruptMode, %function
+ 474              	TFTSHIELD_1_SPIM_1_SetRxInterruptMode:
+ 475              	.LFB9:
+ 332:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 333:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 334:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 335:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_SetRxInterruptMode
+ 336:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 337:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 338:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 339:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Configure which status bits trigger an interrupt event.
+ 340:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 341:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 342:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  intSrc: An or'd combination of the desired status bit masks (defined in the
+ 343:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  header file).
+ 344:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 345:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 346:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 347:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 348:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 349:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enables the output of specific status bits to the interrupt controller.
+ 350:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 351:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 352:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_SetRxInterruptMode(uint8 intSrc) 
+ 353:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 476              		.loc 1 353 0
+ 477              		.cfi_startproc
+ 478              		@ args = 0, pretend = 0, frame = 8
+ 479              		@ frame_needed = 1, uses_anonymous_args = 0
+ 480              		@ link register save eliminated.
+ 481 0000 80B4     		push	{r7}
+ 482              		.cfi_def_cfa_offset 4
+ 483              		.cfi_offset 7, -4
+ 484 0002 83B0     		sub	sp, sp, #12
+ 485              		.cfi_def_cfa_offset 16
+ 486 0004 00AF     		add	r7, sp, #0
+ 487              		.cfi_def_cfa_register 7
+ 488 0006 0346     		mov	r3, r0
+ 489 0008 FB71     		strb	r3, [r7, #7]
+ 354:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_RX_STATUS_MASK_REG  = intSrc;
+ 490              		.loc 1 354 0
+ 491 000a 044A     		ldr	r2, .L30
+ 492 000c FB79     		ldrb	r3, [r7, #7]
+ 493 000e 1370     		strb	r3, [r2]
+ 355:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 494              		.loc 1 355 0
+ 495 0010 0C37     		adds	r7, r7, #12
+ 496              		.cfi_def_cfa_offset 4
+ 497 0012 BD46     		mov	sp, r7
+ 498              		.cfi_def_cfa_register 13
+ 499              		@ sp needed
+ 500 0014 5DF8047B 		ldr	r7, [sp], #4
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 16
+
+
+ 501              		.cfi_restore 7
+ 502              		.cfi_def_cfa_offset 0
+ 503 0018 7047     		bx	lr
+ 504              	.L31:
+ 505 001a 00BF     		.align	2
+ 506              	.L30:
+ 507 001c 8B640040 		.word	1073767563
+ 508              		.cfi_endproc
+ 509              	.LFE9:
+ 510              		.size	TFTSHIELD_1_SPIM_1_SetRxInterruptMode, .-TFTSHIELD_1_SPIM_1_SetRxInterruptMode
+ 511              		.section	.text.TFTSHIELD_1_SPIM_1_ReadTxStatus,"ax",%progbits
+ 512              		.align	2
+ 513              		.global	TFTSHIELD_1_SPIM_1_ReadTxStatus
+ 514              		.thumb
+ 515              		.thumb_func
+ 516              		.type	TFTSHIELD_1_SPIM_1_ReadTxStatus, %function
+ 517              	TFTSHIELD_1_SPIM_1_ReadTxStatus:
+ 518              	.LFB10:
+ 356:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 357:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 358:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 359:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ReadTxStatus
+ 360:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 361:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 362:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 363:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Read the Tx status register for the component.
+ 364:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 365:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 366:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 367:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 368:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 369:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Contents of the Tx status register.
+ 370:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 371:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 372:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_swStatusTx - used to store in software status register,
+ 373:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  modified every function call - resets to zero.
+ 374:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 375:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 376:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Allows the user and the API to read the Tx status register for error
+ 377:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  detection and flow control.
+ 378:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 379:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 380:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear Tx status register of the component.
+ 381:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 382:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 383:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 384:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 385:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 386:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8 TFTSHIELD_1_SPIM_1_ReadTxStatus(void) 
+ 387:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 519              		.loc 1 387 0
+ 520              		.cfi_startproc
+ 521              		@ args = 0, pretend = 0, frame = 8
+ 522              		@ frame_needed = 1, uses_anonymous_args = 0
+ 523              		@ link register save eliminated.
+ 524 0000 80B4     		push	{r7}
+ 525              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 17
+
+
+ 526              		.cfi_offset 7, -4
+ 527 0002 83B0     		sub	sp, sp, #12
+ 528              		.cfi_def_cfa_offset 16
+ 529 0004 00AF     		add	r7, sp, #0
+ 530              		.cfi_def_cfa_register 7
+ 388:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 tmpStatus;
+ 389:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 390:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED)
+ 391:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable TX interrupt to protect global veriables */
+ 392:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableTxInt();
+ 393:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 394:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus = TFTSHIELD_1_SPIM_1_GET_STATUS_TX(TFTSHIELD_1_SPIM_1_swStatusTx);
+ 395:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_swStatusTx = 0u;
+ 396:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 397:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableTxInt();
+ 398:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 399:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+ 400:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 401:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus = TFTSHIELD_1_SPIM_1_TX_STATUS_REG;
+ 531              		.loc 1 401 0
+ 532 0006 054B     		ldr	r3, .L34
+ 533 0008 1B78     		ldrb	r3, [r3]
+ 534 000a FB71     		strb	r3, [r7, #7]
+ 402:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 403:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+ 404:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 405:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     return(tmpStatus);
+ 535              		.loc 1 405 0
+ 536 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 406:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 537              		.loc 1 406 0
+ 538 000e 1846     		mov	r0, r3
+ 539 0010 0C37     		adds	r7, r7, #12
+ 540              		.cfi_def_cfa_offset 4
+ 541 0012 BD46     		mov	sp, r7
+ 542              		.cfi_def_cfa_register 13
+ 543              		@ sp needed
+ 544 0014 5DF8047B 		ldr	r7, [sp], #4
+ 545              		.cfi_restore 7
+ 546              		.cfi_def_cfa_offset 0
+ 547 0018 7047     		bx	lr
+ 548              	.L35:
+ 549 001a 00BF     		.align	2
+ 550              	.L34:
+ 551 001c 6A640040 		.word	1073767530
+ 552              		.cfi_endproc
+ 553              	.LFE10:
+ 554              		.size	TFTSHIELD_1_SPIM_1_ReadTxStatus, .-TFTSHIELD_1_SPIM_1_ReadTxStatus
+ 555              		.section	.text.TFTSHIELD_1_SPIM_1_ReadRxStatus,"ax",%progbits
+ 556              		.align	2
+ 557              		.global	TFTSHIELD_1_SPIM_1_ReadRxStatus
+ 558              		.thumb
+ 559              		.thumb_func
+ 560              		.type	TFTSHIELD_1_SPIM_1_ReadRxStatus, %function
+ 561              	TFTSHIELD_1_SPIM_1_ReadRxStatus:
+ 562              	.LFB11:
+ 407:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 18
+
+
+ 408:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 409:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 410:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ReadRxStatus
+ 411:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 412:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 413:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 414:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Read the Rx status register for the component.
+ 415:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 416:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 417:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 418:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 419:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 420:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Contents of the Rx status register.
+ 421:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 422:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 423:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_swStatusRx - used to store in software Rx status register,
+ 424:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  modified every function call - resets to zero.
+ 425:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 426:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 427:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Allows the user and the API to read the Rx status register for error
+ 428:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  detection and flow control.
+ 429:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 430:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 431:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear Rx status register of the component.
+ 432:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 433:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 434:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 435:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 436:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 437:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8 TFTSHIELD_1_SPIM_1_ReadRxStatus(void) 
+ 438:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 563              		.loc 1 438 0
+ 564              		.cfi_startproc
+ 565              		@ args = 0, pretend = 0, frame = 8
+ 566              		@ frame_needed = 1, uses_anonymous_args = 0
+ 567              		@ link register save eliminated.
+ 568 0000 80B4     		push	{r7}
+ 569              		.cfi_def_cfa_offset 4
+ 570              		.cfi_offset 7, -4
+ 571 0002 83B0     		sub	sp, sp, #12
+ 572              		.cfi_def_cfa_offset 16
+ 573 0004 00AF     		add	r7, sp, #0
+ 574              		.cfi_def_cfa_register 7
+ 439:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 tmpStatus;
+ 440:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 441:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+ 442:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable RX interrupt to protect global veriables */
+ 443:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableRxInt();
+ 444:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 445:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus = TFTSHIELD_1_SPIM_1_GET_STATUS_RX(TFTSHIELD_1_SPIM_1_swStatusRx);
+ 446:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_swStatusRx = 0u;
+ 447:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 448:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableRxInt();
+ 449:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 450:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+ 451:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 452:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus = TFTSHIELD_1_SPIM_1_RX_STATUS_REG;
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 19
+
+
+ 575              		.loc 1 452 0
+ 576 0006 054B     		ldr	r3, .L38
+ 577 0008 1B78     		ldrb	r3, [r3]
+ 578 000a FB71     		strb	r3, [r7, #7]
+ 453:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 454:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED) */
+ 455:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 456:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     return(tmpStatus);
+ 579              		.loc 1 456 0
+ 580 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 457:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 581              		.loc 1 457 0
+ 582 000e 1846     		mov	r0, r3
+ 583 0010 0C37     		adds	r7, r7, #12
+ 584              		.cfi_def_cfa_offset 4
+ 585 0012 BD46     		mov	sp, r7
+ 586              		.cfi_def_cfa_register 13
+ 587              		@ sp needed
+ 588 0014 5DF8047B 		ldr	r7, [sp], #4
+ 589              		.cfi_restore 7
+ 590              		.cfi_def_cfa_offset 0
+ 591 0018 7047     		bx	lr
+ 592              	.L39:
+ 593 001a 00BF     		.align	2
+ 594              	.L38:
+ 595 001c 6B640040 		.word	1073767531
+ 596              		.cfi_endproc
+ 597              	.LFE11:
+ 598              		.size	TFTSHIELD_1_SPIM_1_ReadRxStatus, .-TFTSHIELD_1_SPIM_1_ReadRxStatus
+ 599              		.section	.text.TFTSHIELD_1_SPIM_1_WriteTxData,"ax",%progbits
+ 600              		.align	2
+ 601              		.global	TFTSHIELD_1_SPIM_1_WriteTxData
+ 602              		.thumb
+ 603              		.thumb_func
+ 604              		.type	TFTSHIELD_1_SPIM_1_WriteTxData, %function
+ 605              	TFTSHIELD_1_SPIM_1_WriteTxData:
+ 606              	.LFB12:
+ 458:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 459:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 460:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 461:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_WriteTxData
+ 462:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 463:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 464:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 465:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Write a byte of data to be sent across the SPI.
+ 466:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 467:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 468:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  txDataByte: The data value to send across the SPI.
+ 469:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 470:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 471:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 472:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 473:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 474:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBufferWrite - used for the account of the bytes which
+ 475:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been written down in the TX software buffer, modified every function
+ 476:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  call if TX Software Buffer is used.
+ 477:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBufferRead - used for the account of the bytes which
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 20
+
+
+ 478:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been read from the TX software buffer.
+ 479:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBuffer[TFTSHIELD_1_SPIM_1_TX_BUFFER_SIZE] - used to store
+ 480:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  data to sending, modified every function call if TX Software Buffer is used.
+ 481:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 482:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 483:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Allows the user to transmit any byte of data in a single transfer.
+ 484:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 485:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 486:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  If this function is called again before the previous byte is finished then
+ 487:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  the next byte will be appended to the transfer with no time between
+ 488:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  the byte transfers. Clear Tx status register of the component.
+ 489:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 490:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 491:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 492:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 493:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 494:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_WriteTxData(uint8 txData) 
+ 495:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 607              		.loc 1 495 0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 8
+ 610              		@ frame_needed = 1, uses_anonymous_args = 0
+ 611              		@ link register save eliminated.
+ 612 0000 80B4     		push	{r7}
+ 613              		.cfi_def_cfa_offset 4
+ 614              		.cfi_offset 7, -4
+ 615 0002 83B0     		sub	sp, sp, #12
+ 616              		.cfi_def_cfa_offset 16
+ 617 0004 00AF     		add	r7, sp, #0
+ 618              		.cfi_def_cfa_register 7
+ 619 0006 0346     		mov	r3, r0
+ 620 0008 FB71     		strb	r3, [r7, #7]
+ 496:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED)
+ 497:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 498:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         uint8 tempStatus;
+ 499:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         uint8 tmpTxBufferRead;
+ 500:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 501:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Block if TX buffer is FULL: don't overwrite */
+ 502:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         do
+ 503:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 504:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             tmpTxBufferRead = TFTSHIELD_1_SPIM_1_txBufferRead;
+ 505:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             if(0u == tmpTxBufferRead)
+ 506:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             {
+ 507:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 tmpTxBufferRead = (TFTSHIELD_1_SPIM_1_TX_BUFFER_SIZE - 1u);
+ 508:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             }
+ 509:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             else
+ 510:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             {
+ 511:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 tmpTxBufferRead--;
+ 512:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             }
+ 513:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 514:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }while(tmpTxBufferRead == TFTSHIELD_1_SPIM_1_txBufferWrite);
+ 515:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 516:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable TX interrupt to protect global veriables */
+ 517:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableTxInt();
+ 518:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 519:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tempStatus = TFTSHIELD_1_SPIM_1_GET_STATUS_TX(TFTSHIELD_1_SPIM_1_swStatusTx);
+ 520:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_swStatusTx = tempStatus;
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 21
+
+
+ 521:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 522:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 523:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         if((TFTSHIELD_1_SPIM_1_txBufferRead == TFTSHIELD_1_SPIM_1_txBufferWrite) &&
+ 524:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****            (0u != (TFTSHIELD_1_SPIM_1_swStatusTx & TFTSHIELD_1_SPIM_1_STS_TX_FIFO_NOT_FULL)))
+ 525:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 526:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             /* Add directly to the TX FIFO */
+ 527:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             CY_SET_REG8(TFTSHIELD_1_SPIM_1_TXDATA_PTR, txData);
+ 528:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 529:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else
+ 530:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 531:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             /* Add to the TX software buffer */
+ 532:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             TFTSHIELD_1_SPIM_1_txBufferWrite++;
+ 533:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             if(TFTSHIELD_1_SPIM_1_txBufferWrite >= TFTSHIELD_1_SPIM_1_TX_BUFFER_SIZE)
+ 534:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             {
+ 535:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 TFTSHIELD_1_SPIM_1_txBufferWrite = 0u;
+ 536:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             }
+ 537:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 538:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             if(TFTSHIELD_1_SPIM_1_txBufferWrite == TFTSHIELD_1_SPIM_1_txBufferRead)
+ 539:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             {
+ 540:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 TFTSHIELD_1_SPIM_1_txBufferRead++;
+ 541:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 if(TFTSHIELD_1_SPIM_1_txBufferRead >= TFTSHIELD_1_SPIM_1_TX_BUFFER_SIZE)
+ 542:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 {
+ 543:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                     TFTSHIELD_1_SPIM_1_txBufferRead = 0u;
+ 544:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 }
+ 545:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 TFTSHIELD_1_SPIM_1_txBufferFull = 1u;
+ 546:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             }
+ 547:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 548:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             TFTSHIELD_1_SPIM_1_txBuffer[TFTSHIELD_1_SPIM_1_txBufferWrite] = txData;
+ 549:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 550:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             TFTSHIELD_1_SPIM_1_TX_STATUS_MASK_REG |= TFTSHIELD_1_SPIM_1_STS_TX_FIFO_NOT_FULL;
+ 551:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 552:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 553:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableTxInt();
+ 554:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 555:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+ 556:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 557:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         while(0u == (TFTSHIELD_1_SPIM_1_TX_STATUS_REG & TFTSHIELD_1_SPIM_1_STS_TX_FIFO_NOT_FULL))
+ 621              		.loc 1 557 0
+ 622 000a 00BF     		nop
+ 623              	.L41:
+ 624              		.loc 1 557 0 is_stmt 0 discriminator 1
+ 625 000c 074B     		ldr	r3, .L42
+ 626 000e 1B78     		ldrb	r3, [r3]
+ 627 0010 DBB2     		uxtb	r3, r3
+ 628 0012 03F00403 		and	r3, r3, #4
+ 629 0016 002B     		cmp	r3, #0
+ 630 0018 F8D0     		beq	.L41
+ 558:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 559:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             ; /* Wait for room in FIFO */
+ 560:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 561:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 562:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Put byte in TX FIFO */
+ 563:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         CY_SET_REG8(TFTSHIELD_1_SPIM_1_TXDATA_PTR, txData);
+ 631              		.loc 1 563 0 is_stmt 1
+ 632 001a 054A     		ldr	r2, .L42+4
+ 633 001c FB79     		ldrb	r3, [r7, #7]
+ 634 001e 1370     		strb	r3, [r2]
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 22
+
+
+ 564:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 565:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+ 566:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 635              		.loc 1 566 0
+ 636 0020 0C37     		adds	r7, r7, #12
+ 637              		.cfi_def_cfa_offset 4
+ 638 0022 BD46     		mov	sp, r7
+ 639              		.cfi_def_cfa_register 13
+ 640              		@ sp needed
+ 641 0024 5DF8047B 		ldr	r7, [sp], #4
+ 642              		.cfi_restore 7
+ 643              		.cfi_def_cfa_offset 0
+ 644 0028 7047     		bx	lr
+ 645              	.L43:
+ 646 002a 00BF     		.align	2
+ 647              	.L42:
+ 648 002c 6A640040 		.word	1073767530
+ 649 0030 4D640040 		.word	1073767501
+ 650              		.cfi_endproc
+ 651              	.LFE12:
+ 652              		.size	TFTSHIELD_1_SPIM_1_WriteTxData, .-TFTSHIELD_1_SPIM_1_WriteTxData
+ 653              		.section	.text.TFTSHIELD_1_SPIM_1_ReadRxData,"ax",%progbits
+ 654              		.align	2
+ 655              		.global	TFTSHIELD_1_SPIM_1_ReadRxData
+ 656              		.thumb
+ 657              		.thumb_func
+ 658              		.type	TFTSHIELD_1_SPIM_1_ReadRxData, %function
+ 659              	TFTSHIELD_1_SPIM_1_ReadRxData:
+ 660              	.LFB13:
+ 567:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 568:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 569:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 570:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ReadRxData
+ 571:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 572:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 573:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 574:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Read the next byte of data received across the SPI.
+ 575:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 576:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 577:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 578:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 579:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 580:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  The next byte of data read from the FIFO.
+ 581:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 582:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 583:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBufferWrite - used for the account of the bytes which
+ 584:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been written down in the RX software buffer.
+ 585:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBufferRead - used for the account of the bytes which
+ 586:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been read from the RX software buffer, modified every function
+ 587:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  call if RX Software Buffer is used.
+ 588:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBuffer[TFTSHIELD_1_SPIM_1_RX_BUFFER_SIZE] - used to store
+ 589:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  received data.
+ 590:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 591:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 592:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Allows the user to read a byte of data received.
+ 593:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 594:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 23
+
+
+ 595:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Will return invalid data if the FIFO is empty. The user should Call
+ 596:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  GetRxBufferSize() and if it returns a non-zero value then it is safe to call
+ 597:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  ReadByte() function.
+ 598:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 599:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 600:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 601:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 602:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 603:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8 TFTSHIELD_1_SPIM_1_ReadRxData(void) 
+ 604:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 661              		.loc 1 604 0
+ 662              		.cfi_startproc
+ 663              		@ args = 0, pretend = 0, frame = 8
+ 664              		@ frame_needed = 1, uses_anonymous_args = 0
+ 665              		@ link register save eliminated.
+ 666 0000 80B4     		push	{r7}
+ 667              		.cfi_def_cfa_offset 4
+ 668              		.cfi_offset 7, -4
+ 669 0002 83B0     		sub	sp, sp, #12
+ 670              		.cfi_def_cfa_offset 16
+ 671 0004 00AF     		add	r7, sp, #0
+ 672              		.cfi_def_cfa_register 7
+ 605:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 rxData;
+ 606:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 607:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+ 608:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 609:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable RX interrupt to protect global veriables */
+ 610:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableRxInt();
+ 611:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 612:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         if(TFTSHIELD_1_SPIM_1_rxBufferRead != TFTSHIELD_1_SPIM_1_rxBufferWrite)
+ 613:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 614:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             if(0u == TFTSHIELD_1_SPIM_1_rxBufferFull)
+ 615:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             {
+ 616:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 TFTSHIELD_1_SPIM_1_rxBufferRead++;
+ 617:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 if(TFTSHIELD_1_SPIM_1_rxBufferRead >= TFTSHIELD_1_SPIM_1_RX_BUFFER_SIZE)
+ 618:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 {
+ 619:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                     TFTSHIELD_1_SPIM_1_rxBufferRead = 0u;
+ 620:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 }
+ 621:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             }
+ 622:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             else
+ 623:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             {
+ 624:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                 TFTSHIELD_1_SPIM_1_rxBufferFull = 0u;
+ 625:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             }
+ 626:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 627:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 628:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         rxData = TFTSHIELD_1_SPIM_1_rxBuffer[TFTSHIELD_1_SPIM_1_rxBufferRead];
+ 629:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 630:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableRxInt();
+ 631:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 632:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+ 633:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 634:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         rxData = CY_GET_REG8(TFTSHIELD_1_SPIM_1_RXDATA_PTR);
+ 673              		.loc 1 634 0
+ 674 0006 054B     		ldr	r3, .L46
+ 675 0008 1B78     		ldrb	r3, [r3]
+ 676 000a FB71     		strb	r3, [r7, #7]
+ 635:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 24
+
+
+ 636:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED) */
+ 637:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 638:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     return(rxData);
+ 677              		.loc 1 638 0
+ 678 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 639:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 679              		.loc 1 639 0
+ 680 000e 1846     		mov	r0, r3
+ 681 0010 0C37     		adds	r7, r7, #12
+ 682              		.cfi_def_cfa_offset 4
+ 683 0012 BD46     		mov	sp, r7
+ 684              		.cfi_def_cfa_register 13
+ 685              		@ sp needed
+ 686 0014 5DF8047B 		ldr	r7, [sp], #4
+ 687              		.cfi_restore 7
+ 688              		.cfi_def_cfa_offset 0
+ 689 0018 7047     		bx	lr
+ 690              	.L47:
+ 691 001a 00BF     		.align	2
+ 692              	.L46:
+ 693 001c 5D640040 		.word	1073767517
+ 694              		.cfi_endproc
+ 695              	.LFE13:
+ 696              		.size	TFTSHIELD_1_SPIM_1_ReadRxData, .-TFTSHIELD_1_SPIM_1_ReadRxData
+ 697              		.section	.text.TFTSHIELD_1_SPIM_1_GetRxBufferSize,"ax",%progbits
+ 698              		.align	2
+ 699              		.global	TFTSHIELD_1_SPIM_1_GetRxBufferSize
+ 700              		.thumb
+ 701              		.thumb_func
+ 702              		.type	TFTSHIELD_1_SPIM_1_GetRxBufferSize, %function
+ 703              	TFTSHIELD_1_SPIM_1_GetRxBufferSize:
+ 704              	.LFB14:
+ 640:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 641:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 642:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 643:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_GetRxBufferSize
+ 644:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 645:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 646:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 647:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Returns the number of bytes/words of data currently held in the RX buffer.
+ 648:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  If RX Software Buffer not used then function return 0 if FIFO empty or 1 if
+ 649:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  FIFO not empty. In another case function return size of RX Software Buffer.
+ 650:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 651:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 652:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 653:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 654:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 655:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Integer count of the number of bytes/words in the RX buffer.
+ 656:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 657:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 658:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBufferWrite - used for the account of the bytes which
+ 659:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been written down in the RX software buffer.
+ 660:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBufferRead - used for the account of the bytes which
+ 661:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been read from the RX software buffer.
+ 662:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 663:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 664:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear status register of the component.
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 25
+
+
+ 665:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 666:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 667:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8 TFTSHIELD_1_SPIM_1_GetRxBufferSize(void) 
+ 668:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 705              		.loc 1 668 0
+ 706              		.cfi_startproc
+ 707              		@ args = 0, pretend = 0, frame = 8
+ 708              		@ frame_needed = 1, uses_anonymous_args = 0
+ 709              		@ link register save eliminated.
+ 710 0000 80B4     		push	{r7}
+ 711              		.cfi_def_cfa_offset 4
+ 712              		.cfi_offset 7, -4
+ 713 0002 83B0     		sub	sp, sp, #12
+ 714              		.cfi_def_cfa_offset 16
+ 715 0004 00AF     		add	r7, sp, #0
+ 716              		.cfi_def_cfa_register 7
+ 669:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 size;
+ 670:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 671:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+ 672:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 673:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable RX interrupt to protect global veriables */
+ 674:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableRxInt();
+ 675:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 676:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         if(TFTSHIELD_1_SPIM_1_rxBufferRead == TFTSHIELD_1_SPIM_1_rxBufferWrite)
+ 677:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 678:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = 0u;
+ 679:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 680:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else if(TFTSHIELD_1_SPIM_1_rxBufferRead < TFTSHIELD_1_SPIM_1_rxBufferWrite)
+ 681:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 682:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = (TFTSHIELD_1_SPIM_1_rxBufferWrite - TFTSHIELD_1_SPIM_1_rxBufferRead);
+ 683:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 684:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else
+ 685:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 686:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = (TFTSHIELD_1_SPIM_1_RX_BUFFER_SIZE - TFTSHIELD_1_SPIM_1_rxBufferRead) + TFTSHIEL
+ 687:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 688:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 689:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableRxInt();
+ 690:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 691:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+ 692:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 693:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* We can only know if there is data in the RX FIFO */
+ 694:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         size = (0u != (TFTSHIELD_1_SPIM_1_RX_STATUS_REG & TFTSHIELD_1_SPIM_1_STS_RX_FIFO_NOT_EMPTY)
+ 717              		.loc 1 694 0
+ 718 0006 094B     		ldr	r3, .L52
+ 719 0008 1B78     		ldrb	r3, [r3]
+ 720 000a DBB2     		uxtb	r3, r3
+ 721 000c 03F02003 		and	r3, r3, #32
+ 722 0010 002B     		cmp	r3, #0
+ 723 0012 01D0     		beq	.L49
+ 724              		.loc 1 694 0 is_stmt 0 discriminator 1
+ 725 0014 0123     		movs	r3, #1
+ 726 0016 00E0     		b	.L50
+ 727              	.L49:
+ 728              		.loc 1 694 0 discriminator 2
+ 729 0018 0023     		movs	r3, #0
+ 730              	.L50:
+ 731              		.loc 1 694 0 discriminator 4
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 26
+
+
+ 732 001a FB71     		strb	r3, [r7, #7]
+ 695:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 696:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+ 697:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 698:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     return(size);
+ 733              		.loc 1 698 0 is_stmt 1 discriminator 4
+ 734 001c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 699:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 735              		.loc 1 699 0 discriminator 4
+ 736 001e 1846     		mov	r0, r3
+ 737 0020 0C37     		adds	r7, r7, #12
+ 738              		.cfi_def_cfa_offset 4
+ 739 0022 BD46     		mov	sp, r7
+ 740              		.cfi_def_cfa_register 13
+ 741              		@ sp needed
+ 742 0024 5DF8047B 		ldr	r7, [sp], #4
+ 743              		.cfi_restore 7
+ 744              		.cfi_def_cfa_offset 0
+ 745 0028 7047     		bx	lr
+ 746              	.L53:
+ 747 002a 00BF     		.align	2
+ 748              	.L52:
+ 749 002c 6B640040 		.word	1073767531
+ 750              		.cfi_endproc
+ 751              	.LFE14:
+ 752              		.size	TFTSHIELD_1_SPIM_1_GetRxBufferSize, .-TFTSHIELD_1_SPIM_1_GetRxBufferSize
+ 753              		.section	.text.TFTSHIELD_1_SPIM_1_GetTxBufferSize,"ax",%progbits
+ 754              		.align	2
+ 755              		.global	TFTSHIELD_1_SPIM_1_GetTxBufferSize
+ 756              		.thumb
+ 757              		.thumb_func
+ 758              		.type	TFTSHIELD_1_SPIM_1_GetTxBufferSize, %function
+ 759              	TFTSHIELD_1_SPIM_1_GetTxBufferSize:
+ 760              	.LFB15:
+ 700:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 701:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 702:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 703:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_GetTxBufferSize
+ 704:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 705:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 706:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 707:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Returns the number of bytes/words of data currently held in the TX buffer.
+ 708:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  If TX Software Buffer not used then function return 0 - if FIFO empty, 1 - if
+ 709:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  FIFO not full, 4 - if FIFO full. In another case function return size of TX
+ 710:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Software Buffer.
+ 711:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 712:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 713:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 714:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 715:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 716:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Integer count of the number of bytes/words in the TX buffer.
+ 717:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 718:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 719:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBufferWrite - used for the account of the bytes which
+ 720:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been written down in the TX software buffer.
+ 721:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBufferRead - used for the account of the bytes which
+ 722:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been read from the TX software buffer.
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 27
+
+
+ 723:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 724:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 725:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear status register of the component.
+ 726:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 727:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 728:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8  TFTSHIELD_1_SPIM_1_GetTxBufferSize(void) 
+ 729:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 761              		.loc 1 729 0
+ 762              		.cfi_startproc
+ 763              		@ args = 0, pretend = 0, frame = 8
+ 764              		@ frame_needed = 1, uses_anonymous_args = 0
+ 765              		@ link register save eliminated.
+ 766 0000 80B4     		push	{r7}
+ 767              		.cfi_def_cfa_offset 4
+ 768              		.cfi_offset 7, -4
+ 769 0002 83B0     		sub	sp, sp, #12
+ 770              		.cfi_def_cfa_offset 16
+ 771 0004 00AF     		add	r7, sp, #0
+ 772              		.cfi_def_cfa_register 7
+ 730:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 size;
+ 731:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 732:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED)
+ 733:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable TX interrupt to protect global veriables */
+ 734:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableTxInt();
+ 735:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 736:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         if(TFTSHIELD_1_SPIM_1_txBufferRead == TFTSHIELD_1_SPIM_1_txBufferWrite)
+ 737:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 738:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = 0u;
+ 739:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 740:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else if(TFTSHIELD_1_SPIM_1_txBufferRead < TFTSHIELD_1_SPIM_1_txBufferWrite)
+ 741:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 742:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = (TFTSHIELD_1_SPIM_1_txBufferWrite - TFTSHIELD_1_SPIM_1_txBufferRead);
+ 743:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 744:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else
+ 745:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 746:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = (TFTSHIELD_1_SPIM_1_TX_BUFFER_SIZE - TFTSHIELD_1_SPIM_1_txBufferRead) + TFTSHIEL
+ 747:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 748:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 749:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableTxInt();
+ 750:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 751:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+ 752:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 753:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         size = TFTSHIELD_1_SPIM_1_TX_STATUS_REG;
+ 773              		.loc 1 753 0
+ 774 0006 0E4B     		ldr	r3, .L59
+ 775 0008 1B78     		ldrb	r3, [r3]
+ 776 000a FB71     		strb	r3, [r7, #7]
+ 754:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 755:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         if(0u != (size & TFTSHIELD_1_SPIM_1_STS_TX_FIFO_EMPTY))
+ 777              		.loc 1 755 0
+ 778 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 779 000e 03F00203 		and	r3, r3, #2
+ 780 0012 002B     		cmp	r3, #0
+ 781 0014 02D0     		beq	.L55
+ 756:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 757:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = 0u;
+ 782              		.loc 1 757 0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 28
+
+
+ 783 0016 0023     		movs	r3, #0
+ 784 0018 FB71     		strb	r3, [r7, #7]
+ 785 001a 09E0     		b	.L56
+ 786              	.L55:
+ 758:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 759:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else if(0u != (size & TFTSHIELD_1_SPIM_1_STS_TX_FIFO_NOT_FULL))
+ 787              		.loc 1 759 0
+ 788 001c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 789 001e 03F00403 		and	r3, r3, #4
+ 790 0022 002B     		cmp	r3, #0
+ 791 0024 02D0     		beq	.L57
+ 760:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 761:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = 1u;
+ 792              		.loc 1 761 0
+ 793 0026 0123     		movs	r3, #1
+ 794 0028 FB71     		strb	r3, [r7, #7]
+ 795 002a 01E0     		b	.L56
+ 796              	.L57:
+ 762:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 763:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         else
+ 764:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         {
+ 765:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****             size = TFTSHIELD_1_SPIM_1_FIFO_SIZE;
+ 797              		.loc 1 765 0
+ 798 002c 0423     		movs	r3, #4
+ 799 002e FB71     		strb	r3, [r7, #7]
+ 800              	.L56:
+ 766:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         }
+ 767:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 768:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+ 769:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 770:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     return(size);
+ 801              		.loc 1 770 0
+ 802 0030 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 771:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 803              		.loc 1 771 0
+ 804 0032 1846     		mov	r0, r3
+ 805 0034 0C37     		adds	r7, r7, #12
+ 806              		.cfi_def_cfa_offset 4
+ 807 0036 BD46     		mov	sp, r7
+ 808              		.cfi_def_cfa_register 13
+ 809              		@ sp needed
+ 810 0038 5DF8047B 		ldr	r7, [sp], #4
+ 811              		.cfi_restore 7
+ 812              		.cfi_def_cfa_offset 0
+ 813 003c 7047     		bx	lr
+ 814              	.L60:
+ 815 003e 00BF     		.align	2
+ 816              	.L59:
+ 817 0040 6A640040 		.word	1073767530
+ 818              		.cfi_endproc
+ 819              	.LFE15:
+ 820              		.size	TFTSHIELD_1_SPIM_1_GetTxBufferSize, .-TFTSHIELD_1_SPIM_1_GetTxBufferSize
+ 821              		.section	.text.TFTSHIELD_1_SPIM_1_ClearRxBuffer,"ax",%progbits
+ 822              		.align	2
+ 823              		.global	TFTSHIELD_1_SPIM_1_ClearRxBuffer
+ 824              		.thumb
+ 825              		.thumb_func
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 29
+
+
+ 826              		.type	TFTSHIELD_1_SPIM_1_ClearRxBuffer, %function
+ 827              	TFTSHIELD_1_SPIM_1_ClearRxBuffer:
+ 828              	.LFB16:
+ 772:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 773:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 774:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 775:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ClearRxBuffer
+ 776:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 777:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 778:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 779:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear the RX RAM buffer by setting the read and write pointers both to zero.
+ 780:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 781:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 782:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 783:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 784:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 785:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 786:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 787:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 788:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBufferWrite - used for the account of the bytes which
+ 789:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been written down in the RX software buffer, modified every function
+ 790:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  call - resets to zero.
+ 791:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_rxBufferRead - used for the account of the bytes which
+ 792:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been read from the RX software buffer, modified every function call -
+ 793:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  resets to zero.
+ 794:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 795:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 796:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Setting the pointers to zero makes the system believe there is no data to
+ 797:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  read and writing will resume at address 0 overwriting any data that may have
+ 798:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  remained in the RAM.
+ 799:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 800:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 801:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Any received data not read from the RAM buffer will be lost when overwritten.
+ 802:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 803:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 804:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 805:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 806:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 807:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_ClearRxBuffer(void) 
+ 808:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 829              		.loc 1 808 0
+ 830              		.cfi_startproc
+ 831              		@ args = 0, pretend = 0, frame = 0
+ 832              		@ frame_needed = 1, uses_anonymous_args = 0
+ 833              		@ link register save eliminated.
+ 834 0000 80B4     		push	{r7}
+ 835              		.cfi_def_cfa_offset 4
+ 836              		.cfi_offset 7, -4
+ 837 0002 00AF     		add	r7, sp, #0
+ 838              		.cfi_def_cfa_register 7
+ 809:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Clear Hardware RX FIFO */
+ 810:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     while(0u !=(TFTSHIELD_1_SPIM_1_RX_STATUS_REG & TFTSHIELD_1_SPIM_1_STS_RX_FIFO_NOT_EMPTY))
+ 839              		.loc 1 810 0
+ 840 0004 01E0     		b	.L62
+ 841              	.L63:
+ 811:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 812:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         (void) CY_GET_REG8(TFTSHIELD_1_SPIM_1_RXDATA_PTR);
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 30
+
+
+ 842              		.loc 1 812 0
+ 843 0006 064B     		ldr	r3, .L64
+ 844 0008 1B78     		ldrb	r3, [r3]
+ 845              	.L62:
+ 810:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 846              		.loc 1 810 0
+ 847 000a 064B     		ldr	r3, .L64+4
+ 848 000c 1B78     		ldrb	r3, [r3]
+ 849 000e DBB2     		uxtb	r3, r3
+ 850 0010 03F02003 		and	r3, r3, #32
+ 851 0014 002B     		cmp	r3, #0
+ 852 0016 F6D1     		bne	.L63
+ 813:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     }
+ 814:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 815:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+ 816:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable RX interrupt to protect global veriables */
+ 817:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableRxInt();
+ 818:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 819:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_rxBufferFull  = 0u;
+ 820:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_rxBufferRead  = 0u;
+ 821:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_rxBufferWrite = 0u;
+ 822:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 823:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableRxInt();
+ 824:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED) */
+ 825:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 853              		.loc 1 825 0
+ 854 0018 BD46     		mov	sp, r7
+ 855              		.cfi_def_cfa_register 13
+ 856              		@ sp needed
+ 857 001a 5DF8047B 		ldr	r7, [sp], #4
+ 858              		.cfi_restore 7
+ 859              		.cfi_def_cfa_offset 0
+ 860 001e 7047     		bx	lr
+ 861              	.L65:
+ 862              		.align	2
+ 863              	.L64:
+ 864 0020 5D640040 		.word	1073767517
+ 865 0024 6B640040 		.word	1073767531
+ 866              		.cfi_endproc
+ 867              	.LFE16:
+ 868              		.size	TFTSHIELD_1_SPIM_1_ClearRxBuffer, .-TFTSHIELD_1_SPIM_1_ClearRxBuffer
+ 869              		.section	.text.TFTSHIELD_1_SPIM_1_ClearTxBuffer,"ax",%progbits
+ 870              		.align	2
+ 871              		.global	TFTSHIELD_1_SPIM_1_ClearTxBuffer
+ 872              		.thumb
+ 873              		.thumb_func
+ 874              		.type	TFTSHIELD_1_SPIM_1_ClearTxBuffer, %function
+ 875              	TFTSHIELD_1_SPIM_1_ClearTxBuffer:
+ 876              	.LFB17:
+ 826:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 827:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 828:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 829:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ClearTxBuffer
+ 830:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 831:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 832:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 833:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear the TX RAM buffer by setting the read and write pointers both to zero.
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 31
+
+
+ 834:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 835:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 836:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 837:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 838:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 839:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 840:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 841:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+ 842:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBufferWrite - used for the account of the bytes which
+ 843:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been written down in the TX software buffer, modified every function
+ 844:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  call - resets to zero.
+ 845:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_txBufferRead - used for the account of the bytes which
+ 846:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  have been read from the TX software buffer, modified every function call -
+ 847:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  resets to zero.
+ 848:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 849:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+ 850:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Setting the pointers to zero makes the system believe there is no data to
+ 851:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  read and writing will resume at address 0 overwriting any data that may have
+ 852:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  remained in the RAM.
+ 853:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 854:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 855:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Any data not yet transmitted from the RAM buffer will be lost when
+ 856:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  overwritten.
+ 857:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 858:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 859:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 860:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 861:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 862:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_ClearTxBuffer(void) 
+ 863:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 877              		.loc 1 863 0
+ 878              		.cfi_startproc
+ 879              		@ args = 0, pretend = 0, frame = 8
+ 880              		@ frame_needed = 1, uses_anonymous_args = 0
+ 881 0000 80B5     		push	{r7, lr}
+ 882              		.cfi_def_cfa_offset 8
+ 883              		.cfi_offset 7, -8
+ 884              		.cfi_offset 14, -4
+ 885 0002 82B0     		sub	sp, sp, #8
+ 886              		.cfi_def_cfa_offset 16
+ 887 0004 00AF     		add	r7, sp, #0
+ 888              		.cfi_def_cfa_register 7
+ 864:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 enableInterrupts;
+ 865:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 866:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     enableInterrupts = CyEnterCriticalSection();
+ 889              		.loc 1 866 0
+ 890 0006 FFF7FEFF 		bl	CyEnterCriticalSection
+ 891 000a 0346     		mov	r3, r0
+ 892 000c FB71     		strb	r3, [r7, #7]
+ 867:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Clear TX FIFO */
+ 868:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP0_REG |= ((uint8)  TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+ 893              		.loc 1 868 0
+ 894 000e 0B4A     		ldr	r2, .L67
+ 895 0010 0A4B     		ldr	r3, .L67
+ 896 0012 1B78     		ldrb	r3, [r3]
+ 897 0014 DBB2     		uxtb	r3, r3
+ 898 0016 43F00103 		orr	r3, r3, #1
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 32
+
+
+ 899 001a DBB2     		uxtb	r3, r3
+ 900 001c 1370     		strb	r3, [r2]
+ 869:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP0_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+ 901              		.loc 1 869 0
+ 902 001e 074A     		ldr	r2, .L67
+ 903 0020 064B     		ldr	r3, .L67
+ 904 0022 1B78     		ldrb	r3, [r3]
+ 905 0024 DBB2     		uxtb	r3, r3
+ 906 0026 23F00103 		bic	r3, r3, #1
+ 907 002a DBB2     		uxtb	r3, r3
+ 908 002c 1370     		strb	r3, [r2]
+ 870:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 871:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_USE_SECOND_DATAPATH)
+ 872:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Clear TX FIFO for 2nd Datapath */
+ 873:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP1_REG |= ((uint8)  TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+ 874:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP1_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+ 875:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_USE_SECOND_DATAPATH) */
+ 876:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     CyExitCriticalSection(enableInterrupts);
+ 909              		.loc 1 876 0
+ 910 002e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 911 0030 1846     		mov	r0, r3
+ 912 0032 FFF7FEFF 		bl	CyExitCriticalSection
+ 877:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 878:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED)
+ 879:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Disable TX interrupt to protect global veriables */
+ 880:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableTxInt();
+ 881:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 882:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_txBufferFull  = 0u;
+ 883:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_txBufferRead  = 0u;
+ 884:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_txBufferWrite = 0u;
+ 885:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 886:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Buffer is EMPTY: disable TX FIFO NOT FULL interrupt */
+ 887:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_TX_STATUS_MASK_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_STS_TX_FIFO_NOT_FULL)
+ 888:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 889:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableTxInt();
+ 890:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED) */
+ 891:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 913              		.loc 1 891 0
+ 914 0036 0837     		adds	r7, r7, #8
+ 915              		.cfi_def_cfa_offset 8
+ 916 0038 BD46     		mov	sp, r7
+ 917              		.cfi_def_cfa_register 13
+ 918              		@ sp needed
+ 919 003a 80BD     		pop	{r7, pc}
+ 920              	.L68:
+ 921              		.align	2
+ 922              	.L67:
+ 923 003c 9D640040 		.word	1073767581
+ 924              		.cfi_endproc
+ 925              	.LFE17:
+ 926              		.size	TFTSHIELD_1_SPIM_1_ClearTxBuffer, .-TFTSHIELD_1_SPIM_1_ClearTxBuffer
+ 927              		.section	.text.TFTSHIELD_1_SPIM_1_PutArray,"ax",%progbits
+ 928              		.align	2
+ 929              		.global	TFTSHIELD_1_SPIM_1_PutArray
+ 930              		.thumb
+ 931              		.thumb_func
+ 932              		.type	TFTSHIELD_1_SPIM_1_PutArray, %function
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 33
+
+
+ 933              	TFTSHIELD_1_SPIM_1_PutArray:
+ 934              	.LFB18:
+ 892:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 893:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 894:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #if(0u != TFTSHIELD_1_SPIM_1_BIDIRECTIONAL_MODE)
+ 895:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /*******************************************************************************
+ 896:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Function Name: TFTSHIELD_1_SPIM_1_TxEnable
+ 897:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     ********************************************************************************
+ 898:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 899:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Summary:
+ 900:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  If the SPI master is configured to use a single bi-directional pin then this
+ 901:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  will set the bi-directional pin to transmit.
+ 902:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 903:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Parameters:
+ 904:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  None.
+ 905:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 906:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Return:
+ 907:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  None.
+ 908:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 909:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *******************************************************************************/
+ 910:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     void TFTSHIELD_1_SPIM_1_TxEnable(void) 
+ 911:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 912:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_CONTROL_REG |= TFTSHIELD_1_SPIM_1_CTRL_TX_SIGNAL_EN;
+ 913:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     }
+ 914:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 915:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 916:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /*******************************************************************************
+ 917:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Function Name: TFTSHIELD_1_SPIM_1_TxDisable
+ 918:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     ********************************************************************************
+ 919:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 920:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Summary:
+ 921:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  If the SPI master is configured to use a single bi-directional pin then this
+ 922:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  will set the bi-directional pin to receive.
+ 923:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 924:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Parameters:
+ 925:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  None.
+ 926:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 927:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     * Return:
+ 928:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *  None.
+ 929:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *
+ 930:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     *******************************************************************************/
+ 931:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     void TFTSHIELD_1_SPIM_1_TxDisable(void) 
+ 932:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 933:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_CONTROL_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_CTRL_TX_SIGNAL_EN);
+ 934:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     }
+ 935:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 936:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** #endif /* (0u != TFTSHIELD_1_SPIM_1_BIDIRECTIONAL_MODE) */
+ 937:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 938:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 939:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 940:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_PutArray
+ 941:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 942:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 943:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 944:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Write available data from ROM/RAM to the TX buffer while space is available
+ 945:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  in the TX buffer. Keep trying until all data is passed to the TX buffer.
+ 946:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 34
+
+
+ 947:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 948:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  *buffer: Pointer to the location in RAM containing the data to send
+ 949:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  byteCount: The number of bytes to move to the transmit buffer.
+ 950:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 951:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 952:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 953:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 954:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 955:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Will stay in this routine until all data has been sent.  May get locked in
+ 956:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  this loop if data is not being initiated by the master if there is not
+ 957:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  enough room in the TX FIFO.
+ 958:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 959:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+ 960:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+ 961:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 962:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 963:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_PutArray(const uint8 buffer[], uint8 byteCount)
+ 964:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****                                                                           
+ 965:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 935              		.loc 1 965 0
+ 936              		.cfi_startproc
+ 937              		@ args = 0, pretend = 0, frame = 16
+ 938              		@ frame_needed = 1, uses_anonymous_args = 0
+ 939 0000 80B5     		push	{r7, lr}
+ 940              		.cfi_def_cfa_offset 8
+ 941              		.cfi_offset 7, -8
+ 942              		.cfi_offset 14, -4
+ 943 0002 84B0     		sub	sp, sp, #16
+ 944              		.cfi_def_cfa_offset 24
+ 945 0004 00AF     		add	r7, sp, #0
+ 946              		.cfi_def_cfa_register 7
+ 947 0006 7860     		str	r0, [r7, #4]
+ 948 0008 0B46     		mov	r3, r1
+ 949 000a FB70     		strb	r3, [r7, #3]
+ 966:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 bufIndex;
+ 967:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 968:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     bufIndex = 0u;
+ 950              		.loc 1 968 0
+ 951 000c 0023     		movs	r3, #0
+ 952 000e FB73     		strb	r3, [r7, #15]
+ 969:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 970:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     while(byteCount > 0u)
+ 953              		.loc 1 970 0
+ 954 0010 0CE0     		b	.L70
+ 955              	.L71:
+ 971:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 972:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_WriteTxData(buffer[bufIndex]);
+ 956              		.loc 1 972 0
+ 957 0012 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 958 0014 7A68     		ldr	r2, [r7, #4]
+ 959 0016 1344     		add	r3, r3, r2
+ 960 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 961 001a 1846     		mov	r0, r3
+ 962 001c FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_WriteTxData
+ 973:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         bufIndex++;
+ 963              		.loc 1 973 0
+ 964 0020 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 35
+
+
+ 965 0022 0133     		adds	r3, r3, #1
+ 966 0024 FB73     		strb	r3, [r7, #15]
+ 974:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         byteCount--;
+ 967              		.loc 1 974 0
+ 968 0026 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 969 0028 013B     		subs	r3, r3, #1
+ 970 002a FB70     		strb	r3, [r7, #3]
+ 971              	.L70:
+ 970:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 972              		.loc 1 970 0
+ 973 002c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 974 002e 002B     		cmp	r3, #0
+ 975 0030 EFD1     		bne	.L71
+ 975:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     }
+ 976:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 976              		.loc 1 976 0
+ 977 0032 1037     		adds	r7, r7, #16
+ 978              		.cfi_def_cfa_offset 8
+ 979 0034 BD46     		mov	sp, r7
+ 980              		.cfi_def_cfa_register 13
+ 981              		@ sp needed
+ 982 0036 80BD     		pop	{r7, pc}
+ 983              		.cfi_endproc
+ 984              	.LFE18:
+ 985              		.size	TFTSHIELD_1_SPIM_1_PutArray, .-TFTSHIELD_1_SPIM_1_PutArray
+ 986              		.section	.text.TFTSHIELD_1_SPIM_1_ClearFIFO,"ax",%progbits
+ 987              		.align	2
+ 988              		.global	TFTSHIELD_1_SPIM_1_ClearFIFO
+ 989              		.thumb
+ 990              		.thumb_func
+ 991              		.type	TFTSHIELD_1_SPIM_1_ClearFIFO, %function
+ 992              	TFTSHIELD_1_SPIM_1_ClearFIFO:
+ 993              	.LFB19:
+ 977:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 978:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ 979:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+ 980:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ClearFIFO
+ 981:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+ 982:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 983:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+ 984:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear the RX and TX FIFO's of all data for a fresh start.
+ 985:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 986:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+ 987:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 988:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 989:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+ 990:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ 991:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 992:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+ 993:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear status register of the component.
+ 994:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+ 995:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+ 996:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_ClearFIFO(void) 
+ 997:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 994              		.loc 1 997 0
+ 995              		.cfi_startproc
+ 996              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 36
+
+
+ 997              		@ frame_needed = 1, uses_anonymous_args = 0
+ 998 0000 80B5     		push	{r7, lr}
+ 999              		.cfi_def_cfa_offset 8
+ 1000              		.cfi_offset 7, -8
+ 1001              		.cfi_offset 14, -4
+ 1002 0002 82B0     		sub	sp, sp, #8
+ 1003              		.cfi_def_cfa_offset 16
+ 1004 0004 00AF     		add	r7, sp, #0
+ 1005              		.cfi_def_cfa_register 7
+ 998:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 enableInterrupts;
+ 999:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1000:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Clear Hardware RX FIFO */
+1001:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     while(0u !=(TFTSHIELD_1_SPIM_1_RX_STATUS_REG & TFTSHIELD_1_SPIM_1_STS_RX_FIFO_NOT_EMPTY))
+ 1006              		.loc 1 1001 0
+ 1007 0006 01E0     		b	.L73
+ 1008              	.L74:
+1002:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+1003:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         (void) CY_GET_REG8(TFTSHIELD_1_SPIM_1_RXDATA_PTR);
+ 1009              		.loc 1 1003 0
+ 1010 0008 114B     		ldr	r3, .L75
+ 1011 000a 1B78     		ldrb	r3, [r3]
+ 1012              	.L73:
+1001:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     {
+ 1013              		.loc 1 1001 0
+ 1014 000c 114B     		ldr	r3, .L75+4
+ 1015 000e 1B78     		ldrb	r3, [r3]
+ 1016 0010 DBB2     		uxtb	r3, r3
+ 1017 0012 03F02003 		and	r3, r3, #32
+ 1018 0016 002B     		cmp	r3, #0
+ 1019 0018 F6D1     		bne	.L74
+1004:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     }
+1005:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1006:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     enableInterrupts = CyEnterCriticalSection();
+ 1020              		.loc 1 1006 0
+ 1021 001a FFF7FEFF 		bl	CyEnterCriticalSection
+ 1022 001e 0346     		mov	r3, r0
+ 1023 0020 FB71     		strb	r3, [r7, #7]
+1007:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     /* Clear TX FIFO */
+1008:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP0_REG |= ((uint8)  TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+ 1024              		.loc 1 1008 0
+ 1025 0022 0D4A     		ldr	r2, .L75+8
+ 1026 0024 0C4B     		ldr	r3, .L75+8
+ 1027 0026 1B78     		ldrb	r3, [r3]
+ 1028 0028 DBB2     		uxtb	r3, r3
+ 1029 002a 43F00103 		orr	r3, r3, #1
+ 1030 002e DBB2     		uxtb	r3, r3
+ 1031 0030 1370     		strb	r3, [r2]
+1009:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP0_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+ 1032              		.loc 1 1009 0
+ 1033 0032 094A     		ldr	r2, .L75+8
+ 1034 0034 084B     		ldr	r3, .L75+8
+ 1035 0036 1B78     		ldrb	r3, [r3]
+ 1036 0038 DBB2     		uxtb	r3, r3
+ 1037 003a 23F00103 		bic	r3, r3, #1
+ 1038 003e DBB2     		uxtb	r3, r3
+ 1039 0040 1370     		strb	r3, [r2]
+1010:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 37
+
+
+1011:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_USE_SECOND_DATAPATH)
+1012:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         /* Clear TX FIFO for 2nd Datapath */
+1013:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP1_REG |= ((uint8)  TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+1014:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_AUX_CONTROL_DP1_REG &= ((uint8) ~TFTSHIELD_1_SPIM_1_TX_FIFO_CLR);
+1015:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_USE_SECOND_DATAPATH) */
+1016:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     CyExitCriticalSection(enableInterrupts);
+ 1040              		.loc 1 1016 0
+ 1041 0042 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1042 0044 1846     		mov	r0, r3
+ 1043 0046 FFF7FEFF 		bl	CyExitCriticalSection
+1017:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 1044              		.loc 1 1017 0
+ 1045 004a 0837     		adds	r7, r7, #8
+ 1046              		.cfi_def_cfa_offset 8
+ 1047 004c BD46     		mov	sp, r7
+ 1048              		.cfi_def_cfa_register 13
+ 1049              		@ sp needed
+ 1050 004e 80BD     		pop	{r7, pc}
+ 1051              	.L76:
+ 1052              		.align	2
+ 1053              	.L75:
+ 1054 0050 5D640040 		.word	1073767517
+ 1055 0054 6B640040 		.word	1073767531
+ 1056 0058 9D640040 		.word	1073767581
+ 1057              		.cfi_endproc
+ 1058              	.LFE19:
+ 1059              		.size	TFTSHIELD_1_SPIM_1_ClearFIFO, .-TFTSHIELD_1_SPIM_1_ClearFIFO
+ 1060              		.section	.text.TFTSHIELD_1_SPIM_1_EnableInt,"ax",%progbits
+ 1061              		.align	2
+ 1062              		.global	TFTSHIELD_1_SPIM_1_EnableInt
+ 1063              		.thumb
+ 1064              		.thumb_func
+ 1065              		.type	TFTSHIELD_1_SPIM_1_EnableInt, %function
+ 1066              	TFTSHIELD_1_SPIM_1_EnableInt:
+ 1067              	.LFB20:
+1018:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1019:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1020:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /* Following functions are for version Compatibility, they are obsolete.
+1021:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Please do not use it in new projects.
+1022:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** */
+1023:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1024:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1025:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+1026:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_EnableInt
+1027:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+1028:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1029:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+1030:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable internal interrupt generation.
+1031:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1032:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+1033:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+1034:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1035:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+1036:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+1037:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1038:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+1039:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enable the internal interrupt output -or- the interrupt component itself.
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 38
+
+
+1040:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1041:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+1042:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_EnableInt(void) 
+1043:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 1068              		.loc 1 1043 0
+ 1069              		.cfi_startproc
+ 1070              		@ args = 0, pretend = 0, frame = 0
+ 1071              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1072 0000 80B5     		push	{r7, lr}
+ 1073              		.cfi_def_cfa_offset 8
+ 1074              		.cfi_offset 7, -8
+ 1075              		.cfi_offset 14, -4
+ 1076 0002 00AF     		add	r7, sp, #0
+ 1077              		.cfi_def_cfa_register 7
+1044:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_EnableRxInt();
+ 1078              		.loc 1 1044 0
+ 1079 0004 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_EnableRxInt
+1045:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_EnableTxInt();
+ 1080              		.loc 1 1045 0
+ 1081 0008 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_EnableTxInt
+1046:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 1082              		.loc 1 1046 0
+ 1083 000c 80BD     		pop	{r7, pc}
+ 1084              		.cfi_endproc
+ 1085              	.LFE20:
+ 1086              		.size	TFTSHIELD_1_SPIM_1_EnableInt, .-TFTSHIELD_1_SPIM_1_EnableInt
+ 1087 000e 00BF     		.section	.text.TFTSHIELD_1_SPIM_1_DisableInt,"ax",%progbits
+ 1088              		.align	2
+ 1089              		.global	TFTSHIELD_1_SPIM_1_DisableInt
+ 1090              		.thumb
+ 1091              		.thumb_func
+ 1092              		.type	TFTSHIELD_1_SPIM_1_DisableInt, %function
+ 1093              	TFTSHIELD_1_SPIM_1_DisableInt:
+ 1094              	.LFB21:
+1047:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1048:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1049:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+1050:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_DisableInt
+1051:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+1052:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1053:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+1054:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable internal interrupt generation.
+1055:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1056:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+1057:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+1058:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1059:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+1060:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+1061:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1062:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+1063:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Disable the internal interrupt output -or- the interrupt component itself.
+1064:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1065:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+1066:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_DisableInt(void) 
+1067:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 1095              		.loc 1 1067 0
+ 1096              		.cfi_startproc
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 39
+
+
+ 1097              		@ args = 0, pretend = 0, frame = 0
+ 1098              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1099 0000 80B5     		push	{r7, lr}
+ 1100              		.cfi_def_cfa_offset 8
+ 1101              		.cfi_offset 7, -8
+ 1102              		.cfi_offset 14, -4
+ 1103 0002 00AF     		add	r7, sp, #0
+ 1104              		.cfi_def_cfa_register 7
+1068:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_DisableTxInt();
+ 1105              		.loc 1 1068 0
+ 1106 0004 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_DisableTxInt
+1069:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_DisableRxInt();
+ 1107              		.loc 1 1069 0
+ 1108 0008 FFF7FEFF 		bl	TFTSHIELD_1_SPIM_1_DisableRxInt
+1070:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 1109              		.loc 1 1070 0
+ 1110 000c 80BD     		pop	{r7, pc}
+ 1111              		.cfi_endproc
+ 1112              	.LFE21:
+ 1113              		.size	TFTSHIELD_1_SPIM_1_DisableInt, .-TFTSHIELD_1_SPIM_1_DisableInt
+ 1114 000e 00BF     		.section	.text.TFTSHIELD_1_SPIM_1_SetInterruptMode,"ax",%progbits
+ 1115              		.align	2
+ 1116              		.global	TFTSHIELD_1_SPIM_1_SetInterruptMode
+ 1117              		.thumb
+ 1118              		.thumb_func
+ 1119              		.type	TFTSHIELD_1_SPIM_1_SetInterruptMode, %function
+ 1120              	TFTSHIELD_1_SPIM_1_SetInterruptMode:
+ 1121              	.LFB22:
+1071:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1072:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1073:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+1074:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_SetInterruptMode
+1075:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+1076:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1077:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+1078:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Configure which status bits trigger an interrupt event.
+1079:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1080:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+1081:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  intSrc: An or'd combination of the desired status bit masks (defined in the
+1082:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  header file).
+1083:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1084:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+1085:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+1086:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1087:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+1088:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Enables the output of specific status bits to the interrupt controller.
+1089:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1090:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+1091:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** void TFTSHIELD_1_SPIM_1_SetInterruptMode(uint8 intSrc) 
+1092:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 1122              		.loc 1 1092 0
+ 1123              		.cfi_startproc
+ 1124              		@ args = 0, pretend = 0, frame = 8
+ 1125              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1126              		@ link register save eliminated.
+ 1127 0000 80B4     		push	{r7}
+ 1128              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 40
+
+
+ 1129              		.cfi_offset 7, -4
+ 1130 0002 83B0     		sub	sp, sp, #12
+ 1131              		.cfi_def_cfa_offset 16
+ 1132 0004 00AF     		add	r7, sp, #0
+ 1133              		.cfi_def_cfa_register 7
+ 1134 0006 0346     		mov	r3, r0
+ 1135 0008 FB71     		strb	r3, [r7, #7]
+1093:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_TX_STATUS_MASK_REG  = (intSrc & ((uint8) ~TFTSHIELD_1_SPIM_1_STS_SPI_IDLE));
+ 1136              		.loc 1 1093 0
+ 1137 000a 074A     		ldr	r2, .L80
+ 1138 000c FB79     		ldrb	r3, [r7, #7]
+ 1139 000e 23F01003 		bic	r3, r3, #16
+ 1140 0012 DBB2     		uxtb	r3, r3
+ 1141 0014 1370     		strb	r3, [r2]
+1094:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     TFTSHIELD_1_SPIM_1_RX_STATUS_MASK_REG  =  intSrc;
+ 1142              		.loc 1 1094 0
+ 1143 0016 054A     		ldr	r2, .L80+4
+ 1144 0018 FB79     		ldrb	r3, [r7, #7]
+ 1145 001a 1370     		strb	r3, [r2]
+1095:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 1146              		.loc 1 1095 0
+ 1147 001c 0C37     		adds	r7, r7, #12
+ 1148              		.cfi_def_cfa_offset 4
+ 1149 001e BD46     		mov	sp, r7
+ 1150              		.cfi_def_cfa_register 13
+ 1151              		@ sp needed
+ 1152 0020 5DF8047B 		ldr	r7, [sp], #4
+ 1153              		.cfi_restore 7
+ 1154              		.cfi_def_cfa_offset 0
+ 1155 0024 7047     		bx	lr
+ 1156              	.L81:
+ 1157 0026 00BF     		.align	2
+ 1158              	.L80:
+ 1159 0028 8A640040 		.word	1073767562
+ 1160 002c 8B640040 		.word	1073767563
+ 1161              		.cfi_endproc
+ 1162              	.LFE22:
+ 1163              		.size	TFTSHIELD_1_SPIM_1_SetInterruptMode, .-TFTSHIELD_1_SPIM_1_SetInterruptMode
+ 1164              		.section	.text.TFTSHIELD_1_SPIM_1_ReadStatus,"ax",%progbits
+ 1165              		.align	2
+ 1166              		.global	TFTSHIELD_1_SPIM_1_ReadStatus
+ 1167              		.thumb
+ 1168              		.thumb_func
+ 1169              		.type	TFTSHIELD_1_SPIM_1_ReadStatus, %function
+ 1170              	TFTSHIELD_1_SPIM_1_ReadStatus:
+ 1171              	.LFB23:
+1096:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1097:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1098:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** /*******************************************************************************
+1099:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Function Name: TFTSHIELD_1_SPIM_1_ReadStatus
+1100:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** ********************************************************************************
+1101:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1102:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Summary:
+1103:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Read the status register for the component.
+1104:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1105:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Parameters:
+1106:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  None.
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 41
+
+
+1107:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1108:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Return:
+1109:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Contents of the status register.
+1110:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1111:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Global variables:
+1112:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  TFTSHIELD_1_SPIM_1_swStatus - used to store in software status register,
+1113:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  modified every function call - resets to zero.
+1114:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1115:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Theory:
+1116:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Allows the user and the API to read the status register for error detection
+1117:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  and flow control.
+1118:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1119:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Side Effects:
+1120:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  Clear status register of the component.
+1121:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1122:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** * Reentrant:
+1123:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *  No.
+1124:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *
+1125:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** *******************************************************************************/
+1126:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** uint8 TFTSHIELD_1_SPIM_1_ReadStatus(void) 
+1127:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** {
+ 1172              		.loc 1 1127 0
+ 1173              		.cfi_startproc
+ 1174              		@ args = 0, pretend = 0, frame = 8
+ 1175              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1176              		@ link register save eliminated.
+ 1177 0000 80B4     		push	{r7}
+ 1178              		.cfi_def_cfa_offset 4
+ 1179              		.cfi_offset 7, -4
+ 1180 0002 83B0     		sub	sp, sp, #12
+ 1181              		.cfi_def_cfa_offset 16
+ 1182 0004 00AF     		add	r7, sp, #0
+ 1183              		.cfi_def_cfa_register 7
+1128:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     uint8 tmpStatus;
+1129:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1130:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #if(TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED || TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENABLED)
+1131:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1132:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_DisableInt();
+1133:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1134:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus  = TFTSHIELD_1_SPIM_1_GET_STATUS_RX(TFTSHIELD_1_SPIM_1_swStatusRx);
+1135:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus |= TFTSHIELD_1_SPIM_1_GET_STATUS_TX(TFTSHIELD_1_SPIM_1_swStatusTx);
+1136:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus &= ((uint8) ~TFTSHIELD_1_SPIM_1_STS_SPI_IDLE);
+1137:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1138:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_swStatusTx = 0u;
+1139:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_swStatusRx = 0u;
+1140:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1141:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         TFTSHIELD_1_SPIM_1_EnableInt();
+1142:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1143:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #else
+1144:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1145:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus  = TFTSHIELD_1_SPIM_1_RX_STATUS_REG;
+ 1184              		.loc 1 1145 0
+ 1185 0006 0A4B     		ldr	r3, .L84
+ 1186 0008 1B78     		ldrb	r3, [r3]
+ 1187 000a FB71     		strb	r3, [r7, #7]
+1146:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus |= TFTSHIELD_1_SPIM_1_TX_STATUS_REG;
+ 1188              		.loc 1 1146 0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 42
+
+
+ 1189 000c 094B     		ldr	r3, .L84+4
+ 1190 000e 1B78     		ldrb	r3, [r3]
+ 1191 0010 DAB2     		uxtb	r2, r3
+ 1192 0012 FB79     		ldrb	r3, [r7, #7]
+ 1193 0014 1343     		orrs	r3, r3, r2
+ 1194 0016 FB71     		strb	r3, [r7, #7]
+1147:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****         tmpStatus &= ((uint8) ~TFTSHIELD_1_SPIM_1_STS_SPI_IDLE);
+ 1195              		.loc 1 1147 0
+ 1196 0018 FB79     		ldrb	r3, [r7, #7]
+ 1197 001a 23F01003 		bic	r3, r3, #16
+ 1198 001e FB71     		strb	r3, [r7, #7]
+1148:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1149:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     #endif /* (TFTSHIELD_1_SPIM_1_TX_SOFTWARE_BUF_ENABLED || TFTSHIELD_1_SPIM_1_RX_SOFTWARE_BUF_ENA
+1150:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** 
+1151:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c ****     return(tmpStatus);
+ 1199              		.loc 1 1151 0
+ 1200 0020 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+1152:Generated_Source\PSoC5/TFTSHIELD_1_SPIM_1.c **** }
+ 1201              		.loc 1 1152 0
+ 1202 0022 1846     		mov	r0, r3
+ 1203 0024 0C37     		adds	r7, r7, #12
+ 1204              		.cfi_def_cfa_offset 4
+ 1205 0026 BD46     		mov	sp, r7
+ 1206              		.cfi_def_cfa_register 13
+ 1207              		@ sp needed
+ 1208 0028 5DF8047B 		ldr	r7, [sp], #4
+ 1209              		.cfi_restore 7
+ 1210              		.cfi_def_cfa_offset 0
+ 1211 002c 7047     		bx	lr
+ 1212              	.L85:
+ 1213 002e 00BF     		.align	2
+ 1214              	.L84:
+ 1215 0030 6B640040 		.word	1073767531
+ 1216 0034 6A640040 		.word	1073767530
+ 1217              		.cfi_endproc
+ 1218              	.LFE23:
+ 1219              		.size	TFTSHIELD_1_SPIM_1_ReadStatus, .-TFTSHIELD_1_SPIM_1_ReadStatus
+ 1220              		.text
+ 1221              	.Letext0:
+ 1222              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 1223              		.section	.debug_info,"",%progbits
+ 1224              	.Ldebug_info0:
+ 1225 0000 02040000 		.4byte	0x402
+ 1226 0004 0400     		.2byte	0x4
+ 1227 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1228 000a 04       		.byte	0x4
+ 1229 000b 01       		.uleb128 0x1
+ 1230 000c 6E030000 		.4byte	.LASF53
+ 1231 0010 01       		.byte	0x1
+ 1232 0011 FC030000 		.4byte	.LASF54
+ 1233 0015 29030000 		.4byte	.LASF55
+ 1234 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1235 001d 00000000 		.4byte	0
+ 1236 0021 00000000 		.4byte	.Ldebug_line0
+ 1237 0025 02       		.uleb128 0x2
+ 1238 0026 01       		.byte	0x1
+ 1239 0027 06       		.byte	0x6
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 43
+
+
+ 1240 0028 E6040000 		.4byte	.LASF0
+ 1241 002c 02       		.uleb128 0x2
+ 1242 002d 01       		.byte	0x1
+ 1243 002e 08       		.byte	0x8
+ 1244 002f C4010000 		.4byte	.LASF1
+ 1245 0033 02       		.uleb128 0x2
+ 1246 0034 02       		.byte	0x2
+ 1247 0035 05       		.byte	0x5
+ 1248 0036 28040000 		.4byte	.LASF2
+ 1249 003a 02       		.uleb128 0x2
+ 1250 003b 02       		.byte	0x2
+ 1251 003c 07       		.byte	0x7
+ 1252 003d F2040000 		.4byte	.LASF3
+ 1253 0041 02       		.uleb128 0x2
+ 1254 0042 04       		.byte	0x4
+ 1255 0043 05       		.byte	0x5
+ 1256 0044 B4040000 		.4byte	.LASF4
+ 1257 0048 02       		.uleb128 0x2
+ 1258 0049 04       		.byte	0x4
+ 1259 004a 07       		.byte	0x7
+ 1260 004b 76010000 		.4byte	.LASF5
+ 1261 004f 02       		.uleb128 0x2
+ 1262 0050 08       		.byte	0x8
+ 1263 0051 05       		.byte	0x5
+ 1264 0052 FC020000 		.4byte	.LASF6
+ 1265 0056 02       		.uleb128 0x2
+ 1266 0057 08       		.byte	0x8
+ 1267 0058 07       		.byte	0x7
+ 1268 0059 6B020000 		.4byte	.LASF7
+ 1269 005d 03       		.uleb128 0x3
+ 1270 005e 04       		.byte	0x4
+ 1271 005f 05       		.byte	0x5
+ 1272 0060 696E7400 		.ascii	"int\000"
+ 1273 0064 02       		.uleb128 0x2
+ 1274 0065 04       		.byte	0x4
+ 1275 0066 07       		.byte	0x7
+ 1276 0067 5E020000 		.4byte	.LASF8
+ 1277 006b 04       		.uleb128 0x4
+ 1278 006c 88010000 		.4byte	.LASF9
+ 1279 0070 02       		.byte	0x2
+ 1280 0071 5B       		.byte	0x5b
+ 1281 0072 2C000000 		.4byte	0x2c
+ 1282 0076 04       		.uleb128 0x4
+ 1283 0077 39020000 		.4byte	.LASF10
+ 1284 007b 02       		.byte	0x2
+ 1285 007c 5D       		.byte	0x5d
+ 1286 007d 48000000 		.4byte	0x48
+ 1287 0081 02       		.uleb128 0x2
+ 1288 0082 04       		.byte	0x4
+ 1289 0083 04       		.byte	0x4
+ 1290 0084 28010000 		.4byte	.LASF11
+ 1291 0088 02       		.uleb128 0x2
+ 1292 0089 08       		.byte	0x8
+ 1293 008a 04       		.byte	0x4
+ 1294 008b F2010000 		.4byte	.LASF12
+ 1295 008f 02       		.uleb128 0x2
+ 1296 0090 01       		.byte	0x1
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 44
+
+
+ 1297 0091 08       		.byte	0x8
+ 1298 0092 69030000 		.4byte	.LASF13
+ 1299 0096 04       		.uleb128 0x4
+ 1300 0097 71010000 		.4byte	.LASF14
+ 1301 009b 02       		.byte	0x2
+ 1302 009c F0       		.byte	0xf0
+ 1303 009d A1000000 		.4byte	0xa1
+ 1304 00a1 05       		.uleb128 0x5
+ 1305 00a2 6B000000 		.4byte	0x6b
+ 1306 00a6 04       		.uleb128 0x4
+ 1307 00a7 34000000 		.4byte	.LASF15
+ 1308 00ab 02       		.byte	0x2
+ 1309 00ac F2       		.byte	0xf2
+ 1310 00ad B1000000 		.4byte	0xb1
+ 1311 00b1 05       		.uleb128 0x5
+ 1312 00b2 76000000 		.4byte	0x76
+ 1313 00b6 02       		.uleb128 0x2
+ 1314 00b7 04       		.byte	0x4
+ 1315 00b8 07       		.byte	0x7
+ 1316 00b9 CD020000 		.4byte	.LASF16
+ 1317 00bd 06       		.uleb128 0x6
+ 1318 00be 1C000000 		.4byte	.LASF17
+ 1319 00c2 01       		.byte	0x1
+ 1320 00c3 3F       		.byte	0x3f
+ 1321 00c4 00000000 		.4byte	.LFB0
+ 1322 00c8 68000000 		.4byte	.LFE0-.LFB0
+ 1323 00cc 01       		.uleb128 0x1
+ 1324 00cd 9C       		.byte	0x9c
+ 1325 00ce 07       		.uleb128 0x7
+ 1326 00cf 25050000 		.4byte	.LASF19
+ 1327 00d3 01       		.byte	0x1
+ 1328 00d4 78       		.byte	0x78
+ 1329 00d5 00000000 		.4byte	.LFB1
+ 1330 00d9 60000000 		.4byte	.LFE1-.LFB1
+ 1331 00dd 01       		.uleb128 0x1
+ 1332 00de 9C       		.byte	0x9c
+ 1333 00df F2000000 		.4byte	0xf2
+ 1334 00e3 08       		.uleb128 0x8
+ 1335 00e4 B3010000 		.4byte	.LASF21
+ 1336 00e8 01       		.byte	0x1
+ 1337 00e9 7A       		.byte	0x7a
+ 1338 00ea 6B000000 		.4byte	0x6b
+ 1339 00ee 02       		.uleb128 0x2
+ 1340 00ef 91       		.byte	0x91
+ 1341 00f0 77       		.sleb128 -9
+ 1342 00f1 00       		.byte	0
+ 1343 00f2 06       		.uleb128 0x6
+ 1344 00f3 32040000 		.4byte	.LASF18
+ 1345 00f7 01       		.byte	0x1
+ 1346 00f8 A3       		.byte	0xa3
+ 1347 00f9 00000000 		.4byte	.LFB2
+ 1348 00fd 20000000 		.4byte	.LFE2-.LFB2
+ 1349 0101 01       		.uleb128 0x1
+ 1350 0102 9C       		.byte	0x9c
+ 1351 0103 07       		.uleb128 0x7
+ 1352 0104 21020000 		.4byte	.LASF20
+ 1353 0108 01       		.byte	0x1
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 45
+
+
+ 1354 0109 C0       		.byte	0xc0
+ 1355 010a 00000000 		.4byte	.LFB3
+ 1356 010e 4C000000 		.4byte	.LFE3-.LFB3
+ 1357 0112 01       		.uleb128 0x1
+ 1358 0113 9C       		.byte	0x9c
+ 1359 0114 27010000 		.4byte	0x127
+ 1360 0118 08       		.uleb128 0x8
+ 1361 0119 B3010000 		.4byte	.LASF21
+ 1362 011d 01       		.byte	0x1
+ 1363 011e C2       		.byte	0xc2
+ 1364 011f 6B000000 		.4byte	0x6b
+ 1365 0123 02       		.uleb128 0x2
+ 1366 0124 91       		.byte	0x91
+ 1367 0125 77       		.sleb128 -9
+ 1368 0126 00       		.byte	0
+ 1369 0127 09       		.uleb128 0x9
+ 1370 0128 C2000000 		.4byte	.LASF22
+ 1371 012c 01       		.byte	0x1
+ 1372 012d E3       		.byte	0xe3
+ 1373 012e 00000000 		.4byte	.LFB4
+ 1374 0132 18000000 		.4byte	.LFE4-.LFB4
+ 1375 0136 01       		.uleb128 0x1
+ 1376 0137 9C       		.byte	0x9c
+ 1377 0138 09       		.uleb128 0x9
+ 1378 0139 0A030000 		.4byte	.LASF23
+ 1379 013d 01       		.byte	0x1
+ 1380 013e FC       		.byte	0xfc
+ 1381 013f 00000000 		.4byte	.LFB5
+ 1382 0143 18000000 		.4byte	.LFE5-.LFB5
+ 1383 0147 01       		.uleb128 0x1
+ 1384 0148 9C       		.byte	0x9c
+ 1385 0149 0A       		.uleb128 0xa
+ 1386 014a D2010000 		.4byte	.LASF24
+ 1387 014e 01       		.byte	0x1
+ 1388 014f 1501     		.2byte	0x115
+ 1389 0151 00000000 		.4byte	.LFB6
+ 1390 0155 18000000 		.4byte	.LFE6-.LFB6
+ 1391 0159 01       		.uleb128 0x1
+ 1392 015a 9C       		.byte	0x9c
+ 1393 015b 0A       		.uleb128 0xa
+ 1394 015c 94040000 		.4byte	.LASF25
+ 1395 0160 01       		.byte	0x1
+ 1396 0161 2E01     		.2byte	0x12e
+ 1397 0163 00000000 		.4byte	.LFB7
+ 1398 0167 18000000 		.4byte	.LFE7-.LFB7
+ 1399 016b 01       		.uleb128 0x1
+ 1400 016c 9C       		.byte	0x9c
+ 1401 016d 0B       		.uleb128 0xb
+ 1402 016e 4B040000 		.4byte	.LASF26
+ 1403 0172 01       		.byte	0x1
+ 1404 0173 4801     		.2byte	0x148
+ 1405 0175 00000000 		.4byte	.LFB8
+ 1406 0179 20000000 		.4byte	.LFE8-.LFB8
+ 1407 017d 01       		.uleb128 0x1
+ 1408 017e 9C       		.byte	0x9c
+ 1409 017f 93010000 		.4byte	0x193
+ 1410 0183 0C       		.uleb128 0xc
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 46
+
+
+ 1411 0184 F9010000 		.4byte	.LASF28
+ 1412 0188 01       		.byte	0x1
+ 1413 0189 4801     		.2byte	0x148
+ 1414 018b 6B000000 		.4byte	0x6b
+ 1415 018f 02       		.uleb128 0x2
+ 1416 0190 91       		.byte	0x91
+ 1417 0191 77       		.sleb128 -9
+ 1418 0192 00       		.byte	0
+ 1419 0193 0B       		.uleb128 0xb
+ 1420 0194 D6020000 		.4byte	.LASF27
+ 1421 0198 01       		.byte	0x1
+ 1422 0199 6001     		.2byte	0x160
+ 1423 019b 00000000 		.4byte	.LFB9
+ 1424 019f 20000000 		.4byte	.LFE9-.LFB9
+ 1425 01a3 01       		.uleb128 0x1
+ 1426 01a4 9C       		.byte	0x9c
+ 1427 01a5 B9010000 		.4byte	0x1b9
+ 1428 01a9 0C       		.uleb128 0xc
+ 1429 01aa F9010000 		.4byte	.LASF28
+ 1430 01ae 01       		.byte	0x1
+ 1431 01af 6001     		.2byte	0x160
+ 1432 01b1 6B000000 		.4byte	0x6b
+ 1433 01b5 02       		.uleb128 0x2
+ 1434 01b6 91       		.byte	0x91
+ 1435 01b7 77       		.sleb128 -9
+ 1436 01b8 00       		.byte	0
+ 1437 01b9 0D       		.uleb128 0xd
+ 1438 01ba 05050000 		.4byte	.LASF30
+ 1439 01be 01       		.byte	0x1
+ 1440 01bf 8201     		.2byte	0x182
+ 1441 01c1 6B000000 		.4byte	0x6b
+ 1442 01c5 00000000 		.4byte	.LFB10
+ 1443 01c9 20000000 		.4byte	.LFE10-.LFB10
+ 1444 01cd 01       		.uleb128 0x1
+ 1445 01ce 9C       		.byte	0x9c
+ 1446 01cf E3010000 		.4byte	0x1e3
+ 1447 01d3 0E       		.uleb128 0xe
+ 1448 01d4 BD040000 		.4byte	.LASF29
+ 1449 01d8 01       		.byte	0x1
+ 1450 01d9 8401     		.2byte	0x184
+ 1451 01db 6B000000 		.4byte	0x6b
+ 1452 01df 02       		.uleb128 0x2
+ 1453 01e0 91       		.byte	0x91
+ 1454 01e1 77       		.sleb128 -9
+ 1455 01e2 00       		.byte	0
+ 1456 01e3 0D       		.uleb128 0xd
+ 1457 01e4 2E010000 		.4byte	.LASF31
+ 1458 01e8 01       		.byte	0x1
+ 1459 01e9 B501     		.2byte	0x1b5
+ 1460 01eb 6B000000 		.4byte	0x6b
+ 1461 01ef 00000000 		.4byte	.LFB11
+ 1462 01f3 20000000 		.4byte	.LFE11-.LFB11
+ 1463 01f7 01       		.uleb128 0x1
+ 1464 01f8 9C       		.byte	0x9c
+ 1465 01f9 0D020000 		.4byte	0x20d
+ 1466 01fd 0E       		.uleb128 0xe
+ 1467 01fe BD040000 		.4byte	.LASF29
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 47
+
+
+ 1468 0202 01       		.byte	0x1
+ 1469 0203 B701     		.2byte	0x1b7
+ 1470 0205 6B000000 		.4byte	0x6b
+ 1471 0209 02       		.uleb128 0x2
+ 1472 020a 91       		.byte	0x91
+ 1473 020b 77       		.sleb128 -9
+ 1474 020c 00       		.byte	0
+ 1475 020d 0B       		.uleb128 0xb
+ 1476 020e C7040000 		.4byte	.LASF32
+ 1477 0212 01       		.byte	0x1
+ 1478 0213 EE01     		.2byte	0x1ee
+ 1479 0215 00000000 		.4byte	.LFB12
+ 1480 0219 34000000 		.4byte	.LFE12-.LFB12
+ 1481 021d 01       		.uleb128 0x1
+ 1482 021e 9C       		.byte	0x9c
+ 1483 021f 33020000 		.4byte	0x233
+ 1484 0223 0C       		.uleb128 0xc
+ 1485 0224 5E000000 		.4byte	.LASF33
+ 1486 0228 01       		.byte	0x1
+ 1487 0229 EE01     		.2byte	0x1ee
+ 1488 022b 6B000000 		.4byte	0x6b
+ 1489 022f 02       		.uleb128 0x2
+ 1490 0230 91       		.byte	0x91
+ 1491 0231 77       		.sleb128 -9
+ 1492 0232 00       		.byte	0
+ 1493 0233 0D       		.uleb128 0xd
+ 1494 0234 A4000000 		.4byte	.LASF34
+ 1495 0238 01       		.byte	0x1
+ 1496 0239 5B02     		.2byte	0x25b
+ 1497 023b 6B000000 		.4byte	0x6b
+ 1498 023f 00000000 		.4byte	.LFB13
+ 1499 0243 20000000 		.4byte	.LFE13-.LFB13
+ 1500 0247 01       		.uleb128 0x1
+ 1501 0248 9C       		.byte	0x9c
+ 1502 0249 5D020000 		.4byte	0x25d
+ 1503 024d 0E       		.uleb128 0xe
+ 1504 024e 21010000 		.4byte	.LASF35
+ 1505 0252 01       		.byte	0x1
+ 1506 0253 5D02     		.2byte	0x25d
+ 1507 0255 6B000000 		.4byte	0x6b
+ 1508 0259 02       		.uleb128 0x2
+ 1509 025a 91       		.byte	0x91
+ 1510 025b 77       		.sleb128 -9
+ 1511 025c 00       		.byte	0
+ 1512 025d 0D       		.uleb128 0xd
+ 1513 025e E1000000 		.4byte	.LASF36
+ 1514 0262 01       		.byte	0x1
+ 1515 0263 9B02     		.2byte	0x29b
+ 1516 0265 6B000000 		.4byte	0x6b
+ 1517 0269 00000000 		.4byte	.LFB14
+ 1518 026d 30000000 		.4byte	.LFE14-.LFB14
+ 1519 0271 01       		.uleb128 0x1
+ 1520 0272 9C       		.byte	0x9c
+ 1521 0273 87020000 		.4byte	0x287
+ 1522 0277 0E       		.uleb128 0xe
+ 1523 0278 6C010000 		.4byte	.LASF37
+ 1524 027c 01       		.byte	0x1
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 48
+
+
+ 1525 027d 9D02     		.2byte	0x29d
+ 1526 027f 6B000000 		.4byte	0x6b
+ 1527 0283 02       		.uleb128 0x2
+ 1528 0284 91       		.byte	0x91
+ 1529 0285 77       		.sleb128 -9
+ 1530 0286 00       		.byte	0
+ 1531 0287 0D       		.uleb128 0xd
+ 1532 0288 71040000 		.4byte	.LASF38
+ 1533 028c 01       		.byte	0x1
+ 1534 028d D802     		.2byte	0x2d8
+ 1535 028f 6B000000 		.4byte	0x6b
+ 1536 0293 00000000 		.4byte	.LFB15
+ 1537 0297 44000000 		.4byte	.LFE15-.LFB15
+ 1538 029b 01       		.uleb128 0x1
+ 1539 029c 9C       		.byte	0x9c
+ 1540 029d B1020000 		.4byte	0x2b1
+ 1541 02a1 0E       		.uleb128 0xe
+ 1542 02a2 6C010000 		.4byte	.LASF37
+ 1543 02a6 01       		.byte	0x1
+ 1544 02a7 DA02     		.2byte	0x2da
+ 1545 02a9 6B000000 		.4byte	0x6b
+ 1546 02ad 02       		.uleb128 0x2
+ 1547 02ae 91       		.byte	0x91
+ 1548 02af 77       		.sleb128 -9
+ 1549 02b0 00       		.byte	0
+ 1550 02b1 0A       		.uleb128 0xa
+ 1551 02b2 00020000 		.4byte	.LASF39
+ 1552 02b6 01       		.byte	0x1
+ 1553 02b7 2703     		.2byte	0x327
+ 1554 02b9 00000000 		.4byte	.LFB16
+ 1555 02bd 28000000 		.4byte	.LFE16-.LFB16
+ 1556 02c1 01       		.uleb128 0x1
+ 1557 02c2 9C       		.byte	0x9c
+ 1558 02c3 0F       		.uleb128 0xf
+ 1559 02c4 65000000 		.4byte	.LASF40
+ 1560 02c8 01       		.byte	0x1
+ 1561 02c9 5E03     		.2byte	0x35e
+ 1562 02cb 00000000 		.4byte	.LFB17
+ 1563 02cf 40000000 		.4byte	.LFE17-.LFB17
+ 1564 02d3 01       		.uleb128 0x1
+ 1565 02d4 9C       		.byte	0x9c
+ 1566 02d5 E9020000 		.4byte	0x2e9
+ 1567 02d9 0E       		.uleb128 0xe
+ 1568 02da B3010000 		.4byte	.LASF21
+ 1569 02de 01       		.byte	0x1
+ 1570 02df 6003     		.2byte	0x360
+ 1571 02e1 6B000000 		.4byte	0x6b
+ 1572 02e5 02       		.uleb128 0x2
+ 1573 02e6 91       		.byte	0x91
+ 1574 02e7 77       		.sleb128 -9
+ 1575 02e8 00       		.byte	0
+ 1576 02e9 0F       		.uleb128 0xf
+ 1577 02ea 00000000 		.4byte	.LASF41
+ 1578 02ee 01       		.byte	0x1
+ 1579 02ef C303     		.2byte	0x3c3
+ 1580 02f1 00000000 		.4byte	.LFB18
+ 1581 02f5 38000000 		.4byte	.LFE18-.LFB18
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 49
+
+
+ 1582 02f9 01       		.uleb128 0x1
+ 1583 02fa 9C       		.byte	0x9c
+ 1584 02fb 2D030000 		.4byte	0x32d
+ 1585 02ff 0C       		.uleb128 0xc
+ 1586 0300 57000000 		.4byte	.LASF42
+ 1587 0304 01       		.byte	0x1
+ 1588 0305 C303     		.2byte	0x3c3
+ 1589 0307 2D030000 		.4byte	0x32d
+ 1590 030b 02       		.uleb128 0x2
+ 1591 030c 91       		.byte	0x91
+ 1592 030d 6C       		.sleb128 -20
+ 1593 030e 0C       		.uleb128 0xc
+ 1594 030f A9010000 		.4byte	.LASF43
+ 1595 0313 01       		.byte	0x1
+ 1596 0314 C303     		.2byte	0x3c3
+ 1597 0316 6B000000 		.4byte	0x6b
+ 1598 031a 02       		.uleb128 0x2
+ 1599 031b 91       		.byte	0x91
+ 1600 031c 6B       		.sleb128 -21
+ 1601 031d 0E       		.uleb128 0xe
+ 1602 031e C4020000 		.4byte	.LASF44
+ 1603 0322 01       		.byte	0x1
+ 1604 0323 C603     		.2byte	0x3c6
+ 1605 0325 6B000000 		.4byte	0x6b
+ 1606 0329 02       		.uleb128 0x2
+ 1607 032a 91       		.byte	0x91
+ 1608 032b 77       		.sleb128 -9
+ 1609 032c 00       		.byte	0
+ 1610 032d 10       		.uleb128 0x10
+ 1611 032e 04       		.byte	0x4
+ 1612 032f 33030000 		.4byte	0x333
+ 1613 0333 11       		.uleb128 0x11
+ 1614 0334 6B000000 		.4byte	0x6b
+ 1615 0338 0F       		.uleb128 0xf
+ 1616 0339 04010000 		.4byte	.LASF45
+ 1617 033d 01       		.byte	0x1
+ 1618 033e E403     		.2byte	0x3e4
+ 1619 0340 00000000 		.4byte	.LFB19
+ 1620 0344 5C000000 		.4byte	.LFE19-.LFB19
+ 1621 0348 01       		.uleb128 0x1
+ 1622 0349 9C       		.byte	0x9c
+ 1623 034a 5E030000 		.4byte	0x35e
+ 1624 034e 0E       		.uleb128 0xe
+ 1625 034f B3010000 		.4byte	.LASF21
+ 1626 0353 01       		.byte	0x1
+ 1627 0354 E603     		.2byte	0x3e6
+ 1628 0356 6B000000 		.4byte	0x6b
+ 1629 035a 02       		.uleb128 0x2
+ 1630 035b 91       		.byte	0x91
+ 1631 035c 77       		.sleb128 -9
+ 1632 035d 00       		.byte	0
+ 1633 035e 12       		.uleb128 0x12
+ 1634 035f 3A000000 		.4byte	.LASF46
+ 1635 0363 01       		.byte	0x1
+ 1636 0364 1204     		.2byte	0x412
+ 1637 0366 00000000 		.4byte	.LFB20
+ 1638 036a 0E000000 		.4byte	.LFE20-.LFB20
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 50
+
+
+ 1639 036e 01       		.uleb128 0x1
+ 1640 036f 9C       		.byte	0x9c
+ 1641 0370 12       		.uleb128 0x12
+ 1642 0371 86000000 		.4byte	.LASF47
+ 1643 0375 01       		.byte	0x1
+ 1644 0376 2A04     		.2byte	0x42a
+ 1645 0378 00000000 		.4byte	.LFB21
+ 1646 037c 0E000000 		.4byte	.LFE21-.LFB21
+ 1647 0380 01       		.uleb128 0x1
+ 1648 0381 9C       		.byte	0x9c
+ 1649 0382 0B       		.uleb128 0xb
+ 1650 0383 A0020000 		.4byte	.LASF48
+ 1651 0387 01       		.byte	0x1
+ 1652 0388 4304     		.2byte	0x443
+ 1653 038a 00000000 		.4byte	.LFB22
+ 1654 038e 30000000 		.4byte	.LFE22-.LFB22
+ 1655 0392 01       		.uleb128 0x1
+ 1656 0393 9C       		.byte	0x9c
+ 1657 0394 A8030000 		.4byte	0x3a8
+ 1658 0398 0C       		.uleb128 0xc
+ 1659 0399 F9010000 		.4byte	.LASF28
+ 1660 039d 01       		.byte	0x1
+ 1661 039e 4304     		.2byte	0x443
+ 1662 03a0 6B000000 		.4byte	0x6b
+ 1663 03a4 02       		.uleb128 0x2
+ 1664 03a5 91       		.byte	0x91
+ 1665 03a6 77       		.sleb128 -9
+ 1666 03a7 00       		.byte	0
+ 1667 03a8 0D       		.uleb128 0xd
+ 1668 03a9 4E010000 		.4byte	.LASF49
+ 1669 03ad 01       		.byte	0x1
+ 1670 03ae 6604     		.2byte	0x466
+ 1671 03b0 6B000000 		.4byte	0x6b
+ 1672 03b4 00000000 		.4byte	.LFB23
+ 1673 03b8 38000000 		.4byte	.LFE23-.LFB23
+ 1674 03bc 01       		.uleb128 0x1
+ 1675 03bd 9C       		.byte	0x9c
+ 1676 03be D2030000 		.4byte	0x3d2
+ 1677 03c2 0E       		.uleb128 0xe
+ 1678 03c3 BD040000 		.4byte	.LASF29
+ 1679 03c7 01       		.byte	0x1
+ 1680 03c8 6804     		.2byte	0x468
+ 1681 03ca 6B000000 		.4byte	0x6b
+ 1682 03ce 02       		.uleb128 0x2
+ 1683 03cf 91       		.byte	0x91
+ 1684 03d0 77       		.sleb128 -9
+ 1685 03d1 00       		.byte	0
+ 1686 03d2 13       		.uleb128 0x13
+ 1687 03d3 8E010000 		.4byte	.LASF50
+ 1688 03d7 01       		.byte	0x1
+ 1689 03d8 22       		.byte	0x22
+ 1690 03d9 6B000000 		.4byte	0x6b
+ 1691 03dd 05       		.uleb128 0x5
+ 1692 03de 03       		.byte	0x3
+ 1693 03df 00000000 		.4byte	TFTSHIELD_1_SPIM_1_initVar
+ 1694 03e3 13       		.uleb128 0x13
+ 1695 03e4 82020000 		.4byte	.LASF51
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 51
+
+
+ 1696 03e8 01       		.byte	0x1
+ 1697 03e9 24       		.byte	0x24
+ 1698 03ea A1000000 		.4byte	0xa1
+ 1699 03ee 05       		.uleb128 0x5
+ 1700 03ef 03       		.byte	0x3
+ 1701 03f0 00000000 		.4byte	TFTSHIELD_1_SPIM_1_swStatusTx
+ 1702 03f4 13       		.uleb128 0x13
+ 1703 03f5 40020000 		.4byte	.LASF52
+ 1704 03f9 01       		.byte	0x1
+ 1705 03fa 25       		.byte	0x25
+ 1706 03fb A1000000 		.4byte	0xa1
+ 1707 03ff 05       		.uleb128 0x5
+ 1708 0400 03       		.byte	0x3
+ 1709 0401 00000000 		.4byte	TFTSHIELD_1_SPIM_1_swStatusRx
+ 1710 0405 00       		.byte	0
+ 1711              		.section	.debug_abbrev,"",%progbits
+ 1712              	.Ldebug_abbrev0:
+ 1713 0000 01       		.uleb128 0x1
+ 1714 0001 11       		.uleb128 0x11
+ 1715 0002 01       		.byte	0x1
+ 1716 0003 25       		.uleb128 0x25
+ 1717 0004 0E       		.uleb128 0xe
+ 1718 0005 13       		.uleb128 0x13
+ 1719 0006 0B       		.uleb128 0xb
+ 1720 0007 03       		.uleb128 0x3
+ 1721 0008 0E       		.uleb128 0xe
+ 1722 0009 1B       		.uleb128 0x1b
+ 1723 000a 0E       		.uleb128 0xe
+ 1724 000b 55       		.uleb128 0x55
+ 1725 000c 17       		.uleb128 0x17
+ 1726 000d 11       		.uleb128 0x11
+ 1727 000e 01       		.uleb128 0x1
+ 1728 000f 10       		.uleb128 0x10
+ 1729 0010 17       		.uleb128 0x17
+ 1730 0011 00       		.byte	0
+ 1731 0012 00       		.byte	0
+ 1732 0013 02       		.uleb128 0x2
+ 1733 0014 24       		.uleb128 0x24
+ 1734 0015 00       		.byte	0
+ 1735 0016 0B       		.uleb128 0xb
+ 1736 0017 0B       		.uleb128 0xb
+ 1737 0018 3E       		.uleb128 0x3e
+ 1738 0019 0B       		.uleb128 0xb
+ 1739 001a 03       		.uleb128 0x3
+ 1740 001b 0E       		.uleb128 0xe
+ 1741 001c 00       		.byte	0
+ 1742 001d 00       		.byte	0
+ 1743 001e 03       		.uleb128 0x3
+ 1744 001f 24       		.uleb128 0x24
+ 1745 0020 00       		.byte	0
+ 1746 0021 0B       		.uleb128 0xb
+ 1747 0022 0B       		.uleb128 0xb
+ 1748 0023 3E       		.uleb128 0x3e
+ 1749 0024 0B       		.uleb128 0xb
+ 1750 0025 03       		.uleb128 0x3
+ 1751 0026 08       		.uleb128 0x8
+ 1752 0027 00       		.byte	0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 52
+
+
+ 1753 0028 00       		.byte	0
+ 1754 0029 04       		.uleb128 0x4
+ 1755 002a 16       		.uleb128 0x16
+ 1756 002b 00       		.byte	0
+ 1757 002c 03       		.uleb128 0x3
+ 1758 002d 0E       		.uleb128 0xe
+ 1759 002e 3A       		.uleb128 0x3a
+ 1760 002f 0B       		.uleb128 0xb
+ 1761 0030 3B       		.uleb128 0x3b
+ 1762 0031 0B       		.uleb128 0xb
+ 1763 0032 49       		.uleb128 0x49
+ 1764 0033 13       		.uleb128 0x13
+ 1765 0034 00       		.byte	0
+ 1766 0035 00       		.byte	0
+ 1767 0036 05       		.uleb128 0x5
+ 1768 0037 35       		.uleb128 0x35
+ 1769 0038 00       		.byte	0
+ 1770 0039 49       		.uleb128 0x49
+ 1771 003a 13       		.uleb128 0x13
+ 1772 003b 00       		.byte	0
+ 1773 003c 00       		.byte	0
+ 1774 003d 06       		.uleb128 0x6
+ 1775 003e 2E       		.uleb128 0x2e
+ 1776 003f 00       		.byte	0
+ 1777 0040 3F       		.uleb128 0x3f
+ 1778 0041 19       		.uleb128 0x19
+ 1779 0042 03       		.uleb128 0x3
+ 1780 0043 0E       		.uleb128 0xe
+ 1781 0044 3A       		.uleb128 0x3a
+ 1782 0045 0B       		.uleb128 0xb
+ 1783 0046 3B       		.uleb128 0x3b
+ 1784 0047 0B       		.uleb128 0xb
+ 1785 0048 27       		.uleb128 0x27
+ 1786 0049 19       		.uleb128 0x19
+ 1787 004a 11       		.uleb128 0x11
+ 1788 004b 01       		.uleb128 0x1
+ 1789 004c 12       		.uleb128 0x12
+ 1790 004d 06       		.uleb128 0x6
+ 1791 004e 40       		.uleb128 0x40
+ 1792 004f 18       		.uleb128 0x18
+ 1793 0050 9642     		.uleb128 0x2116
+ 1794 0052 19       		.uleb128 0x19
+ 1795 0053 00       		.byte	0
+ 1796 0054 00       		.byte	0
+ 1797 0055 07       		.uleb128 0x7
+ 1798 0056 2E       		.uleb128 0x2e
+ 1799 0057 01       		.byte	0x1
+ 1800 0058 3F       		.uleb128 0x3f
+ 1801 0059 19       		.uleb128 0x19
+ 1802 005a 03       		.uleb128 0x3
+ 1803 005b 0E       		.uleb128 0xe
+ 1804 005c 3A       		.uleb128 0x3a
+ 1805 005d 0B       		.uleb128 0xb
+ 1806 005e 3B       		.uleb128 0x3b
+ 1807 005f 0B       		.uleb128 0xb
+ 1808 0060 27       		.uleb128 0x27
+ 1809 0061 19       		.uleb128 0x19
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 53
+
+
+ 1810 0062 11       		.uleb128 0x11
+ 1811 0063 01       		.uleb128 0x1
+ 1812 0064 12       		.uleb128 0x12
+ 1813 0065 06       		.uleb128 0x6
+ 1814 0066 40       		.uleb128 0x40
+ 1815 0067 18       		.uleb128 0x18
+ 1816 0068 9642     		.uleb128 0x2116
+ 1817 006a 19       		.uleb128 0x19
+ 1818 006b 01       		.uleb128 0x1
+ 1819 006c 13       		.uleb128 0x13
+ 1820 006d 00       		.byte	0
+ 1821 006e 00       		.byte	0
+ 1822 006f 08       		.uleb128 0x8
+ 1823 0070 34       		.uleb128 0x34
+ 1824 0071 00       		.byte	0
+ 1825 0072 03       		.uleb128 0x3
+ 1826 0073 0E       		.uleb128 0xe
+ 1827 0074 3A       		.uleb128 0x3a
+ 1828 0075 0B       		.uleb128 0xb
+ 1829 0076 3B       		.uleb128 0x3b
+ 1830 0077 0B       		.uleb128 0xb
+ 1831 0078 49       		.uleb128 0x49
+ 1832 0079 13       		.uleb128 0x13
+ 1833 007a 02       		.uleb128 0x2
+ 1834 007b 18       		.uleb128 0x18
+ 1835 007c 00       		.byte	0
+ 1836 007d 00       		.byte	0
+ 1837 007e 09       		.uleb128 0x9
+ 1838 007f 2E       		.uleb128 0x2e
+ 1839 0080 00       		.byte	0
+ 1840 0081 3F       		.uleb128 0x3f
+ 1841 0082 19       		.uleb128 0x19
+ 1842 0083 03       		.uleb128 0x3
+ 1843 0084 0E       		.uleb128 0xe
+ 1844 0085 3A       		.uleb128 0x3a
+ 1845 0086 0B       		.uleb128 0xb
+ 1846 0087 3B       		.uleb128 0x3b
+ 1847 0088 0B       		.uleb128 0xb
+ 1848 0089 27       		.uleb128 0x27
+ 1849 008a 19       		.uleb128 0x19
+ 1850 008b 11       		.uleb128 0x11
+ 1851 008c 01       		.uleb128 0x1
+ 1852 008d 12       		.uleb128 0x12
+ 1853 008e 06       		.uleb128 0x6
+ 1854 008f 40       		.uleb128 0x40
+ 1855 0090 18       		.uleb128 0x18
+ 1856 0091 9742     		.uleb128 0x2117
+ 1857 0093 19       		.uleb128 0x19
+ 1858 0094 00       		.byte	0
+ 1859 0095 00       		.byte	0
+ 1860 0096 0A       		.uleb128 0xa
+ 1861 0097 2E       		.uleb128 0x2e
+ 1862 0098 00       		.byte	0
+ 1863 0099 3F       		.uleb128 0x3f
+ 1864 009a 19       		.uleb128 0x19
+ 1865 009b 03       		.uleb128 0x3
+ 1866 009c 0E       		.uleb128 0xe
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 54
+
+
+ 1867 009d 3A       		.uleb128 0x3a
+ 1868 009e 0B       		.uleb128 0xb
+ 1869 009f 3B       		.uleb128 0x3b
+ 1870 00a0 05       		.uleb128 0x5
+ 1871 00a1 27       		.uleb128 0x27
+ 1872 00a2 19       		.uleb128 0x19
+ 1873 00a3 11       		.uleb128 0x11
+ 1874 00a4 01       		.uleb128 0x1
+ 1875 00a5 12       		.uleb128 0x12
+ 1876 00a6 06       		.uleb128 0x6
+ 1877 00a7 40       		.uleb128 0x40
+ 1878 00a8 18       		.uleb128 0x18
+ 1879 00a9 9742     		.uleb128 0x2117
+ 1880 00ab 19       		.uleb128 0x19
+ 1881 00ac 00       		.byte	0
+ 1882 00ad 00       		.byte	0
+ 1883 00ae 0B       		.uleb128 0xb
+ 1884 00af 2E       		.uleb128 0x2e
+ 1885 00b0 01       		.byte	0x1
+ 1886 00b1 3F       		.uleb128 0x3f
+ 1887 00b2 19       		.uleb128 0x19
+ 1888 00b3 03       		.uleb128 0x3
+ 1889 00b4 0E       		.uleb128 0xe
+ 1890 00b5 3A       		.uleb128 0x3a
+ 1891 00b6 0B       		.uleb128 0xb
+ 1892 00b7 3B       		.uleb128 0x3b
+ 1893 00b8 05       		.uleb128 0x5
+ 1894 00b9 27       		.uleb128 0x27
+ 1895 00ba 19       		.uleb128 0x19
+ 1896 00bb 11       		.uleb128 0x11
+ 1897 00bc 01       		.uleb128 0x1
+ 1898 00bd 12       		.uleb128 0x12
+ 1899 00be 06       		.uleb128 0x6
+ 1900 00bf 40       		.uleb128 0x40
+ 1901 00c0 18       		.uleb128 0x18
+ 1902 00c1 9742     		.uleb128 0x2117
+ 1903 00c3 19       		.uleb128 0x19
+ 1904 00c4 01       		.uleb128 0x1
+ 1905 00c5 13       		.uleb128 0x13
+ 1906 00c6 00       		.byte	0
+ 1907 00c7 00       		.byte	0
+ 1908 00c8 0C       		.uleb128 0xc
+ 1909 00c9 05       		.uleb128 0x5
+ 1910 00ca 00       		.byte	0
+ 1911 00cb 03       		.uleb128 0x3
+ 1912 00cc 0E       		.uleb128 0xe
+ 1913 00cd 3A       		.uleb128 0x3a
+ 1914 00ce 0B       		.uleb128 0xb
+ 1915 00cf 3B       		.uleb128 0x3b
+ 1916 00d0 05       		.uleb128 0x5
+ 1917 00d1 49       		.uleb128 0x49
+ 1918 00d2 13       		.uleb128 0x13
+ 1919 00d3 02       		.uleb128 0x2
+ 1920 00d4 18       		.uleb128 0x18
+ 1921 00d5 00       		.byte	0
+ 1922 00d6 00       		.byte	0
+ 1923 00d7 0D       		.uleb128 0xd
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 55
+
+
+ 1924 00d8 2E       		.uleb128 0x2e
+ 1925 00d9 01       		.byte	0x1
+ 1926 00da 3F       		.uleb128 0x3f
+ 1927 00db 19       		.uleb128 0x19
+ 1928 00dc 03       		.uleb128 0x3
+ 1929 00dd 0E       		.uleb128 0xe
+ 1930 00de 3A       		.uleb128 0x3a
+ 1931 00df 0B       		.uleb128 0xb
+ 1932 00e0 3B       		.uleb128 0x3b
+ 1933 00e1 05       		.uleb128 0x5
+ 1934 00e2 27       		.uleb128 0x27
+ 1935 00e3 19       		.uleb128 0x19
+ 1936 00e4 49       		.uleb128 0x49
+ 1937 00e5 13       		.uleb128 0x13
+ 1938 00e6 11       		.uleb128 0x11
+ 1939 00e7 01       		.uleb128 0x1
+ 1940 00e8 12       		.uleb128 0x12
+ 1941 00e9 06       		.uleb128 0x6
+ 1942 00ea 40       		.uleb128 0x40
+ 1943 00eb 18       		.uleb128 0x18
+ 1944 00ec 9742     		.uleb128 0x2117
+ 1945 00ee 19       		.uleb128 0x19
+ 1946 00ef 01       		.uleb128 0x1
+ 1947 00f0 13       		.uleb128 0x13
+ 1948 00f1 00       		.byte	0
+ 1949 00f2 00       		.byte	0
+ 1950 00f3 0E       		.uleb128 0xe
+ 1951 00f4 34       		.uleb128 0x34
+ 1952 00f5 00       		.byte	0
+ 1953 00f6 03       		.uleb128 0x3
+ 1954 00f7 0E       		.uleb128 0xe
+ 1955 00f8 3A       		.uleb128 0x3a
+ 1956 00f9 0B       		.uleb128 0xb
+ 1957 00fa 3B       		.uleb128 0x3b
+ 1958 00fb 05       		.uleb128 0x5
+ 1959 00fc 49       		.uleb128 0x49
+ 1960 00fd 13       		.uleb128 0x13
+ 1961 00fe 02       		.uleb128 0x2
+ 1962 00ff 18       		.uleb128 0x18
+ 1963 0100 00       		.byte	0
+ 1964 0101 00       		.byte	0
+ 1965 0102 0F       		.uleb128 0xf
+ 1966 0103 2E       		.uleb128 0x2e
+ 1967 0104 01       		.byte	0x1
+ 1968 0105 3F       		.uleb128 0x3f
+ 1969 0106 19       		.uleb128 0x19
+ 1970 0107 03       		.uleb128 0x3
+ 1971 0108 0E       		.uleb128 0xe
+ 1972 0109 3A       		.uleb128 0x3a
+ 1973 010a 0B       		.uleb128 0xb
+ 1974 010b 3B       		.uleb128 0x3b
+ 1975 010c 05       		.uleb128 0x5
+ 1976 010d 27       		.uleb128 0x27
+ 1977 010e 19       		.uleb128 0x19
+ 1978 010f 11       		.uleb128 0x11
+ 1979 0110 01       		.uleb128 0x1
+ 1980 0111 12       		.uleb128 0x12
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 56
+
+
+ 1981 0112 06       		.uleb128 0x6
+ 1982 0113 40       		.uleb128 0x40
+ 1983 0114 18       		.uleb128 0x18
+ 1984 0115 9642     		.uleb128 0x2116
+ 1985 0117 19       		.uleb128 0x19
+ 1986 0118 01       		.uleb128 0x1
+ 1987 0119 13       		.uleb128 0x13
+ 1988 011a 00       		.byte	0
+ 1989 011b 00       		.byte	0
+ 1990 011c 10       		.uleb128 0x10
+ 1991 011d 0F       		.uleb128 0xf
+ 1992 011e 00       		.byte	0
+ 1993 011f 0B       		.uleb128 0xb
+ 1994 0120 0B       		.uleb128 0xb
+ 1995 0121 49       		.uleb128 0x49
+ 1996 0122 13       		.uleb128 0x13
+ 1997 0123 00       		.byte	0
+ 1998 0124 00       		.byte	0
+ 1999 0125 11       		.uleb128 0x11
+ 2000 0126 26       		.uleb128 0x26
+ 2001 0127 00       		.byte	0
+ 2002 0128 49       		.uleb128 0x49
+ 2003 0129 13       		.uleb128 0x13
+ 2004 012a 00       		.byte	0
+ 2005 012b 00       		.byte	0
+ 2006 012c 12       		.uleb128 0x12
+ 2007 012d 2E       		.uleb128 0x2e
+ 2008 012e 00       		.byte	0
+ 2009 012f 3F       		.uleb128 0x3f
+ 2010 0130 19       		.uleb128 0x19
+ 2011 0131 03       		.uleb128 0x3
+ 2012 0132 0E       		.uleb128 0xe
+ 2013 0133 3A       		.uleb128 0x3a
+ 2014 0134 0B       		.uleb128 0xb
+ 2015 0135 3B       		.uleb128 0x3b
+ 2016 0136 05       		.uleb128 0x5
+ 2017 0137 27       		.uleb128 0x27
+ 2018 0138 19       		.uleb128 0x19
+ 2019 0139 11       		.uleb128 0x11
+ 2020 013a 01       		.uleb128 0x1
+ 2021 013b 12       		.uleb128 0x12
+ 2022 013c 06       		.uleb128 0x6
+ 2023 013d 40       		.uleb128 0x40
+ 2024 013e 18       		.uleb128 0x18
+ 2025 013f 9642     		.uleb128 0x2116
+ 2026 0141 19       		.uleb128 0x19
+ 2027 0142 00       		.byte	0
+ 2028 0143 00       		.byte	0
+ 2029 0144 13       		.uleb128 0x13
+ 2030 0145 34       		.uleb128 0x34
+ 2031 0146 00       		.byte	0
+ 2032 0147 03       		.uleb128 0x3
+ 2033 0148 0E       		.uleb128 0xe
+ 2034 0149 3A       		.uleb128 0x3a
+ 2035 014a 0B       		.uleb128 0xb
+ 2036 014b 3B       		.uleb128 0x3b
+ 2037 014c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 57
+
+
+ 2038 014d 49       		.uleb128 0x49
+ 2039 014e 13       		.uleb128 0x13
+ 2040 014f 3F       		.uleb128 0x3f
+ 2041 0150 19       		.uleb128 0x19
+ 2042 0151 02       		.uleb128 0x2
+ 2043 0152 18       		.uleb128 0x18
+ 2044 0153 00       		.byte	0
+ 2045 0154 00       		.byte	0
+ 2046 0155 00       		.byte	0
+ 2047              		.section	.debug_aranges,"",%progbits
+ 2048 0000 D4000000 		.4byte	0xd4
+ 2049 0004 0200     		.2byte	0x2
+ 2050 0006 00000000 		.4byte	.Ldebug_info0
+ 2051 000a 04       		.byte	0x4
+ 2052 000b 00       		.byte	0
+ 2053 000c 0000     		.2byte	0
+ 2054 000e 0000     		.2byte	0
+ 2055 0010 00000000 		.4byte	.LFB0
+ 2056 0014 68000000 		.4byte	.LFE0-.LFB0
+ 2057 0018 00000000 		.4byte	.LFB1
+ 2058 001c 60000000 		.4byte	.LFE1-.LFB1
+ 2059 0020 00000000 		.4byte	.LFB2
+ 2060 0024 20000000 		.4byte	.LFE2-.LFB2
+ 2061 0028 00000000 		.4byte	.LFB3
+ 2062 002c 4C000000 		.4byte	.LFE3-.LFB3
+ 2063 0030 00000000 		.4byte	.LFB4
+ 2064 0034 18000000 		.4byte	.LFE4-.LFB4
+ 2065 0038 00000000 		.4byte	.LFB5
+ 2066 003c 18000000 		.4byte	.LFE5-.LFB5
+ 2067 0040 00000000 		.4byte	.LFB6
+ 2068 0044 18000000 		.4byte	.LFE6-.LFB6
+ 2069 0048 00000000 		.4byte	.LFB7
+ 2070 004c 18000000 		.4byte	.LFE7-.LFB7
+ 2071 0050 00000000 		.4byte	.LFB8
+ 2072 0054 20000000 		.4byte	.LFE8-.LFB8
+ 2073 0058 00000000 		.4byte	.LFB9
+ 2074 005c 20000000 		.4byte	.LFE9-.LFB9
+ 2075 0060 00000000 		.4byte	.LFB10
+ 2076 0064 20000000 		.4byte	.LFE10-.LFB10
+ 2077 0068 00000000 		.4byte	.LFB11
+ 2078 006c 20000000 		.4byte	.LFE11-.LFB11
+ 2079 0070 00000000 		.4byte	.LFB12
+ 2080 0074 34000000 		.4byte	.LFE12-.LFB12
+ 2081 0078 00000000 		.4byte	.LFB13
+ 2082 007c 20000000 		.4byte	.LFE13-.LFB13
+ 2083 0080 00000000 		.4byte	.LFB14
+ 2084 0084 30000000 		.4byte	.LFE14-.LFB14
+ 2085 0088 00000000 		.4byte	.LFB15
+ 2086 008c 44000000 		.4byte	.LFE15-.LFB15
+ 2087 0090 00000000 		.4byte	.LFB16
+ 2088 0094 28000000 		.4byte	.LFE16-.LFB16
+ 2089 0098 00000000 		.4byte	.LFB17
+ 2090 009c 40000000 		.4byte	.LFE17-.LFB17
+ 2091 00a0 00000000 		.4byte	.LFB18
+ 2092 00a4 38000000 		.4byte	.LFE18-.LFB18
+ 2093 00a8 00000000 		.4byte	.LFB19
+ 2094 00ac 5C000000 		.4byte	.LFE19-.LFB19
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 58
+
+
+ 2095 00b0 00000000 		.4byte	.LFB20
+ 2096 00b4 0E000000 		.4byte	.LFE20-.LFB20
+ 2097 00b8 00000000 		.4byte	.LFB21
+ 2098 00bc 0E000000 		.4byte	.LFE21-.LFB21
+ 2099 00c0 00000000 		.4byte	.LFB22
+ 2100 00c4 30000000 		.4byte	.LFE22-.LFB22
+ 2101 00c8 00000000 		.4byte	.LFB23
+ 2102 00cc 38000000 		.4byte	.LFE23-.LFB23
+ 2103 00d0 00000000 		.4byte	0
+ 2104 00d4 00000000 		.4byte	0
+ 2105              		.section	.debug_ranges,"",%progbits
+ 2106              	.Ldebug_ranges0:
+ 2107 0000 00000000 		.4byte	.LFB0
+ 2108 0004 68000000 		.4byte	.LFE0
+ 2109 0008 00000000 		.4byte	.LFB1
+ 2110 000c 60000000 		.4byte	.LFE1
+ 2111 0010 00000000 		.4byte	.LFB2
+ 2112 0014 20000000 		.4byte	.LFE2
+ 2113 0018 00000000 		.4byte	.LFB3
+ 2114 001c 4C000000 		.4byte	.LFE3
+ 2115 0020 00000000 		.4byte	.LFB4
+ 2116 0024 18000000 		.4byte	.LFE4
+ 2117 0028 00000000 		.4byte	.LFB5
+ 2118 002c 18000000 		.4byte	.LFE5
+ 2119 0030 00000000 		.4byte	.LFB6
+ 2120 0034 18000000 		.4byte	.LFE6
+ 2121 0038 00000000 		.4byte	.LFB7
+ 2122 003c 18000000 		.4byte	.LFE7
+ 2123 0040 00000000 		.4byte	.LFB8
+ 2124 0044 20000000 		.4byte	.LFE8
+ 2125 0048 00000000 		.4byte	.LFB9
+ 2126 004c 20000000 		.4byte	.LFE9
+ 2127 0050 00000000 		.4byte	.LFB10
+ 2128 0054 20000000 		.4byte	.LFE10
+ 2129 0058 00000000 		.4byte	.LFB11
+ 2130 005c 20000000 		.4byte	.LFE11
+ 2131 0060 00000000 		.4byte	.LFB12
+ 2132 0064 34000000 		.4byte	.LFE12
+ 2133 0068 00000000 		.4byte	.LFB13
+ 2134 006c 20000000 		.4byte	.LFE13
+ 2135 0070 00000000 		.4byte	.LFB14
+ 2136 0074 30000000 		.4byte	.LFE14
+ 2137 0078 00000000 		.4byte	.LFB15
+ 2138 007c 44000000 		.4byte	.LFE15
+ 2139 0080 00000000 		.4byte	.LFB16
+ 2140 0084 28000000 		.4byte	.LFE16
+ 2141 0088 00000000 		.4byte	.LFB17
+ 2142 008c 40000000 		.4byte	.LFE17
+ 2143 0090 00000000 		.4byte	.LFB18
+ 2144 0094 38000000 		.4byte	.LFE18
+ 2145 0098 00000000 		.4byte	.LFB19
+ 2146 009c 5C000000 		.4byte	.LFE19
+ 2147 00a0 00000000 		.4byte	.LFB20
+ 2148 00a4 0E000000 		.4byte	.LFE20
+ 2149 00a8 00000000 		.4byte	.LFB21
+ 2150 00ac 0E000000 		.4byte	.LFE21
+ 2151 00b0 00000000 		.4byte	.LFB22
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 59
+
+
+ 2152 00b4 30000000 		.4byte	.LFE22
+ 2153 00b8 00000000 		.4byte	.LFB23
+ 2154 00bc 38000000 		.4byte	.LFE23
+ 2155 00c0 00000000 		.4byte	0
+ 2156 00c4 00000000 		.4byte	0
+ 2157              		.section	.debug_line,"",%progbits
+ 2158              	.Ldebug_line0:
+ 2159 0000 72020000 		.section	.debug_str,"MS",%progbits,1
+ 2159      02004F00 
+ 2159      00000201 
+ 2159      FB0E0D00 
+ 2159      01010101 
+ 2160              	.LASF41:
+ 2161 0000 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_PutArray\000"
+ 2161      4849454C 
+ 2161      445F315F 
+ 2161      5350494D 
+ 2161      5F315F50 
+ 2162              	.LASF17:
+ 2163 001c 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_Init\000"
+ 2163      4849454C 
+ 2163      445F315F 
+ 2163      5350494D 
+ 2163      5F315F49 
+ 2164              	.LASF15:
+ 2165 0034 72656733 		.ascii	"reg32\000"
+ 2165      3200
+ 2166              	.LASF46:
+ 2167 003a 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_EnableInt\000"
+ 2167      4849454C 
+ 2167      445F315F 
+ 2167      5350494D 
+ 2167      5F315F45 
+ 2168              	.LASF42:
+ 2169 0057 62756666 		.ascii	"buffer\000"
+ 2169      657200
+ 2170              	.LASF33:
+ 2171 005e 74784461 		.ascii	"txData\000"
+ 2171      746100
+ 2172              	.LASF40:
+ 2173 0065 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ClearTxBuffer\000"
+ 2173      4849454C 
+ 2173      445F315F 
+ 2173      5350494D 
+ 2173      5F315F43 
+ 2174              	.LASF47:
+ 2175 0086 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_DisableInt\000"
+ 2175      4849454C 
+ 2175      445F315F 
+ 2175      5350494D 
+ 2175      5F315F44 
+ 2176              	.LASF34:
+ 2177 00a4 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ReadRxData\000"
+ 2177      4849454C 
+ 2177      445F315F 
+ 2177      5350494D 
+ 2177      5F315F52 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 60
+
+
+ 2178              	.LASF22:
+ 2179 00c2 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_EnableTxInt\000"
+ 2179      4849454C 
+ 2179      445F315F 
+ 2179      5350494D 
+ 2179      5F315F45 
+ 2180              	.LASF36:
+ 2181 00e1 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_GetRxBufferSize\000"
+ 2181      4849454C 
+ 2181      445F315F 
+ 2181      5350494D 
+ 2181      5F315F47 
+ 2182              	.LASF45:
+ 2183 0104 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ClearFIFO\000"
+ 2183      4849454C 
+ 2183      445F315F 
+ 2183      5350494D 
+ 2183      5F315F43 
+ 2184              	.LASF35:
+ 2185 0121 72784461 		.ascii	"rxData\000"
+ 2185      746100
+ 2186              	.LASF11:
+ 2187 0128 666C6F61 		.ascii	"float\000"
+ 2187      7400
+ 2188              	.LASF31:
+ 2189 012e 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ReadRxStatus\000"
+ 2189      4849454C 
+ 2189      445F315F 
+ 2189      5350494D 
+ 2189      5F315F52 
+ 2190              	.LASF49:
+ 2191 014e 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ReadStatus\000"
+ 2191      4849454C 
+ 2191      445F315F 
+ 2191      5350494D 
+ 2191      5F315F52 
+ 2192              	.LASF37:
+ 2193 016c 73697A65 		.ascii	"size\000"
+ 2193      00
+ 2194              	.LASF14:
+ 2195 0171 72656738 		.ascii	"reg8\000"
+ 2195      00
+ 2196              	.LASF5:
+ 2197 0176 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2197      20756E73 
+ 2197      69676E65 
+ 2197      6420696E 
+ 2197      7400
+ 2198              	.LASF9:
+ 2199 0188 75696E74 		.ascii	"uint8\000"
+ 2199      3800
+ 2200              	.LASF50:
+ 2201 018e 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_initVar\000"
+ 2201      4849454C 
+ 2201      445F315F 
+ 2201      5350494D 
+ 2201      5F315F69 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 61
+
+
+ 2202              	.LASF43:
+ 2203 01a9 62797465 		.ascii	"byteCount\000"
+ 2203      436F756E 
+ 2203      7400
+ 2204              	.LASF21:
+ 2205 01b3 656E6162 		.ascii	"enableInterrupts\000"
+ 2205      6C65496E 
+ 2205      74657272 
+ 2205      75707473 
+ 2205      00
+ 2206              	.LASF1:
+ 2207 01c4 756E7369 		.ascii	"unsigned char\000"
+ 2207      676E6564 
+ 2207      20636861 
+ 2207      7200
+ 2208              	.LASF24:
+ 2209 01d2 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_DisableTxInt\000"
+ 2209      4849454C 
+ 2209      445F315F 
+ 2209      5350494D 
+ 2209      5F315F44 
+ 2210              	.LASF12:
+ 2211 01f2 646F7562 		.ascii	"double\000"
+ 2211      6C6500
+ 2212              	.LASF28:
+ 2213 01f9 696E7453 		.ascii	"intSrc\000"
+ 2213      726300
+ 2214              	.LASF39:
+ 2215 0200 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ClearRxBuffer\000"
+ 2215      4849454C 
+ 2215      445F315F 
+ 2215      5350494D 
+ 2215      5F315F43 
+ 2216              	.LASF20:
+ 2217 0221 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_Stop\000"
+ 2217      4849454C 
+ 2217      445F315F 
+ 2217      5350494D 
+ 2217      5F315F53 
+ 2218              	.LASF10:
+ 2219 0239 75696E74 		.ascii	"uint32\000"
+ 2219      333200
+ 2220              	.LASF52:
+ 2221 0240 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_swStatusRx\000"
+ 2221      4849454C 
+ 2221      445F315F 
+ 2221      5350494D 
+ 2221      5F315F73 
+ 2222              	.LASF8:
+ 2223 025e 756E7369 		.ascii	"unsigned int\000"
+ 2223      676E6564 
+ 2223      20696E74 
+ 2223      00
+ 2224              	.LASF7:
+ 2225 026b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2225      206C6F6E 
+ 2225      6720756E 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 62
+
+
+ 2225      7369676E 
+ 2225      65642069 
+ 2226              	.LASF51:
+ 2227 0282 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_swStatusTx\000"
+ 2227      4849454C 
+ 2227      445F315F 
+ 2227      5350494D 
+ 2227      5F315F73 
+ 2228              	.LASF48:
+ 2229 02a0 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_SetInterruptMode\000"
+ 2229      4849454C 
+ 2229      445F315F 
+ 2229      5350494D 
+ 2229      5F315F53 
+ 2230              	.LASF44:
+ 2231 02c4 62756649 		.ascii	"bufIndex\000"
+ 2231      6E646578 
+ 2231      00
+ 2232              	.LASF16:
+ 2233 02cd 73697A65 		.ascii	"sizetype\000"
+ 2233      74797065 
+ 2233      00
+ 2234              	.LASF27:
+ 2235 02d6 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_SetRxInterruptMode\000"
+ 2235      4849454C 
+ 2235      445F315F 
+ 2235      5350494D 
+ 2235      5F315F53 
+ 2236              	.LASF6:
+ 2237 02fc 6C6F6E67 		.ascii	"long long int\000"
+ 2237      206C6F6E 
+ 2237      6720696E 
+ 2237      7400
+ 2238              	.LASF23:
+ 2239 030a 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_EnableRxInt\000"
+ 2239      4849454C 
+ 2239      445F315F 
+ 2239      5350494D 
+ 2239      5F315F45 
+ 2240              	.LASF55:
+ 2241 0329 433A5C55 		.ascii	"C:\\Users\\LilRobby\\Downloads\\TFTSHIELD-master - "
+ 2241      73657273 
+ 2241      5C4C696C 
+ 2241      526F6262 
+ 2241      795C446F 
+ 2242 0358 315C7466 		.ascii	"1\\tft_test.cydsn\000"
+ 2242      745F7465 
+ 2242      73742E63 
+ 2242      7964736E 
+ 2242      00
+ 2243              	.LASF13:
+ 2244 0369 63686172 		.ascii	"char\000"
+ 2244      00
+ 2245              	.LASF53:
+ 2246 036e 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 2246      4320342E 
+ 2246      392E3320 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 63
+
+
+ 2246      32303135 
+ 2246      30333033 
+ 2247 03a1 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 2247      20726576 
+ 2247      6973696F 
+ 2247      6E203232 
+ 2247      31323230 
+ 2248 03d4 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2248      66756E63 
+ 2248      74696F6E 
+ 2248      2D736563 
+ 2248      74696F6E 
+ 2249              	.LASF54:
+ 2250 03fc 47656E65 		.ascii	"Generated_Source\\PSoC5\\TFTSHIELD_1_SPIM_1.c\000"
+ 2250      72617465 
+ 2250      645F536F 
+ 2250      75726365 
+ 2250      5C50536F 
+ 2251              	.LASF2:
+ 2252 0428 73686F72 		.ascii	"short int\000"
+ 2252      7420696E 
+ 2252      7400
+ 2253              	.LASF18:
+ 2254 0432 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_Start\000"
+ 2254      4849454C 
+ 2254      445F315F 
+ 2254      5350494D 
+ 2254      5F315F53 
+ 2255              	.LASF26:
+ 2256 044b 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_SetTxInterruptMode\000"
+ 2256      4849454C 
+ 2256      445F315F 
+ 2256      5350494D 
+ 2256      5F315F53 
+ 2257              	.LASF38:
+ 2258 0471 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_GetTxBufferSize\000"
+ 2258      4849454C 
+ 2258      445F315F 
+ 2258      5350494D 
+ 2258      5F315F47 
+ 2259              	.LASF25:
+ 2260 0494 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_DisableRxInt\000"
+ 2260      4849454C 
+ 2260      445F315F 
+ 2260      5350494D 
+ 2260      5F315F44 
+ 2261              	.LASF4:
+ 2262 04b4 6C6F6E67 		.ascii	"long int\000"
+ 2262      20696E74 
+ 2262      00
+ 2263              	.LASF29:
+ 2264 04bd 746D7053 		.ascii	"tmpStatus\000"
+ 2264      74617475 
+ 2264      7300
+ 2265              	.LASF32:
+ 2266 04c7 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_WriteTxData\000"
+ 2266      4849454C 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccVtiCu3.s 			page 64
+
+
+ 2266      445F315F 
+ 2266      5350494D 
+ 2266      5F315F57 
+ 2267              	.LASF0:
+ 2268 04e6 7369676E 		.ascii	"signed char\000"
+ 2268      65642063 
+ 2268      68617200 
+ 2269              	.LASF3:
+ 2270 04f2 73686F72 		.ascii	"short unsigned int\000"
+ 2270      7420756E 
+ 2270      7369676E 
+ 2270      65642069 
+ 2270      6E7400
+ 2271              	.LASF30:
+ 2272 0505 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_ReadTxStatus\000"
+ 2272      4849454C 
+ 2272      445F315F 
+ 2272      5350494D 
+ 2272      5F315F52 
+ 2273              	.LASF19:
+ 2274 0525 54465453 		.ascii	"TFTSHIELD_1_SPIM_1_Enable\000"
+ 2274      4849454C 
+ 2274      445F315F 
+ 2274      5350494D 
+ 2274      5F315F45 
+ 2275              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

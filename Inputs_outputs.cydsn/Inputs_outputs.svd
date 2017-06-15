@@ -12,7 +12,7 @@
       <baseAddress>0x4000647E</baseAddress>
       <addressBlock>
         <offset>0</offset>
-        <size>0x1</size>
+        <size>0x0</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>
@@ -33,7 +33,7 @@
       <baseAddress>0x4000646F</baseAddress>
       <addressBlock>
         <offset>0</offset>
-        <size>0x31</size>
+        <size>0x0</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>
@@ -185,10 +185,10 @@
     <peripheral>
       <name>LED_Register</name>
       <description>No description available</description>
-      <baseAddress>0x4000646A</baseAddress>
+      <baseAddress>0x4000646B</baseAddress>
       <addressBlock>
         <offset>0</offset>
-        <size>0x31</size>
+        <size>0x0</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>
@@ -340,10 +340,10 @@
     <peripheral>
       <name>PushButton_Register</name>
       <description>No description available</description>
-      <baseAddress>0x4000647A</baseAddress>
+      <baseAddress>0x4000647B</baseAddress>
       <addressBlock>
         <offset>0</offset>
-        <size>0x1</size>
+        <size>0x0</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>
@@ -364,7 +364,7 @@
       <baseAddress>0x4000647F</baseAddress>
       <addressBlock>
         <offset>0</offset>
-        <size>0x1</size>
+        <size>0x0</size>
         <usage>registers</usage>
       </addressBlock>
       <registers>

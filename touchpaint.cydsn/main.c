@@ -1,8 +1,8 @@
 /*******************************************************************************
 * \file main.c
-* \brief This file is used to demonstrate the TFTSHIELD API for RPiSoC/PSoC. It mimics the functionality of the touchpaint program from Adafruit
+* \brief This file is used to demonstrate the TFTSHIELD API for PiSoC/PSoC. It mimics the functionality of the touchpaint program from Adafruit
 *
-* Version 1.0
+* Version 1.1
 *
 * \author Robert Barron
 *
@@ -65,7 +65,7 @@ int main()
     
     //landscape orientation
     //TFTSHIELD_1_SetRotation(1);
-    //TFTSHIELD_1_PrintString("tft lcd screen with word wrap working blah blah blah");
+    //TFTSHIELD_1_PrintString("tft lcd screen with word wrap working blah");
     
     //TFTSHIELD_1_DrawLine(50, 150, 100, 150, GREEN);
    // TFTSHIELD_1_DrawLine(35, 100, 35 , 200, BLUE);

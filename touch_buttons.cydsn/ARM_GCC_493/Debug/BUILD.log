@@ -1,0 +1,103 @@
+--------------- Build Started: 06/14/2017 21:26:06 Project: touch_buttons, Configuration: ARM GCC 4.9-2015-q1-update Debug ---------------
+cydsfit.exe -.appdatapath "C:\Users\LilRobby\AppData\Local\Cypress Semiconductor\PSoC Creator\4.0" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p "C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\touch_buttons.cyprj" -d CY8C5868AXI-LP035 -s "C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\Generated_Source\PSoC5" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+ADD: pft.M0074: information: A (re)build is required to use the analog device editor. Unable to load the necessary information from the cyfit file. Partial/wrong data will be displayed until this has been resolved.
+ * C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\touch_buttons.cydwr ()
+HDL Generation...
+Synthesis...
+Tech Mapping...
+Analog Placement...
+Analog Routing...
+Analog Code Generation...
+Digital Placement...
+Digital Routing...
+Bitstream Generation...
+Bitstream Verification...
+Static timing analysis...
+API Generation...
+DEL: pft.M0074: information: A (re)build is required to use the analog device editor. Unable to load the necessary information from the cyfit file. Partial/wrong data will be displayed until this has been resolved.
+ * C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\touch_buttons.cydwr ()
+Dependency Generation...
+Cleanup...
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/main.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c main.c -o .\ARM_GCC_493\Debug\main.o
+main.c: In function 'main':
+main.c:103:14: warning: unused variable 'buffer' [-Wunused-variable]
+         char buffer[50];
+              ^
+main.c:102:20: warning: unused variable 'buf' [-Wunused-variable]
+         uint8_t z, buf;
+                    ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/cyfitter_cfg.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\cyfitter_cfg.c -o .\ARM_GCC_493\Debug\cyfitter_cfg.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/cymetadata.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\cymetadata.c -o .\ARM_GCC_493\Debug\cymetadata.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/miso.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\miso.c -o .\ARM_GCC_493\Debug\miso.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/Clock_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\Clock_1.c -o .\ARM_GCC_493\Debug\Clock_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/ss.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\ss.c -o .\ARM_GCC_493\Debug\ss.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/sclk.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\sclk.c -o .\ARM_GCC_493\Debug\sclk.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/mosi.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\mosi.c -o .\ARM_GCC_493\Debug\mosi.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/cs.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\cs.c -o .\ARM_GCC_493\Debug\cs.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/dc.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\dc.c -o .\ARM_GCC_493\Debug\dc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/rt_cs.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\rt_cs.c -o .\ARM_GCC_493\Debug\rt_cs.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/TFTSHIELD_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\TFTSHIELD_1.c -o .\ARM_GCC_493\Debug\TFTSHIELD_1.o
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_SPITransfer':
+Generated_Source\PSoC5\TFTSHIELD_1.c:495:5: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_WriteTxData' [-Wimplicit-function-declaration]
+     TFTSHIELD_1_SPIM_1_WriteTxData(data8);
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_DrawTriangle':
+Generated_Source\PSoC5\TFTSHIELD_1.c:776:5: warning: implicit declaration of function 'TFTSHIELD_1DrawLine' [-Wimplicit-function-declaration]
+     TFTSHIELD_1DrawLine(x0, y0, x1, y1, color);
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_FillTriangle':
+Generated_Source\PSoC5\TFTSHIELD_1.c:800:5: warning: implicit declaration of function 'swap' [-Wimplicit-function-declaration]
+     swap(y0, y1); swap(x0, x1);
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c:825:5: warning: unused variable 'dy12' [-Wunused-variable]
+     dy12 = y2 - y1,
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c:824:5: warning: unused variable 'dx12' [-Wunused-variable]
+     dx12 = x2 - x1,
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_PrintString':
+Generated_Source\PSoC5\TFTSHIELD_1.c:934:9: warning: unused variable 'unused' [-Wunused-variable]
+  char * unused;
+         ^
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_CS_LOW':
+Generated_Source\PSoC5\TFTSHIELD_1.c:1158:5: warning: implicit declaration of function 'TFTSHIELD_1_CR_1_Read' [-Wimplicit-function-declaration]
+     uint8 temp = TFTSHIELD_1_CR_1_Read();
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c:1160:5: warning: implicit declaration of function 'TFTSHIELD_1_CR_1_Write' [-Wimplicit-function-declaration]
+     TFTSHIELD_1_CR_1_Write(temp);
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_StartTouch':
+Generated_Source\PSoC5\TFTSHIELD_1.c:1227:5: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_Start' [-Wimplicit-function-declaration]
+     TFTSHIELD_1_SPIM_1_Start();
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c:1239:13: warning: variable 'val' set but not used [-Wunused-but-set-variable]
+     uint8_t val = 0;
+             ^
+Generated_Source\PSoC5\TFTSHIELD_1.c: In function 'TFTSHIELD_1_ReadRegister16':
+Generated_Source\PSoC5\TFTSHIELD_1.c:1306:5: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_GetRxBufferSize' [-Wimplicit-function-declaration]
+     while(!TFTSHIELD_1_SPIM_1_GetRxBufferSize());
+     ^
+Generated_Source\PSoC5\TFTSHIELD_1.c:1309:9: warning: implicit declaration of function 'TFTSHIELD_1_SPIM_1_ReadRxData' [-Wimplicit-function-declaration]
+         output = TFTSHIELD_1_SPIM_1_ReadRxData();
+         ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/TFTSHIELD_1_SPIM_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\TFTSHIELD_1_SPIM_1.c -o .\ARM_GCC_493\Debug\TFTSHIELD_1_SPIM_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/TFTSHIELD_1_SPIM_1_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\TFTSHIELD_1_SPIM_1_PM.c -o .\ARM_GCC_493\Debug\TFTSHIELD_1_SPIM_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/TFTSHIELD_1_SPIM_1_INT.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\TFTSHIELD_1_SPIM_1_INT.c -o .\ARM_GCC_493\Debug\TFTSHIELD_1_SPIM_1_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/TFTSHIELD_1_CR_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\TFTSHIELD_1_CR_1.c -o .\ARM_GCC_493\Debug\TFTSHIELD_1_CR_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/Cm3Start.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\Cm3Start.c -o .\ARM_GCC_493\Debug\Cm3Start.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/CyDmac.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\CyDmac.c -o .\ARM_GCC_493\Debug\CyDmac.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/CyFlash.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\CyFlash.c -o .\ARM_GCC_493\Debug\CyFlash.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/CyLib.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\CyLib.c -o .\ARM_GCC_493\Debug\CyLib.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/cyPm.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\cyPm.c -o .\ARM_GCC_493\Debug\cyPm.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/CySpc.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\CySpc.c -o .\ARM_GCC_493\Debug\CySpc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\ARM_GCC_493\Debug/cyutils.lst -g -D DEBUG -Wall -ffunction-sections -O0 -ffat-lto-objects -c Generated_Source\PSoC5\cyutils.c -o .\ARM_GCC_493\Debug\cyutils.o
+arm-none-eabi-as.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=.\ARM_GCC_493\Debug/CyBootAsmGnu.lst -g -o .\ARM_GCC_493\Debug\CyBootAsmGnu.o Generated_Source\PSoC5\CyBootAsmGnu.s
+arm-none-eabi-ar.exe -rs .\ARM_GCC_493\Debug\touch_buttons.a .\ARM_GCC_493\Debug\cyfitter_cfg.o .\ARM_GCC_493\Debug\miso.o .\ARM_GCC_493\Debug\Clock_1.o .\ARM_GCC_493\Debug\ss.o .\ARM_GCC_493\Debug\sclk.o .\ARM_GCC_493\Debug\mosi.o .\ARM_GCC_493\Debug\cs.o .\ARM_GCC_493\Debug\dc.o .\ARM_GCC_493\Debug\rt_cs.o .\ARM_GCC_493\Debug\TFTSHIELD_1.o .\ARM_GCC_493\Debug\TFTSHIELD_1_SPIM_1.o .\ARM_GCC_493\Debug\TFTSHIELD_1_SPIM_1_PM.o .\ARM_GCC_493\Debug\TFTSHIELD_1_SPIM_1_INT.o .\ARM_GCC_493\Debug\TFTSHIELD_1_CR_1.o .\ARM_GCC_493\Debug\CyDmac.o .\ARM_GCC_493\Debug\CyFlash.o .\ARM_GCC_493\Debug\CyLib.o .\ARM_GCC_493\Debug\cyPm.o .\ARM_GCC_493\Debug\CySpc.o .\ARM_GCC_493\Debug\cyutils.o .\ARM_GCC_493\Debug\CyBootAsmGnu.o
+arm-none-eabi-ar.exe: creating .\ARM_GCC_493\Debug\touch_buttons.a
+arm-none-eabi-gcc.exe -Wl,--start-group -o .\ARM_GCC_493\Debug\touch_buttons.elf .\ARM_GCC_493\Debug\main.o .\ARM_GCC_493\Debug\cymetadata.o .\ARM_GCC_493\Debug\Cm3Start.o .\ARM_GCC_493\Debug\touch_buttons.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.0\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_493\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -g -ffunction-sections -O0 -ffat-lto-objects -L Generated_Source\PSoC5 -Wl,-Map,.\ARM_GCC_493\Debug/touch_buttons.map -T "C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\Generated_Source\PSoC5\cm3gcc.ld" -specs=nano.specs -Wl,--gc-sections -Wl,--end-group
+cyelftool.exe -C "C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\ARM_GCC_493\Debug\touch_buttons.elf" --flash_row_size 256 --flash_size 262144
+cyelftool.exe -S "C:\Users\LilRobby\Downloads\TFTSHIELD-master - 1\touch_buttons.cydsn\ARM_GCC_493\Debug\touch_buttons.elf"
+Flash used: 6630 of 262144 bytes (2.5 %).
+SRAM used: 20829 of 65536 bytes (31.8 %). Stack: 16384 bytes. Heap: 4096 bytes.
+--------------- Build Succeeded: 06/14/2017 21:26:25 ---------------

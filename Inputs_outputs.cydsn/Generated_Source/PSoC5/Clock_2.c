@@ -1,6 +1,6 @@
 /*******************************************************************************
 * File Name: Clock_2.c
-* Version 2.10
+* Version 2.20
 *
 *  Description:
 *   This file provides the source code to the API for the clock component.

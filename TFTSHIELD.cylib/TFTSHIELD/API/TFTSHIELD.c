@@ -7,7 +7,7 @@
 *
 * \author Robert Barron
 *
-* \bug No known bugs
+* \bug The text and shape drawing origins are in opposite corners, at least when the screen orientation is set to 1.
 *
 * 
 *
@@ -171,12 +171,12 @@ const char fontA[128][6]  =
 };
 
 /**************************************************************************//**
-*  @brief Performs all required initialization for this component
+*  @brief Performs all required initialization for this component and fills the screen with black
 *
 *******************************************************************************/
 void `$INSTANCE_NAME`_Start(void)
 {
-    `$INSTANCE_NAME`_SPIM_1_Start();
+    //`$INSTANCE_NAME`_SPIM_1_Start();
     
     `$INSTANCE_NAME`_CS_HIGH();
     `$INSTANCE_NAME`_DC_HIGH();
@@ -294,7 +294,7 @@ void `$INSTANCE_NAME`_Start(void)
     `$INSTANCE_NAME`_SendCmd(0x29);
 	//`$INSTANCE_NAME`_SetRotation(0);
 	/* Display on*/
-    `$INSTANCE_NAME`_FillScreen(WHITE);
+    `$INSTANCE_NAME`_FillScreen(BLACK);
 }
 
 /**************************************************************************//**
@@ -494,7 +494,7 @@ void `$INSTANCE_NAME`_SPITransfer(uint8 data8)
 	//SPIM_1_SpiUART_1WriteTxData((uint32)data8);
     `$INSTANCE_NAME`_SPIM_1_WriteTxData(data8);
 
-	CyDelayUs(1);
+	//CyDelayUs(1);
 }
 
 /**************************************************************************//**
@@ -523,6 +523,12 @@ void `$INSTANCE_NAME`_DrawVLine(uint16 Pos_X, uint16 Pos_Y, uint16 Length, uint1
 	}
 	
 	`$INSTANCE_NAME`_CS_HIGH();
+}
+
+void `$INSTANCE_NAME`_DrawHLine(int16_t x, int16_t y,
+				 int16_t w, uint16_t color) {
+  
+  `$INSTANCE_NAME`_DrawLine(x, y, x+w-1, y, color);
 }
 
 /**************************************************************************//**
@@ -585,6 +591,312 @@ void `$INSTANCE_NAME`_DrawLine( uint16 x1, uint16 y1, uint16 x2, uint16 y2, uint
 		}
 	}
 }
+
+/**************************************************************************//**
+*  @brief Draws a rectangle outline
+*
+*  @param x: The x coordinate
+*  @param y: The y coordinate
+*  @param w: The width
+*  @param h: The height
+*  @param color: The color of the rectangle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_DrawRect(int16_t x, int16_t y, int16_t w, int16_t h, uint16_t color)
+{
+   `$INSTANCE_NAME`_DrawHLine(x, y, w, color);
+  `$INSTANCE_NAME`_DrawHLine(x, y+h-1, w, color);
+  `$INSTANCE_NAME`_DrawVLine(x, y, h, color);
+  `$INSTANCE_NAME`_DrawVLine(x+w-1, y, h, color);
+}
+
+/**************************************************************************//**
+*  @brief Draws a circle outline
+*
+*  @param x0: The x coordinate
+*  @param y0: The y coordinate
+*  @param r: The radius of the circle
+*  @param color: The color of the circle
+*
+*******************************************************************************/
+
+void `$INSTANCE_NAME`_DrawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color)
+{
+  int16_t f = 1 - r;
+  int16_t ddF_x = 1;
+  int16_t ddF_y = -2 * r;
+  int16_t x = 0;
+  int16_t y = r;
+
+  `$INSTANCE_NAME`_SetPixel(x0  , y0+r, color);
+  `$INSTANCE_NAME`_SetPixel(x0  , y0-r, color);
+  `$INSTANCE_NAME`_SetPixel(x0+r, y0  , color);
+  `$INSTANCE_NAME`_SetPixel(x0-r, y0  , color);
+
+  while (x<y) {
+        if (f >= 0) {
+          y--;
+          ddF_y += 2;
+          f += ddF_y;
+        }
+        x++;
+        ddF_x += 2;
+        f += ddF_x;
+      
+        `$INSTANCE_NAME`_SetPixel(x0 + x, y0 + y, color);
+        `$INSTANCE_NAME`_SetPixel(x0 - x, y0 + y, color);
+        `$INSTANCE_NAME`_SetPixel(x0 + x, y0 - y, color);
+        `$INSTANCE_NAME`_SetPixel(x0 - x, y0 - y, color);
+        `$INSTANCE_NAME`_SetPixel(x0 + y, y0 + x, color);
+        `$INSTANCE_NAME`_SetPixel(x0 - y, y0 + x, color);
+        `$INSTANCE_NAME`_SetPixel(x0 + y, y0 - x, color);
+        `$INSTANCE_NAME`_SetPixel(x0 - y, y0 - x, color); 
+    }
+}
+
+/**************************************************************************//**
+*  @brief Helper function for drawing circles and corners
+*
+*  @param x0: The x coordinate
+*  @param y0: The y coordinate
+*  @param r: The radius of the circle
+*  @param cornername: Corner orientation
+*  @param delta: Delta value
+*  @param color: The color of the circle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_DrawCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername,
+      uint16_t color)
+{
+  int16_t f     = 1 - r;
+  int16_t ddF_x = 1;
+  int16_t ddF_y = -2 * r;
+  int16_t x     = 0;
+  int16_t y     = r;
+
+  while (x<y) {
+    if (f >= 0) {
+      y--;
+      ddF_y += 2;
+      f     += ddF_y;
+    }
+    x++;
+    ddF_x += 2;
+    f     += ddF_x;
+    if (cornername & 0x4) {
+      `$INSTANCE_NAME`_SetPixel(x0 + x, y0 + y, color);
+      `$INSTANCE_NAME`_SetPixel(x0 + y, y0 + x, color);
+    } 
+    if (cornername & 0x2) {
+      `$INSTANCE_NAME`_SetPixel(x0 + x, y0 - y, color);
+      `$INSTANCE_NAME`_SetPixel(x0 + y, y0 - x, color);
+    }
+    if (cornername & 0x8) {
+      `$INSTANCE_NAME`_SetPixel(x0 - y, y0 + x, color);
+      `$INSTANCE_NAME`_SetPixel(x0 - x, y0 + y, color);
+    }
+    if (cornername & 0x1) {
+      `$INSTANCE_NAME`_SetPixel(x0 - y, y0 - x, color);
+      `$INSTANCE_NAME`_SetPixel(x0 - x, y0 - y, color);
+    }
+  }
+}
+
+/**************************************************************************//**
+*  @brief Draws a circle filled in with the specified color
+*
+*  @param x0: The x coordinate
+*  @param y0: The y coordinate
+*  @param r: The radius of the circle
+*  @param color: The color of the circle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_FillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color)
+{
+    `$INSTANCE_NAME`_DrawVLine(x0, y0-r, 2*r+1, color);
+    `$INSTANCE_NAME`_FillCircleHelper(x0, y0, r, 3, 0, color);
+}
+
+/**************************************************************************//**
+*  @brief Helper function for filling circles and corners
+*
+*  @param x0: The x coordinate
+*  @param y0: The y coordinate
+*  @param r: The radius of the circle
+*  @param cornername: Corner orientation
+*  @param delta: Delta value
+*  @param color: The color of the circle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_FillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername,
+      int16_t delta, uint16_t color)
+{
+  int16_t f     = 1 - r;
+  int16_t ddF_x = 1;
+  int16_t ddF_y = -2 * r;
+  int16_t x     = 0;
+  int16_t y     = r;
+
+  while (x<y) {
+    if (f >= 0) {
+      y--;
+      ddF_y += 2;
+      f     += ddF_y;
+    }
+    x++;
+    ddF_x += 2;
+    f     += ddF_x;
+
+    if (cornername & 0x1) {
+      `$INSTANCE_NAME`_DrawVLine(x0+x, y0-y, 2*y+1+delta, color);
+      `$INSTANCE_NAME`_DrawVLine(x0+y, y0-x, 2*x+1+delta, color);
+    }
+    if (cornername & 0x2) {
+      `$INSTANCE_NAME`_DrawVLine(x0-x, y0-y, 2*y+1+delta, color);
+     `$INSTANCE_NAME`_DrawVLine(x0-y, y0-x, 2*x+1+delta, color);
+    }
+  }
+}
+
+/**************************************************************************//**
+*  @brief Draws a triangle outline
+*
+*  @param x0: The first x coordinate
+*  @param y0: The first y coordinate
+*  @param x1: The second x coordinate
+*  @param y1: The second y coordinate
+*  @param x2: The third x coordinate
+*  @param y2: The third y coordinate
+*  @param color: The color of the triangle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_DrawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
+      int16_t x2, int16_t y2, uint16_t color)
+{
+    `$INSTANCE_NAME`DrawLine(x0, y0, x1, y1, color);
+    `$INSTANCE_NAME`DrawLine(x1, y1, x2, y2, color);
+    `$INSTANCE_NAME`DrawLine(x2, y2, x0, y0, color);
+}
+
+/**************************************************************************//**
+*  @brief Draws a triangle filled with the specified color
+*
+*  @param x0: The first x coordinate
+*  @param y0: The first y coordinate
+*  @param x1: The second x coordinate
+*  @param y1: The second y coordinate
+*  @param x2: The third x coordinate
+*  @param y2: The third y coordinate
+*  @param color: The color of the triangle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_FillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
+      int16_t x2, int16_t y2, uint16_t color)
+{
+     int16_t a, b, y, last;
+
+  // Sort coordinates by Y order (y2 >= y1 >= y0)
+  if (y0 > y1) {
+    swap(y0, y1); swap(x0, x1);
+  }
+  if (y1 > y2) {
+    swap(y2, y1); swap(x2, x1);
+  }
+  if (y0 > y1) {
+    swap(y0, y1); swap(x0, x1);
+  }
+
+  if(y0 == y2) { // Handle awkward all-on-same-line case as its own thing
+    a = b = x0;
+    if(x1 < a)      a = x1;
+    else if(x1 > b) b = x1;
+    if(x2 < a)      a = x2;
+    else if(x2 > b) b = x2;
+    `$INSTANCE_NAME`DrawLine(a, y0, b-a+1, color);
+    return;
+  }
+
+  int16_t
+    dx01 = x1 - x0,
+    dy01 = y1 - y0,
+    dx02 = x2 - x0,
+    dy02 = y2 - y0,
+    dx12 = x2 - x1,
+    dy12 = y2 - y1,
+    sa   = 0,
+    sb   = 0;
+
+  // For upper part of triangle, find scanline crossings for segments
+  // 0-1 and 0-2.  If y1=y2 (flat-bottomed triangle), the scanline y1
+  // is included here (and second loop will be skipped, avoiding a /0
+  // error there), otherwise scanline y1 is skipped here and handled
+  // in the second loop...which also avoids a /0 error here if y0=y1
+  // (flat-topped triangle).
+  if(y1 == y2) last = y1;   // Include y1 scanline
+  else         last = y1-1; // Skip it
+
+  for(y=y0; y<=last; y++) {
+        a   = x0 + sa / dy01;
+        b   = x0 + sb / dy02;
+        sa += dx01;
+        sb += dx02;
+        /* longhand:
+        a = x0 + (x1 - x0) * (y - y0) / (y1 - y0);
+        b = x0 + (x2 - x0) * (y - y0) / (y2 - y0);
+        */
+        if(a > b) swap(a,b);
+        `$INSTANCE_NAME`DrawLine(a, y, b-a+1, color);
+    }
+}
+
+/**************************************************************************//**
+*  @brief Draws a rectangle outline with rounded corners
+*
+*  @param x: The x coordinate
+*  @param y: The y coordinate
+*  @param w: The width
+*  @param h: The height
+*  @param r: The radius of the rounded corners
+*  @param color: The color of the rectangle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_DrawRoundRect(int16_t x, int16_t y, int16_t w, int16_t h,
+      int16_t r, uint16_t color)
+{
+    // smarter version
+  `$INSTANCE_NAME`_DrawHLine(x+r  , y    , w-2*r, color); // Top
+  `$INSTANCE_NAME`_DrawHLine(x+r  , y+h-1, w-2*r, color); // Bottom
+  `$INSTANCE_NAME`_DrawVLine(x    , y+r  , h-2*r, color); // Left
+  `$INSTANCE_NAME`_DrawVLine(x+w-1, y+r  , h-2*r, color); // Right
+  // draw four corners
+  `$INSTANCE_NAME`_DrawCircleHelper(x+r    , y+r    , r, 1, color);
+  `$INSTANCE_NAME`_DrawCircleHelper(x+w-r-1, y+r    , r, 2, color);
+  `$INSTANCE_NAME`_DrawCircleHelper(x+w-r-1, y+h-r-1, r, 4, color);
+  `$INSTANCE_NAME`_DrawCircleHelper(x+r    , y+h-r-1, r, 8, color);
+}
+
+/**************************************************************************//**
+*  @brief Draws a rectangle filled with the specified color and with rounded corners
+*
+*  @param x: The x coordinate
+*  @param y: The y coordinate
+*  @param w: The width
+*  @param h: The height
+*  @param r: The radius of the rounded corners
+*  @param color: The color of the rectangle
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_FillRoundRect(int16_t x, int16_t y, int16_t w, int16_t h,
+      int16_t r, uint16_t color)
+{
+    // smarter version
+  `$INSTANCE_NAME`_FillRect(x+r, y, w-2*r, h, color);
+
+  // draw four corners
+  `$INSTANCE_NAME`_FillCircleHelper(x+w-r-1, y+r, r, 1, h-2*r-1, color);
+  `$INSTANCE_NAME`_FillCircleHelper(x+r    , y+r, r, 2, h-2*r-1, color);
+}
+
 
 /**************************************************************************//**
 *  @brief Prints a string of ascii txt
@@ -879,6 +1191,270 @@ void `$INSTANCE_NAME`_DC_HIGH(void)
     uint8 temp = `$INSTANCE_NAME`_CR_1_Read();
     temp |= 0x02;
     `$INSTANCE_NAME`_CR_1_Write(temp);
+}
+
+//Touchscreen. SPI clock must be set to 1MHZ before calling any of these functions!
+
+/**************************************************************************//**
+*  @brief Sets touchscreen command select line to low
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_RT_CS_LOW(void)
+{
+    uint8 temp = `$INSTANCE_NAME`_CR_1_Read();
+    temp &= 0x0B;
+    `$INSTANCE_NAME`_CR_1_Write(temp);
+}
+
+/**************************************************************************//**
+*  @brief Sets touchscreen command select line to high
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_RT_CS_HIGH(void)
+{
+    uint8 temp = `$INSTANCE_NAME`_CR_1_Read();
+    temp |= 0x04;
+    `$INSTANCE_NAME`_CR_1_Write(temp);
+}
+
+
+/**************************************************************************//**
+*  @brief Initializes touchscreen
+*
+*******************************************************************************/
+bool `$INSTANCE_NAME`_StartTouch(void)
+{
+    `$INSTANCE_NAME`_SPIM_1_Start();
+    if (`$INSTANCE_NAME`_GetVersion() != 0x811)
+    {
+        return false;
+    }
+    
+    `$INSTANCE_NAME`_RT_CS_HIGH();
+    
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_SYS_CTRL1, STMPE_SYS_CTRL1_RESET);
+    CyDelay(10);
+    //char buf[50];
+    uint8_t i;
+    uint8_t val = 0;
+    for (i=1; i<65; i++)
+    {
+        val = `$INSTANCE_NAME`_ReadRegister8(i);
+        //sprintf(buf,"reg num %i = %i\n",i,val);
+        //`$INSTANCE_NAME`_PrintString(buf);
+    }
+
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_SYS_CTRL2, 0x0); // turn on clocks!
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_TSC_CTRL, STMPE_TSC_CTRL_XYZ | STMPE_TSC_CTRL_EN); // XYZ and enable!
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_INT_EN, STMPE_INT_EN_TOUCHDET);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_ADC_CTRL1, STMPE_ADC_CTRL1_10BIT | (0x6 << 4)); // 96 clocks per conversion
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_ADC_CTRL2, STMPE_ADC_CTRL2_6_5MHZ);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_TSC_CFG, STMPE_TSC_CFG_4SAMPLE | STMPE_TSC_CFG_DELAY_1MS | STMPE_TSC_CFG_SETTLE_5MS);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_TSC_FRACTION_Z, 0x6);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_FIFO_TH, 1);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_FIFO_STA, STMPE_FIFO_STA_RESET);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_FIFO_STA, 0);    // unreset
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_TSC_I_DRIVE, STMPE_TSC_I_DRIVE_50MA);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_INT_CTRL, STMPE_INT_CTRL_POL_HIGH | STMPE_INT_CTRL_ENABLE);
+
+    
+    /*for (i=1; i<65; i++)
+    {
+        val = `$INSTANCE_NAME`_ReadRegister8(i);
+        //sprintf(buf,"reg num %i = %i\n",i,val);
+        //`$INSTANCE_NAME`_PrintString(buf);
+    }*/
+    
+    return true;
+}
+
+/**************************************************************************//**
+*  @brief Writes register value to touchscreen
+*
+*  @param reg: register
+*  @param val: value to be written
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_WriteRegister8(uint16_t reg, uint16_t val)
+{
+    `$INSTANCE_NAME`_RT_CS_LOW();
+     CyDelay(1);
+    `$INSTANCE_NAME`_SPITransfer(reg);
+     CyDelay(1);
+    `$INSTANCE_NAME`_SPITransfer(val);
+     CyDelay(1);
+    `$INSTANCE_NAME`_RT_CS_HIGH();
+}
+
+/**************************************************************************//**
+*  @brief Reads register value from touchscreen
+*
+*  @param reg: register
+*
+*  @return: 16 bit register value
+*
+*******************************************************************************/
+uint16_t `$INSTANCE_NAME`_ReadRegister16(uint16_t reg)
+{
+    uint16_t output;
+    
+    `$INSTANCE_NAME`_RT_CS_LOW();
+    `$INSTANCE_NAME`_SPIM_1_WriteTxData(0x80 | reg);
+    `$INSTANCE_NAME`_SPIM_1_WriteTxData(0x00);
+    
+    while(!`$INSTANCE_NAME`_SPIM_1_GetRxBufferSize());
+    //{
+        //`$INSTANCE_NAME`_SPIM_1_WriteTxData(0);
+        output = `$INSTANCE_NAME`_SPIM_1_ReadRxData();
+        output <<= 8;
+        while(!`$INSTANCE_NAME`_SPIM_1_GetRxBufferSize());
+        //{
+            //`$INSTANCE_NAME`_SPIM_1_WriteTxData(0);
+            output |= `$INSTANCE_NAME`_SPIM_1_ReadRxData();
+       // }
+    //}
+    `$INSTANCE_NAME`_RT_CS_HIGH();
+    
+    return output;
+}
+
+/**************************************************************************//**
+*  @brief Reads register value from touchscreen
+*
+*  @param reg: register
+*
+*  @return: 8 bit register value
+*
+*******************************************************************************/
+uint8_t `$INSTANCE_NAME`_ReadRegister8(uint8_t reg)
+{
+    //CyDelay(1);
+    uint8_t output;
+    
+    //`$INSTANCE_NAME`_SPIM_1_ClearRxBuffer();
+    //`$INSTANCE_NAME`_SPIM_1_ClearTxBuffer();
+    `$INSTANCE_NAME`_RT_CS_LOW();
+    CyDelay(1);
+    `$INSTANCE_NAME`_SPIM_1_WriteTxData(0x80 | reg);
+    CyDelay(1);
+    `$INSTANCE_NAME`_SPIM_1_WriteTxData(0x00);
+    CyDelay(1);
+    while(!`$INSTANCE_NAME`_SPIM_1_GetRxBufferSize());
+    //{  
+        CyDelay(1);
+        `$INSTANCE_NAME`_SPIM_1_WriteTxData(0);
+        CyDelayUs(100);
+        while(!`$INSTANCE_NAME`_SPIM_1_GetRxBufferSize());
+        output = `$INSTANCE_NAME`_SPIM_1_ReadRxData();
+        //output = `$INSTANCE_NAME`_SPIM_1_ReadRxData();
+   // }
+    `$INSTANCE_NAME`_RT_CS_HIGH();
+    
+    return output;
+}
+
+/**************************************************************************//**
+*  @brief Reads coordinates from touchscreen
+*
+*  @param x: x coordinate
+*  @param y: y coordinate
+*  @param z: pressure value
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_ReadData(uint16_t *x, uint16_t *y, uint8_t *z)
+{
+    uint8_t data[4];
+    uint8_t i;
+    
+    for (i=0; i<4; i++)
+    {
+        data[i] = `$INSTANCE_NAME`_ReadRegister8(0xD7);
+    }
+    *x = data[0];
+    *x <<= 4;
+    *x |= (data[1] >> 4);
+    *y = data[1] & 0x0F; 
+    *y <<= 8;
+    *y |= data[2]; 
+    *z = data[3];
+    
+    if(`$INSTANCE_NAME`_BufferEmpty())
+    {
+        `$INSTANCE_NAME`_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
+    }
+    
+}
+
+/**************************************************************************//**
+*  @brief Gets touchscreen version
+*
+*  @return: version number
+*
+*******************************************************************************/
+uint16_t `$INSTANCE_NAME`_GetVersion()
+{
+    uint16_t v;
+    
+    v = `$INSTANCE_NAME`_ReadRegister8(0);
+    v <<= 8;
+    v |= `$INSTANCE_NAME`_ReadRegister8(1);
+   // v = `$INSTANCE_NAME`_ReadRegister16(1);
+    return v;
+}
+
+
+/**************************************************************************//**
+*  @brief Clears the buffer and then re-enables it
+*
+*******************************************************************************/
+void `$INSTANCE_NAME`_ResetBuffer(void)
+{  
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_FIFO_STA,`$INSTANCE_NAME`_ReadRegister8(STMPE_FIFO_STA) | 0x01);
+    `$INSTANCE_NAME`_WriteRegister8(STMPE_FIFO_STA,`$INSTANCE_NAME`_ReadRegister8(STMPE_FIFO_STA) & 0xFE);
+}
+/**************************************************************************//**
+*  @brief Checks if the screen currently being touched
+*
+*  @return: true for touched, false otherwise
+*
+*******************************************************************************/
+bool `$INSTANCE_NAME`_Touched(void)
+{
+    uint8_t touch = `$INSTANCE_NAME`_ReadRegister8(0x40);//STMPE_TSC_CTRL);
+    uint8_t touch_final = touch & 0x80;
+    return touch_final;//(`$INSTANCE_NAME`_ReadRegister8(STMPE_TSC_CTRL) & 0x80);
+}
+
+/**************************************************************************//**
+*  @brief Checks if the touchscreen buffer is empty
+*
+*  @return: false for empty, true otherwise
+*
+*******************************************************************************/
+bool `$INSTANCE_NAME`_BufferEmpty(void)
+{
+    return (`$INSTANCE_NAME`_ReadRegister8(STMPE_FIFO_STA) & STMPE_FIFO_STA_EMPTY);
+}
+
+/**************************************************************************//**
+*  @brief Checks the size of the touchscreen buffer
+*
+*  @return: size of buffer
+*
+*******************************************************************************/
+uint8_t `$INSTANCE_NAME`_BufferSize(void)
+{
+    return `$INSTANCE_NAME`_ReadRegister8(STMPE_FIFO_SIZE);
+}
+//TS_Point `$INSTANCE_NAME`_GetPoint(void);
+
+//swap two variables
+void `$INSTANCE_NAME`_swap(int16_t *a, int16_t *b)
+{
+   int16_t *c = a;
+   a = b;
+   b = c;
 }
 
 

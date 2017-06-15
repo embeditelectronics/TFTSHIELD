@@ -1,0 +1,1582 @@
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	cursor_x,2,2
+  19              		.comm	cursor_y,2,2
+  20              		.comm	textcolor,2,2
+  21              		.comm	textbgcolor,2,2
+  22              		.comm	textsize,1,1
+  23              		.comm	rotation,1,1
+  24              		.comm	wrap,1,1
+  25              		.comm	_width,4,4
+  26              		.comm	_height,4,4
+  27              		.comm	oldcolor,4,4
+  28              		.comm	currentcolor,4,4
+  29              		.section	.text.main,"ax",%progbits
+  30              		.align	2
+  31              		.global	main
+  32              		.thumb
+  33              		.thumb_func
+  34              		.type	main, %function
+  35              	main:
+  36              	.LFB56:
+  37              		.file 1 "main.c"
+   1:main.c        **** /*******************************************************************************
+   2:main.c        **** * \file main.c
+   3:main.c        **** * \brief This file is used to demonstrate the TFTSHIELD API for PiSoC/PSoC. It mimics the functiona
+   4:main.c        **** *
+   5:main.c        **** * Version 1.1
+   6:main.c        **** *
+   7:main.c        **** * \author Robert Barron
+   8:main.c        **** *
+   9:main.c        **** * \bug 
+  10:main.c        **** *
+  11:main.c        **** * Here is the original credit:
+  12:main.c        **** *
+  13:main.c        **** *  This is our touchscreen painting example for the Adafruit ILI9341 Shield
+  14:main.c        ****   ----> http://www.adafruit.com/products/1651
+  15:main.c        **** 
+  16:main.c        ****   Check out the links above for our tutorials and wiring diagrams
+  17:main.c        ****   These displays use SPI to communicate, 4 or 5 pins are required to
+  18:main.c        ****   interface (RST is optional)
+  19:main.c        ****   Adafruit invests time and resources providing this open source code,
+  20:main.c        ****   please support Adafruit and open-source hardware by purchasing
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 2
+
+
+  21:main.c        ****   products from Adafruit!
+  22:main.c        **** 
+  23:main.c        ****   Written by Limor Fried/Ladyada for Adafruit Industries.
+  24:main.c        ****   MIT license, all text above must be included in any redistribution
+  25:main.c        **** *******************************************************************************/
+  26:main.c        **** #include <project.h>
+  27:main.c        **** #include "stdio.h"
+  28:main.c        **** 
+  29:main.c        **** // This is calibration data for the raw touch data to the screen coordinates
+  30:main.c        **** #define TS_MINX 150
+  31:main.c        **** #define TS_MINY 130
+  32:main.c        **** #define TS_MAXX 3800
+  33:main.c        **** #define TS_MAXY 4000
+  34:main.c        **** // Size of the color selection boxes and the paintbrush size
+  35:main.c        **** #define BOXSIZE 40
+  36:main.c        **** #define PENRADIUS 3
+  37:main.c        **** int oldcolor, currentcolor;
+  38:main.c        **** 
+  39:main.c        **** long mapCoor(long x, long in_min, long in_max, long out_min, long out_max);
+  40:main.c        **** 
+  41:main.c        **** 
+  42:main.c        **** int main()
+  43:main.c        **** {   
+  38              		.loc 1 43 0
+  39              		.cfi_startproc
+  40              		@ args = 0, pretend = 0, frame = 64
+  41              		@ frame_needed = 1, uses_anonymous_args = 0
+  42 0000 80B5     		push	{r7, lr}
+  43              		.cfi_def_cfa_offset 8
+  44              		.cfi_offset 7, -8
+  45              		.cfi_offset 14, -4
+  46 0002 92B0     		sub	sp, sp, #72
+  47              		.cfi_def_cfa_offset 80
+  48 0004 02AF     		add	r7, sp, #8
+  49              		.cfi_def_cfa 7, 72
+  44:main.c        ****     //initializes tft
+  45:main.c        ****     CyDelay(1000);
+  50              		.loc 1 45 0
+  51 0006 4FF47A70 		mov	r0, #1000
+  52 000a FFF7FEFF 		bl	CyDelay
+  46:main.c        ****     Clock_1_SetDividerValue(24);
+  53              		.loc 1 46 0
+  54 000e 1720     		movs	r0, #23
+  55 0010 0121     		movs	r1, #1
+  56 0012 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  47:main.c        ****     CyDelay(10);
+  57              		.loc 1 47 0
+  58 0016 0A20     		movs	r0, #10
+  59 0018 FFF7FEFF 		bl	CyDelay
+  48:main.c        ****     //TFTSHIELD_1_StartTouch();
+  49:main.c        ****     bool touch_en = 0;
+  60              		.loc 1 49 0
+  61 001c 0023     		movs	r3, #0
+  62 001e 87F83F30 		strb	r3, [r7, #63]
+  50:main.c        ****     
+  51:main.c        ****     if(TFTSHIELD_1_StartTouch())
+  63              		.loc 1 51 0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 3
+
+
+  64 0022 FFF7FEFF 		bl	TFTSHIELD_1_StartTouch
+  65 0026 0346     		mov	r3, r0
+  66 0028 002B     		cmp	r3, #0
+  67 002a 02D0     		beq	.L2
+  52:main.c        ****     {
+  53:main.c        ****        touch_en = 1;
+  68              		.loc 1 53 0
+  69 002c 0123     		movs	r3, #1
+  70 002e 87F83F30 		strb	r3, [r7, #63]
+  71              	.L2:
+  54:main.c        ****     }
+  55:main.c        ****     
+  56:main.c        ****     Clock_1_SetDividerValue(1);
+  72              		.loc 1 56 0
+  73 0032 0020     		movs	r0, #0
+  74 0034 0121     		movs	r1, #1
+  75 0036 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  57:main.c        ****     CyDelay(10);
+  76              		.loc 1 57 0
+  77 003a 0A20     		movs	r0, #10
+  78 003c FFF7FEFF 		bl	CyDelay
+  58:main.c        ****     TFTSHIELD_1_Start();
+  79              		.loc 1 58 0
+  80 0040 FFF7FEFF 		bl	TFTSHIELD_1_Start
+  59:main.c        ****     
+  60:main.c        ****     TFTSHIELD_1_FillScreen(BLACK);
+  81              		.loc 1 60 0
+  82 0044 0020     		movs	r0, #0
+  83 0046 FFF7FEFF 		bl	TFTSHIELD_1_FillScreen
+  61:main.c        ****     //start at 0,0 for text
+  62:main.c        ****     TFTSHIELD_1_SetCursor(0,0);
+  84              		.loc 1 62 0
+  85 004a 0020     		movs	r0, #0
+  86 004c 0021     		movs	r1, #0
+  87 004e FFF7FEFF 		bl	TFTSHIELD_1_SetCursor
+  63:main.c        ****     TFTSHIELD_1_SetTextColor(WHITE);  
+  88              		.loc 1 63 0
+  89 0052 4FF6FF70 		movw	r0, #65535
+  90 0056 FFF7FEFF 		bl	TFTSHIELD_1_SetTextColor
+  64:main.c        ****     TFTSHIELD_1_SetTextSize(2);
+  91              		.loc 1 64 0
+  92 005a 0220     		movs	r0, #2
+  93 005c FFF7FEFF 		bl	TFTSHIELD_1_SetTextSize
+  65:main.c        ****     
+  66:main.c        ****     //landscape orientation
+  67:main.c        ****     //TFTSHIELD_1_SetRotation(1);
+  68:main.c        ****     //TFTSHIELD_1_PrintString("tft lcd screen with word wrap working blah");
+  69:main.c        ****     
+  70:main.c        ****     //TFTSHIELD_1_DrawLine(50, 150, 100, 150, GREEN);
+  71:main.c        ****    // TFTSHIELD_1_DrawLine(35, 100, 35 , 200, BLUE);
+  72:main.c        ****     //TFTSHIELD_1_FillCircle(100,100,10,MAGENTA);
+  73:main.c        ****     
+  74:main.c        ****     //TFTSHIELD_1_FillRect(150, 150, 75,75, YELLOW);
+  75:main.c        ****     if(touch_en)
+  76:main.c        ****     {
+  77:main.c        ****         //TFTSHIELD_1_PrintString("GO1");
+  78:main.c        ****     }
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 4
+
+
+  79:main.c        ****     //initializes touchscreen
+  80:main.c        ****     //clock must be set to 1MHZ when polling the touchscreen..
+  81:main.c        ****     Clock_1_SetDividerValue(24);
+  94              		.loc 1 81 0
+  95 0060 1720     		movs	r0, #23
+  96 0062 0121     		movs	r1, #1
+  97 0064 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  82:main.c        ****     CyDelay(10);
+  98              		.loc 1 82 0
+  99 0068 0A20     		movs	r0, #10
+ 100 006a FFF7FEFF 		bl	CyDelay
+  83:main.c        ****     
+  84:main.c        ****     //int touchon = 0;
+  85:main.c        ****     if(TFTSHIELD_1_StartTouch())
+ 101              		.loc 1 85 0
+ 102 006e FFF7FEFF 		bl	TFTSHIELD_1_StartTouch
+  86:main.c        ****     {
+  87:main.c        ****          //touchon = 1;  
+  88:main.c        ****         /*Clock_1_SetDividerValue(1);
+  89:main.c        ****         CyDelay(1);
+  90:main.c        ****         TFTSHIELD_1_PrintString("     GO2");
+  91:main.c        ****         Clock_1_SetDividerValue(24);*/
+  92:main.c        ****     }
+  93:main.c        ****     
+  94:main.c        ****     Clock_1_SetDividerValue(1);
+ 103              		.loc 1 94 0
+ 104 0072 0020     		movs	r0, #0
+ 105 0074 0121     		movs	r1, #1
+ 106 0076 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  95:main.c        ****     CyDelay(10);
+ 107              		.loc 1 95 0
+ 108 007a 0A20     		movs	r0, #10
+ 109 007c FFF7FEFF 		bl	CyDelay
+  96:main.c        ****    // make the color selection boxes
+  97:main.c        ****     TFTSHIELD_1_FillRect(0, 0, BOXSIZE, BOXSIZE,RED);
+ 110              		.loc 1 97 0
+ 111 0080 4FF47843 		mov	r3, #63488
+ 112 0084 0093     		str	r3, [sp]
+ 113 0086 0020     		movs	r0, #0
+ 114 0088 0021     		movs	r1, #0
+ 115 008a 2822     		movs	r2, #40
+ 116 008c 2823     		movs	r3, #40
+ 117 008e FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+  98:main.c        ****     TFTSHIELD_1_FillRect(BOXSIZE, 0, BOXSIZE, BOXSIZE, YELLOW);
+ 118              		.loc 1 98 0
+ 119 0092 4FF6E073 		movw	r3, #65504
+ 120 0096 0093     		str	r3, [sp]
+ 121 0098 2820     		movs	r0, #40
+ 122 009a 0021     		movs	r1, #0
+ 123 009c 2822     		movs	r2, #40
+ 124 009e 2823     		movs	r3, #40
+ 125 00a0 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+  99:main.c        ****     TFTSHIELD_1_FillRect(BOXSIZE*2, 0, BOXSIZE, BOXSIZE, GREEN);
+ 126              		.loc 1 99 0
+ 127 00a4 4FF4FC63 		mov	r3, #2016
+ 128 00a8 0093     		str	r3, [sp]
+ 129 00aa 5020     		movs	r0, #80
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 5
+
+
+ 130 00ac 0021     		movs	r1, #0
+ 131 00ae 2822     		movs	r2, #40
+ 132 00b0 2823     		movs	r3, #40
+ 133 00b2 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 100:main.c        ****     TFTSHIELD_1_FillRect(BOXSIZE*3, 0, BOXSIZE, BOXSIZE, CYAN);
+ 134              		.loc 1 100 0
+ 135 00b6 40F2FF73 		movw	r3, #2047
+ 136 00ba 0093     		str	r3, [sp]
+ 137 00bc 7820     		movs	r0, #120
+ 138 00be 0021     		movs	r1, #0
+ 139 00c0 2822     		movs	r2, #40
+ 140 00c2 2823     		movs	r3, #40
+ 141 00c4 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 101:main.c        ****     TFTSHIELD_1_FillRect(BOXSIZE*4, 0, BOXSIZE, BOXSIZE, BLUE);
+ 142              		.loc 1 101 0
+ 143 00c8 1F23     		movs	r3, #31
+ 144 00ca 0093     		str	r3, [sp]
+ 145 00cc A020     		movs	r0, #160
+ 146 00ce 0021     		movs	r1, #0
+ 147 00d0 2822     		movs	r2, #40
+ 148 00d2 2823     		movs	r3, #40
+ 149 00d4 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 102:main.c        ****     TFTSHIELD_1_FillRect(BOXSIZE*5, 0, BOXSIZE, BOXSIZE, MAGENTA);
+ 150              		.loc 1 102 0
+ 151 00d8 4FF61F03 		movw	r3, #63519
+ 152 00dc 0093     		str	r3, [sp]
+ 153 00de C820     		movs	r0, #200
+ 154 00e0 0021     		movs	r1, #0
+ 155 00e2 2822     		movs	r2, #40
+ 156 00e4 2823     		movs	r3, #40
+ 157 00e6 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 103:main.c        ****  
+ 104:main.c        ****   // select the current color 'red'
+ 105:main.c        ****   TFTSHIELD_1_FillRect(0, 0, BOXSIZE, BOXSIZE,WHITE);
+ 158              		.loc 1 105 0
+ 159 00ea 4FF6FF73 		movw	r3, #65535
+ 160 00ee 0093     		str	r3, [sp]
+ 161 00f0 0020     		movs	r0, #0
+ 162 00f2 0021     		movs	r1, #0
+ 163 00f4 2822     		movs	r2, #40
+ 164 00f6 2823     		movs	r3, #40
+ 165 00f8 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 106:main.c        ****   currentcolor = RED;
+ 166              		.loc 1 106 0
+ 167 00fc 8D4B     		ldr	r3, .L17
+ 168 00fe 4FF47842 		mov	r2, #63488
+ 169 0102 1A60     		str	r2, [r3]
+ 170              	.L16:
+ 171              	.LBB2:
+ 107:main.c        ****     
+ 108:main.c        ****     for(;;)
+ 109:main.c        ****     {
+ 110:main.c        ****         Clock_1_SetDividerValue(24);
+ 172              		.loc 1 110 0
+ 173 0104 1720     		movs	r0, #23
+ 174 0106 0121     		movs	r1, #1
+ 175 0108 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 6
+
+
+ 111:main.c        ****         uint16_t x, y;
+ 112:main.c        ****         uint8_t z, buf;
+ 113:main.c        ****         char buffer[50];
+ 114:main.c        ****         //Clock_1_SetDividerValue(24);
+ 115:main.c        ****         CyDelay(1);
+ 176              		.loc 1 115 0
+ 177 010c 0120     		movs	r0, #1
+ 178 010e FFF7FEFF 		bl	CyDelay
+ 116:main.c        ****         if(TFTSHIELD_1_Touched())
+ 179              		.loc 1 116 0
+ 180 0112 FFF7FEFF 		bl	TFTSHIELD_1_Touched
+ 181 0116 0346     		mov	r3, r0
+ 182 0118 002B     		cmp	r3, #0
+ 183 011a 00F00A81 		beq	.L3
+ 117:main.c        ****         {
+ 118:main.c        ****            
+ 119:main.c        ****             TFTSHIELD_1_ReadData(&x,&y,&z);
+ 184              		.loc 1 119 0
+ 185 011e 07F13C01 		add	r1, r7, #60
+ 186 0122 07F13A02 		add	r2, r7, #58
+ 187 0126 07F13903 		add	r3, r7, #57
+ 188 012a 0846     		mov	r0, r1
+ 189 012c 1146     		mov	r1, r2
+ 190 012e 1A46     		mov	r2, r3
+ 191 0130 FFF7FEFF 		bl	TFTSHIELD_1_ReadData
+ 120:main.c        ****             x = mapCoor(x, TS_MINX, TS_MAXX, 0, 240);
+ 192              		.loc 1 120 0
+ 193 0134 BB8F     		ldrh	r3, [r7, #60]
+ 194 0136 1A46     		mov	r2, r3
+ 195 0138 F023     		movs	r3, #240
+ 196 013a 0093     		str	r3, [sp]
+ 197 013c 1046     		mov	r0, r2
+ 198 013e 9621     		movs	r1, #150
+ 199 0140 40F6D862 		movw	r2, #3800
+ 200 0144 0023     		movs	r3, #0
+ 201 0146 FFF7FEFF 		bl	mapCoor
+ 202 014a 0346     		mov	r3, r0
+ 203 014c 9BB2     		uxth	r3, r3
+ 204 014e BB87     		strh	r3, [r7, #60]	@ movhi
+ 121:main.c        ****             y = mapCoor(y, TS_MINY, TS_MAXY, 0, 320);    
+ 205              		.loc 1 121 0
+ 206 0150 7B8F     		ldrh	r3, [r7, #58]
+ 207 0152 1A46     		mov	r2, r3
+ 208 0154 4FF4A073 		mov	r3, #320
+ 209 0158 0093     		str	r3, [sp]
+ 210 015a 1046     		mov	r0, r2
+ 211 015c 8221     		movs	r1, #130
+ 212 015e 4FF47A62 		mov	r2, #4000
+ 213 0162 0023     		movs	r3, #0
+ 214 0164 FFF7FEFF 		bl	mapCoor
+ 215 0168 0346     		mov	r3, r0
+ 216 016a 9BB2     		uxth	r3, r3
+ 217 016c 7B87     		strh	r3, [r7, #58]	@ movhi
+ 122:main.c        ****            
+ 123:main.c        ****             Clock_1_SetDividerValue(1);
+ 218              		.loc 1 123 0
+ 219 016e 0020     		movs	r0, #0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 7
+
+
+ 220 0170 0121     		movs	r1, #1
+ 221 0172 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ 124:main.c        ****             if (y < BOXSIZE) {
+ 222              		.loc 1 124 0
+ 223 0176 7B8F     		ldrh	r3, [r7, #58]
+ 224 0178 272B     		cmp	r3, #39
+ 225 017a 00F2C380 		bhi	.L4
+ 125:main.c        ****                  oldcolor = currentcolor;
+ 226              		.loc 1 125 0
+ 227 017e 6D4B     		ldr	r3, .L17
+ 228 0180 1B68     		ldr	r3, [r3]
+ 229 0182 6D4A     		ldr	r2, .L17+4
+ 230 0184 1360     		str	r3, [r2]
+ 126:main.c        **** 
+ 127:main.c        ****                  if (x < BOXSIZE) 
+ 231              		.loc 1 127 0
+ 232 0186 BB8F     		ldrh	r3, [r7, #60]
+ 233 0188 272B     		cmp	r3, #39
+ 234 018a 0DD8     		bhi	.L5
+ 128:main.c        ****                  { 
+ 129:main.c        ****                    currentcolor = RED; 
+ 235              		.loc 1 129 0
+ 236 018c 694B     		ldr	r3, .L17
+ 237 018e 4FF47842 		mov	r2, #63488
+ 238 0192 1A60     		str	r2, [r3]
+ 130:main.c        ****                    TFTSHIELD_1_DrawRect(0, 0, BOXSIZE, BOXSIZE, WHITE);
+ 239              		.loc 1 130 0
+ 240 0194 4FF6FF73 		movw	r3, #65535
+ 241 0198 0093     		str	r3, [sp]
+ 242 019a 0020     		movs	r0, #0
+ 243 019c 0021     		movs	r1, #0
+ 244 019e 2822     		movs	r2, #40
+ 245 01a0 2823     		movs	r3, #40
+ 246 01a2 FFF7FEFF 		bl	TFTSHIELD_1_DrawRect
+ 247 01a6 52E0     		b	.L6
+ 248              	.L5:
+ 131:main.c        ****                  } else if (x < BOXSIZE*2) {
+ 249              		.loc 1 131 0
+ 250 01a8 BB8F     		ldrh	r3, [r7, #60]
+ 251 01aa 4F2B     		cmp	r3, #79
+ 252 01ac 0DD8     		bhi	.L7
+ 132:main.c        ****                    currentcolor = YELLOW;
+ 253              		.loc 1 132 0
+ 254 01ae 614B     		ldr	r3, .L17
+ 255 01b0 4FF6E072 		movw	r2, #65504
+ 256 01b4 1A60     		str	r2, [r3]
+ 133:main.c        ****                    TFTSHIELD_1_DrawRect(BOXSIZE, 0, BOXSIZE, BOXSIZE, WHITE);
+ 257              		.loc 1 133 0
+ 258 01b6 4FF6FF73 		movw	r3, #65535
+ 259 01ba 0093     		str	r3, [sp]
+ 260 01bc 2820     		movs	r0, #40
+ 261 01be 0021     		movs	r1, #0
+ 262 01c0 2822     		movs	r2, #40
+ 263 01c2 2823     		movs	r3, #40
+ 264 01c4 FFF7FEFF 		bl	TFTSHIELD_1_DrawRect
+ 265 01c8 41E0     		b	.L6
+ 266              	.L7:
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 8
+
+
+ 134:main.c        ****                  } else if (x < BOXSIZE*3) {
+ 267              		.loc 1 134 0
+ 268 01ca BB8F     		ldrh	r3, [r7, #60]
+ 269 01cc 772B     		cmp	r3, #119
+ 270 01ce 0DD8     		bhi	.L8
+ 135:main.c        ****                    currentcolor = GREEN;
+ 271              		.loc 1 135 0
+ 272 01d0 584B     		ldr	r3, .L17
+ 273 01d2 4FF4FC62 		mov	r2, #2016
+ 274 01d6 1A60     		str	r2, [r3]
+ 136:main.c        ****                    TFTSHIELD_1_DrawRect(BOXSIZE*2, 0, BOXSIZE, BOXSIZE, WHITE);
+ 275              		.loc 1 136 0
+ 276 01d8 4FF6FF73 		movw	r3, #65535
+ 277 01dc 0093     		str	r3, [sp]
+ 278 01de 5020     		movs	r0, #80
+ 279 01e0 0021     		movs	r1, #0
+ 280 01e2 2822     		movs	r2, #40
+ 281 01e4 2823     		movs	r3, #40
+ 282 01e6 FFF7FEFF 		bl	TFTSHIELD_1_DrawRect
+ 283 01ea 30E0     		b	.L6
+ 284              	.L8:
+ 137:main.c        ****                  } else if (x < BOXSIZE*4) {
+ 285              		.loc 1 137 0
+ 286 01ec BB8F     		ldrh	r3, [r7, #60]
+ 287 01ee 9F2B     		cmp	r3, #159
+ 288 01f0 0DD8     		bhi	.L9
+ 138:main.c        ****                    currentcolor = CYAN;
+ 289              		.loc 1 138 0
+ 290 01f2 504B     		ldr	r3, .L17
+ 291 01f4 40F2FF72 		movw	r2, #2047
+ 292 01f8 1A60     		str	r2, [r3]
+ 139:main.c        ****                    TFTSHIELD_1_DrawRect(BOXSIZE*3, 0, BOXSIZE, BOXSIZE, WHITE);
+ 293              		.loc 1 139 0
+ 294 01fa 4FF6FF73 		movw	r3, #65535
+ 295 01fe 0093     		str	r3, [sp]
+ 296 0200 7820     		movs	r0, #120
+ 297 0202 0021     		movs	r1, #0
+ 298 0204 2822     		movs	r2, #40
+ 299 0206 2823     		movs	r3, #40
+ 300 0208 FFF7FEFF 		bl	TFTSHIELD_1_DrawRect
+ 301 020c 1FE0     		b	.L6
+ 302              	.L9:
+ 140:main.c        ****                  } else if (x < BOXSIZE*5) {
+ 303              		.loc 1 140 0
+ 304 020e BB8F     		ldrh	r3, [r7, #60]
+ 305 0210 C72B     		cmp	r3, #199
+ 306 0212 0CD8     		bhi	.L10
+ 141:main.c        ****                    currentcolor = BLUE;
+ 307              		.loc 1 141 0
+ 308 0214 474B     		ldr	r3, .L17
+ 309 0216 1F22     		movs	r2, #31
+ 310 0218 1A60     		str	r2, [r3]
+ 142:main.c        ****                    TFTSHIELD_1_DrawRect(BOXSIZE*4, 0, BOXSIZE, BOXSIZE,WHITE);
+ 311              		.loc 1 142 0
+ 312 021a 4FF6FF73 		movw	r3, #65535
+ 313 021e 0093     		str	r3, [sp]
+ 314 0220 A020     		movs	r0, #160
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 9
+
+
+ 315 0222 0021     		movs	r1, #0
+ 316 0224 2822     		movs	r2, #40
+ 317 0226 2823     		movs	r3, #40
+ 318 0228 FFF7FEFF 		bl	TFTSHIELD_1_DrawRect
+ 319 022c 0FE0     		b	.L6
+ 320              	.L10:
+ 143:main.c        ****                  } else if (x < BOXSIZE*6) {
+ 321              		.loc 1 143 0
+ 322 022e BB8F     		ldrh	r3, [r7, #60]
+ 323 0230 EF2B     		cmp	r3, #239
+ 324 0232 0CD8     		bhi	.L6
+ 144:main.c        ****                    currentcolor = MAGENTA;
+ 325              		.loc 1 144 0
+ 326 0234 3F4B     		ldr	r3, .L17
+ 327 0236 4FF61F02 		movw	r2, #63519
+ 328 023a 1A60     		str	r2, [r3]
+ 145:main.c        ****                    TFTSHIELD_1_DrawRect(BOXSIZE*5, 0, BOXSIZE, BOXSIZE, WHITE);
+ 329              		.loc 1 145 0
+ 330 023c 4FF6FF73 		movw	r3, #65535
+ 331 0240 0093     		str	r3, [sp]
+ 332 0242 C820     		movs	r0, #200
+ 333 0244 0021     		movs	r1, #0
+ 334 0246 2822     		movs	r2, #40
+ 335 0248 2823     		movs	r3, #40
+ 336 024a FFF7FEFF 		bl	TFTSHIELD_1_DrawRect
+ 337              	.L6:
+ 146:main.c        ****                  }
+ 147:main.c        **** 
+ 148:main.c        ****                  if (oldcolor != currentcolor) 
+ 338              		.loc 1 148 0
+ 339 024e 3A4B     		ldr	r3, .L17+4
+ 340 0250 1A68     		ldr	r2, [r3]
+ 341 0252 384B     		ldr	r3, .L17
+ 342 0254 1B68     		ldr	r3, [r3]
+ 343 0256 9A42     		cmp	r2, r3
+ 344 0258 54D0     		beq	.L4
+ 149:main.c        ****                 {
+ 150:main.c        ****                     if (oldcolor == RED) 
+ 345              		.loc 1 150 0
+ 346 025a 374B     		ldr	r3, .L17+4
+ 347 025c 1B68     		ldr	r3, [r3]
+ 348 025e B3F5784F 		cmp	r3, #63488
+ 349 0262 08D1     		bne	.L11
+ 151:main.c        ****                       TFTSHIELD_1_FillRect(0, 0, BOXSIZE, BOXSIZE, RED);
+ 350              		.loc 1 151 0
+ 351 0264 4FF47843 		mov	r3, #63488
+ 352 0268 0093     		str	r3, [sp]
+ 353 026a 0020     		movs	r0, #0
+ 354 026c 0021     		movs	r1, #0
+ 355 026e 2822     		movs	r2, #40
+ 356 0270 2823     		movs	r3, #40
+ 357 0272 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 358              	.L11:
+ 152:main.c        ****                     if (oldcolor == YELLOW) 
+ 359              		.loc 1 152 0
+ 360 0276 304B     		ldr	r3, .L17+4
+ 361 0278 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 10
+
+
+ 362 027a 4FF6E072 		movw	r2, #65504
+ 363 027e 9342     		cmp	r3, r2
+ 364 0280 08D1     		bne	.L12
+ 153:main.c        ****                       TFTSHIELD_1_FillRect(BOXSIZE, 0, BOXSIZE, BOXSIZE, YELLOW);
+ 365              		.loc 1 153 0
+ 366 0282 4FF6E073 		movw	r3, #65504
+ 367 0286 0093     		str	r3, [sp]
+ 368 0288 2820     		movs	r0, #40
+ 369 028a 0021     		movs	r1, #0
+ 370 028c 2822     		movs	r2, #40
+ 371 028e 2823     		movs	r3, #40
+ 372 0290 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 373              	.L12:
+ 154:main.c        ****                     if (oldcolor == GREEN) 
+ 374              		.loc 1 154 0
+ 375 0294 284B     		ldr	r3, .L17+4
+ 376 0296 1B68     		ldr	r3, [r3]
+ 377 0298 B3F5FC6F 		cmp	r3, #2016
+ 378 029c 08D1     		bne	.L13
+ 155:main.c        ****                       TFTSHIELD_1_FillRect(BOXSIZE*2, 0, BOXSIZE, BOXSIZE, GREEN);
+ 379              		.loc 1 155 0
+ 380 029e 4FF4FC63 		mov	r3, #2016
+ 381 02a2 0093     		str	r3, [sp]
+ 382 02a4 5020     		movs	r0, #80
+ 383 02a6 0021     		movs	r1, #0
+ 384 02a8 2822     		movs	r2, #40
+ 385 02aa 2823     		movs	r3, #40
+ 386 02ac FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 387              	.L13:
+ 156:main.c        ****                     if (oldcolor == CYAN) 
+ 388              		.loc 1 156 0
+ 389 02b0 214B     		ldr	r3, .L17+4
+ 390 02b2 1B68     		ldr	r3, [r3]
+ 391 02b4 40F2FF72 		movw	r2, #2047
+ 392 02b8 9342     		cmp	r3, r2
+ 393 02ba 08D1     		bne	.L14
+ 157:main.c        ****                       TFTSHIELD_1_FillRect(BOXSIZE*3, 0, BOXSIZE, BOXSIZE, CYAN);
+ 394              		.loc 1 157 0
+ 395 02bc 40F2FF73 		movw	r3, #2047
+ 396 02c0 0093     		str	r3, [sp]
+ 397 02c2 7820     		movs	r0, #120
+ 398 02c4 0021     		movs	r1, #0
+ 399 02c6 2822     		movs	r2, #40
+ 400 02c8 2823     		movs	r3, #40
+ 401 02ca FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 402              	.L14:
+ 158:main.c        ****                     if (oldcolor == BLUE) 
+ 403              		.loc 1 158 0
+ 404 02ce 1A4B     		ldr	r3, .L17+4
+ 405 02d0 1B68     		ldr	r3, [r3]
+ 406 02d2 1F2B     		cmp	r3, #31
+ 407 02d4 07D1     		bne	.L15
+ 159:main.c        ****                       TFTSHIELD_1_FillRect(BOXSIZE*4, 0, BOXSIZE, BOXSIZE, BLUE);
+ 408              		.loc 1 159 0
+ 409 02d6 1F23     		movs	r3, #31
+ 410 02d8 0093     		str	r3, [sp]
+ 411 02da A020     		movs	r0, #160
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 11
+
+
+ 412 02dc 0021     		movs	r1, #0
+ 413 02de 2822     		movs	r2, #40
+ 414 02e0 2823     		movs	r3, #40
+ 415 02e2 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 416              	.L15:
+ 160:main.c        ****                     if (oldcolor == MAGENTA) 
+ 417              		.loc 1 160 0
+ 418 02e6 144B     		ldr	r3, .L17+4
+ 419 02e8 1B68     		ldr	r3, [r3]
+ 420 02ea 4FF61F02 		movw	r2, #63519
+ 421 02ee 9342     		cmp	r3, r2
+ 422 02f0 08D1     		bne	.L4
+ 161:main.c        ****                       TFTSHIELD_1_FillRect(BOXSIZE*5, 0, BOXSIZE, BOXSIZE, MAGENTA);
+ 423              		.loc 1 161 0
+ 424 02f2 4FF61F03 		movw	r3, #63519
+ 425 02f6 0093     		str	r3, [sp]
+ 426 02f8 C820     		movs	r0, #200
+ 427 02fa 0021     		movs	r1, #0
+ 428 02fc 2822     		movs	r2, #40
+ 429 02fe 2823     		movs	r3, #40
+ 430 0300 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+ 431              	.L4:
+ 162:main.c        ****                 }
+ 163:main.c        ****               }
+ 164:main.c        ****             if (((y-PENRADIUS) > BOXSIZE) && ((y+PENRADIUS) < 320))
+ 432              		.loc 1 164 0
+ 433 0304 7B8F     		ldrh	r3, [r7, #58]
+ 434 0306 033B     		subs	r3, r3, #3
+ 435 0308 282B     		cmp	r3, #40
+ 436 030a 12DD     		ble	.L3
+ 437              		.loc 1 164 0 is_stmt 0 discriminator 1
+ 438 030c 7B8F     		ldrh	r3, [r7, #58]
+ 439 030e 0333     		adds	r3, r3, #3
+ 440 0310 B3F5A07F 		cmp	r3, #320
+ 441 0314 0DDA     		bge	.L3
+ 165:main.c        ****             {
+ 166:main.c        ****                 TFTSHIELD_1_FillCircle(x, y, PENRADIUS, currentcolor);
+ 442              		.loc 1 166 0 is_stmt 1
+ 443 0316 BB8F     		ldrh	r3, [r7, #60]
+ 444 0318 99B2     		uxth	r1, r3
+ 445 031a 7B8F     		ldrh	r3, [r7, #58]
+ 446 031c 9AB2     		uxth	r2, r3
+ 447 031e 054B     		ldr	r3, .L17
+ 448 0320 1B68     		ldr	r3, [r3]
+ 449 0322 9BB2     		uxth	r3, r3
+ 450 0324 09B2     		sxth	r1, r1
+ 451 0326 12B2     		sxth	r2, r2
+ 452 0328 0846     		mov	r0, r1
+ 453 032a 1146     		mov	r1, r2
+ 454 032c 0322     		movs	r2, #3
+ 455 032e FFF7FEFF 		bl	TFTSHIELD_1_FillCircle
+ 456              	.L3:
+ 457              	.LBE2:
+ 167:main.c        ****             }
+ 168:main.c        ****         
+ 169:main.c        ****         }   
+ 170:main.c        ****     }
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 12
+
+
+ 458              		.loc 1 170 0
+ 459 0332 E7E6     		b	.L16
+ 460              	.L18:
+ 461              		.align	2
+ 462              	.L17:
+ 463 0334 00000000 		.word	currentcolor
+ 464 0338 00000000 		.word	oldcolor
+ 465              		.cfi_endproc
+ 466              	.LFE56:
+ 467              		.size	main, .-main
+ 468              		.section	.text.mapCoor,"ax",%progbits
+ 469              		.align	2
+ 470              		.global	mapCoor
+ 471              		.thumb
+ 472              		.thumb_func
+ 473              		.type	mapCoor, %function
+ 474              	mapCoor:
+ 475              	.LFB57:
+ 171:main.c        **** }
+ 172:main.c        **** 
+ 173:main.c        **** long mapCoor(long x, long in_min, long in_max, long out_min, long out_max)
+ 174:main.c        **** {
+ 476              		.loc 1 174 0
+ 477              		.cfi_startproc
+ 478              		@ args = 4, pretend = 0, frame = 16
+ 479              		@ frame_needed = 1, uses_anonymous_args = 0
+ 480              		@ link register save eliminated.
+ 481 0000 80B4     		push	{r7}
+ 482              		.cfi_def_cfa_offset 4
+ 483              		.cfi_offset 7, -4
+ 484 0002 85B0     		sub	sp, sp, #20
+ 485              		.cfi_def_cfa_offset 24
+ 486 0004 00AF     		add	r7, sp, #0
+ 487              		.cfi_def_cfa_register 7
+ 488 0006 F860     		str	r0, [r7, #12]
+ 489 0008 B960     		str	r1, [r7, #8]
+ 490 000a 7A60     		str	r2, [r7, #4]
+ 491 000c 3B60     		str	r3, [r7]
+ 175:main.c        ****   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+ 492              		.loc 1 175 0
+ 493 000e FA68     		ldr	r2, [r7, #12]
+ 494 0010 BB68     		ldr	r3, [r7, #8]
+ 495 0012 D31A     		subs	r3, r2, r3
+ 496 0014 B969     		ldr	r1, [r7, #24]
+ 497 0016 3A68     		ldr	r2, [r7]
+ 498 0018 8A1A     		subs	r2, r1, r2
+ 499 001a 02FB03F2 		mul	r2, r2, r3
+ 500 001e 7968     		ldr	r1, [r7, #4]
+ 501 0020 BB68     		ldr	r3, [r7, #8]
+ 502 0022 CB1A     		subs	r3, r1, r3
+ 503 0024 92FBF3F2 		sdiv	r2, r2, r3
+ 504 0028 3B68     		ldr	r3, [r7]
+ 505 002a 1344     		add	r3, r3, r2
+ 176:main.c        **** }
+ 506              		.loc 1 176 0
+ 507 002c 1846     		mov	r0, r3
+ 508 002e 1437     		adds	r7, r7, #20
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 13
+
+
+ 509              		.cfi_def_cfa_offset 4
+ 510 0030 BD46     		mov	sp, r7
+ 511              		.cfi_def_cfa_register 13
+ 512              		@ sp needed
+ 513 0032 5DF8047B 		ldr	r7, [sp], #4
+ 514              		.cfi_restore 7
+ 515              		.cfi_def_cfa_offset 0
+ 516 0036 7047     		bx	lr
+ 517              		.cfi_endproc
+ 518              	.LFE57:
+ 519              		.size	mapCoor, .-mapCoor
+ 520              		.text
+ 521              	.Letext0:
+ 522              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 523              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 524              		.file 4 "Generated_Source\\PSoC5/TFTSHIELD_1.h"
+ 525              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 526              		.section	.debug_info,"",%progbits
+ 527              	.Ldebug_info0:
+ 528 0000 8D020000 		.4byte	0x28d
+ 529 0004 0400     		.2byte	0x4
+ 530 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 531 000a 04       		.byte	0x4
+ 532 000b 01       		.uleb128 0x1
+ 533 000c 7B010000 		.4byte	.LASF40
+ 534 0010 01       		.byte	0x1
+ 535 0011 6B010000 		.4byte	.LASF41
+ 536 0015 6F000000 		.4byte	.LASF42
+ 537 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 538 001d 00000000 		.4byte	0
+ 539 0021 00000000 		.4byte	.Ldebug_line0
+ 540 0025 02       		.uleb128 0x2
+ 541 0026 01       		.byte	0x1
+ 542 0027 06       		.byte	0x6
+ 543 0028 45020000 		.4byte	.LASF0
+ 544 002c 03       		.uleb128 0x3
+ 545 002d 00000000 		.4byte	.LASF2
+ 546 0031 02       		.byte	0x2
+ 547 0032 1D       		.byte	0x1d
+ 548 0033 37000000 		.4byte	0x37
+ 549 0037 02       		.uleb128 0x2
+ 550 0038 01       		.byte	0x1
+ 551 0039 08       		.byte	0x8
+ 552 003a 5A000000 		.4byte	.LASF1
+ 553 003e 03       		.uleb128 0x3
+ 554 003f FC000000 		.4byte	.LASF3
+ 555 0043 02       		.byte	0x2
+ 556 0044 29       		.byte	0x29
+ 557 0045 49000000 		.4byte	0x49
+ 558 0049 02       		.uleb128 0x2
+ 559 004a 02       		.byte	0x2
+ 560 004b 05       		.byte	0x5
+ 561 004c 11020000 		.4byte	.LASF4
+ 562 0050 03       		.uleb128 0x3
+ 563 0051 D0000000 		.4byte	.LASF5
+ 564 0055 02       		.byte	0x2
+ 565 0056 2B       		.byte	0x2b
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 14
+
+
+ 566 0057 5B000000 		.4byte	0x5b
+ 567 005b 02       		.uleb128 0x2
+ 568 005c 02       		.byte	0x2
+ 569 005d 07       		.byte	0x7
+ 570 005e 51020000 		.4byte	.LASF6
+ 571 0062 03       		.uleb128 0x3
+ 572 0063 0A000000 		.4byte	.LASF7
+ 573 0067 02       		.byte	0x2
+ 574 0068 3F       		.byte	0x3f
+ 575 0069 6D000000 		.4byte	0x6d
+ 576 006d 02       		.uleb128 0x2
+ 577 006e 04       		.byte	0x4
+ 578 006f 05       		.byte	0x5
+ 579 0070 37020000 		.4byte	.LASF8
+ 580 0074 02       		.uleb128 0x2
+ 581 0075 04       		.byte	0x4
+ 582 0076 07       		.byte	0x7
+ 583 0077 DB000000 		.4byte	.LASF9
+ 584 007b 02       		.uleb128 0x2
+ 585 007c 08       		.byte	0x8
+ 586 007d 05       		.byte	0x5
+ 587 007e 5D010000 		.4byte	.LASF10
+ 588 0082 02       		.uleb128 0x2
+ 589 0083 08       		.byte	0x8
+ 590 0084 07       		.byte	0x7
+ 591 0085 1C010000 		.4byte	.LASF11
+ 592 0089 04       		.uleb128 0x4
+ 593 008a 04       		.byte	0x4
+ 594 008b 05       		.byte	0x5
+ 595 008c 696E7400 		.ascii	"int\000"
+ 596 0090 02       		.uleb128 0x2
+ 597 0091 04       		.byte	0x4
+ 598 0092 07       		.byte	0x7
+ 599 0093 06010000 		.4byte	.LASF12
+ 600 0097 03       		.uleb128 0x3
+ 601 0098 33010000 		.4byte	.LASF13
+ 602 009c 03       		.byte	0x3
+ 603 009d 15       		.byte	0x15
+ 604 009e 2C000000 		.4byte	0x2c
+ 605 00a2 03       		.uleb128 0x3
+ 606 00a3 3B010000 		.4byte	.LASF14
+ 607 00a7 03       		.byte	0x3
+ 608 00a8 20       		.byte	0x20
+ 609 00a9 3E000000 		.4byte	0x3e
+ 610 00ad 03       		.uleb128 0x3
+ 611 00ae 22020000 		.4byte	.LASF15
+ 612 00b2 03       		.byte	0x3
+ 613 00b3 21       		.byte	0x21
+ 614 00b4 50000000 		.4byte	0x50
+ 615 00b8 03       		.uleb128 0x3
+ 616 00b9 4C010000 		.4byte	.LASF16
+ 617 00bd 03       		.byte	0x3
+ 618 00be 2C       		.byte	0x2c
+ 619 00bf 62000000 		.4byte	0x62
+ 620 00c3 02       		.uleb128 0x2
+ 621 00c4 04       		.byte	0x4
+ 622 00c5 04       		.byte	0x4
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 15
+
+
+ 623 00c6 4B000000 		.4byte	.LASF17
+ 624 00ca 02       		.uleb128 0x2
+ 625 00cb 08       		.byte	0x8
+ 626 00cc 04       		.byte	0x4
+ 627 00cd 2D000000 		.4byte	.LASF18
+ 628 00d1 02       		.uleb128 0x2
+ 629 00d2 01       		.byte	0x1
+ 630 00d3 08       		.byte	0x8
+ 631 00d4 40020000 		.4byte	.LASF19
+ 632 00d8 02       		.uleb128 0x2
+ 633 00d9 04       		.byte	0x4
+ 634 00da 07       		.byte	0x7
+ 635 00db 54010000 		.4byte	.LASF20
+ 636 00df 05       		.uleb128 0x5
+ 637 00e0 F7000000 		.4byte	.LASF43
+ 638 00e4 01       		.byte	0x1
+ 639 00e5 2A       		.byte	0x2a
+ 640 00e6 89000000 		.4byte	0x89
+ 641 00ea 00000000 		.4byte	.LFB56
+ 642 00ee 3C030000 		.4byte	.LFE56-.LFB56
+ 643 00f2 01       		.uleb128 0x1
+ 644 00f3 9C       		.byte	0x9c
+ 645 00f4 4F010000 		.4byte	0x14f
+ 646 00f8 06       		.uleb128 0x6
+ 647 00f9 43010000 		.4byte	.LASF21
+ 648 00fd 01       		.byte	0x1
+ 649 00fe 31       		.byte	0x31
+ 650 00ff 4F010000 		.4byte	0x14f
+ 651 0103 02       		.uleb128 0x2
+ 652 0104 91       		.byte	0x91
+ 653 0105 77       		.sleb128 -9
+ 654 0106 07       		.uleb128 0x7
+ 655 0107 04010000 		.4byte	.LBB2
+ 656 010b 2E020000 		.4byte	.LBE2-.LBB2
+ 657 010f 08       		.uleb128 0x8
+ 658 0110 7800     		.ascii	"x\000"
+ 659 0112 01       		.byte	0x1
+ 660 0113 6F       		.byte	0x6f
+ 661 0114 AD000000 		.4byte	0xad
+ 662 0118 02       		.uleb128 0x2
+ 663 0119 91       		.byte	0x91
+ 664 011a 74       		.sleb128 -12
+ 665 011b 08       		.uleb128 0x8
+ 666 011c 7900     		.ascii	"y\000"
+ 667 011e 01       		.byte	0x1
+ 668 011f 6F       		.byte	0x6f
+ 669 0120 AD000000 		.4byte	0xad
+ 670 0124 02       		.uleb128 0x2
+ 671 0125 91       		.byte	0x91
+ 672 0126 72       		.sleb128 -14
+ 673 0127 08       		.uleb128 0x8
+ 674 0128 7A00     		.ascii	"z\000"
+ 675 012a 01       		.byte	0x1
+ 676 012b 70       		.byte	0x70
+ 677 012c 97000000 		.4byte	0x97
+ 678 0130 02       		.uleb128 0x2
+ 679 0131 91       		.byte	0x91
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 16
+
+
+ 680 0132 71       		.sleb128 -15
+ 681 0133 09       		.uleb128 0x9
+ 682 0134 62756600 		.ascii	"buf\000"
+ 683 0138 01       		.byte	0x1
+ 684 0139 70       		.byte	0x70
+ 685 013a 97000000 		.4byte	0x97
+ 686 013e 06       		.uleb128 0x6
+ 687 013f 1B020000 		.4byte	.LASF22
+ 688 0143 01       		.byte	0x1
+ 689 0144 71       		.byte	0x71
+ 690 0145 56010000 		.4byte	0x156
+ 691 0149 03       		.uleb128 0x3
+ 692 014a 91       		.byte	0x91
+ 693 014b BC7F     		.sleb128 -68
+ 694 014d 00       		.byte	0
+ 695 014e 00       		.byte	0
+ 696 014f 02       		.uleb128 0x2
+ 697 0150 01       		.byte	0x1
+ 698 0151 02       		.byte	0x2
+ 699 0152 6C020000 		.4byte	.LASF23
+ 700 0156 0A       		.uleb128 0xa
+ 701 0157 D1000000 		.4byte	0xd1
+ 702 015b 66010000 		.4byte	0x166
+ 703 015f 0B       		.uleb128 0xb
+ 704 0160 D8000000 		.4byte	0xd8
+ 705 0164 31       		.byte	0x31
+ 706 0165 00       		.byte	0
+ 707 0166 0C       		.uleb128 0xc
+ 708 0167 64020000 		.4byte	.LASF44
+ 709 016b 01       		.byte	0x1
+ 710 016c AD       		.byte	0xad
+ 711 016d 6D000000 		.4byte	0x6d
+ 712 0171 00000000 		.4byte	.LFB57
+ 713 0175 38000000 		.4byte	.LFE57-.LFB57
+ 714 0179 01       		.uleb128 0x1
+ 715 017a 9C       		.byte	0x9c
+ 716 017b C4010000 		.4byte	0x1c4
+ 717 017f 0D       		.uleb128 0xd
+ 718 0180 7800     		.ascii	"x\000"
+ 719 0182 01       		.byte	0x1
+ 720 0183 AD       		.byte	0xad
+ 721 0184 6D000000 		.4byte	0x6d
+ 722 0188 02       		.uleb128 0x2
+ 723 0189 91       		.byte	0x91
+ 724 018a 74       		.sleb128 -12
+ 725 018b 0E       		.uleb128 0xe
+ 726 018c 68000000 		.4byte	.LASF24
+ 727 0190 01       		.byte	0x1
+ 728 0191 AD       		.byte	0xad
+ 729 0192 6D000000 		.4byte	0x6d
+ 730 0196 02       		.uleb128 0x2
+ 731 0197 91       		.byte	0x91
+ 732 0198 70       		.sleb128 -16
+ 733 0199 0E       		.uleb128 0xe
+ 734 019a 34000000 		.4byte	.LASF25
+ 735 019e 01       		.byte	0x1
+ 736 019f AD       		.byte	0xad
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 17
+
+
+ 737 01a0 6D000000 		.4byte	0x6d
+ 738 01a4 02       		.uleb128 0x2
+ 739 01a5 91       		.byte	0x91
+ 740 01a6 6C       		.sleb128 -20
+ 741 01a7 0E       		.uleb128 0xe
+ 742 01a8 43000000 		.4byte	.LASF26
+ 743 01ac 01       		.byte	0x1
+ 744 01ad AD       		.byte	0xad
+ 745 01ae 6D000000 		.4byte	0x6d
+ 746 01b2 02       		.uleb128 0x2
+ 747 01b3 91       		.byte	0x91
+ 748 01b4 68       		.sleb128 -24
+ 749 01b5 0E       		.uleb128 0xe
+ 750 01b6 3B000000 		.4byte	.LASF27
+ 751 01ba 01       		.byte	0x1
+ 752 01bb AD       		.byte	0xad
+ 753 01bc 6D000000 		.4byte	0x6d
+ 754 01c0 02       		.uleb128 0x2
+ 755 01c1 91       		.byte	0x91
+ 756 01c2 00       		.sleb128 0
+ 757 01c3 00       		.byte	0
+ 758 01c4 0F       		.uleb128 0xf
+ 759 01c5 B1000000 		.4byte	.LASF28
+ 760 01c9 04       		.byte	0x4
+ 761 01ca 6D       		.byte	0x6d
+ 762 01cb A2000000 		.4byte	0xa2
+ 763 01cf 05       		.uleb128 0x5
+ 764 01d0 03       		.byte	0x3
+ 765 01d1 00000000 		.4byte	cursor_x
+ 766 01d5 0F       		.uleb128 0xf
+ 767 01d6 BA000000 		.4byte	.LASF29
+ 768 01da 04       		.byte	0x4
+ 769 01db 6E       		.byte	0x6e
+ 770 01dc A2000000 		.4byte	0xa2
+ 771 01e0 05       		.uleb128 0x5
+ 772 01e1 03       		.byte	0x3
+ 773 01e2 00000000 		.4byte	cursor_y
+ 774 01e6 0F       		.uleb128 0xf
+ 775 01e7 ED000000 		.4byte	.LASF30
+ 776 01eb 04       		.byte	0x4
+ 777 01ec 6F       		.byte	0x6f
+ 778 01ed AD000000 		.4byte	0xad
+ 779 01f1 05       		.uleb128 0x5
+ 780 01f2 03       		.byte	0x3
+ 781 01f3 00000000 		.4byte	textcolor
+ 782 01f7 0F       		.uleb128 0xf
+ 783 01f8 2B020000 		.4byte	.LASF31
+ 784 01fc 04       		.byte	0x4
+ 785 01fd 70       		.byte	0x70
+ 786 01fe AD000000 		.4byte	0xad
+ 787 0202 05       		.uleb128 0x5
+ 788 0203 03       		.byte	0x3
+ 789 0204 00000000 		.4byte	textbgcolor
+ 790 0208 0F       		.uleb128 0xf
+ 791 0209 72010000 		.4byte	.LASF32
+ 792 020d 04       		.byte	0x4
+ 793 020e 71       		.byte	0x71
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 18
+
+
+ 794 020f 97000000 		.4byte	0x97
+ 795 0213 05       		.uleb128 0x5
+ 796 0214 03       		.byte	0x3
+ 797 0215 00000000 		.4byte	textsize
+ 798 0219 0F       		.uleb128 0xf
+ 799 021a 13010000 		.4byte	.LASF33
+ 800 021e 04       		.byte	0x4
+ 801 021f 72       		.byte	0x72
+ 802 0220 97000000 		.4byte	0x97
+ 803 0224 05       		.uleb128 0x5
+ 804 0225 03       		.byte	0x3
+ 805 0226 00000000 		.4byte	rotation
+ 806 022a 0F       		.uleb128 0xf
+ 807 022b 1B000000 		.4byte	.LASF34
+ 808 022f 04       		.byte	0x4
+ 809 0230 73       		.byte	0x73
+ 810 0231 97000000 		.4byte	0x97
+ 811 0235 05       		.uleb128 0x5
+ 812 0236 03       		.byte	0x3
+ 813 0237 00000000 		.4byte	wrap
+ 814 023b 0F       		.uleb128 0xf
+ 815 023c 14000000 		.4byte	.LASF35
+ 816 0240 04       		.byte	0x4
+ 817 0241 74       		.byte	0x74
+ 818 0242 89000000 		.4byte	0x89
+ 819 0246 05       		.uleb128 0x5
+ 820 0247 03       		.byte	0x3
+ 821 0248 00000000 		.4byte	_width
+ 822 024c 0F       		.uleb128 0xf
+ 823 024d 09020000 		.4byte	.LASF36
+ 824 0251 04       		.byte	0x4
+ 825 0252 75       		.byte	0x75
+ 826 0253 89000000 		.4byte	0x89
+ 827 0257 05       		.uleb128 0x5
+ 828 0258 03       		.byte	0x3
+ 829 0259 00000000 		.4byte	_height
+ 830 025d 10       		.uleb128 0x10
+ 831 025e C3000000 		.4byte	.LASF37
+ 832 0262 05       		.byte	0x5
+ 833 0263 1606     		.2byte	0x616
+ 834 0265 69020000 		.4byte	0x269
+ 835 0269 11       		.uleb128 0x11
+ 836 026a B8000000 		.4byte	0xb8
+ 837 026e 0F       		.uleb128 0xf
+ 838 026f 51000000 		.4byte	.LASF38
+ 839 0273 01       		.byte	0x1
+ 840 0274 25       		.byte	0x25
+ 841 0275 89000000 		.4byte	0x89
+ 842 0279 05       		.uleb128 0x5
+ 843 027a 03       		.byte	0x3
+ 844 027b 00000000 		.4byte	oldcolor
+ 845 027f 0F       		.uleb128 0xf
+ 846 0280 20000000 		.4byte	.LASF39
+ 847 0284 01       		.byte	0x1
+ 848 0285 25       		.byte	0x25
+ 849 0286 89000000 		.4byte	0x89
+ 850 028a 05       		.uleb128 0x5
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 19
+
+
+ 851 028b 03       		.byte	0x3
+ 852 028c 00000000 		.4byte	currentcolor
+ 853 0290 00       		.byte	0
+ 854              		.section	.debug_abbrev,"",%progbits
+ 855              	.Ldebug_abbrev0:
+ 856 0000 01       		.uleb128 0x1
+ 857 0001 11       		.uleb128 0x11
+ 858 0002 01       		.byte	0x1
+ 859 0003 25       		.uleb128 0x25
+ 860 0004 0E       		.uleb128 0xe
+ 861 0005 13       		.uleb128 0x13
+ 862 0006 0B       		.uleb128 0xb
+ 863 0007 03       		.uleb128 0x3
+ 864 0008 0E       		.uleb128 0xe
+ 865 0009 1B       		.uleb128 0x1b
+ 866 000a 0E       		.uleb128 0xe
+ 867 000b 55       		.uleb128 0x55
+ 868 000c 17       		.uleb128 0x17
+ 869 000d 11       		.uleb128 0x11
+ 870 000e 01       		.uleb128 0x1
+ 871 000f 10       		.uleb128 0x10
+ 872 0010 17       		.uleb128 0x17
+ 873 0011 00       		.byte	0
+ 874 0012 00       		.byte	0
+ 875 0013 02       		.uleb128 0x2
+ 876 0014 24       		.uleb128 0x24
+ 877 0015 00       		.byte	0
+ 878 0016 0B       		.uleb128 0xb
+ 879 0017 0B       		.uleb128 0xb
+ 880 0018 3E       		.uleb128 0x3e
+ 881 0019 0B       		.uleb128 0xb
+ 882 001a 03       		.uleb128 0x3
+ 883 001b 0E       		.uleb128 0xe
+ 884 001c 00       		.byte	0
+ 885 001d 00       		.byte	0
+ 886 001e 03       		.uleb128 0x3
+ 887 001f 16       		.uleb128 0x16
+ 888 0020 00       		.byte	0
+ 889 0021 03       		.uleb128 0x3
+ 890 0022 0E       		.uleb128 0xe
+ 891 0023 3A       		.uleb128 0x3a
+ 892 0024 0B       		.uleb128 0xb
+ 893 0025 3B       		.uleb128 0x3b
+ 894 0026 0B       		.uleb128 0xb
+ 895 0027 49       		.uleb128 0x49
+ 896 0028 13       		.uleb128 0x13
+ 897 0029 00       		.byte	0
+ 898 002a 00       		.byte	0
+ 899 002b 04       		.uleb128 0x4
+ 900 002c 24       		.uleb128 0x24
+ 901 002d 00       		.byte	0
+ 902 002e 0B       		.uleb128 0xb
+ 903 002f 0B       		.uleb128 0xb
+ 904 0030 3E       		.uleb128 0x3e
+ 905 0031 0B       		.uleb128 0xb
+ 906 0032 03       		.uleb128 0x3
+ 907 0033 08       		.uleb128 0x8
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 20
+
+
+ 908 0034 00       		.byte	0
+ 909 0035 00       		.byte	0
+ 910 0036 05       		.uleb128 0x5
+ 911 0037 2E       		.uleb128 0x2e
+ 912 0038 01       		.byte	0x1
+ 913 0039 3F       		.uleb128 0x3f
+ 914 003a 19       		.uleb128 0x19
+ 915 003b 03       		.uleb128 0x3
+ 916 003c 0E       		.uleb128 0xe
+ 917 003d 3A       		.uleb128 0x3a
+ 918 003e 0B       		.uleb128 0xb
+ 919 003f 3B       		.uleb128 0x3b
+ 920 0040 0B       		.uleb128 0xb
+ 921 0041 49       		.uleb128 0x49
+ 922 0042 13       		.uleb128 0x13
+ 923 0043 11       		.uleb128 0x11
+ 924 0044 01       		.uleb128 0x1
+ 925 0045 12       		.uleb128 0x12
+ 926 0046 06       		.uleb128 0x6
+ 927 0047 40       		.uleb128 0x40
+ 928 0048 18       		.uleb128 0x18
+ 929 0049 9642     		.uleb128 0x2116
+ 930 004b 19       		.uleb128 0x19
+ 931 004c 01       		.uleb128 0x1
+ 932 004d 13       		.uleb128 0x13
+ 933 004e 00       		.byte	0
+ 934 004f 00       		.byte	0
+ 935 0050 06       		.uleb128 0x6
+ 936 0051 34       		.uleb128 0x34
+ 937 0052 00       		.byte	0
+ 938 0053 03       		.uleb128 0x3
+ 939 0054 0E       		.uleb128 0xe
+ 940 0055 3A       		.uleb128 0x3a
+ 941 0056 0B       		.uleb128 0xb
+ 942 0057 3B       		.uleb128 0x3b
+ 943 0058 0B       		.uleb128 0xb
+ 944 0059 49       		.uleb128 0x49
+ 945 005a 13       		.uleb128 0x13
+ 946 005b 02       		.uleb128 0x2
+ 947 005c 18       		.uleb128 0x18
+ 948 005d 00       		.byte	0
+ 949 005e 00       		.byte	0
+ 950 005f 07       		.uleb128 0x7
+ 951 0060 0B       		.uleb128 0xb
+ 952 0061 01       		.byte	0x1
+ 953 0062 11       		.uleb128 0x11
+ 954 0063 01       		.uleb128 0x1
+ 955 0064 12       		.uleb128 0x12
+ 956 0065 06       		.uleb128 0x6
+ 957 0066 00       		.byte	0
+ 958 0067 00       		.byte	0
+ 959 0068 08       		.uleb128 0x8
+ 960 0069 34       		.uleb128 0x34
+ 961 006a 00       		.byte	0
+ 962 006b 03       		.uleb128 0x3
+ 963 006c 08       		.uleb128 0x8
+ 964 006d 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 21
+
+
+ 965 006e 0B       		.uleb128 0xb
+ 966 006f 3B       		.uleb128 0x3b
+ 967 0070 0B       		.uleb128 0xb
+ 968 0071 49       		.uleb128 0x49
+ 969 0072 13       		.uleb128 0x13
+ 970 0073 02       		.uleb128 0x2
+ 971 0074 18       		.uleb128 0x18
+ 972 0075 00       		.byte	0
+ 973 0076 00       		.byte	0
+ 974 0077 09       		.uleb128 0x9
+ 975 0078 34       		.uleb128 0x34
+ 976 0079 00       		.byte	0
+ 977 007a 03       		.uleb128 0x3
+ 978 007b 08       		.uleb128 0x8
+ 979 007c 3A       		.uleb128 0x3a
+ 980 007d 0B       		.uleb128 0xb
+ 981 007e 3B       		.uleb128 0x3b
+ 982 007f 0B       		.uleb128 0xb
+ 983 0080 49       		.uleb128 0x49
+ 984 0081 13       		.uleb128 0x13
+ 985 0082 00       		.byte	0
+ 986 0083 00       		.byte	0
+ 987 0084 0A       		.uleb128 0xa
+ 988 0085 01       		.uleb128 0x1
+ 989 0086 01       		.byte	0x1
+ 990 0087 49       		.uleb128 0x49
+ 991 0088 13       		.uleb128 0x13
+ 992 0089 01       		.uleb128 0x1
+ 993 008a 13       		.uleb128 0x13
+ 994 008b 00       		.byte	0
+ 995 008c 00       		.byte	0
+ 996 008d 0B       		.uleb128 0xb
+ 997 008e 21       		.uleb128 0x21
+ 998 008f 00       		.byte	0
+ 999 0090 49       		.uleb128 0x49
+ 1000 0091 13       		.uleb128 0x13
+ 1001 0092 2F       		.uleb128 0x2f
+ 1002 0093 0B       		.uleb128 0xb
+ 1003 0094 00       		.byte	0
+ 1004 0095 00       		.byte	0
+ 1005 0096 0C       		.uleb128 0xc
+ 1006 0097 2E       		.uleb128 0x2e
+ 1007 0098 01       		.byte	0x1
+ 1008 0099 3F       		.uleb128 0x3f
+ 1009 009a 19       		.uleb128 0x19
+ 1010 009b 03       		.uleb128 0x3
+ 1011 009c 0E       		.uleb128 0xe
+ 1012 009d 3A       		.uleb128 0x3a
+ 1013 009e 0B       		.uleb128 0xb
+ 1014 009f 3B       		.uleb128 0x3b
+ 1015 00a0 0B       		.uleb128 0xb
+ 1016 00a1 27       		.uleb128 0x27
+ 1017 00a2 19       		.uleb128 0x19
+ 1018 00a3 49       		.uleb128 0x49
+ 1019 00a4 13       		.uleb128 0x13
+ 1020 00a5 11       		.uleb128 0x11
+ 1021 00a6 01       		.uleb128 0x1
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 22
+
+
+ 1022 00a7 12       		.uleb128 0x12
+ 1023 00a8 06       		.uleb128 0x6
+ 1024 00a9 40       		.uleb128 0x40
+ 1025 00aa 18       		.uleb128 0x18
+ 1026 00ab 9742     		.uleb128 0x2117
+ 1027 00ad 19       		.uleb128 0x19
+ 1028 00ae 01       		.uleb128 0x1
+ 1029 00af 13       		.uleb128 0x13
+ 1030 00b0 00       		.byte	0
+ 1031 00b1 00       		.byte	0
+ 1032 00b2 0D       		.uleb128 0xd
+ 1033 00b3 05       		.uleb128 0x5
+ 1034 00b4 00       		.byte	0
+ 1035 00b5 03       		.uleb128 0x3
+ 1036 00b6 08       		.uleb128 0x8
+ 1037 00b7 3A       		.uleb128 0x3a
+ 1038 00b8 0B       		.uleb128 0xb
+ 1039 00b9 3B       		.uleb128 0x3b
+ 1040 00ba 0B       		.uleb128 0xb
+ 1041 00bb 49       		.uleb128 0x49
+ 1042 00bc 13       		.uleb128 0x13
+ 1043 00bd 02       		.uleb128 0x2
+ 1044 00be 18       		.uleb128 0x18
+ 1045 00bf 00       		.byte	0
+ 1046 00c0 00       		.byte	0
+ 1047 00c1 0E       		.uleb128 0xe
+ 1048 00c2 05       		.uleb128 0x5
+ 1049 00c3 00       		.byte	0
+ 1050 00c4 03       		.uleb128 0x3
+ 1051 00c5 0E       		.uleb128 0xe
+ 1052 00c6 3A       		.uleb128 0x3a
+ 1053 00c7 0B       		.uleb128 0xb
+ 1054 00c8 3B       		.uleb128 0x3b
+ 1055 00c9 0B       		.uleb128 0xb
+ 1056 00ca 49       		.uleb128 0x49
+ 1057 00cb 13       		.uleb128 0x13
+ 1058 00cc 02       		.uleb128 0x2
+ 1059 00cd 18       		.uleb128 0x18
+ 1060 00ce 00       		.byte	0
+ 1061 00cf 00       		.byte	0
+ 1062 00d0 0F       		.uleb128 0xf
+ 1063 00d1 34       		.uleb128 0x34
+ 1064 00d2 00       		.byte	0
+ 1065 00d3 03       		.uleb128 0x3
+ 1066 00d4 0E       		.uleb128 0xe
+ 1067 00d5 3A       		.uleb128 0x3a
+ 1068 00d6 0B       		.uleb128 0xb
+ 1069 00d7 3B       		.uleb128 0x3b
+ 1070 00d8 0B       		.uleb128 0xb
+ 1071 00d9 49       		.uleb128 0x49
+ 1072 00da 13       		.uleb128 0x13
+ 1073 00db 3F       		.uleb128 0x3f
+ 1074 00dc 19       		.uleb128 0x19
+ 1075 00dd 02       		.uleb128 0x2
+ 1076 00de 18       		.uleb128 0x18
+ 1077 00df 00       		.byte	0
+ 1078 00e0 00       		.byte	0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 23
+
+
+ 1079 00e1 10       		.uleb128 0x10
+ 1080 00e2 34       		.uleb128 0x34
+ 1081 00e3 00       		.byte	0
+ 1082 00e4 03       		.uleb128 0x3
+ 1083 00e5 0E       		.uleb128 0xe
+ 1084 00e6 3A       		.uleb128 0x3a
+ 1085 00e7 0B       		.uleb128 0xb
+ 1086 00e8 3B       		.uleb128 0x3b
+ 1087 00e9 05       		.uleb128 0x5
+ 1088 00ea 49       		.uleb128 0x49
+ 1089 00eb 13       		.uleb128 0x13
+ 1090 00ec 3F       		.uleb128 0x3f
+ 1091 00ed 19       		.uleb128 0x19
+ 1092 00ee 3C       		.uleb128 0x3c
+ 1093 00ef 19       		.uleb128 0x19
+ 1094 00f0 00       		.byte	0
+ 1095 00f1 00       		.byte	0
+ 1096 00f2 11       		.uleb128 0x11
+ 1097 00f3 35       		.uleb128 0x35
+ 1098 00f4 00       		.byte	0
+ 1099 00f5 49       		.uleb128 0x49
+ 1100 00f6 13       		.uleb128 0x13
+ 1101 00f7 00       		.byte	0
+ 1102 00f8 00       		.byte	0
+ 1103 00f9 00       		.byte	0
+ 1104              		.section	.debug_aranges,"",%progbits
+ 1105 0000 24000000 		.4byte	0x24
+ 1106 0004 0200     		.2byte	0x2
+ 1107 0006 00000000 		.4byte	.Ldebug_info0
+ 1108 000a 04       		.byte	0x4
+ 1109 000b 00       		.byte	0
+ 1110 000c 0000     		.2byte	0
+ 1111 000e 0000     		.2byte	0
+ 1112 0010 00000000 		.4byte	.LFB56
+ 1113 0014 3C030000 		.4byte	.LFE56-.LFB56
+ 1114 0018 00000000 		.4byte	.LFB57
+ 1115 001c 38000000 		.4byte	.LFE57-.LFB57
+ 1116 0020 00000000 		.4byte	0
+ 1117 0024 00000000 		.4byte	0
+ 1118              		.section	.debug_ranges,"",%progbits
+ 1119              	.Ldebug_ranges0:
+ 1120 0000 00000000 		.4byte	.LFB56
+ 1121 0004 3C030000 		.4byte	.LFE56
+ 1122 0008 00000000 		.4byte	.LFB57
+ 1123 000c 38000000 		.4byte	.LFE57
+ 1124 0010 00000000 		.4byte	0
+ 1125 0014 00000000 		.4byte	0
+ 1126              		.section	.debug_line,"",%progbits
+ 1127              	.Ldebug_line0:
+ 1128 0000 C2010000 		.section	.debug_str,"MS",%progbits,1
+ 1128      02004B01 
+ 1128      00000201 
+ 1128      FB0E0D00 
+ 1128      01010101 
+ 1129              	.LASF2:
+ 1130 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1130      6E74385F 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 24
+
+
+ 1130      7400
+ 1131              	.LASF7:
+ 1132 000a 5F5F696E 		.ascii	"__int32_t\000"
+ 1132      7433325F 
+ 1132      7400
+ 1133              	.LASF35:
+ 1134 0014 5F776964 		.ascii	"_width\000"
+ 1134      746800
+ 1135              	.LASF34:
+ 1136 001b 77726170 		.ascii	"wrap\000"
+ 1136      00
+ 1137              	.LASF39:
+ 1138 0020 63757272 		.ascii	"currentcolor\000"
+ 1138      656E7463 
+ 1138      6F6C6F72 
+ 1138      00
+ 1139              	.LASF18:
+ 1140 002d 646F7562 		.ascii	"double\000"
+ 1140      6C6500
+ 1141              	.LASF25:
+ 1142 0034 696E5F6D 		.ascii	"in_max\000"
+ 1142      617800
+ 1143              	.LASF27:
+ 1144 003b 6F75745F 		.ascii	"out_max\000"
+ 1144      6D617800 
+ 1145              	.LASF26:
+ 1146 0043 6F75745F 		.ascii	"out_min\000"
+ 1146      6D696E00 
+ 1147              	.LASF17:
+ 1148 004b 666C6F61 		.ascii	"float\000"
+ 1148      7400
+ 1149              	.LASF38:
+ 1150 0051 6F6C6463 		.ascii	"oldcolor\000"
+ 1150      6F6C6F72 
+ 1150      00
+ 1151              	.LASF1:
+ 1152 005a 756E7369 		.ascii	"unsigned char\000"
+ 1152      676E6564 
+ 1152      20636861 
+ 1152      7200
+ 1153              	.LASF24:
+ 1154 0068 696E5F6D 		.ascii	"in_min\000"
+ 1154      696E00
+ 1155              	.LASF42:
+ 1156 006f 433A5C55 		.ascii	"C:\\Users\\LilRobby\\Downloads\\TFTSHIELD-master - "
+ 1156      73657273 
+ 1156      5C4C696C 
+ 1156      526F6262 
+ 1156      795C446F 
+ 1157 009e 315C746F 		.ascii	"1\\touchpaint.cydsn\000"
+ 1157      75636870 
+ 1157      61696E74 
+ 1157      2E637964 
+ 1157      736E00
+ 1158              	.LASF28:
+ 1159 00b1 63757273 		.ascii	"cursor_x\000"
+ 1159      6F725F78 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 25
+
+
+ 1159      00
+ 1160              	.LASF29:
+ 1161 00ba 63757273 		.ascii	"cursor_y\000"
+ 1161      6F725F79 
+ 1161      00
+ 1162              	.LASF37:
+ 1163 00c3 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1163      52784275 
+ 1163      66666572 
+ 1163      00
+ 1164              	.LASF5:
+ 1165 00d0 5F5F7569 		.ascii	"__uint16_t\000"
+ 1165      6E743136 
+ 1165      5F7400
+ 1166              	.LASF9:
+ 1167 00db 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1167      20756E73 
+ 1167      69676E65 
+ 1167      6420696E 
+ 1167      7400
+ 1168              	.LASF30:
+ 1169 00ed 74657874 		.ascii	"textcolor\000"
+ 1169      636F6C6F 
+ 1169      7200
+ 1170              	.LASF43:
+ 1171 00f7 6D61696E 		.ascii	"main\000"
+ 1171      00
+ 1172              	.LASF3:
+ 1173 00fc 5F5F696E 		.ascii	"__int16_t\000"
+ 1173      7431365F 
+ 1173      7400
+ 1174              	.LASF12:
+ 1175 0106 756E7369 		.ascii	"unsigned int\000"
+ 1175      676E6564 
+ 1175      20696E74 
+ 1175      00
+ 1176              	.LASF33:
+ 1177 0113 726F7461 		.ascii	"rotation\000"
+ 1177      74696F6E 
+ 1177      00
+ 1178              	.LASF11:
+ 1179 011c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1179      206C6F6E 
+ 1179      6720756E 
+ 1179      7369676E 
+ 1179      65642069 
+ 1180              	.LASF13:
+ 1181 0133 75696E74 		.ascii	"uint8_t\000"
+ 1181      385F7400 
+ 1182              	.LASF14:
+ 1183 013b 696E7431 		.ascii	"int16_t\000"
+ 1183      365F7400 
+ 1184              	.LASF21:
+ 1185 0143 746F7563 		.ascii	"touch_en\000"
+ 1185      685F656E 
+ 1185      00
+ 1186              	.LASF16:
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 26
+
+
+ 1187 014c 696E7433 		.ascii	"int32_t\000"
+ 1187      325F7400 
+ 1188              	.LASF20:
+ 1189 0154 73697A65 		.ascii	"sizetype\000"
+ 1189      74797065 
+ 1189      00
+ 1190              	.LASF10:
+ 1191 015d 6C6F6E67 		.ascii	"long long int\000"
+ 1191      206C6F6E 
+ 1191      6720696E 
+ 1191      7400
+ 1192              	.LASF41:
+ 1193 016b 6D61696E 		.ascii	"main.c\000"
+ 1193      2E6300
+ 1194              	.LASF32:
+ 1195 0172 74657874 		.ascii	"textsize\000"
+ 1195      73697A65 
+ 1195      00
+ 1196              	.LASF40:
+ 1197 017b 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1197      4320342E 
+ 1197      392E3320 
+ 1197      32303135 
+ 1197      30333033 
+ 1198 01ae 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1198      20726576 
+ 1198      6973696F 
+ 1198      6E203232 
+ 1198      31323230 
+ 1199 01e1 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1199      66756E63 
+ 1199      74696F6E 
+ 1199      2D736563 
+ 1199      74696F6E 
+ 1200              	.LASF36:
+ 1201 0209 5F686569 		.ascii	"_height\000"
+ 1201      67687400 
+ 1202              	.LASF4:
+ 1203 0211 73686F72 		.ascii	"short int\000"
+ 1203      7420696E 
+ 1203      7400
+ 1204              	.LASF22:
+ 1205 021b 62756666 		.ascii	"buffer\000"
+ 1205      657200
+ 1206              	.LASF15:
+ 1207 0222 75696E74 		.ascii	"uint16_t\000"
+ 1207      31365F74 
+ 1207      00
+ 1208              	.LASF31:
+ 1209 022b 74657874 		.ascii	"textbgcolor\000"
+ 1209      6267636F 
+ 1209      6C6F7200 
+ 1210              	.LASF8:
+ 1211 0237 6C6F6E67 		.ascii	"long int\000"
+ 1211      20696E74 
+ 1211      00
+ 1212              	.LASF19:
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\ccCay2SU.s 			page 27
+
+
+ 1213 0240 63686172 		.ascii	"char\000"
+ 1213      00
+ 1214              	.LASF0:
+ 1215 0245 7369676E 		.ascii	"signed char\000"
+ 1215      65642063 
+ 1215      68617200 
+ 1216              	.LASF6:
+ 1217 0251 73686F72 		.ascii	"short unsigned int\000"
+ 1217      7420756E 
+ 1217      7369676E 
+ 1217      65642069 
+ 1217      6E7400
+ 1218              	.LASF44:
+ 1219 0264 6D617043 		.ascii	"mapCoor\000"
+ 1219      6F6F7200 
+ 1220              	.LASF23:
+ 1221 026c 5F426F6F 		.ascii	"_Bool\000"
+ 1221      6C00
+ 1222              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

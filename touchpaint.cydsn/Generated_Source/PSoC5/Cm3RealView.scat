@@ -44,7 +44,7 @@
 #if (CYDEV_PROJ_TYPE == CYDEV_PROJ_TYPE_LOADABLE)
     #define CY_APPL_NUM     1
     #define CY_APPL_MAX     1
-    #define CY_EE_IN_BTLDR  0
+    #define CY_EE_IN_BTLDR  
 
     #if CY_APPL_ORIGIN
         #define APPL1_START     CY_APPL_ORIGIN

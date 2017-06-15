@@ -1,0 +1,3258 @@
+##################################################################### 
+                    Table of Contents
+===================================================================== 
+	1::Clock Frequency Summary
+	2::Clock Relationship Summary
+	3::Datasheet Report
+		3.1::Setup to Clock
+		3.2::Clock to Out
+		3.3::Pad to Pad
+	4::Path Details for Clock Frequency Summary
+		4.1::Critical Path Report for Clock_1
+		4.2::Critical Path Report for CyBUS_CLK
+	5::Path Details for Clock Relationship Summary
+		5.1::Critical Path Report for (CyBUS_CLK:R vs. Clock_1:R)
+		5.2::Critical Path Report for (Clock_1:R vs. Clock_1:R)
+===================================================================== 
+                    End of Table of Contents
+##################################################################### 
+
+##################################################################### 
+                    1::Clock Frequency Summary
+===================================================================== 
+Number of clocks: 6
+Clock: Clock_1       | Frequency: 64.75 MHz  | Target: 24.00 MHz  | 
+Clock: CyBUS_CLK     | Frequency: 91.94 MHz  | Target: 24.00 MHz  | 
+Clock: CyILO         | N/A                   | Target: 0.00 MHz   | 
+Clock: CyIMO         | N/A                   | Target: 3.00 MHz   | 
+Clock: CyMASTER_CLK  | N/A                   | Target: 24.00 MHz  | 
+Clock: CyPLL_OUT     | N/A                   | Target: 24.00 MHz  | 
+
+ =====================================================================
+                    End of Clock Frequency Summary
+ #####################################################################
+
+
+ #####################################################################
+                    2::Clock Relationship Summary
+ =====================================================================
+
+Launch Clock  Capture Clock  Constraint(R-R)  Slack(R-R)  Constraint(R-F)  Slack(R-F)  Constraint(F-F)  Slack(F-F)  Constraint(F-R)  Slack(F-R)  
+------------  -------------  ---------------  ----------  ---------------  ----------  ---------------  ----------  ---------------  ----------  
+Clock_1       Clock_1        41666.7          26223       N/A              N/A         N/A              N/A         N/A              N/A         
+CyBUS_CLK     Clock_1        41666.7          30790       N/A              N/A         N/A              N/A         N/A              N/A         
+
+ =====================================================================
+                    End of Clock Relationship Summary
+ #####################################################################
+
+
+ #####################################################################
+                    3::Datasheet Report
+
+All values are in Picoseconds
+ =====================================================================
+
+3.1::Setup to Clock                     
+-------------------                     
+
+Port Name  Setup to Clk  Clock Name:Phase  
+---------  ------------  ----------------  
+
+
+-----------------------3.2::Clock to Out
+----------------------------------------
+
+Port Name     Clock to Out  Clock Name:Phase  
+------------  ------------  ----------------  
+cs(0)_PAD     25703         CyBUS_CLK:R       
+dc(0)_PAD     23874         CyBUS_CLK:R       
+mosi(0)_PAD   23079         Clock_1:R         
+rt_cs(0)_PAD  25112         CyBUS_CLK:R       
+sclk(0)_PAD   24270         Clock_1:R         
+ss(0)_PAD     25843         Clock_1:R         
+
+
+                         3.3::Pad to Pad
+                         ---------------
+
+Port Name (Source)  Port Name (Destination)  Delay  
+------------------  -----------------------  -----  
+
+===================================================================== 
+                    End of Datasheet Report
+##################################################################### 
+##################################################################### 
+                    4::Path Details for Clock Frequency Summary
+===================================================================== 
+4.1::Critical Path Report for Clock_1
+*************************************
+Clock: Clock_1
+Frequency: 64.75 MHz | Target: 24.00 MHz
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f1_load
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 26223p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -2850
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38817
+
+Launch Clock Arrival Time                       0
++ Clock path delay                          0
++ Data path delay                       12594
+-------------------------------------   ----- 
+End-of-path arrival time (ps)           12594
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                        model name     delay     AT  slack  edge  Fanout
+----------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3   count7cell      1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/main_1  macrocell1      4694   6634  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/q       macrocell1      3350   9984  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f1_load    datapathcell1   2610  12594  26223  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+===================================================================== 
+4.2::Critical Path Report for CyBUS_CLK
+***************************************
+Clock: CyBUS_CLK
+Frequency: 91.94 MHz | Target: 24.00 MHz
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : miso(0)/fb
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/route_si
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 30790p
+
+Capture Clock Arrival Time                           0
++ Clock path delay                                   0
++ Cycle adjust (CyBUS_CLK:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                     -3500
+----------------------------------------------   ----- 
+End-of-path required time (ps)                   38167
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       7377
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           7377
+ 
+Launch Clock Path
+pin name                                                    model name      delay     AT  edge  Fanout
+----------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
+miso(0)/in_clock                                            iocell1             0      0  RISE       1
+
+Data path
+pin name                                       model name     delay     AT  slack  edge  Fanout
+---------------------------------------------  -------------  -----  -----  -----  ----  ------
+miso(0)/fb                                     iocell1         2133   2133  30790  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/route_si  datapathcell1   5244   7377  30790  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+===================================================================== 
+                    End of Path Details for Clock Frequency Summary
+##################################################################### 
+
+
+##################################################################### 
+                    5::Path Details for Clock Relationship Summary
+===================================================================== 
+
+5.1::Critical Path Report for (CyBUS_CLK:R vs. Clock_1:R)
+*********************************************************
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : miso(0)/fb
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/route_si
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 30790p
+
+Capture Clock Arrival Time                           0
++ Clock path delay                                   0
++ Cycle adjust (CyBUS_CLK:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                     -3500
+----------------------------------------------   ----- 
+End-of-path required time (ps)                   38167
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       7377
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           7377
+ 
+Launch Clock Path
+pin name                                                    model name      delay     AT  edge  Fanout
+----------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
+miso(0)/in_clock                                            iocell1             0      0  RISE       1
+
+Data path
+pin name                                       model name     delay     AT  slack  edge  Fanout
+---------------------------------------------  -------------  -----  -----  -----  ----  ------
+miso(0)/fb                                     iocell1         2133   2133  30790  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/route_si  datapathcell1   5244   7377  30790  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+5.2::Critical Path Report for (Clock_1:R vs. Clock_1:R)
+*******************************************************
+
+++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f1_load
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 26223p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -2850
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38817
+
+Launch Clock Arrival Time                       0
++ Clock path delay                          0
++ Data path delay                       12594
+-------------------------------------   ----- 
+End-of-path arrival time (ps)           12594
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                        model name     delay     AT  slack  edge  Fanout
+----------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3   count7cell      1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/main_1  macrocell1      4694   6634  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/q       macrocell1      3350   9984  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f1_load    datapathcell1   2610  12594  26223  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+===================================================================== 
+                    End of Path Details for Clock Relationship Summary
+##################################################################### 
+
+##################################################################### 
+                    Detailed Report for all timing paths 
+===================================================================== 
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f1_load
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 26223p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -2850
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38817
+
+Launch Clock Arrival Time                       0
++ Clock path delay                          0
++ Data path delay                       12594
+-------------------------------------   ----- 
+End-of-path arrival time (ps)           12594
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                        model name     delay     AT  slack  edge  Fanout
+----------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3   count7cell      1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/main_1  macrocell1      4694   6634  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/q       macrocell1      3350   9984  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f1_load    datapathcell1   2610  12594  26223  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:RxStsReg\/status_6
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:RxStsReg\/clock
+Path slack     : 26819p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                    -500
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 41167
+
+Launch Clock Arrival Time                       0
++ Clock path delay                          0
++ Data path delay                       14347
+-------------------------------------   ----- 
+End-of-path arrival time (ps)           14347
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name    delay     AT  slack  edge  Fanout
+---------------------------------------------  ------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3  count7cell     1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:rx_status_6\/main_1  macrocell4     6723   8663  26819  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:rx_status_6\/q       macrocell4     3350  12013  26819  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:RxStsReg\/status_6   statusicell2   2335  14347  26819  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:RxStsReg\/clock                  statusicell2        0      0  RISE       1
+
+
+
+++++ Path 3 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/status_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/clock
+Path slack     : 27806p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                    -500
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 41167
+
+Launch Clock Arrival Time                       0
++ Clock path delay                          0
++ Data path delay                       13361
+-------------------------------------   ----- 
+End-of-path arrival time (ps)           13361
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                        model name    delay     AT  slack  edge  Fanout
+----------------------------------------------  ------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3   count7cell     1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/main_1  macrocell1     4694   6634  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_rx_data\/q       macrocell1     3350   9984  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/status_3    statusicell1   3377  13361  27806  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/clock                  statusicell1        0      0  RISE       1
+
+
+
+++++ Path 4 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_4
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 29494p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       8663
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           8663
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3  count7cell    1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_4    macrocell11   6723   8663  29494  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 5 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/status_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/clock
+Path slack     : 29861p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                    -500
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 41167
+
+Launch Clock Arrival Time                       0
++ Clock path delay                          0
++ Data path delay                       11305
+-------------------------------------   ----- 
+End-of-path arrival time (ps)           11305
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                       model name    delay     AT  slack  edge  Fanout
+---------------------------------------------  ------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q           macrocell9     1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:tx_status_0\/main_1  macrocell2     4393   5643  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:tx_status_0\/q       macrocell2     3350   8993  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/status_0   statusicell1   2312  11305  29861  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:TxStsReg\/clock                  statusicell1        0      0  RISE       1
+
+
+
+++++ Path 6 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f0_blk_stat_comb
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0
+Path slack     : 29886p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       8271
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           8271
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+Data path
+pin name                                               model name     delay     AT  slack  edge  Fanout
+-----------------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f0_blk_stat_comb  datapathcell1   3580   3580  29886  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_3              macrocell10     4691   8271  29886  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+
+
+++++ Path 7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/cs_addr_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 30204p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -6010
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 35657
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5453
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5453
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                        model name     delay     AT  slack  edge  Fanout
+----------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q            macrocell10     1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/cs_addr_0  datapathcell1   4203   5453  30204  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+++++ Path 8 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/so_comb
+Path End       : Net_20/main_4
+Capture Clock  : Net_20/clock_0
+Path slack     : 30466p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       7690
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           7690
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+Data path
+pin name                                      model name     delay     AT  slack  edge  Fanout
+--------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/so_comb  datapathcell1   5360   5360  30466  RISE       1
+Net_20/main_4                                 macrocell7      2330   7690  30466  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 9 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : miso(0)/fb
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/route_si
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 30790p
+
+Capture Clock Arrival Time                           0
++ Clock path delay                                   0
++ Cycle adjust (CyBUS_CLK:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                     -3500
+----------------------------------------------   ----- 
+End-of-path required time (ps)                   38167
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       7377
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           7377
+ 
+Launch Clock Path
+pin name                                                    model name      delay     AT  edge  Fanout
+----------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/clk_bus_glb                                      clockblockcell      0      0  RISE       1
+miso(0)/in_clock                                            iocell1             0      0  RISE       1
+
+Data path
+pin name                                       model name     delay     AT  slack  edge  Fanout
+---------------------------------------------  -------------  -----  -----  -----  ----  ------
+miso(0)/fb                                     iocell1         2133   2133  30790  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/route_si  datapathcell1   5244   7377  30790  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+++++ Path 10 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/cs_addr_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 31133p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -6010
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 35657
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4524
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4524
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                        model name     delay     AT  slack  edge  Fanout
+----------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q            macrocell9      1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/cs_addr_1  datapathcell1   3274   4524  31133  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+++++ Path 11 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/cs_addr_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock
+Path slack     : 31159p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -6010
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 35657
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4498
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4498
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                        model name     delay     AT  slack  edge  Fanout
+----------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q            macrocell8      1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/cs_addr_2  datapathcell1   3248   4498  31159  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+
+
+++++ Path 12 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : Net_20/main_6
+Capture Clock  : Net_20/clock_0
+Path slack     : 31523p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       6634
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           6634
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3  count7cell    1940   1940  26223  RISE       1
+Net_20/main_6                                  macrocell7    4694   6634  31523  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 13 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f0_blk_stat_comb
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_8
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 32278p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5879
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5879
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+Data path
+pin name                                               model name     delay     AT  slack  edge  Fanout
+-----------------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f0_blk_stat_comb  datapathcell1   3580   3580  29886  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_8              macrocell8      2299   5879  32278  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 14 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f0_blk_stat_comb
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_8
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 32278p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5879
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5879
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/clock                 datapathcell1       0      0  RISE       1
+
+Data path
+pin name                                               model name     delay     AT  slack  edge  Fanout
+-----------------------------------------------------  -------------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:sR8:Dp:u0\/f0_blk_stat_comb  datapathcell1   3580   3580  29886  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_8              macrocell9      2299   5879  32278  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 15 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_6
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 32328p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5829
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5829
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1  count7cell    1940   1940  27777  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_6    macrocell11   3889   5829  32328  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 16 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_4
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 32452p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5705
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5705
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3  count7cell    1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_4      macrocell8    3765   5705  32452  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 17 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_4
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 32452p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5705
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5705
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3  count7cell    1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_4      macrocell9    3765   5705  32452  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 18 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_4
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 32452p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5705
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5705
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_3  count7cell    1940   1940  26223  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_4     macrocell12   3765   5705  32452  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 19 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_7
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 32484p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5673
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5673
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0  count7cell    1940   1940  28095  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_7    macrocell11   3733   5673  32484  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 20 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_5
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 32495p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5661
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5661
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2  count7cell    1940   1940  28121  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_5    macrocell11   3721   5661  32495  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 21 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0
+Path slack     : 32509p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5647
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5647
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q       macrocell9    1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_1  macrocell10   4397   5647  32509  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+
+
+++++ Path 22 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 32509p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5647
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5647
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                     model name   delay     AT  slack  edge  Fanout
+-------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q         macrocell9    1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_1  macrocell11   4397   5647  32509  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 23 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0
+Path slack     : 32513p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5643
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5643
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                      model name   delay     AT  slack  edge  Fanout
+--------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q          macrocell9    1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_1  macrocell13   4393   5643  32513  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0              macrocell13         0      0  RISE       1
+
+
+
+++++ Path 24 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 32563p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5594
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5594
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q       macrocell10   1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_2  macrocell8    4344   5594  32563  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 25 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 32563p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5594
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5594
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q       macrocell10   1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_2  macrocell9    4344   5594  32563  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 26 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 32563p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5594
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5594
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                    model name   delay     AT  slack  edge  Fanout
+------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q        macrocell10   1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_2  macrocell12   4344   5594  32563  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 27 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : Net_17/main_1
+Capture Clock  : Net_17/clock_0
+Path slack     : 32587p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5569
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5569
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q  macrocell8    1250   1250  30013  RISE       1
+Net_17/main_1                         macrocell5    4319   5569  32587  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_17/clock_0                                             macrocell5          0      0  RISE       1
+
+
+
+++++ Path 28 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : Net_19/main_1
+Capture Clock  : Net_19/clock_0
+Path slack     : 32587p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5569
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5569
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q  macrocell8    1250   1250  30013  RISE       1
+Net_19/main_1                         macrocell6    4319   5569  32587  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_19/clock_0                                             macrocell6          0      0  RISE       1
+
+
+
+++++ Path 29 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 32645p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5511
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5511
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4  count7cell    1940   1940  28272  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_3    macrocell11   3571   5511  32645  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 30 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0
+Path slack     : 32664p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5492
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5492
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q       macrocell8    1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_0  macrocell10   4242   5492  32664  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+
+
+++++ Path 31 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 32664p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5492
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5492
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                     model name   delay     AT  slack  edge  Fanout
+-------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q         macrocell8    1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_0  macrocell11   4242   5492  32664  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 32 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0
+Path slack     : 32665p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5492
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5492
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                      model name   delay     AT  slack  edge  Fanout
+--------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q          macrocell8    1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_0  macrocell13   4242   5492  32665  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0              macrocell13         0      0  RISE       1
+
+
+
+++++ Path 33 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : Net_17/main_2
+Capture Clock  : Net_17/clock_0
+Path slack     : 32729p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5427
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5427
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q  macrocell9    1250   1250  29861  RISE       1
+Net_17/main_2                         macrocell5    4177   5427  32729  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_17/clock_0                                             macrocell5          0      0  RISE       1
+
+
+
+++++ Path 34 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : Net_19/main_2
+Capture Clock  : Net_19/clock_0
+Path slack     : 32729p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5427
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5427
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q  macrocell9    1250   1250  29861  RISE       1
+Net_19/main_2                         macrocell6    4177   5427  32729  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_19/clock_0                                             macrocell6          0      0  RISE       1
+
+
+
+++++ Path 35 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : Net_20/main_3
+Capture Clock  : Net_20/clock_0
+Path slack     : 32729p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5427
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5427
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q  macrocell10   1250   1250  30204  RISE       1
+Net_20/main_3                         macrocell7    4177   5427  32729  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 36 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/enable
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock
+Path slack     : 32931p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -4060
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 37607
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4676
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4676
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0              macrocell13         0      0  RISE       1
+
+Data path
+pin name                                      model name   delay     AT  slack  edge  Fanout
+--------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/q       macrocell13   1250   1250  32931  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/enable  count7cell    3426   4676  32931  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+
+
+++++ Path 37 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1
+Path End       : Net_20/main_8
+Capture Clock  : Net_20/clock_0
+Path slack     : 33077p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5079
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5079
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1  count7cell    1940   1940  27777  RISE       1
+Net_20/main_8                                  macrocell7    3139   5079  33077  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 38 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : Net_19/q
+Path End       : Net_19/main_0
+Capture Clock  : Net_19/clock_0
+Path slack     : 33093p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5063
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5063
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_19/clock_0                                             macrocell6          0      0  RISE       1
+
+Data path
+pin name       model name   delay     AT  slack  edge  Fanout
+-------------  -----------  -----  -----  -----  ----  ------
+Net_19/q       macrocell6    1250   1250  33093  RISE       1
+Net_19/main_0  macrocell6    3813   5063  33093  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_19/clock_0                                             macrocell6          0      0  RISE       1
+
+
+
+++++ Path 39 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_6
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 33099p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5057
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5057
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1  count7cell    1940   1940  27777  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_6      macrocell8    3117   5057  33099  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 40 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_6
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 33099p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5057
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5057
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1  count7cell    1940   1940  27777  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_6      macrocell9    3117   5057  33099  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 41 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_6
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 33099p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5057
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5057
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_1  count7cell    1940   1940  27777  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_6     macrocell12   3117   5057  33099  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 42 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : Net_17/q
+Path End       : Net_17/main_0
+Capture Clock  : Net_17/clock_0
+Path slack     : 33131p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       5026
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           5026
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_17/clock_0                                             macrocell5          0      0  RISE       1
+
+Data path
+pin name       model name   delay     AT  slack  edge  Fanout
+-------------  -----------  -----  -----  -----  ----  ------
+Net_17/q       macrocell5    1250   1250  33131  RISE       1
+Net_17/main_0  macrocell5    3776   5026  33131  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_17/clock_0                                             macrocell5          0      0  RISE       1
+
+
+
+++++ Path 43 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0
+Path End       : Net_20/main_9
+Capture Clock  : Net_20/clock_0
+Path slack     : 33394p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4762
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4762
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0  count7cell    1940   1940  28095  RISE       1
+Net_20/main_9                                  macrocell7    2822   4762  33394  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 44 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_7
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 33416p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4740
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4740
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0  count7cell    1940   1940  28095  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_7      macrocell8    2800   4740  33416  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 45 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_7
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 33416p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4740
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4740
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0  count7cell    1940   1940  28095  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_7      macrocell9    2800   4740  33416  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 46 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_7
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 33416p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4740
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4740
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_0  count7cell    1940   1940  28095  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_7     macrocell12   2800   4740  33416  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 47 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2
+Path End       : Net_20/main_7
+Capture Clock  : Net_20/clock_0
+Path slack     : 33421p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4736
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4736
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2  count7cell    1940   1940  28121  RISE       1
+Net_20/main_7                                  macrocell7    2796   4736  33421  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 48 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_5
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 33428p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4729
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4729
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2  count7cell    1940   1940  28121  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_5      macrocell8    2789   4729  33428  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 49 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_5
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 33428p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4729
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4729
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2  count7cell    1940   1940  28121  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_5      macrocell9    2789   4729  33428  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 50 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_5
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 33428p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4729
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4729
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_2  count7cell    1940   1940  28121  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_5     macrocell12   2789   4729  33428  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 51 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : Net_17/main_3
+Capture Clock  : Net_17/clock_0
+Path slack     : 33476p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4681
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4681
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q  macrocell10   1250   1250  30204  RISE       1
+Net_17/main_3                         macrocell5    3431   4681  33476  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_17/clock_0                                             macrocell5          0      0  RISE       1
+
+
+
+++++ Path 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : Net_19/main_3
+Capture Clock  : Net_19/clock_0
+Path slack     : 33476p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4681
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4681
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q  macrocell10   1250   1250  30204  RISE       1
+Net_19/main_3                         macrocell6    3431   4681  33476  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_19/clock_0                                             macrocell6          0      0  RISE       1
+
+
+
+++++ Path 53 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0
+Path slack     : 33483p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4674
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4674
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                      model name   delay     AT  slack  edge  Fanout
+--------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q          macrocell10   1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_2  macrocell13   3424   4674  33483  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0              macrocell13         0      0  RISE       1
+
+
+
+++++ Path 54 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 33503p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4654
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4654
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q       macrocell8    1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_0  macrocell8    3404   4654  33503  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 55 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 33503p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4654
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4654
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q       macrocell8    1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_0  macrocell9    3404   4654  33503  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 56 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_0
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 33503p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4654
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4654
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                                    model name   delay     AT  slack  edge  Fanout
+------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q        macrocell8    1250   1250  30013  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_0  macrocell12   3404   4654  33503  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 57 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q
+Path End       : Net_20/main_1
+Capture Clock  : Net_20/clock_0
+Path slack     : 33504p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4652
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4652
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/q  macrocell8    1250   1250  30013  RISE       1
+Net_20/main_1                         macrocell7    3402   4652  33504  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 58 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4
+Path End       : Net_20/main_5
+Capture Clock  : Net_20/clock_0
+Path slack     : 33571p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4585
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4585
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4  count7cell    1940   1940  28272  RISE       1
+Net_20/main_5                                  macrocell7    2645   4585  33571  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 59 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 33585p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4572
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4572
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4  count7cell    1940   1940  28272  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_3      macrocell8    2632   4572  33585  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 33585p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4572
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4572
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4  count7cell    1940   1940  28272  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_3      macrocell9    2632   4572  33585  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 61 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 33585p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4572
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4572
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/clock                count7cell          0      0  RISE       1
+
+Data path
+pin name                                       model name   delay     AT  slack  edge  Fanout
+---------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:BitCounter\/count_4  count7cell    1940   1940  28272  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_3     macrocell12   2632   4572  33585  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 62 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : Net_20/main_2
+Capture Clock  : Net_20/clock_0
+Path slack     : 33613p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4544
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4544
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                              model name   delay     AT  slack  edge  Fanout
+------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q  macrocell9    1250   1250  29861  RISE       1
+Net_20/main_2                         macrocell7    3294   4544  33613  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 63 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0
+Path slack     : 33616p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4541
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4541
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q       macrocell10   1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/main_2  macrocell10   3291   4541  33616  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+
+
+++++ Path 64 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_2
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 33616p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4541
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4541
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/clock_0                 macrocell10         0      0  RISE       1
+
+Data path
+pin name                                     model name   delay     AT  slack  edge  Fanout
+-------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_0\/q         macrocell10   1250   1250  30204  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_2  macrocell11   3291   4541  33616  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 65 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 33622p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4534
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4534
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q       macrocell9    1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_1  macrocell8    3284   4534  33622  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 66 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 33622p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4534
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4534
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q       macrocell9    1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_1  macrocell9    3284   4534  33622  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 67 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_1
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 33622p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4534
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4534
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+Data path
+pin name                                    model name   delay     AT  slack  edge  Fanout
+------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/q        macrocell9    1250   1250  29861  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_1  macrocell12   3284   4534  33622  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 68 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_9
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0
+Path slack     : 34120p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4036
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4036
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q      macrocell12   1250   1250  34120  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/main_9  macrocell8    2786   4036  34120  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_2\/clock_0                 macrocell8          0      0  RISE       1
+
+
+
+++++ Path 69 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_9
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0
+Path slack     : 34120p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4036
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4036
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+Data path
+pin name                                   model name   delay     AT  slack  edge  Fanout
+-----------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q      macrocell12   1250   1250  34120  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/main_9  macrocell9    2786   4036  34120  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:state_1\/clock_0                 macrocell9          0      0  RISE       1
+
+
+
+++++ Path 70 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_8
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0
+Path slack     : 34120p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4036
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4036
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+Data path
+pin name                                    model name   delay     AT  slack  edge  Fanout
+------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q       macrocell12   1250   1250  34120  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/main_8  macrocell12   2786   4036  34120  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+
+
+++++ Path 71 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q
+Path End       : Net_20/main_10
+Capture Clock  : Net_20/clock_0
+Path slack     : 34140p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       4016
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           4016
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/clock_0                macrocell12         0      0  RISE       1
+
+Data path
+pin name                               model name   delay     AT  slack  edge  Fanout
+-------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:ld_ident\/q  macrocell12   1250   1250  34120  RISE       1
+Net_20/main_10                         macrocell7    2766   4016  34140  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+
+++++ Path 72 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_3
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0
+Path slack     : 34256p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       3900
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           3900
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0              macrocell13         0      0  RISE       1
+
+Data path
+pin name                                      model name   delay     AT  slack  edge  Fanout
+--------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/q       macrocell13   1250   1250  32931  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/main_3  macrocell13   2650   3900  34256  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:cnt_enable\/clock_0              macrocell13         0      0  RISE       1
+
+
+
+++++ Path 73 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/q
+Path End       : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_8
+Capture Clock  : \TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0
+Path slack     : 34602p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       3554
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           3554
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+Data path
+pin name                                     model name   delay     AT  slack  edge  Fanout
+-------------------------------------------  -----------  -----  -----  -----  ----  ------
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/q       macrocell11   1250   1250  34602  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/main_8  macrocell11   2304   3554  34602  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+\TFTSHIELD_1:SPIM_1:BSPIM:load_cond\/clock_0               macrocell11         0      0  RISE       1
+
+
+
+++++ Path 74 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin     : Net_20/q
+Path End       : Net_20/main_0
+Capture Clock  : Net_20/clock_0
+Path slack     : 34619p
+
+Capture Clock Arrival Time                         0
++ Clock path delay                                 0
++ Cycle adjust (Clock_1:R#1 vs. Clock_1:R#2)   41667
+- Setup time                                   -3510
+--------------------------------------------   ----- 
+End-of-path required time (ps)                 38157
+
+Launch Clock Arrival Time                      0
++ Clock path delay                         0
++ Data path delay                       3538
+-------------------------------------   ---- 
+End-of-path arrival time (ps)           3538
+ 
+Launch Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+Data path
+pin name       model name   delay     AT  slack  edge  Fanout
+-------------  -----------  -----  -----  -----  ----  ------
+Net_20/q       macrocell7    1250   1250  34619  RISE       1
+Net_20/main_0  macrocell7    2288   3538  34619  RISE       1
+
+Capture Clock Path
+pin name                                                   model name      delay     AT  edge  Fanout
+---------------------------------------------------------  --------------  -----  -----  ----  ------
+ClockBlock/dclk_glb_0                                      clockblockcell      0      0  RISE       1
+Net_20/clock_0                                             macrocell7          0      0  RISE       1
+
+
+===================================================================== 
+                    End of Detailed Report for all timing paths 
+##################################################################### 
+
+##################################################################### 
+                    End of Timing Report 
+##################################################################### 
+

@@ -1,0 +1,1293 @@
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	cursor_x,2,2
+  19              		.comm	cursor_y,2,2
+  20              		.comm	textcolor,2,2
+  21              		.comm	textbgcolor,2,2
+  22              		.comm	textsize,1,1
+  23              		.comm	rotation,1,1
+  24              		.comm	wrap,1,1
+  25              		.comm	_width,4,4
+  26              		.comm	_height,4,4
+  27              		.section	.rodata
+  28              		.align	2
+  29              	.LC0:
+  30 0000 74667420 		.ascii	"tft lcd screen with word wrap\000"
+  30      6C636420 
+  30      73637265 
+  30      656E2077 
+  30      69746820 
+  31 001e 0000     		.align	2
+  32              	.LC1:
+  33 0020 782C793A 		.ascii	"x,y: %i    %i\000"
+  33      20256920 
+  33      20202025 
+  33      6900
+  34 002e 0000     		.section	.text.main,"ax",%progbits
+  35              		.align	2
+  36              		.global	main
+  37              		.thumb
+  38              		.thumb_func
+  39              		.type	main, %function
+  40              	main:
+  41              	.LFB56:
+  42              		.file 1 "main.c"
+   1:main.c        **** /*******************************************************************************
+   2:main.c        **** * \file main.c
+   3:main.c        **** * \brief This file is used to demonstrate the TFTSHIELD API.
+   4:main.c        **** *
+   5:main.c        **** * Version 1.0
+   6:main.c        **** *
+   7:main.c        **** * \author Robert Barron
+   8:main.c        **** *
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 2
+
+
+   9:main.c        **** * \bug 
+  10:main.c        **** *******************************************************************************/
+  11:main.c        **** #include <project.h>
+  12:main.c        **** #include "stdio.h"
+  13:main.c        **** 
+  14:main.c        **** // This is calibration data for the raw touch data to the screen coordinates
+  15:main.c        **** #define TS_MINX 150
+  16:main.c        **** #define TS_MINY 130
+  17:main.c        **** #define TS_MAXX 3800
+  18:main.c        **** #define TS_MAXY 4000
+  19:main.c        **** long mapCoor(long x, long in_min, long in_max, long out_min, long out_max);
+  20:main.c        **** 
+  21:main.c        **** int main()
+  22:main.c        **** {   
+  43              		.loc 1 22 0
+  44              		.cfi_startproc
+  45              		@ args = 0, pretend = 0, frame = 64
+  46              		@ frame_needed = 1, uses_anonymous_args = 0
+  47 0000 90B5     		push	{r4, r7, lr}
+  48              		.cfi_def_cfa_offset 12
+  49              		.cfi_offset 4, -12
+  50              		.cfi_offset 7, -8
+  51              		.cfi_offset 14, -4
+  52 0002 93B0     		sub	sp, sp, #76
+  53              		.cfi_def_cfa_offset 88
+  54 0004 02AF     		add	r7, sp, #8
+  55              		.cfi_def_cfa 7, 80
+  23:main.c        ****     //initializes tft
+  24:main.c        ****     CyDelay(1000);
+  56              		.loc 1 24 0
+  57 0006 4FF47A70 		mov	r0, #1000
+  58 000a FFF7FEFF 		bl	CyDelay
+  25:main.c        ****     Clock_1_SetDividerValue(24);
+  59              		.loc 1 25 0
+  60 000e 1720     		movs	r0, #23
+  61 0010 0121     		movs	r1, #1
+  62 0012 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  26:main.c        ****     CyDelay(10);
+  63              		.loc 1 26 0
+  64 0016 0A20     		movs	r0, #10
+  65 0018 FFF7FEFF 		bl	CyDelay
+  27:main.c        ****     //TFTSHIELD_1_StartTouch();
+  28:main.c        ****     bool touch_en = 0;
+  66              		.loc 1 28 0
+  67 001c 0023     		movs	r3, #0
+  68 001e 87F83F30 		strb	r3, [r7, #63]
+  29:main.c        ****     uint16_t x, y;
+  30:main.c        ****     uint8_t z, buf;
+  31:main.c        ****     char buffer[50];
+  32:main.c        ****     
+  33:main.c        ****     while(!TFTSHIELD_1_StartTouch())
+  69              		.loc 1 33 0
+  70 0022 00BF     		nop
+  71              	.L2:
+  72              		.loc 1 33 0 is_stmt 0 discriminator 1
+  73 0024 FFF7FEFF 		bl	TFTSHIELD_1_StartTouch
+  74 0028 0346     		mov	r3, r0
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 3
+
+
+  75 002a 83F00103 		eor	r3, r3, #1
+  76 002e DBB2     		uxtb	r3, r3
+  77 0030 002B     		cmp	r3, #0
+  78 0032 F7D1     		bne	.L2
+  34:main.c        ****     {
+  35:main.c        ****        
+  36:main.c        ****     }
+  37:main.c        ****     touch_en = 1;
+  79              		.loc 1 37 0 is_stmt 1
+  80 0034 0123     		movs	r3, #1
+  81 0036 87F83F30 		strb	r3, [r7, #63]
+  38:main.c        ****     Clock_1_SetDividerValue(1);
+  82              		.loc 1 38 0
+  83 003a 0020     		movs	r0, #0
+  84 003c 0121     		movs	r1, #1
+  85 003e FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  39:main.c        ****     CyDelay(10);
+  86              		.loc 1 39 0
+  87 0042 0A20     		movs	r0, #10
+  88 0044 FFF7FEFF 		bl	CyDelay
+  40:main.c        ****     TFTSHIELD_1_Start();
+  89              		.loc 1 40 0
+  90 0048 FFF7FEFF 		bl	TFTSHIELD_1_Start
+  41:main.c        ****     
+  42:main.c        ****     TFTSHIELD_1_FillScreen(BLACK);
+  91              		.loc 1 42 0
+  92 004c 0020     		movs	r0, #0
+  93 004e FFF7FEFF 		bl	TFTSHIELD_1_FillScreen
+  43:main.c        ****     //start at 0,0 for text
+  44:main.c        ****     TFTSHIELD_1_SetCursor(0,0);
+  94              		.loc 1 44 0
+  95 0052 0020     		movs	r0, #0
+  96 0054 0021     		movs	r1, #0
+  97 0056 FFF7FEFF 		bl	TFTSHIELD_1_SetCursor
+  45:main.c        ****     TFTSHIELD_1_SetTextColor(WHITE);  
+  98              		.loc 1 45 0
+  99 005a 4FF6FF70 		movw	r0, #65535
+ 100 005e FFF7FEFF 		bl	TFTSHIELD_1_SetTextColor
+  46:main.c        ****     TFTSHIELD_1_SetTextSize(2);
+ 101              		.loc 1 46 0
+ 102 0062 0220     		movs	r0, #2
+ 103 0064 FFF7FEFF 		bl	TFTSHIELD_1_SetTextSize
+  47:main.c        ****     
+  48:main.c        ****     //landscape orientation
+  49:main.c        ****     TFTSHIELD_1_SetRotation(0);
+ 104              		.loc 1 49 0
+ 105 0068 0020     		movs	r0, #0
+ 106 006a FFF7FEFF 		bl	TFTSHIELD_1_SetRotation
+  50:main.c        ****     TFTSHIELD_1_PrintString("tft lcd screen with word wrap");
+ 107              		.loc 1 50 0
+ 108 006e 5648     		ldr	r0, .L5
+ 109 0070 FFF7FEFF 		bl	TFTSHIELD_1_PrintString
+  51:main.c        ****     
+  52:main.c        ****     TFTSHIELD_1_DrawLine(50, 150, 100, 150, GREEN);
+ 110              		.loc 1 52 0
+ 111 0074 4FF4FC63 		mov	r3, #2016
+ 112 0078 0093     		str	r3, [sp]
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 4
+
+
+ 113 007a 3220     		movs	r0, #50
+ 114 007c 9621     		movs	r1, #150
+ 115 007e 6422     		movs	r2, #100
+ 116 0080 9623     		movs	r3, #150
+ 117 0082 FFF7FEFF 		bl	TFTSHIELD_1_DrawLine
+  53:main.c        ****     TFTSHIELD_1_DrawLine(35, 100, 35 , 200, BLUE);
+ 118              		.loc 1 53 0
+ 119 0086 1F23     		movs	r3, #31
+ 120 0088 0093     		str	r3, [sp]
+ 121 008a 2320     		movs	r0, #35
+ 122 008c 6421     		movs	r1, #100
+ 123 008e 2322     		movs	r2, #35
+ 124 0090 C823     		movs	r3, #200
+ 125 0092 FFF7FEFF 		bl	TFTSHIELD_1_DrawLine
+  54:main.c        ****     TFTSHIELD_1_FillCircle(100,100,10,MAGENTA);
+ 126              		.loc 1 54 0
+ 127 0096 6420     		movs	r0, #100
+ 128 0098 6421     		movs	r1, #100
+ 129 009a 0A22     		movs	r2, #10
+ 130 009c 4FF61F03 		movw	r3, #63519
+ 131 00a0 FFF7FEFF 		bl	TFTSHIELD_1_FillCircle
+  55:main.c        ****     
+  56:main.c        ****     TFTSHIELD_1_FillRect(150, 150, 75,75, YELLOW);
+ 132              		.loc 1 56 0
+ 133 00a4 4FF6E073 		movw	r3, #65504
+ 134 00a8 0093     		str	r3, [sp]
+ 135 00aa 9620     		movs	r0, #150
+ 136 00ac 9621     		movs	r1, #150
+ 137 00ae 4B22     		movs	r2, #75
+ 138 00b0 4B23     		movs	r3, #75
+ 139 00b2 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+  57:main.c        ****     if(touch_en)
+  58:main.c        ****     {
+  59:main.c        ****        // TFTSHIELD_1_PrintString("GO1");
+  60:main.c        ****     }
+  61:main.c        ****     //initializes touchscreen
+  62:main.c        ****     //clock must be set to 1MHZ when polling the touchscreen..
+  63:main.c        ****     Clock_1_SetDividerValue(24);
+ 140              		.loc 1 63 0
+ 141 00b6 1720     		movs	r0, #23
+ 142 00b8 0121     		movs	r1, #1
+ 143 00ba FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  64:main.c        ****     CyDelay(10);
+ 144              		.loc 1 64 0
+ 145 00be 0A20     		movs	r0, #10
+ 146 00c0 FFF7FEFF 		bl	CyDelay
+  65:main.c        ****     
+  66:main.c        ****     //int touchon = 0;
+  67:main.c        ****     if(TFTSHIELD_1_StartTouch())
+ 147              		.loc 1 67 0
+ 148 00c4 FFF7FEFF 		bl	TFTSHIELD_1_StartTouch
+ 149 00c8 0346     		mov	r3, r0
+ 150 00ca 002B     		cmp	r3, #0
+ 151 00cc 0AD0     		beq	.L3
+  68:main.c        ****     {
+  69:main.c        ****          //touchon = 1;  
+  70:main.c        ****         Clock_1_SetDividerValue(1);
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 5
+
+
+ 152              		.loc 1 70 0
+ 153 00ce 0020     		movs	r0, #0
+ 154 00d0 0121     		movs	r1, #1
+ 155 00d2 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  71:main.c        ****         CyDelay(1);
+ 156              		.loc 1 71 0
+ 157 00d6 0120     		movs	r0, #1
+ 158 00d8 FFF7FEFF 		bl	CyDelay
+  72:main.c        ****         //TFTSHIELD_1_PrintString("     GO2");
+  73:main.c        ****         Clock_1_SetDividerValue(24);
+ 159              		.loc 1 73 0
+ 160 00dc 1720     		movs	r0, #23
+ 161 00de 0121     		movs	r1, #1
+ 162 00e0 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ 163              	.L3:
+  74:main.c        ****     } 
+  75:main.c        ****     
+  76:main.c        ****     
+  77:main.c        ****     
+  78:main.c        ****     for(;;)
+  79:main.c        ****     {
+  80:main.c        ****         Clock_1_SetDividerValue(24);
+ 164              		.loc 1 80 0
+ 165 00e4 1720     		movs	r0, #23
+ 166 00e6 0121     		movs	r1, #1
+ 167 00e8 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  81:main.c        ****         //Clock_1_SetDividerValue(24);
+  82:main.c        ****         CyDelay(1);
+ 168              		.loc 1 82 0
+ 169 00ec 0120     		movs	r0, #1
+ 170 00ee FFF7FEFF 		bl	CyDelay
+  83:main.c        ****         if(TFTSHIELD_1_Touched())
+ 171              		.loc 1 83 0
+ 172 00f2 FFF7FEFF 		bl	TFTSHIELD_1_Touched
+ 173 00f6 0346     		mov	r3, r0
+ 174 00f8 002B     		cmp	r3, #0
+ 175 00fa 5AD0     		beq	.L4
+  84:main.c        ****         {
+  85:main.c        ****             Clock_1_SetDividerValue(1);
+ 176              		.loc 1 85 0
+ 177 00fc 0020     		movs	r0, #0
+ 178 00fe 0121     		movs	r1, #1
+ 179 0100 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  86:main.c        ****             CyDelay(1);
+ 180              		.loc 1 86 0
+ 181 0104 0120     		movs	r0, #1
+ 182 0106 FFF7FEFF 		bl	CyDelay
+  87:main.c        ****             TFTSHIELD_1_FillRect(0, 0, 240,50, BLACK);
+ 183              		.loc 1 87 0
+ 184 010a 0023     		movs	r3, #0
+ 185 010c 0093     		str	r3, [sp]
+ 186 010e 0020     		movs	r0, #0
+ 187 0110 0021     		movs	r1, #0
+ 188 0112 F022     		movs	r2, #240
+ 189 0114 3223     		movs	r3, #50
+ 190 0116 FFF7FEFF 		bl	TFTSHIELD_1_FillRect
+  88:main.c        ****             TFTSHIELD_1_SetCursor(0,5);
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 6
+
+
+ 191              		.loc 1 88 0
+ 192 011a 0020     		movs	r0, #0
+ 193 011c 0521     		movs	r1, #5
+ 194 011e FFF7FEFF 		bl	TFTSHIELD_1_SetCursor
+  89:main.c        ****             
+  90:main.c        ****             Clock_1_SetDividerValue(24);
+ 195              		.loc 1 90 0
+ 196 0122 1720     		movs	r0, #23
+ 197 0124 0121     		movs	r1, #1
+ 198 0126 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  91:main.c        ****            
+  92:main.c        ****             TFTSHIELD_1_ReadData(&x,&y,&z);
+ 199              		.loc 1 92 0
+ 200 012a 07F13C01 		add	r1, r7, #60
+ 201 012e 07F13A02 		add	r2, r7, #58
+ 202 0132 07F13903 		add	r3, r7, #57
+ 203 0136 0846     		mov	r0, r1
+ 204 0138 1146     		mov	r1, r2
+ 205 013a 1A46     		mov	r2, r3
+ 206 013c FFF7FEFF 		bl	TFTSHIELD_1_ReadData
+  93:main.c        ****             x = mapCoor(x, TS_MINX, TS_MAXX, 0, 240);
+ 207              		.loc 1 93 0
+ 208 0140 BB8F     		ldrh	r3, [r7, #60]
+ 209 0142 1A46     		mov	r2, r3
+ 210 0144 F023     		movs	r3, #240
+ 211 0146 0093     		str	r3, [sp]
+ 212 0148 1046     		mov	r0, r2
+ 213 014a 9621     		movs	r1, #150
+ 214 014c 40F6D862 		movw	r2, #3800
+ 215 0150 0023     		movs	r3, #0
+ 216 0152 FFF7FEFF 		bl	mapCoor
+ 217 0156 0346     		mov	r3, r0
+ 218 0158 9BB2     		uxth	r3, r3
+ 219 015a BB87     		strh	r3, [r7, #60]	@ movhi
+  94:main.c        ****             y = mapCoor(y, TS_MINY, TS_MAXY, 0, 320);
+ 220              		.loc 1 94 0
+ 221 015c 7B8F     		ldrh	r3, [r7, #58]
+ 222 015e 1A46     		mov	r2, r3
+ 223 0160 4FF4A073 		mov	r3, #320
+ 224 0164 0093     		str	r3, [sp]
+ 225 0166 1046     		mov	r0, r2
+ 226 0168 8221     		movs	r1, #130
+ 227 016a 4FF47A62 		mov	r2, #4000
+ 228 016e 0023     		movs	r3, #0
+ 229 0170 FFF7FEFF 		bl	mapCoor
+ 230 0174 0346     		mov	r3, r0
+ 231 0176 9BB2     		uxth	r3, r3
+ 232 0178 7B87     		strh	r3, [r7, #58]	@ movhi
+  95:main.c        ****             sprintf(buffer,"x,y: %i    %i",x,y);
+ 233              		.loc 1 95 0
+ 234 017a BB8F     		ldrh	r3, [r7, #60]
+ 235 017c 1A46     		mov	r2, r3
+ 236 017e 7B8F     		ldrh	r3, [r7, #58]
+ 237 0180 1C46     		mov	r4, r3
+ 238 0182 3B1D     		adds	r3, r7, #4
+ 239 0184 1846     		mov	r0, r3
+ 240 0186 1149     		ldr	r1, .L5+4
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 7
+
+
+ 241 0188 2346     		mov	r3, r4
+ 242 018a FFF7FEFF 		bl	sprintf
+  96:main.c        ****             Clock_1_SetDividerValue(1);
+ 243              		.loc 1 96 0
+ 244 018e 0020     		movs	r0, #0
+ 245 0190 0121     		movs	r1, #1
+ 246 0192 FFF7FEFF 		bl	Clock_1_SetDividerRegister
+  97:main.c        ****             CyDelay(1);
+ 247              		.loc 1 97 0
+ 248 0196 0120     		movs	r0, #1
+ 249 0198 FFF7FEFF 		bl	CyDelay
+  98:main.c        ****             TFTSHIELD_1_PrintString(buffer);
+ 250              		.loc 1 98 0
+ 251 019c 3B1D     		adds	r3, r7, #4
+ 252 019e 1846     		mov	r0, r3
+ 253 01a0 FFF7FEFF 		bl	TFTSHIELD_1_PrintString
+  99:main.c        ****             CyDelay(1);
+ 254              		.loc 1 99 0
+ 255 01a4 0120     		movs	r0, #1
+ 256 01a6 FFF7FEFF 		bl	CyDelay
+ 100:main.c        ****                 
+ 101:main.c        ****             Clock_1_SetDividerValue(24);
+ 257              		.loc 1 101 0
+ 258 01aa 1720     		movs	r0, #23
+ 259 01ac 0121     		movs	r1, #1
+ 260 01ae FFF7FEFF 		bl	Clock_1_SetDividerRegister
+ 261              	.L4:
+ 102:main.c        ****         }
+ 103:main.c        ****         TFTSHIELD_1_WriteRegister8(STMPE_INT_STA, 0xFF); // reset all ints
+ 262              		.loc 1 103 0
+ 263 01b2 0B20     		movs	r0, #11
+ 264 01b4 FF21     		movs	r1, #255
+ 265 01b6 FFF7FEFF 		bl	TFTSHIELD_1_WriteRegister8
+ 104:main.c        ****         TFTSHIELD_1_ResetBuffer();
+ 266              		.loc 1 104 0
+ 267 01ba FFF7FEFF 		bl	TFTSHIELD_1_ResetBuffer
+ 105:main.c        ****         
+ 106:main.c        ****             //TFTSHIELD_1_FillRect(150, 150, 75,75, GREEN); 
+ 107:main.c        ****            
+ 108:main.c        ****       // }
+ 109:main.c        ****       // else
+ 110:main.c        ****        //{
+ 111:main.c        ****          //  TFTSHIELD_1_FillRect(150, 150, 75,75, RED); 
+ 112:main.c        ****       // }
+ 113:main.c        ****         CyDelay(10);
+ 268              		.loc 1 113 0
+ 269 01be 0A20     		movs	r0, #10
+ 270 01c0 FFF7FEFF 		bl	CyDelay
+ 114:main.c        ****     }
+ 271              		.loc 1 114 0
+ 272 01c4 8EE7     		b	.L3
+ 273              	.L6:
+ 274 01c6 00BF     		.align	2
+ 275              	.L5:
+ 276 01c8 00000000 		.word	.LC0
+ 277 01cc 20000000 		.word	.LC1
+ 278              		.cfi_endproc
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 8
+
+
+ 279              	.LFE56:
+ 280              		.size	main, .-main
+ 281              		.section	.text.mapCoor,"ax",%progbits
+ 282              		.align	2
+ 283              		.global	mapCoor
+ 284              		.thumb
+ 285              		.thumb_func
+ 286              		.type	mapCoor, %function
+ 287              	mapCoor:
+ 288              	.LFB57:
+ 115:main.c        **** }
+ 116:main.c        **** 
+ 117:main.c        **** long mapCoor(long x, long in_min, long in_max, long out_min, long out_max)
+ 118:main.c        **** {
+ 289              		.loc 1 118 0
+ 290              		.cfi_startproc
+ 291              		@ args = 4, pretend = 0, frame = 16
+ 292              		@ frame_needed = 1, uses_anonymous_args = 0
+ 293              		@ link register save eliminated.
+ 294 0000 80B4     		push	{r7}
+ 295              		.cfi_def_cfa_offset 4
+ 296              		.cfi_offset 7, -4
+ 297 0002 85B0     		sub	sp, sp, #20
+ 298              		.cfi_def_cfa_offset 24
+ 299 0004 00AF     		add	r7, sp, #0
+ 300              		.cfi_def_cfa_register 7
+ 301 0006 F860     		str	r0, [r7, #12]
+ 302 0008 B960     		str	r1, [r7, #8]
+ 303 000a 7A60     		str	r2, [r7, #4]
+ 304 000c 3B60     		str	r3, [r7]
+ 119:main.c        ****   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+ 305              		.loc 1 119 0
+ 306 000e FA68     		ldr	r2, [r7, #12]
+ 307 0010 BB68     		ldr	r3, [r7, #8]
+ 308 0012 D31A     		subs	r3, r2, r3
+ 309 0014 B969     		ldr	r1, [r7, #24]
+ 310 0016 3A68     		ldr	r2, [r7]
+ 311 0018 8A1A     		subs	r2, r1, r2
+ 312 001a 02FB03F2 		mul	r2, r2, r3
+ 313 001e 7968     		ldr	r1, [r7, #4]
+ 314 0020 BB68     		ldr	r3, [r7, #8]
+ 315 0022 CB1A     		subs	r3, r1, r3
+ 316 0024 92FBF3F2 		sdiv	r2, r2, r3
+ 317 0028 3B68     		ldr	r3, [r7]
+ 318 002a 1344     		add	r3, r3, r2
+ 120:main.c        **** }
+ 319              		.loc 1 120 0
+ 320 002c 1846     		mov	r0, r3
+ 321 002e 1437     		adds	r7, r7, #20
+ 322              		.cfi_def_cfa_offset 4
+ 323 0030 BD46     		mov	sp, r7
+ 324              		.cfi_def_cfa_register 13
+ 325              		@ sp needed
+ 326 0032 5DF8047B 		ldr	r7, [sp], #4
+ 327              		.cfi_restore 7
+ 328              		.cfi_def_cfa_offset 0
+ 329 0036 7047     		bx	lr
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 9
+
+
+ 330              		.cfi_endproc
+ 331              	.LFE57:
+ 332              		.size	mapCoor, .-mapCoor
+ 333              		.text
+ 334              	.Letext0:
+ 335              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 336              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.0\\psoc creator\\import\\gnu\\arm\\4.9.
+ 337              		.file 4 "Generated_Source\\PSoC5/TFTSHIELD_1.h"
+ 338              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 339              		.section	.debug_info,"",%progbits
+ 340              	.Ldebug_info0:
+ 341 0000 61020000 		.4byte	0x261
+ 342 0004 0400     		.2byte	0x4
+ 343 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 344 000a 04       		.byte	0x4
+ 345 000b 01       		.uleb128 0x1
+ 346 000c 76010000 		.4byte	.LASF38
+ 347 0010 01       		.byte	0x1
+ 348 0011 66010000 		.4byte	.LASF39
+ 349 0015 0F010000 		.4byte	.LASF40
+ 350 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 351 001d 00000000 		.4byte	0
+ 352 0021 00000000 		.4byte	.Ldebug_line0
+ 353 0025 02       		.uleb128 0x2
+ 354 0026 01       		.byte	0x1
+ 355 0027 06       		.byte	0x6
+ 356 0028 40020000 		.4byte	.LASF0
+ 357 002c 03       		.uleb128 0x3
+ 358 002d 00000000 		.4byte	.LASF2
+ 359 0031 02       		.byte	0x2
+ 360 0032 1D       		.byte	0x1d
+ 361 0033 37000000 		.4byte	0x37
+ 362 0037 02       		.uleb128 0x2
+ 363 0038 01       		.byte	0x1
+ 364 0039 08       		.byte	0x8
+ 365 003a 44000000 		.4byte	.LASF1
+ 366 003e 03       		.uleb128 0x3
+ 367 003f B7000000 		.4byte	.LASF3
+ 368 0043 02       		.byte	0x2
+ 369 0044 29       		.byte	0x29
+ 370 0045 49000000 		.4byte	0x49
+ 371 0049 02       		.uleb128 0x2
+ 372 004a 02       		.byte	0x2
+ 373 004b 05       		.byte	0x5
+ 374 004c 0C020000 		.4byte	.LASF4
+ 375 0050 03       		.uleb128 0x3
+ 376 0051 8B000000 		.4byte	.LASF5
+ 377 0055 02       		.byte	0x2
+ 378 0056 2B       		.byte	0x2b
+ 379 0057 5B000000 		.4byte	0x5b
+ 380 005b 02       		.uleb128 0x2
+ 381 005c 02       		.byte	0x2
+ 382 005d 07       		.byte	0x7
+ 383 005e 59000000 		.4byte	.LASF6
+ 384 0062 03       		.uleb128 0x3
+ 385 0063 0A000000 		.4byte	.LASF7
+ 386 0067 02       		.byte	0x2
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 10
+
+
+ 387 0068 3F       		.byte	0x3f
+ 388 0069 6D000000 		.4byte	0x6d
+ 389 006d 02       		.uleb128 0x2
+ 390 006e 04       		.byte	0x4
+ 391 006f 05       		.byte	0x5
+ 392 0070 32020000 		.4byte	.LASF8
+ 393 0074 02       		.uleb128 0x2
+ 394 0075 04       		.byte	0x4
+ 395 0076 07       		.byte	0x7
+ 396 0077 96000000 		.4byte	.LASF9
+ 397 007b 02       		.uleb128 0x2
+ 398 007c 08       		.byte	0x8
+ 399 007d 05       		.byte	0x5
+ 400 007e 4F010000 		.4byte	.LASF10
+ 401 0082 02       		.uleb128 0x2
+ 402 0083 08       		.byte	0x8
+ 403 0084 07       		.byte	0x7
+ 404 0085 D7000000 		.4byte	.LASF11
+ 405 0089 04       		.uleb128 0x4
+ 406 008a 04       		.byte	0x4
+ 407 008b 05       		.byte	0x5
+ 408 008c 696E7400 		.ascii	"int\000"
+ 409 0090 02       		.uleb128 0x2
+ 410 0091 04       		.byte	0x4
+ 411 0092 07       		.byte	0x7
+ 412 0093 C1000000 		.4byte	.LASF12
+ 413 0097 03       		.uleb128 0x3
+ 414 0098 EE000000 		.4byte	.LASF13
+ 415 009c 03       		.byte	0x3
+ 416 009d 15       		.byte	0x15
+ 417 009e 2C000000 		.4byte	0x2c
+ 418 00a2 03       		.uleb128 0x3
+ 419 00a3 F6000000 		.4byte	.LASF14
+ 420 00a7 03       		.byte	0x3
+ 421 00a8 20       		.byte	0x20
+ 422 00a9 3E000000 		.4byte	0x3e
+ 423 00ad 03       		.uleb128 0x3
+ 424 00ae 1D020000 		.4byte	.LASF15
+ 425 00b2 03       		.byte	0x3
+ 426 00b3 21       		.byte	0x21
+ 427 00b4 50000000 		.4byte	0x50
+ 428 00b8 03       		.uleb128 0x3
+ 429 00b9 07010000 		.4byte	.LASF16
+ 430 00bd 03       		.byte	0x3
+ 431 00be 2C       		.byte	0x2c
+ 432 00bf 62000000 		.4byte	0x62
+ 433 00c3 02       		.uleb128 0x2
+ 434 00c4 04       		.byte	0x4
+ 435 00c5 04       		.byte	0x4
+ 436 00c6 3E000000 		.4byte	.LASF17
+ 437 00ca 02       		.uleb128 0x2
+ 438 00cb 08       		.byte	0x8
+ 439 00cc 04       		.byte	0x4
+ 440 00cd 20000000 		.4byte	.LASF18
+ 441 00d1 02       		.uleb128 0x2
+ 442 00d2 01       		.byte	0x1
+ 443 00d3 08       		.byte	0x8
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 11
+
+
+ 444 00d4 3B020000 		.4byte	.LASF19
+ 445 00d8 02       		.uleb128 0x2
+ 446 00d9 04       		.byte	0x4
+ 447 00da 07       		.byte	0x7
+ 448 00db 5D010000 		.4byte	.LASF20
+ 449 00df 05       		.uleb128 0x5
+ 450 00e0 B2000000 		.4byte	.LASF41
+ 451 00e4 01       		.byte	0x1
+ 452 00e5 15       		.byte	0x15
+ 453 00e6 89000000 		.4byte	0x89
+ 454 00ea 00000000 		.4byte	.LFB56
+ 455 00ee D0010000 		.4byte	.LFE56-.LFB56
+ 456 00f2 01       		.uleb128 0x1
+ 457 00f3 9C       		.byte	0x9c
+ 458 00f4 45010000 		.4byte	0x145
+ 459 00f8 06       		.uleb128 0x6
+ 460 00f9 FE000000 		.4byte	.LASF21
+ 461 00fd 01       		.byte	0x1
+ 462 00fe 1C       		.byte	0x1c
+ 463 00ff 45010000 		.4byte	0x145
+ 464 0103 02       		.uleb128 0x2
+ 465 0104 91       		.byte	0x91
+ 466 0105 6F       		.sleb128 -17
+ 467 0106 07       		.uleb128 0x7
+ 468 0107 7800     		.ascii	"x\000"
+ 469 0109 01       		.byte	0x1
+ 470 010a 1D       		.byte	0x1d
+ 471 010b AD000000 		.4byte	0xad
+ 472 010f 02       		.uleb128 0x2
+ 473 0110 91       		.byte	0x91
+ 474 0111 6C       		.sleb128 -20
+ 475 0112 07       		.uleb128 0x7
+ 476 0113 7900     		.ascii	"y\000"
+ 477 0115 01       		.byte	0x1
+ 478 0116 1D       		.byte	0x1d
+ 479 0117 AD000000 		.4byte	0xad
+ 480 011b 02       		.uleb128 0x2
+ 481 011c 91       		.byte	0x91
+ 482 011d 6A       		.sleb128 -22
+ 483 011e 07       		.uleb128 0x7
+ 484 011f 7A00     		.ascii	"z\000"
+ 485 0121 01       		.byte	0x1
+ 486 0122 1E       		.byte	0x1e
+ 487 0123 97000000 		.4byte	0x97
+ 488 0127 02       		.uleb128 0x2
+ 489 0128 91       		.byte	0x91
+ 490 0129 69       		.sleb128 -23
+ 491 012a 08       		.uleb128 0x8
+ 492 012b 62756600 		.ascii	"buf\000"
+ 493 012f 01       		.byte	0x1
+ 494 0130 1E       		.byte	0x1e
+ 495 0131 97000000 		.4byte	0x97
+ 496 0135 06       		.uleb128 0x6
+ 497 0136 16020000 		.4byte	.LASF22
+ 498 013a 01       		.byte	0x1
+ 499 013b 1F       		.byte	0x1f
+ 500 013c 4C010000 		.4byte	0x14c
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 12
+
+
+ 501 0140 03       		.uleb128 0x3
+ 502 0141 91       		.byte	0x91
+ 503 0142 B47F     		.sleb128 -76
+ 504 0144 00       		.byte	0
+ 505 0145 02       		.uleb128 0x2
+ 506 0146 01       		.byte	0x1
+ 507 0147 02       		.byte	0x2
+ 508 0148 54020000 		.4byte	.LASF23
+ 509 014c 09       		.uleb128 0x9
+ 510 014d D1000000 		.4byte	0xd1
+ 511 0151 5C010000 		.4byte	0x15c
+ 512 0155 0A       		.uleb128 0xa
+ 513 0156 D8000000 		.4byte	0xd8
+ 514 015a 31       		.byte	0x31
+ 515 015b 00       		.byte	0
+ 516 015c 0B       		.uleb128 0xb
+ 517 015d 4C020000 		.4byte	.LASF42
+ 518 0161 01       		.byte	0x1
+ 519 0162 75       		.byte	0x75
+ 520 0163 6D000000 		.4byte	0x6d
+ 521 0167 00000000 		.4byte	.LFB57
+ 522 016b 38000000 		.4byte	.LFE57-.LFB57
+ 523 016f 01       		.uleb128 0x1
+ 524 0170 9C       		.byte	0x9c
+ 525 0171 BA010000 		.4byte	0x1ba
+ 526 0175 0C       		.uleb128 0xc
+ 527 0176 7800     		.ascii	"x\000"
+ 528 0178 01       		.byte	0x1
+ 529 0179 75       		.byte	0x75
+ 530 017a 6D000000 		.4byte	0x6d
+ 531 017e 02       		.uleb128 0x2
+ 532 017f 91       		.byte	0x91
+ 533 0180 74       		.sleb128 -12
+ 534 0181 0D       		.uleb128 0xd
+ 535 0182 52000000 		.4byte	.LASF24
+ 536 0186 01       		.byte	0x1
+ 537 0187 75       		.byte	0x75
+ 538 0188 6D000000 		.4byte	0x6d
+ 539 018c 02       		.uleb128 0x2
+ 540 018d 91       		.byte	0x91
+ 541 018e 70       		.sleb128 -16
+ 542 018f 0D       		.uleb128 0xd
+ 543 0190 27000000 		.4byte	.LASF25
+ 544 0194 01       		.byte	0x1
+ 545 0195 75       		.byte	0x75
+ 546 0196 6D000000 		.4byte	0x6d
+ 547 019a 02       		.uleb128 0x2
+ 548 019b 91       		.byte	0x91
+ 549 019c 6C       		.sleb128 -20
+ 550 019d 0D       		.uleb128 0xd
+ 551 019e 36000000 		.4byte	.LASF26
+ 552 01a2 01       		.byte	0x1
+ 553 01a3 75       		.byte	0x75
+ 554 01a4 6D000000 		.4byte	0x6d
+ 555 01a8 02       		.uleb128 0x2
+ 556 01a9 91       		.byte	0x91
+ 557 01aa 68       		.sleb128 -24
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 13
+
+
+ 558 01ab 0D       		.uleb128 0xd
+ 559 01ac 2E000000 		.4byte	.LASF27
+ 560 01b0 01       		.byte	0x1
+ 561 01b1 75       		.byte	0x75
+ 562 01b2 6D000000 		.4byte	0x6d
+ 563 01b6 02       		.uleb128 0x2
+ 564 01b7 91       		.byte	0x91
+ 565 01b8 00       		.sleb128 0
+ 566 01b9 00       		.byte	0
+ 567 01ba 0E       		.uleb128 0xe
+ 568 01bb 6C000000 		.4byte	.LASF28
+ 569 01bf 04       		.byte	0x4
+ 570 01c0 6D       		.byte	0x6d
+ 571 01c1 A2000000 		.4byte	0xa2
+ 572 01c5 05       		.uleb128 0x5
+ 573 01c6 03       		.byte	0x3
+ 574 01c7 00000000 		.4byte	cursor_x
+ 575 01cb 0E       		.uleb128 0xe
+ 576 01cc 75000000 		.4byte	.LASF29
+ 577 01d0 04       		.byte	0x4
+ 578 01d1 6E       		.byte	0x6e
+ 579 01d2 A2000000 		.4byte	0xa2
+ 580 01d6 05       		.uleb128 0x5
+ 581 01d7 03       		.byte	0x3
+ 582 01d8 00000000 		.4byte	cursor_y
+ 583 01dc 0E       		.uleb128 0xe
+ 584 01dd A8000000 		.4byte	.LASF30
+ 585 01e1 04       		.byte	0x4
+ 586 01e2 6F       		.byte	0x6f
+ 587 01e3 AD000000 		.4byte	0xad
+ 588 01e7 05       		.uleb128 0x5
+ 589 01e8 03       		.byte	0x3
+ 590 01e9 00000000 		.4byte	textcolor
+ 591 01ed 0E       		.uleb128 0xe
+ 592 01ee 26020000 		.4byte	.LASF31
+ 593 01f2 04       		.byte	0x4
+ 594 01f3 70       		.byte	0x70
+ 595 01f4 AD000000 		.4byte	0xad
+ 596 01f8 05       		.uleb128 0x5
+ 597 01f9 03       		.byte	0x3
+ 598 01fa 00000000 		.4byte	textbgcolor
+ 599 01fe 0E       		.uleb128 0xe
+ 600 01ff 6D010000 		.4byte	.LASF32
+ 601 0203 04       		.byte	0x4
+ 602 0204 71       		.byte	0x71
+ 603 0205 97000000 		.4byte	0x97
+ 604 0209 05       		.uleb128 0x5
+ 605 020a 03       		.byte	0x3
+ 606 020b 00000000 		.4byte	textsize
+ 607 020f 0E       		.uleb128 0xe
+ 608 0210 CE000000 		.4byte	.LASF33
+ 609 0214 04       		.byte	0x4
+ 610 0215 72       		.byte	0x72
+ 611 0216 97000000 		.4byte	0x97
+ 612 021a 05       		.uleb128 0x5
+ 613 021b 03       		.byte	0x3
+ 614 021c 00000000 		.4byte	rotation
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 14
+
+
+ 615 0220 0E       		.uleb128 0xe
+ 616 0221 1B000000 		.4byte	.LASF34
+ 617 0225 04       		.byte	0x4
+ 618 0226 73       		.byte	0x73
+ 619 0227 97000000 		.4byte	0x97
+ 620 022b 05       		.uleb128 0x5
+ 621 022c 03       		.byte	0x3
+ 622 022d 00000000 		.4byte	wrap
+ 623 0231 0E       		.uleb128 0xe
+ 624 0232 14000000 		.4byte	.LASF35
+ 625 0236 04       		.byte	0x4
+ 626 0237 74       		.byte	0x74
+ 627 0238 89000000 		.4byte	0x89
+ 628 023c 05       		.uleb128 0x5
+ 629 023d 03       		.byte	0x3
+ 630 023e 00000000 		.4byte	_width
+ 631 0242 0E       		.uleb128 0xe
+ 632 0243 04020000 		.4byte	.LASF36
+ 633 0247 04       		.byte	0x4
+ 634 0248 75       		.byte	0x75
+ 635 0249 89000000 		.4byte	0x89
+ 636 024d 05       		.uleb128 0x5
+ 637 024e 03       		.byte	0x3
+ 638 024f 00000000 		.4byte	_height
+ 639 0253 0F       		.uleb128 0xf
+ 640 0254 7E000000 		.4byte	.LASF37
+ 641 0258 05       		.byte	0x5
+ 642 0259 1606     		.2byte	0x616
+ 643 025b 5F020000 		.4byte	0x25f
+ 644 025f 10       		.uleb128 0x10
+ 645 0260 B8000000 		.4byte	0xb8
+ 646 0264 00       		.byte	0
+ 647              		.section	.debug_abbrev,"",%progbits
+ 648              	.Ldebug_abbrev0:
+ 649 0000 01       		.uleb128 0x1
+ 650 0001 11       		.uleb128 0x11
+ 651 0002 01       		.byte	0x1
+ 652 0003 25       		.uleb128 0x25
+ 653 0004 0E       		.uleb128 0xe
+ 654 0005 13       		.uleb128 0x13
+ 655 0006 0B       		.uleb128 0xb
+ 656 0007 03       		.uleb128 0x3
+ 657 0008 0E       		.uleb128 0xe
+ 658 0009 1B       		.uleb128 0x1b
+ 659 000a 0E       		.uleb128 0xe
+ 660 000b 55       		.uleb128 0x55
+ 661 000c 17       		.uleb128 0x17
+ 662 000d 11       		.uleb128 0x11
+ 663 000e 01       		.uleb128 0x1
+ 664 000f 10       		.uleb128 0x10
+ 665 0010 17       		.uleb128 0x17
+ 666 0011 00       		.byte	0
+ 667 0012 00       		.byte	0
+ 668 0013 02       		.uleb128 0x2
+ 669 0014 24       		.uleb128 0x24
+ 670 0015 00       		.byte	0
+ 671 0016 0B       		.uleb128 0xb
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 15
+
+
+ 672 0017 0B       		.uleb128 0xb
+ 673 0018 3E       		.uleb128 0x3e
+ 674 0019 0B       		.uleb128 0xb
+ 675 001a 03       		.uleb128 0x3
+ 676 001b 0E       		.uleb128 0xe
+ 677 001c 00       		.byte	0
+ 678 001d 00       		.byte	0
+ 679 001e 03       		.uleb128 0x3
+ 680 001f 16       		.uleb128 0x16
+ 681 0020 00       		.byte	0
+ 682 0021 03       		.uleb128 0x3
+ 683 0022 0E       		.uleb128 0xe
+ 684 0023 3A       		.uleb128 0x3a
+ 685 0024 0B       		.uleb128 0xb
+ 686 0025 3B       		.uleb128 0x3b
+ 687 0026 0B       		.uleb128 0xb
+ 688 0027 49       		.uleb128 0x49
+ 689 0028 13       		.uleb128 0x13
+ 690 0029 00       		.byte	0
+ 691 002a 00       		.byte	0
+ 692 002b 04       		.uleb128 0x4
+ 693 002c 24       		.uleb128 0x24
+ 694 002d 00       		.byte	0
+ 695 002e 0B       		.uleb128 0xb
+ 696 002f 0B       		.uleb128 0xb
+ 697 0030 3E       		.uleb128 0x3e
+ 698 0031 0B       		.uleb128 0xb
+ 699 0032 03       		.uleb128 0x3
+ 700 0033 08       		.uleb128 0x8
+ 701 0034 00       		.byte	0
+ 702 0035 00       		.byte	0
+ 703 0036 05       		.uleb128 0x5
+ 704 0037 2E       		.uleb128 0x2e
+ 705 0038 01       		.byte	0x1
+ 706 0039 3F       		.uleb128 0x3f
+ 707 003a 19       		.uleb128 0x19
+ 708 003b 03       		.uleb128 0x3
+ 709 003c 0E       		.uleb128 0xe
+ 710 003d 3A       		.uleb128 0x3a
+ 711 003e 0B       		.uleb128 0xb
+ 712 003f 3B       		.uleb128 0x3b
+ 713 0040 0B       		.uleb128 0xb
+ 714 0041 49       		.uleb128 0x49
+ 715 0042 13       		.uleb128 0x13
+ 716 0043 11       		.uleb128 0x11
+ 717 0044 01       		.uleb128 0x1
+ 718 0045 12       		.uleb128 0x12
+ 719 0046 06       		.uleb128 0x6
+ 720 0047 40       		.uleb128 0x40
+ 721 0048 18       		.uleb128 0x18
+ 722 0049 9642     		.uleb128 0x2116
+ 723 004b 19       		.uleb128 0x19
+ 724 004c 01       		.uleb128 0x1
+ 725 004d 13       		.uleb128 0x13
+ 726 004e 00       		.byte	0
+ 727 004f 00       		.byte	0
+ 728 0050 06       		.uleb128 0x6
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 16
+
+
+ 729 0051 34       		.uleb128 0x34
+ 730 0052 00       		.byte	0
+ 731 0053 03       		.uleb128 0x3
+ 732 0054 0E       		.uleb128 0xe
+ 733 0055 3A       		.uleb128 0x3a
+ 734 0056 0B       		.uleb128 0xb
+ 735 0057 3B       		.uleb128 0x3b
+ 736 0058 0B       		.uleb128 0xb
+ 737 0059 49       		.uleb128 0x49
+ 738 005a 13       		.uleb128 0x13
+ 739 005b 02       		.uleb128 0x2
+ 740 005c 18       		.uleb128 0x18
+ 741 005d 00       		.byte	0
+ 742 005e 00       		.byte	0
+ 743 005f 07       		.uleb128 0x7
+ 744 0060 34       		.uleb128 0x34
+ 745 0061 00       		.byte	0
+ 746 0062 03       		.uleb128 0x3
+ 747 0063 08       		.uleb128 0x8
+ 748 0064 3A       		.uleb128 0x3a
+ 749 0065 0B       		.uleb128 0xb
+ 750 0066 3B       		.uleb128 0x3b
+ 751 0067 0B       		.uleb128 0xb
+ 752 0068 49       		.uleb128 0x49
+ 753 0069 13       		.uleb128 0x13
+ 754 006a 02       		.uleb128 0x2
+ 755 006b 18       		.uleb128 0x18
+ 756 006c 00       		.byte	0
+ 757 006d 00       		.byte	0
+ 758 006e 08       		.uleb128 0x8
+ 759 006f 34       		.uleb128 0x34
+ 760 0070 00       		.byte	0
+ 761 0071 03       		.uleb128 0x3
+ 762 0072 08       		.uleb128 0x8
+ 763 0073 3A       		.uleb128 0x3a
+ 764 0074 0B       		.uleb128 0xb
+ 765 0075 3B       		.uleb128 0x3b
+ 766 0076 0B       		.uleb128 0xb
+ 767 0077 49       		.uleb128 0x49
+ 768 0078 13       		.uleb128 0x13
+ 769 0079 00       		.byte	0
+ 770 007a 00       		.byte	0
+ 771 007b 09       		.uleb128 0x9
+ 772 007c 01       		.uleb128 0x1
+ 773 007d 01       		.byte	0x1
+ 774 007e 49       		.uleb128 0x49
+ 775 007f 13       		.uleb128 0x13
+ 776 0080 01       		.uleb128 0x1
+ 777 0081 13       		.uleb128 0x13
+ 778 0082 00       		.byte	0
+ 779 0083 00       		.byte	0
+ 780 0084 0A       		.uleb128 0xa
+ 781 0085 21       		.uleb128 0x21
+ 782 0086 00       		.byte	0
+ 783 0087 49       		.uleb128 0x49
+ 784 0088 13       		.uleb128 0x13
+ 785 0089 2F       		.uleb128 0x2f
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 17
+
+
+ 786 008a 0B       		.uleb128 0xb
+ 787 008b 00       		.byte	0
+ 788 008c 00       		.byte	0
+ 789 008d 0B       		.uleb128 0xb
+ 790 008e 2E       		.uleb128 0x2e
+ 791 008f 01       		.byte	0x1
+ 792 0090 3F       		.uleb128 0x3f
+ 793 0091 19       		.uleb128 0x19
+ 794 0092 03       		.uleb128 0x3
+ 795 0093 0E       		.uleb128 0xe
+ 796 0094 3A       		.uleb128 0x3a
+ 797 0095 0B       		.uleb128 0xb
+ 798 0096 3B       		.uleb128 0x3b
+ 799 0097 0B       		.uleb128 0xb
+ 800 0098 27       		.uleb128 0x27
+ 801 0099 19       		.uleb128 0x19
+ 802 009a 49       		.uleb128 0x49
+ 803 009b 13       		.uleb128 0x13
+ 804 009c 11       		.uleb128 0x11
+ 805 009d 01       		.uleb128 0x1
+ 806 009e 12       		.uleb128 0x12
+ 807 009f 06       		.uleb128 0x6
+ 808 00a0 40       		.uleb128 0x40
+ 809 00a1 18       		.uleb128 0x18
+ 810 00a2 9742     		.uleb128 0x2117
+ 811 00a4 19       		.uleb128 0x19
+ 812 00a5 01       		.uleb128 0x1
+ 813 00a6 13       		.uleb128 0x13
+ 814 00a7 00       		.byte	0
+ 815 00a8 00       		.byte	0
+ 816 00a9 0C       		.uleb128 0xc
+ 817 00aa 05       		.uleb128 0x5
+ 818 00ab 00       		.byte	0
+ 819 00ac 03       		.uleb128 0x3
+ 820 00ad 08       		.uleb128 0x8
+ 821 00ae 3A       		.uleb128 0x3a
+ 822 00af 0B       		.uleb128 0xb
+ 823 00b0 3B       		.uleb128 0x3b
+ 824 00b1 0B       		.uleb128 0xb
+ 825 00b2 49       		.uleb128 0x49
+ 826 00b3 13       		.uleb128 0x13
+ 827 00b4 02       		.uleb128 0x2
+ 828 00b5 18       		.uleb128 0x18
+ 829 00b6 00       		.byte	0
+ 830 00b7 00       		.byte	0
+ 831 00b8 0D       		.uleb128 0xd
+ 832 00b9 05       		.uleb128 0x5
+ 833 00ba 00       		.byte	0
+ 834 00bb 03       		.uleb128 0x3
+ 835 00bc 0E       		.uleb128 0xe
+ 836 00bd 3A       		.uleb128 0x3a
+ 837 00be 0B       		.uleb128 0xb
+ 838 00bf 3B       		.uleb128 0x3b
+ 839 00c0 0B       		.uleb128 0xb
+ 840 00c1 49       		.uleb128 0x49
+ 841 00c2 13       		.uleb128 0x13
+ 842 00c3 02       		.uleb128 0x2
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 18
+
+
+ 843 00c4 18       		.uleb128 0x18
+ 844 00c5 00       		.byte	0
+ 845 00c6 00       		.byte	0
+ 846 00c7 0E       		.uleb128 0xe
+ 847 00c8 34       		.uleb128 0x34
+ 848 00c9 00       		.byte	0
+ 849 00ca 03       		.uleb128 0x3
+ 850 00cb 0E       		.uleb128 0xe
+ 851 00cc 3A       		.uleb128 0x3a
+ 852 00cd 0B       		.uleb128 0xb
+ 853 00ce 3B       		.uleb128 0x3b
+ 854 00cf 0B       		.uleb128 0xb
+ 855 00d0 49       		.uleb128 0x49
+ 856 00d1 13       		.uleb128 0x13
+ 857 00d2 3F       		.uleb128 0x3f
+ 858 00d3 19       		.uleb128 0x19
+ 859 00d4 02       		.uleb128 0x2
+ 860 00d5 18       		.uleb128 0x18
+ 861 00d6 00       		.byte	0
+ 862 00d7 00       		.byte	0
+ 863 00d8 0F       		.uleb128 0xf
+ 864 00d9 34       		.uleb128 0x34
+ 865 00da 00       		.byte	0
+ 866 00db 03       		.uleb128 0x3
+ 867 00dc 0E       		.uleb128 0xe
+ 868 00dd 3A       		.uleb128 0x3a
+ 869 00de 0B       		.uleb128 0xb
+ 870 00df 3B       		.uleb128 0x3b
+ 871 00e0 05       		.uleb128 0x5
+ 872 00e1 49       		.uleb128 0x49
+ 873 00e2 13       		.uleb128 0x13
+ 874 00e3 3F       		.uleb128 0x3f
+ 875 00e4 19       		.uleb128 0x19
+ 876 00e5 3C       		.uleb128 0x3c
+ 877 00e6 19       		.uleb128 0x19
+ 878 00e7 00       		.byte	0
+ 879 00e8 00       		.byte	0
+ 880 00e9 10       		.uleb128 0x10
+ 881 00ea 35       		.uleb128 0x35
+ 882 00eb 00       		.byte	0
+ 883 00ec 49       		.uleb128 0x49
+ 884 00ed 13       		.uleb128 0x13
+ 885 00ee 00       		.byte	0
+ 886 00ef 00       		.byte	0
+ 887 00f0 00       		.byte	0
+ 888              		.section	.debug_aranges,"",%progbits
+ 889 0000 24000000 		.4byte	0x24
+ 890 0004 0200     		.2byte	0x2
+ 891 0006 00000000 		.4byte	.Ldebug_info0
+ 892 000a 04       		.byte	0x4
+ 893 000b 00       		.byte	0
+ 894 000c 0000     		.2byte	0
+ 895 000e 0000     		.2byte	0
+ 896 0010 00000000 		.4byte	.LFB56
+ 897 0014 D0010000 		.4byte	.LFE56-.LFB56
+ 898 0018 00000000 		.4byte	.LFB57
+ 899 001c 38000000 		.4byte	.LFE57-.LFB57
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 19
+
+
+ 900 0020 00000000 		.4byte	0
+ 901 0024 00000000 		.4byte	0
+ 902              		.section	.debug_ranges,"",%progbits
+ 903              	.Ldebug_ranges0:
+ 904 0000 00000000 		.4byte	.LFB56
+ 905 0004 D0010000 		.4byte	.LFE56
+ 906 0008 00000000 		.4byte	.LFB57
+ 907 000c 38000000 		.4byte	.LFE57
+ 908 0010 00000000 		.4byte	0
+ 909 0014 00000000 		.4byte	0
+ 910              		.section	.debug_line,"",%progbits
+ 911              	.Ldebug_line0:
+ 912 0000 A9010000 		.section	.debug_str,"MS",%progbits,1
+ 912      02004B01 
+ 912      00000201 
+ 912      FB0E0D00 
+ 912      01010101 
+ 913              	.LASF2:
+ 914 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 914      6E74385F 
+ 914      7400
+ 915              	.LASF7:
+ 916 000a 5F5F696E 		.ascii	"__int32_t\000"
+ 916      7433325F 
+ 916      7400
+ 917              	.LASF35:
+ 918 0014 5F776964 		.ascii	"_width\000"
+ 918      746800
+ 919              	.LASF34:
+ 920 001b 77726170 		.ascii	"wrap\000"
+ 920      00
+ 921              	.LASF18:
+ 922 0020 646F7562 		.ascii	"double\000"
+ 922      6C6500
+ 923              	.LASF25:
+ 924 0027 696E5F6D 		.ascii	"in_max\000"
+ 924      617800
+ 925              	.LASF27:
+ 926 002e 6F75745F 		.ascii	"out_max\000"
+ 926      6D617800 
+ 927              	.LASF26:
+ 928 0036 6F75745F 		.ascii	"out_min\000"
+ 928      6D696E00 
+ 929              	.LASF17:
+ 930 003e 666C6F61 		.ascii	"float\000"
+ 930      7400
+ 931              	.LASF1:
+ 932 0044 756E7369 		.ascii	"unsigned char\000"
+ 932      676E6564 
+ 932      20636861 
+ 932      7200
+ 933              	.LASF24:
+ 934 0052 696E5F6D 		.ascii	"in_min\000"
+ 934      696E00
+ 935              	.LASF6:
+ 936 0059 73686F72 		.ascii	"short unsigned int\000"
+ 936      7420756E 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 20
+
+
+ 936      7369676E 
+ 936      65642069 
+ 936      6E7400
+ 937              	.LASF28:
+ 938 006c 63757273 		.ascii	"cursor_x\000"
+ 938      6F725F78 
+ 938      00
+ 939              	.LASF29:
+ 940 0075 63757273 		.ascii	"cursor_y\000"
+ 940      6F725F79 
+ 940      00
+ 941              	.LASF37:
+ 942 007e 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 942      52784275 
+ 942      66666572 
+ 942      00
+ 943              	.LASF5:
+ 944 008b 5F5F7569 		.ascii	"__uint16_t\000"
+ 944      6E743136 
+ 944      5F7400
+ 945              	.LASF9:
+ 946 0096 6C6F6E67 		.ascii	"long unsigned int\000"
+ 946      20756E73 
+ 946      69676E65 
+ 946      6420696E 
+ 946      7400
+ 947              	.LASF30:
+ 948 00a8 74657874 		.ascii	"textcolor\000"
+ 948      636F6C6F 
+ 948      7200
+ 949              	.LASF41:
+ 950 00b2 6D61696E 		.ascii	"main\000"
+ 950      00
+ 951              	.LASF3:
+ 952 00b7 5F5F696E 		.ascii	"__int16_t\000"
+ 952      7431365F 
+ 952      7400
+ 953              	.LASF12:
+ 954 00c1 756E7369 		.ascii	"unsigned int\000"
+ 954      676E6564 
+ 954      20696E74 
+ 954      00
+ 955              	.LASF33:
+ 956 00ce 726F7461 		.ascii	"rotation\000"
+ 956      74696F6E 
+ 956      00
+ 957              	.LASF11:
+ 958 00d7 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 958      206C6F6E 
+ 958      6720756E 
+ 958      7369676E 
+ 958      65642069 
+ 959              	.LASF13:
+ 960 00ee 75696E74 		.ascii	"uint8_t\000"
+ 960      385F7400 
+ 961              	.LASF14:
+ 962 00f6 696E7431 		.ascii	"int16_t\000"
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 21
+
+
+ 962      365F7400 
+ 963              	.LASF21:
+ 964 00fe 746F7563 		.ascii	"touch_en\000"
+ 964      685F656E 
+ 964      00
+ 965              	.LASF16:
+ 966 0107 696E7433 		.ascii	"int32_t\000"
+ 966      325F7400 
+ 967              	.LASF40:
+ 968 010f 433A5C55 		.ascii	"C:\\Users\\LilRobby\\Downloads\\TFTSHIELD-master - "
+ 968      73657273 
+ 968      5C4C696C 
+ 968      526F6262 
+ 968      795C446F 
+ 969 013e 315C7466 		.ascii	"1\\tft_test.cydsn\000"
+ 969      745F7465 
+ 969      73742E63 
+ 969      7964736E 
+ 969      00
+ 970              	.LASF10:
+ 971 014f 6C6F6E67 		.ascii	"long long int\000"
+ 971      206C6F6E 
+ 971      6720696E 
+ 971      7400
+ 972              	.LASF20:
+ 973 015d 73697A65 		.ascii	"sizetype\000"
+ 973      74797065 
+ 973      00
+ 974              	.LASF39:
+ 975 0166 6D61696E 		.ascii	"main.c\000"
+ 975      2E6300
+ 976              	.LASF32:
+ 977 016d 74657874 		.ascii	"textsize\000"
+ 977      73697A65 
+ 977      00
+ 978              	.LASF38:
+ 979 0176 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 979      4320342E 
+ 979      392E3320 
+ 979      32303135 
+ 979      30333033 
+ 980 01a9 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 980      20726576 
+ 980      6973696F 
+ 980      6E203232 
+ 980      31323230 
+ 981 01dc 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 981      66756E63 
+ 981      74696F6E 
+ 981      2D736563 
+ 981      74696F6E 
+ 982              	.LASF36:
+ 983 0204 5F686569 		.ascii	"_height\000"
+ 983      67687400 
+ 984              	.LASF4:
+ 985 020c 73686F72 		.ascii	"short int\000"
+ 985      7420696E 
+ARM GAS  C:\Users\LilRobby\AppData\Local\Temp\cctnJiOb.s 			page 22
+
+
+ 985      7400
+ 986              	.LASF22:
+ 987 0216 62756666 		.ascii	"buffer\000"
+ 987      657200
+ 988              	.LASF15:
+ 989 021d 75696E74 		.ascii	"uint16_t\000"
+ 989      31365F74 
+ 989      00
+ 990              	.LASF31:
+ 991 0226 74657874 		.ascii	"textbgcolor\000"
+ 991      6267636F 
+ 991      6C6F7200 
+ 992              	.LASF8:
+ 993 0232 6C6F6E67 		.ascii	"long int\000"
+ 993      20696E74 
+ 993      00
+ 994              	.LASF19:
+ 995 023b 63686172 		.ascii	"char\000"
+ 995      00
+ 996              	.LASF0:
+ 997 0240 7369676E 		.ascii	"signed char\000"
+ 997      65642063 
+ 997      68617200 
+ 998              	.LASF42:
+ 999 024c 6D617043 		.ascii	"mapCoor\000"
+ 999      6F6F7200 
+ 1000              	.LASF23:
+ 1001 0254 5F426F6F 		.ascii	"_Bool\000"
+ 1001      6C00
+ 1002              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
